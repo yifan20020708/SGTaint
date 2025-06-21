@@ -1,0 +1,7 @@
+
+sub_4016dc, 18s
+sub_4025f4, 5s
+sub_402330, 4s
+sub_401298, 1s
+ Done 
+Total time: 46s 

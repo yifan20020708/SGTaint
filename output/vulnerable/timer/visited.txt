@@ -1,0 +1,13 @@
+
+sub_401c80, 4s
+main, 30s
+sub_402cc0, 1s
+tw_check_parental_control_time, 2s
+sub_402724, 8s
+sub_402f68, 3s
+setRCWANModeType, 2s
+parse_parental_control_rules, 3s
+sub_402074, 5s
+sub_402510, 0s
+ Done 
+Total time: 75s 

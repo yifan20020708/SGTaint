@@ -1,0 +1,34 @@
+target_addr: 0x431080, target_name: FIREWALL_IPv6_FILTER_run, errorMessage: 'MemoryLocation' object has no attribute 'reg_offset' 
+target_addr: 0x406184, target_name: sub_406184, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x41630c, target_name: tw_add_device_mac, errorMessage: list index out of range 
+target_addr: 0x40e090, target_name: tw_get_cur_wan_type, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x427890, target_name: PORTFORWARD_run, errorMessage: 'MemoryLocation' object has no attribute 'reg_offset' 
+target_addr: 0x40a010, target_name: nvifname_to_osifname, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x40839c, target_name: nvram_get_double, errorMessage: The node Definition:
+Atom: <Reg 24<4>>
+CodeLoc: [External ['0x40839c']]
+Tags: <ParameterTag {Function: 0x40839c, Metadata:None}> is not in the digraph. 
+target_addr: 0x407f20, target_name: nvram_get_int, errorMessage: The node Definition:
+Atom: <Reg 24<4>>
+CodeLoc: [External ['0x407f20']]
+Tags: <ParameterTag {Function: 0x407f20, Metadata:None}> is not in the digraph. 
+target_addr: 0x42e034, target_name: MACFILTER_run, errorMessage: 'MemoryLocation' object has no attribute 'reg_offset' 
+target_addr: 0x4099b8, target_name: get_bridged_interfaces, errorMessage: 'MemoryLocation' object has no attribute 'reg_offset' 
+target_addr: 0x429c60, target_name: VIRTUALSERVER_run, errorMessage: 'MemoryLocation' object has no attribute 'reg_offset' 
+target_addr: 0x417558, target_name: MASQUERADENAT_run, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x42f164, target_name: FIREWALL_FILTER_run, errorMessage: 'MemoryLocation' object has no attribute 'reg_offset' 
+target_addr: 0x4103e8, target_name: TW_Anti_DOS_Config, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x4157f0, target_name: tw_lanip_reserve_check, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x43307c, target_name: Qos_init_sw_rules, errorMessage: list index out of range 
+target_addr: 0x42c170, target_name: REMOTEMANGE_run, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x41a6f4, target_name: stupidftp_ruleCreate, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x424f9c, target_name: USBWAN_find_card_switch_file, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x404c14, target_name: sub_404c14, errorMessage: 'NoneType' object has no attribute 'statements' 
+target_addr: 0x418f04, target_name: sub_418f04, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x4098ac, target_name: ether_etoa, errorMessage: 'Jump' object has no attribute 'args' 
+target_addr: 0x406bdc, target_name: ipv6_wan_getpathprefix, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x432a80, target_name: QOS_chain_init, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x433c90, target_name: QOS_stop, errorMessage: list index out of range 
+target_addr: 0x432f28, target_name: QOS_init_interface, errorMessage: list index out of range 
+target_addr: 0x417db4, target_name: TW_wan_pre_run, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x41afe8, target_name: tw_add_url_filter_iptables_rule_drop, errorMessage: list index out of range 

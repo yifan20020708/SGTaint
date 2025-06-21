@@ -1,0 +1,202 @@
+
+TW_GetFactoryMode, 0s
+iptables_upnp_run, 13s
+FIREWALL_IPv6_FILTER_run
+sub_406184
+WLAN_guest_login_block, 10s
+alg_ipseccommit_handler, 1s
+tw_add_device_mac
+tw_add_porttrigger_iptables_rule, 39s
+tw_get_cur_wan_type
+tw_add_reserve_ip_to_file, 3s
+PORTFORWARD_run
+tw_start_ftpd, 22s
+ipv6_router_address, 2s
+nvifname_to_osifname
+LAN_WANIPConflictHandler, 25s
+TW_get_wan_ifname, 1s
+TW_get_use_wan_prefix, 20s
+nvram_get_double
+tw_sroute_init, 4s
+nvram_get_int
+ure_any_enabled, 0s
+getRouteDev, 13s
+alg_sipcommit_handler, 0s
+TW_Spi_Fw_Config, 148s
+get_wan6_mac, 2s
+upload_trigger_rules, 1s
+DMZ_run, 51s
+get_lan_mac, 0s
+start_miniupnpd_finish, 4s
+TW_Anti_Spoofing_Init, 16s
+tw_get_usb_wan_interface, 0s
+MACFILTER_run
+Get_The_Interface_By_Proto, 1s
+get_bridged_interfaces
+Gobi_SignalLevel_Int, 11s
+Gobi_SignalQuality_Int, 11s
+add_iptables_for_lan, 3s
+alg_rtspcommit_handler, 1s
+sub_4220c0, 3s
+creat_miniupnpd_iptables, 11s
+upload_url_filter_rules, 19s
+tw_check_Iscurrtime_Indsrange, 2s
+TW_get_wan_netmask, 0s
+ipv6_wan_getconntype, 2s
+Gobi_ConnectISP, 19s
+upload_ping_block_rules, 5s
+getRCModeType, 2s
+start_syslogd, 1s
+USBWAN_generate_3G_ppp_conf, 84s
+Gobi_ConnectStatus_Int, 11s
+delete_trigger_rules, 12s
+tw_get_wan_interface, 1s
+USBWAN_remove_card, 2s
+setRCWANModeType, 2s
+ipv6_wan_getdetectconntype, 2s
+VIRTUALSERVER_run
+trigger_timeout, 0s
+ipv6_wan_prefix, 5s
+MASQUERADENAT_run
+ipv6_lan_prefix, 2s
+TW_IPv6_Ingress_Filtering_Init, 3s
+IPFILTER_run, 37s
+FIREWALL_FILTER_run
+TW_Anti_DOS_Config
+tw_wl_guest_cafestyle, 6s
+parse_parental_control_rules, 11s
+QOS_start, 4s
+tw_set_timezone, 0s
+tw_lanip_reserve_check
+alg_pptpcommit_handler, 1s
+sub_415ff0, 3s
+Qos_init_sw_rules
+miniupnpd, 1s
+REMOTEMANGE_run
+TW_get_wan_ipaddr, 0s
+stupidftp_ruleCreate
+tw_set_dstoffset, 0s
+Gobi_SelectBand, 3s
+kill_pidfile_s, 0s
+getIfIpv6addr, 2s
+sub_418b10, 0s
+USBWAN_find_card_switch_file
+Gobi_QcnVersion, 2s
+getFlashContentByOffset, 0s
+kill_pidfile, 0s
+Gobi_FwVersion, 2s
+detect_process, 1s
+Gobi_SimCard, 1s
+get_pid_by_name, 1s
+get_meminfo_item, 0s
+Gobi_IMEI, 3s
+set_miniupnpd_config, 2s
+Gobi_BandChannel, 42s
+send_signal_to_pid, 1s
+sub_404c14
+set_nth_value_flash, 3s
+TW_StrReplace, 2s
+get_ifname_unit, 1s
+set_nth_value, 2s
+splitNvram, 1s
+ipv6_lan_genulaprefix, 1s
+psname, 0s
+get_process_name_by_pid, 0s
+sub_418f04
+check_if_dir_writable, 0s
+ether_etoa
+tw_add_static_route, 1s
+mac_check_and_change, 0s
+getIfMac, 0s
+file_lock, 1s
+USBWAN_check_card_support, 2s
+ipv6_wan_getpathprefix
+tw_set_localtime_to_nvram, 0s
+start_logmonitor, 0s
+tw_enable_coredump, 0s
+loadFactoryDefault, 0s
+loadDefault, 0s
+COMM_SystemEx, 0s
+start_alg_service, 0s
+IPFILTER_chain_init, 0s
+tw_add_url_filter_chain, 0s
+start_timer, 0s
+VIRTUALSERVER_chain_destroy, 1s
+tw_add_parent_control_chain, 0s
+tw_add_porttrigger_chain_for_nat, 0s
+tw_del_parent_skipctf_chain, 0s
+TW_IPv6_Simple_Security_Destroy, 1s
+FIREWALL_IPv6_FILTER_chain_init, 0s
+PORTFORWARD_chain_destroy, 1s
+DMZ_chain_init, 1s
+sub_40fc50, 4s
+del_acl_ping_chain, 0s
+tw_add_url_filter_iptables_rule, 0s
+TW_grc_run, 1s
+load_iptalbes, 1s
+VIRTUALSERVER_chain_init, 1s
+QOS_chain_init
+QOS_stop
+tw_del_skipctf_chain, 0s
+TCPMSS_run, 0s
+MACFILTER_chain_destroy, 0s
+tw_add_parent_skipctf_chain, 0s
+TW_Anti_Spoofing_Destroy, 2s
+FIREWALL_FILTER_add_allow_rule_drop, 0s
+REMOTEMANGE_chain_init, 0s
+PORTFORWARD_chain_init, 1s
+IPFILTER_chain_destroy, 0s
+tw_del_parent_skipctf_iptables_rule, 0s
+FIREWALL_IPv6_FILTER_chain_destroy, 0s
+tw_del_url_filter_chain, 0s
+Anti_DOS_rule_clear, 4s
+iptables_upnp_destroy, 1s
+tw_del_porttrigger_chain_for_filter, 0s
+FIREWALL_FILTER_chain_init, 0s
+tw_add_url_allow_filter_iptables_rule, 0s
+tw_add_skipctf_chain, 0s
+USBWAN_switch_card_common, 1s
+QOS_init_interface
+tw_add_porttrigger_chain_for_filter, 0s
+tw_add_skipctf_iptables_rule, 0s
+tw_add_parental_control_rules, 0s
+add_acl_ping_chain, 0s
+tw_del_parent_control_chain, 0s
+TW_IPv6_Ingress_Filtering_Destroy, 1s
+tw_del_skipctf_iptables_rule, 0s
+MACFILTER_add_allow_rule_drop, 0s
+ping_unblock_iptables_rules, 0s
+tw_add_parent_skipctf_iptables_rule, 0s
+QOS_chain_destroy, 1s
+TW_flush_all_chain, 0s
+tw_del_url_filter_iptables_rule, 0s
+IPFILTER_add_allow_rule_drop, 0s
+TW_IPv6_Simple_Security_Init, 13s
+TW_wan_pre_run
+FIREWALL_FILTER_chain_destroy, 0s
+FIREWALL_IPv6_FILTER_add_allow_rule_drop, 0s
+REMOTEMANGE_chain_destroy, 1s
+MACFILTER_chain_init, 0s
+tw_add_url_filter_iptables_rule_drop
+DMZ_chain_destroy, 1s
+tw_del_porttrigger_chain_for_nat, 0s
+ping_block_iptables_rules, 0s
+reset_ipv6_linklocal_addr, 1s
+stop_syslogd, 0s
+start_btn, 0s
+stop_logmonitor, 0s
+start_klogd, 0s
+stop_miniupnpd, 0s
+tw_stop_ftpd, 0s
+stop_btn, 0s
+start_downloader, 0s
+stop_timer, 0s
+stop_klogd, 0s
+_eval, 3s
+nvram_set_double, 0s
+cleanRCModeType, 0s
+setAllRCModetype, 0s
+nvram_set_int, 0s
+TW_Anti_DOS_ReConfig, 0s
+ Done 
+Total time: 1752s 

@@ -1,0 +1,215 @@
+Binary Path: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/ntpclient
+
+========== Binary Function Keywords ==========
+No keywords found.
+
+========== Set-Get Call Sites ==========
+nvram_safe_get:
+  [1] Call Site Address: 0x401d84, Caller: 0x4016dc, Block Address: 0x401d30, Key: ntp_timezone
+  [2] Call Site Address: 0x401da0, Caller: 0x4016dc, Block Address: 0x401d8c, Key: ntp_DaylightSavingsUsed
+
+========== Related File Paths ==========
+[1] /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi
+
+========== Diffusion File Paths ==========
+No diffusion file paths found.
+
+========== Set-Get Function Info ==========
+[1] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+[2] Set: nvram_safe_set, Get: nvram_safe_get, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+
+========== Source2Sink Paths ==========
+*** Path #1 ***
+error_messges_str   : 
+source_keyword      : ntp_timezone
+str_length_visited_function: 
+decompile_list      : ['    __s = (char *)nvram_safe_get("ntp_timezone");\n    pcVar3 = (char *)nvram_safe_get("ntp_DaylightSavingsUsed");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,"+%d:%d",&local_94,&local_98);']
+target_name         : sub_4016dc
+ghidra_path         : [[4200156, 4201776, 4201864, 4201948, 4201964]]
+target_addr         : 0x4016dc
+conditions_str      : 
+end_block           : 4201776
+taint_source        : nvram_safe_get
+start_block         : 4201948
+taint_sink          : sscanf
+path                : 0x401ddc#0x401d8c#0x401d30
+visited_functions   : nvram_safe_get
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x401d88
+sink_addr           : sub_4016dc
+sink_insr_addr      : 0x40203c
+checking_time       : 0
+source_name         : sub_4016dc
+source_addr         : 0x5000c8
+*** Path #2 ***
+error_messges_str   : 
+source_keyword      : ntp_timezone
+str_length_visited_function: 
+decompile_list      : ['    __s = (char *)nvram_safe_get("ntp_timezone");\n    pcVar3 = (char *)nvram_safe_get("ntp_DaylightSavingsUsed");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,"+%d:%d",&local_94,&local_98);']
+target_name         : sub_4016dc
+ghidra_path         : [[4200156, 4201776, 4201864, 4201868, 4201892]]
+target_addr         : 0x4016dc
+conditions_str      : 
+end_block           : 4201776
+taint_source        : nvram_safe_get
+start_block         : 4201868
+taint_sink          : sscanf
+path                : 0x401d8c#0x401d30
+visited_functions   : nvram_safe_get
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x401d88
+sink_addr           : sub_4016dc
+sink_insr_addr      : 0x40203c
+checking_time       : 0
+source_name         : sub_4016dc
+source_addr         : 0x5000c8
+*** Path #3 ***
+error_messges_str   : 
+source_keyword      : ntp_timezone
+str_length_visited_function: 
+decompile_list      : ['    __s = (char *)nvram_safe_get("ntp_timezone");\n    pcVar3 = (char *)nvram_safe_get("ntp_DaylightSavingsUsed");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,"+%d:%d",&local_94,&local_98);']
+target_name         : sub_4016dc
+ghidra_path         : [[4200156, 4201776, 4201864, 4201948, 4201964]]
+target_addr         : 0x4016dc
+conditions_str      : 
+end_block           : 4201776
+taint_source        : nvram_safe_get
+start_block         : 4201948
+taint_sink          : sscanf
+path                : 0x401ddc#0x401d8c#0x401d30
+visited_functions   : nvram_safe_get
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x401d88
+sink_addr           : sub_4016dc
+sink_insr_addr      : 0x401e00
+checking_time       : 0
+source_name         : sub_4016dc
+source_addr         : 0x5000c8
+*** Path #4 ***
+error_messges_str   : 
+source_keyword      : ntp_timezone
+str_length_visited_function: 
+decompile_list      : ['    __s = (char *)nvram_safe_get("ntp_timezone");\n    pcVar3 = (char *)nvram_safe_get("ntp_DaylightSavingsUsed");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,"+%d:%d",&local_94,&local_98);']
+target_name         : sub_4016dc
+ghidra_path         : [[4200156, 4201776, 4201864, 4201868, 4201892]]
+target_addr         : 0x4016dc
+conditions_str      : 
+end_block           : 4201776
+taint_source        : nvram_safe_get
+start_block         : 4201868
+taint_sink          : sscanf
+path                : 0x401d8c#0x401d30
+visited_functions   : nvram_safe_get
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x401d88
+sink_addr           : sub_4016dc
+sink_insr_addr      : 0x401e00
+checking_time       : 0
+source_name         : sub_4016dc
+source_addr         : 0x5000c8
+*** Path #5 ***
+error_messges_str   : 
+source_keyword      : not_static_string
+str_length_visited_function: 
+decompile_list      : ['    pcVar1 = fgets(acStack_98,100,_stdin);\n    if (pcVar1 == (char *)0x0) {\n      return;\n    }\n    iVar2 = sscanf(acStack_98,"%d %f %f %f %lf %f %d",&local_a4,&local_ac,&local_b0,auStack_b4,\n                   &local_a0,&local_b8,&local_a8);\n    if (iVar2 != 7) {\n      fwrite("Replay input error\\n",1,0x13,_stderr);\n                    /* WARNING: Subroutine does not return */\n      exit(2);\n    }\n    fputs(acStack_98,_stdout);\n    iVar2 = local_a4 * 0x15180;\n    iVar3 = __fixsfsi(local_ac);\n    iVar2 = iVar2 + iVar3;\n    uVar4 = __addsf3(local_b0,local_b8);\n    uVar7 = __extendsfdf2(uVar4);\n    if (debug == 0) {\n      iVar3 = 0;\n      if (iVar6 != 0) goto LAB_0040274c;\nLAB_00402884:\n      uVar7 = 0;\n      iVar5 = local_a8;\n    }\n    else {\n      printf("contemplate %u %.1f %.1f %d\\n",iVar2,(undefined4)local_a0,local_a0._4_4_,(int)uVar7,\n             (int)((ulonglong)uVar7 >> 0x20),local_a8);\n      iVar3 = debug;\n      if (iVar6 == 0) goto LAB_00402884;\nLAB_0040274c:\n      uVar7 = __floatsidf(local_a8 - iVar5);\n    }\n    local_30 = uVar7;\n    uVar7 = __floatunsidf(iVar2 - iVar6);\n    uVar7 = __muldf3((int)uVar7,(int)((ulonglong)uVar7 >> 0x20),(undefined4)local_30,local_30._4_4_)\n    ;\n    uVar7 = __muldf3((int)uVar7,(int)((ulonglong)uVar7 >> 0x20),0,0x3ef00000);\n    uVar8 = __adddf3((int)uVar8,(int)((ulonglong)uVar8 >> 0x20),(int)uVar7,\n                     (int)((ulonglong)uVar7 >> 0x20));\n    uVar4 = (undefined4)((ulonglong)uVar8 >> 0x20);\n    uVar7 = local_a0;\n    if (iVar3 != 0) {\n      local_30._0_4_ = uVar4;\n      printf("fake %f %d \\n",0x400000,(int)uVar8,uVar4,iVar5);\n      uVar4 = (undefined4)local_30;\n      uVar7 = local_a0;\n    }\n    local_a0._4_4_ = (undefined4)((ulonglong)uVar7 >> 0x20);\n    local_a0._0_4_ = (undefined4)uVar7;\n    uVar9 = __adddf3((int)uVar8,uVar4,(undefined4)local_a0,local_a0._4_4_);\n    local_a0 = uVar7;\n    local_a8 = iVar5;\n    local_a0 = uVar9;\n    iVar5 = contemplate_data(iVar2);\n    iVar6 = iVar2;\n  } while( true );\n}\n']
+target_name         : sub_4025f4
+ghidra_path         : [[4204020, 4204096, 4204116, 4204096, 4204116]]
+target_addr         : 0x4025f4
+conditions_str      : 
+end_block           : 4204096
+taint_source        : fgets
+start_block         : 4204096
+taint_sink          : sscanf
+path                : 0x402640#0x402640
+visited_functions   : fgets
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x402648
+sink_addr           : sub_4025f4
+sink_insr_addr      : 0x4026a0
+checking_time       : 0
+source_name         : sub_4025f4
+source_addr         : 0x5000b4
+
+========== Get2Set Paths ==========
+No paths paths found.
+
+========== SOURCE ==========
+[1] sub_1d170
+[2] config_get
+[3] NK_query_entry_get
+[4] webGetVarString
+[5] bcm_nvram_get
+[6] GetValue
+[7] acosNvramConfig_read
+[8] sub_42af24
+[9] sub_42a978
+[10] get_cgi
+[11] websGetVar
+[12] nvram_get
+[13] nvram_safe_get
+[14] nvram_default_get
+[15] getenv
+[16] nvram_pf_get
+[17] acosNvramConfig_get
+[18] uciGet
+[19] entry
+[20] wpa_config_get
+[21] httpGenListDataGet
+[22] cJSON_GetArrayItem
+[23] vici_find_str
+[24] DoHardwareComponent
+[25] device_get_string_value
+[26] cJSON_Parse
+[27] OM_ValGet
+[28] acosUciConfig_get
+[29] CAL_abstract_get
+[30] json_object_object_get
+[31] json_object_object_get_ex
+[32] json_tokener_parse
+[33] OM_ValFind
+[34] get_parameter
+[35] get_wlan_setting
+[36] av_dict_get
+[37] cgi_value
+[38] stringOut
+[39] cJSON_GetObjectItem
+[40] sw_getValueByName
+[41] querystr
+[42] find_val
+[43] log_query
+[44] value_parser_by_index_D7000
+[45] getoption
+[46] WEB_GetVar
+[47] av_opt_get
+[48] paramValueFromObjGet
+[49] help_getObjPtr
+[50] NCONF_get_string
+[51] av_metadata_get
+[52] httpGetEnv
+[53] gets
+[54] fgets
+[55] recvfrom
+[56] recvmsg
+[57] nvram_bufget
+
+========== TRANSITIVE SET ==========
+[1] config_set
+[2] SetValue
+[3] setenv
+[4] nvram_set
+[5] nvram_safe_set
+[6] nvram_pf_set
+[7] artblock_set
+[8] acos_nvram_set
+[9] acosNvramConfig_set
+[10] acosNvramConfig_write
+[11] envz_add
+[12] uciSet
+[13] device_set_string_value
+[14] wpa_config_set
+[15] scfgmgr_set_by_index_D7000
+[16] acosUciConfig_set
+[17] OM_ValSet
+[18] CAL_abstract_set
+[19] nvram_bufset
+
