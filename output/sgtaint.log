@@ -1,0 +1,89 @@
+2025-06-21 06:01:11,396 [INFO] Initialized SGTaintRunner (v1.1.0)
+2025-06-21 06:01:11,397 [DEBUG] Removed file/symlink: /home/SGTaint/output/log/2025-06-21_05-01-44_set_get_graph.txt
+2025-06-21 06:01:11,397 [DEBUG] Removed file/symlink: /home/SGTaint/output/log/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_potential_path.json
+2025-06-21 06:01:11,398 [DEBUG] Removed file/symlink: /home/SGTaint/output/log/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_get2sink_path.json
+2025-06-21 06:01:11,398 [DEBUG] Removed file/symlink: /home/SGTaint/output/log/DIR-878_potential_path_final.json
+2025-06-21 06:01:11,399 [INFO] Cleared: /home/SGTaint/output/log
+2025-06-21 06:01:11,399 [DEBUG] Removed directory: /home/SGTaint/output/vulnerable/ntpclient
+2025-06-21 06:01:11,399 [DEBUG] Removed directory: /home/SGTaint/output/vulnerable/ralink_init
+2025-06-21 06:01:11,399 [DEBUG] Removed directory: /home/SGTaint/output/vulnerable/timer
+2025-06-21 06:01:11,400 [DEBUG] Removed directory: /home/SGTaint/output/vulnerable/librcm.so
+2025-06-21 06:01:11,400 [DEBUG] Removed directory: /home/SGTaint/output/vulnerable/rc
+2025-06-21 06:01:11,400 [DEBUG] Removed directory: /home/SGTaint/output/vulnerable/prog.cgi
+2025-06-21 06:01:11,400 [INFO] Cleared: /home/SGTaint/output/vulnerable
+2025-06-21 06:01:11,400 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryConfig/prog.cgi_analysis_binary_config.json
+2025-06-21 06:01:11,401 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryConfig/ralink_init_analysis_binary_config.json
+2025-06-21 06:01:11,401 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryConfig/ntpclient_analysis_binary_config.json
+2025-06-21 06:01:11,401 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryConfig/rc_analysis_binary_config.json
+2025-06-21 06:01:11,401 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryConfig/librcm.so_analysis_binary_config.json
+2025-06-21 06:01:11,401 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryConfig/timer_analysis_binary_config.json
+2025-06-21 06:01:11,401 [INFO] Cleared: /home/SGTaint/tmp/BinaryConfig
+2025-06-21 06:01:11,401 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryInfo/ntpclient_analysis_binary_info.txt
+2025-06-21 06:01:11,401 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryInfo/ralink_init_analysis_binary_info.txt
+2025-06-21 06:01:11,401 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryInfo/timer_analysis_binary_info.txt
+2025-06-21 06:01:11,402 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryInfo/librcm.so_analysis_binary_info.txt
+2025-06-21 06:01:11,402 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryInfo/prog.cgi_analysis_binary_info.txt
+2025-06-21 06:01:11,402 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryInfo/rc_analysis_binary_info.txt
+2025-06-21 06:01:11,402 [INFO] Cleared: /home/SGTaint/tmp/BinaryInfo
+2025-06-21 06:01:11,402 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_usr_sbin_radvd_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_miniupnpd_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_usr_lib_pppd_2.4.5_pptp.so_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_sbin_udhcpd_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_usr_bin_pppdo_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_usr_sbin_omcproxy_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_usr_sbin_dhcp6-multi_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_lighttpd_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_iptables_keyword_function.json
+2025-06-21 06:01:11,403 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_dnsmasq_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_ip_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_busybox_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_rc_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_lib_librcm.so_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_tc_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_lib_libfl-0.9.28.so_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_ip6tables_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_ralink_init_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_usr_sbin_odhcp6c_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_lib_liblua.so.5.1.5_keyword_function.json
+2025-06-21 06:01:11,404 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_lib_ipsec_addconn_keyword_function.json
+2025-06-21 06:01:11,405 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_usr_sbin_pppd_keyword_function.json
+2025-06-21 06:01:11,405 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_openssl_keyword_function.json
+2025-06-21 06:01:11,405 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_bin_prog.cgi_keyword_function.json
+2025-06-21 06:01:11,405 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_lib_ipsec_pluto_keyword_function.json
+2025-06-21 06:01:11,405 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_lib_libuClibc-0.9.33.2.so_keyword_function.json
+2025-06-21 06:01:11,405 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/BinaryKeyword/_home_firmware_Current_dataset_D-Link_DIR-878_cpio-root_lib_libcrypto.so.1.0.0_keyword_function.json
+2025-06-21 06:01:11,405 [INFO] Cleared: /home/SGTaint/tmp/BinaryKeyword
+2025-06-21 06:01:11,405 [INFO] Cleared: /home/SGTaint/tmp/BinaryTmp
+2025-06-21 06:01:11,408 [DEBUG] Removed directory: /home/SGTaint/tmp/ghidra/prog.cgi.rep
+2025-06-21 06:01:11,408 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/ghidra/prog.cgi.gpr
+2025-06-21 06:01:11,409 [DEBUG] Removed directory: /home/SGTaint/tmp/ghidra/nvram_daemon.rep
+2025-06-21 06:01:11,409 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/ghidra/nvram_daemon.gpr
+2025-06-21 06:01:11,410 [DEBUG] Removed directory: /home/SGTaint/tmp/ghidra/protest.rep
+2025-06-21 06:01:11,410 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/ghidra/protest.gpr
+2025-06-21 06:01:11,412 [DEBUG] Removed directory: /home/SGTaint/tmp/ghidra/librcm.so.rep
+2025-06-21 06:01:11,412 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/ghidra/librcm.so.gpr
+2025-06-21 06:01:11,413 [DEBUG] Removed directory: /home/SGTaint/tmp/ghidra/timer.rep
+2025-06-21 06:01:11,413 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/ghidra/timer.gpr
+2025-06-21 06:01:11,414 [DEBUG] Removed directory: /home/SGTaint/tmp/ghidra/ntpclient.rep
+2025-06-21 06:01:11,414 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/ghidra/ntpclient.gpr
+2025-06-21 06:01:11,415 [DEBUG] Removed directory: /home/SGTaint/tmp/ghidra/ralink_init.rep
+2025-06-21 06:01:11,415 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/ghidra/ralink_init.gpr
+2025-06-21 06:01:11,417 [DEBUG] Removed directory: /home/SGTaint/tmp/ghidra/rc.rep
+2025-06-21 06:01:11,417 [DEBUG] Removed file/symlink: /home/SGTaint/tmp/ghidra/rc.gpr
+2025-06-21 06:01:11,417 [INFO] Cleared: /home/SGTaint/tmp/ghidra
+2025-06-21 06:01:11,418 [INFO] [STEP 1] Initializing AnalysisBinaryDict and SetGetGraph ...
+2025-06-21 06:01:11,418 [INFO] [STEP 1] finished in 0.00 seconds
+
+2025-06-21 06:01:11,418 [INFO] [STEP 2] Building SGGraph and collecting binaries to analyze ...
+2025-06-21 06:01:13,998 [INFO] Starting npm service in /home/SGTaint/tool/Keyword/JS_Parse
+2025-06-21 06:01:14,007 [DEBUG] Waiting 3s for npm service startup
+2025-06-21 06:01:17,011 [INFO] npm service should be up now
+2025-06-21 06:01:17,014 [INFO] HtmlParser initialized: 57 HTML files to process
+2025-06-21 06:01:17,014 [INFO] Starting parallel parsing: 57 files
+2025-06-21 06:01:18,787 [DEBUG] [1/57] Parsed successfully: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/etc_ro/lighttpd/www/web/FirmwareUpdate_Valid.html
+2025-06-21 06:01:19,013 [DEBUG] [2/57] Parsed successfully: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/etc_ro/lighttpd/www/web/IndexHome.html
+2025-06-21 06:01:19,115 [DEBUG] [3/57] Parsed successfully: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/etc_ro/lighttpd/www/web/FirmwareUpdate_Fail.html
+2025-06-21 06:01:19,186 [DEBUG] [4/57] Parsed successfully: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/etc_ro/lighttpd/www/web/Index.html
+2025-06-21 06:01:19,544 [DEBUG] [5/57] Parsed successfully: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/etc_ro/lighttpd/www/web/MobileHome.html
+2025-06-21 06:01:19,724 [DEBUG] [6/57] Parsed successfully: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/etc_ro/lighttpd/www/web/MobileUpdateFirmware.html
+2025-06-21 06:01:20,237 [INFO] npm service terminated

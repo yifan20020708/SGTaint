@@ -1,0 +1,227 @@
+# -*- coding: utf-8 -*-
+import os
+import json
+import re
+import sys
+sys.path.append("/home/SGTaint")
+import tool.Config.config as config_sgtaint
+from ghidra.app.decompiler import DecompInterface, DecompileOptions # type: ignore
+from ghidra.app.decompiler.component import DecompilerUtils # type: ignore
+from ghidra.util.task import ConsoleTaskMonitor # type: ignore
+
+# 执行任意命令
+def execute(command):
+    from subprocess import check_output, STDOUT
+    command = "{}; exit 0".format(command)
+    return check_output(command, stderr=STDOUT, shell=True).decode("utf-8")
+
+
+# 通过函数名称或函数地址获取函数对象   
+def get_function(program, identifier):
+    identifier = str(identifier)
+    function_manager = program.getFunctionManager()
+    addr_factory = program.getAddressFactory().getDefaultAddressSpace() 
+    try:
+        if isinstance(identifier, str) and identifier.lower().startswith("0x"):
+            addr_val = int(identifier, 16)
+        else:
+            addr_val = int(identifier)
+        addr = addr_factory.getAddress(hex(addr_val))
+        func = function_manager.getFunctionAt(addr)
+        if func is None:
+            print("[-] No function found at address %s" % hex(addr_val))
+        return func
+    except Exception:
+        functions = function_manager.getFunctions(True)
+        for func in functions:
+            if func.getName() == identifier:
+                return func
+        print("[-] No function found with name '%s'" % identifier)
+        return None
+
+
+# 基础地址换算（从angr到ghidra）
+def base_addr_transform_angr2ghidra(program, angr_base_addr, angr_addr):
+    image_base = program.getImageBase()
+    ghidra_base_addr = image_base.getOffset()
+    ghidra_addr = angr_addr - angr_base_addr + ghidra_base_addr
+    return ghidra_addr
+
+
+# 基础地址换算（从ghidra到angr）
+def base_addr_transform_ghidra2angr(program, angr_base_addr, ghidra_addr):
+    image_base = program.getImageBase()
+    ghidra_base_addr = image_base.getOffset()
+    angr_addr = ghidra_addr + angr_base_addr - ghidra_base_addr
+    return angr_addr
+
+
+# 给定反汇编后的代码行提取对应的函数调用内容
+def get_call_site_func_name_from_line(line, call_site_name):
+    stack_line = [] # 用于处理嵌套的括号问题
+    offset_start = 0
+    # 找到起始的偏移位置
+    tmp_line = line[offset_start:]
+    while offset_start < len(line):
+        if not tmp_line.startswith(call_site_name):
+            offset_start += 1
+            tmp_line = line[offset_start:]
+            continue
+        else:
+            break
+    offset_finish = offset_start + len(call_site_name)
+    # 获取最靠近函数调用的‘（’
+    while offset_finish < len(line) and line[offset_finish] != '(':
+        offset_finish += 1
+    offset_finish += 1
+    stack_line.append('(')
+    while offset_finish < len(line):
+        if line[offset_finish] == '(':
+            stack_line.append('(')
+        elif line[offset_finish] == ')':
+            stack_line.pop()
+            if not stack_line:
+                offset_finish += 1
+                break
+        offset_finish += 1
+    return offset_start, offset_finish
+
+
+# 根据反编译代码获取函数调用参数信息辅助函数
+def get_args_string_call_sites(program, identifier, call_site_name, angr_base_addr):
+    try:
+        func = get_function(program, identifier)
+        if func is None:
+            return None
+        # 初始化反编译接口
+        decomp_iface = DecompInterface()
+        decomp_iface.openProgram(program)
+        # 设置反编译选项（例如调用约定等）
+        decompileOptions = DecompileOptions()
+        decompileOptions.setProtoEvalModel("__stdcall")
+        decomp_iface.setOptions(decompileOptions)
+        # 反编译函数，设置超时时间为60秒
+        monitor = ConsoleTaskMonitor()
+        decomp_res = decomp_iface.decompileFunction(func, 60, monitor)
+        # 利用DecompilerUtils将token组转换为ClangLine列表
+        lines = DecompilerUtils.toLines(decomp_res.getCCodeMarkup())
+        call_site_dict = {} # 将调用站点存储在字典中，键值为函数调用的地址
+        for clang_line in lines:
+            line_text = clang_line.toString()
+            clean_line = re.sub(r'^\s*\d+:\s*', '', line_text)
+            if call_site_name in line_text:
+                offset_start, offset_finish = get_call_site_func_name_from_line(line_text, call_site_name)
+                call_site_code = line_text[offset_start:offset_finish]
+                for clang_token in clang_line.getAllTokens():
+                    if clang_token.getText() == call_site_name:
+                        # 仅仅使用call_site点的地址
+                        min_addr = base_addr_transform_ghidra2angr(program, angr_base_addr, clang_token.getMinAddress().getOffset())
+                call_site_dict[hex(min_addr)[:-1]] = [clean_line, call_site_code]          
+        return call_site_dict
+    except Exception as e:
+        print("[-] An exception occurred during decompilation: ", e)
+        return None
+    finally:
+        if 'decomp_iface' in locals():
+            decomp_iface.dispose()
+            
+
+# SG函数信息识别
+def get_all_decompile_code(program, angr_base_addr):
+    # 获取对应的函数列表信息
+    file_path = program.getExecutablePath()
+    file_path_process = file_path.replace("/", "_")
+    func_name_phase_file_name = "{}_func_name_phase.json".format(file_path_process)
+    func_name_phase_file_path = os.path.join(config_sgtaint.TMP_DIR, func_name_phase_file_name)
+    with open(func_name_phase_file_path, "r") as file:
+        func_name_phase_result_json = json.load(file)
+    # 存储解析结果
+    func_name_phase_result = []
+    for set_get_func_info in func_name_phase_result_json:
+        # 进行set函数的反编译代码行获取
+        set_func_name = set_get_func_info.get("set_func_name")
+        set_func_addr = set_get_func_info.get("set_func_addr")
+        set_code_dict = {}
+        angr_assist_set_func_addr = []
+        for set_func_addr_angr in set_func_addr:
+            set_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, set_func_addr_angr)
+            call_site_code_dict = get_args_string_call_sites(program, set_func_addr, set_func_name, angr_base_addr)
+            if call_site_code_dict:
+                set_code_dict.update(call_site_code_dict)
+            else:
+                angr_assist_set_func_addr.append(set_func_addr_angr) # 若ghidra没有找到对应的函数，则将其存储在列表中
+        # 进行get函数的反编译代码行获取
+        get_func_name = set_get_func_info.get("get_func_name")
+        get_func_addr = set_get_func_info.get("get_func_addr")
+        get_code_dict = {}
+        angr_assist_get_func_addr = []
+        for get_func_addr_angr in get_func_addr:
+            get_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, get_func_addr_angr)
+            call_site_code_dict = get_args_string_call_sites(program, get_func_addr, get_func_name, angr_base_addr)
+            if call_site_code_dict:
+                get_code_dict.update(call_site_code_dict)
+            else:
+                angr_assist_get_func_addr.append(get_func_addr_angr)
+        func_name_phase_result.append({
+            "set_func_name": set_func_name,
+            "set_code_dict": set_code_dict,
+            "set_func_fail": angr_assist_set_func_addr,
+            "get_func_name": get_func_name,
+            "get_code_dict": get_code_dict,
+            "get_func_fail": angr_assist_get_func_addr
+        })
+    # 存储对应的文件名称
+    func_name_phase_file_result_name = "{}_func_name_phase_result.json".format(file_path_process)
+    func_name_phase_file_result_path = os.path.join(config_sgtaint.TMP_DIR, func_name_phase_file_result_name)
+    with open(func_name_phase_file_result_path, "w") as file:
+        json.dump(func_name_phase_result, file, indent=4)
+    # 删除第一个存储的中间文件
+    command = "rm {}".format(func_name_phase_file_path)
+    execute(command)
+
+
+# 指定函数的调用站点的反编译获取
+def get_decompile_code_by_func_name(program, call_site_name, angr_base_addr):
+    # 获取对应的函数地址列表
+    caller_file_name = "{}_caller_addr.json".format(call_site_name)
+    caller_file_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_name)
+    with open(caller_file_path, "r") as file:
+        caller_addr_result_json = json.load(file)
+    # 存储解析结果
+    caller_parse_result = []
+    decompile_code_dict = {}
+    angr_assist_func_addr = []
+    for caller_addr_result in caller_addr_result_json:
+        func_addr_angr = int(caller_addr_result.get("caller"), 16)
+        # 输出所有的解析结果
+        func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, func_addr_angr)
+        call_site_code_list = get_args_string_call_sites(program, func_addr, call_site_name, angr_base_addr)
+        if call_site_code_list:
+            decompile_code_dict.update(call_site_code_list)
+        else:
+            angr_assist_func_addr.append(func_addr_angr)
+    caller_parse_result.append({
+        "code_dict": decompile_code_dict,
+        "func_fail": angr_assist_func_addr
+    })
+    # 存储对应的文件名称
+    caller_file_result_name =  "{}_caller_parse_result.json".format(call_site_name)
+    caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
+    with open(caller_file_result_path, "w") as file:
+        json.dump(caller_parse_result, file, indent=4)
+    # 删除第一个存储的中间文件
+    command = "rm {}".format(caller_file_path)
+    execute(command)
+    
+
+if __name__ == "__main__":
+    # 获取传递的参数
+    args = list(getScriptArgs()) # type: ignore
+    angr_base_addr = int(args[0], 16)
+    call_site_name = args[1]
+    # 进行Angr以及Ghidra的地址对应
+    program = getCurrentProgram() # type: ignore
+    if call_site_name == "*": # 进行SG函数信息的识别
+        get_all_decompile_code(program, angr_base_addr)
+    else: # 进行函数调用的解析
+        get_decompile_code_by_func_name(program, call_site_name, angr_base_addr)

@@ -1,0 +1,63 @@
+{
+  "name": "koa-json-error",
+  "version": "3.1.2",
+  "description": "Error handler for pure-JSON Koa apps",
+  "keywords": [
+    "koa",
+    "json",
+    "error",
+    "api",
+    "handler",
+    "middleware"
+  ],
+  "bugs": {
+    "url": "https://github.com/koajs/json-error/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Nicolás Fantone",
+    "email": "nfantone@gmail.com",
+    "url": "https://github.com/nfantone",
+    "twitter": "https://twitter.com/nfantone"
+  },
+  "contributors": [
+    "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)"
+  ],
+  "files": [
+    "index.js",
+    "lib/"
+  ],
+  "main": "index.js",
+  "repository": "koajs/json-error",
+  "scripts": {
+    "lint": "eslint *.js test/",
+    "test": "NODE_ENV=test mocha --reporter spec",
+    "coverage": "nyc npm run test",
+    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
+    "validate": "npm-run-all lint coverage",
+    "ci": "npm-run-all validate report-coverage"
+  },
+  "dependencies": {
+    "lodash.compact": "^3.0.1",
+    "lodash.curry": "^4.1.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "codecov": "^2.0.1",
+    "eslint": "^3.17.1",
+    "eslint-config-standard": "^7.0.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
+    "koa": "^2.2.0",
+    "mocha": "3.2.0",
+    "npm-run-all": "^4.0.2",
+    "nyc": "^10.1.2",
+    "pre-commit": "^1.2.2",
+    "supertest": "3.0.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "pre-commit": "test"
+}

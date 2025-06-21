@@ -1,0 +1,28 @@
+{
+    "name": "js_parser",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node index.js"
+    },
+    "keywords": [],
+    "author": "yyf(refer SaTC)",
+    "license": "ISC",
+    "dependencies": {
+      "acorn": "^6.3.1",
+      "acorn-bigint": "^1.0.0",
+      "acorn-jsx": "^5.2.0",
+      "esprima": "^4.0.1",
+      "koa": "^2.13.0",
+      "koa-body": "^4.2.0",
+      "koa-json-error": "^3.1.2",
+      "koa-router": "^9.1.0",
+      "package.json": "^0.0.0"
+    },
+    "devDependencies": {
+      "cross-env": "^7.0.2"
+    }
+  }
+  

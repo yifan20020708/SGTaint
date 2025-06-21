@@ -1,0 +1,896 @@
+import re
+import queue
+import multiprocessing
+import ailment
+import logging
+from collections import defaultdict
+from angr.project import Project
+from angr.analyses.cfg.cfg_fast import CFGFast
+from angr.knowledge_plugins.key_definitions.atoms import Register, SpOffset, MemoryLocation
+from angr.knowledge_plugins.key_definitions.tag import ReturnValueTag
+import tool.Config.config as config_sgtaint
+from tool.SGGraph.utils import dedupe_paths
+
+logger = logging.getLogger("sgtaint.merge")
+
+def get_clinic_block(project: Project, clinic, addr):
+    blk = None
+    if clinic is not None:
+        for block in clinic.graph.nodes():
+            if block.addr == addr:
+                blk = block
+                break
+        try:
+            if blk is not None and hasattr(blk, "statements") and len(blk.statements) > 0:
+                return blk
+        except Exception:
+            pass
+    try:
+        manager = ailment.Manager(arch=project.arch)
+        block = project.factory.block(addr)
+        ail_block = ailment.IRSBConverter.convert(block.vex, manager)
+        simp = project.analyses.AILBlockSimplifier(ail_block, clinic.function.addr)
+        csm = project.analyses.AILCallSiteMaker(simp.result_block)
+        if csm.result_block:
+            ail_block = csm.result_block
+            simp = project.analyses.AILBlockSimplifier(ail_block, clinic.function.addr)
+        return simp.result_block
+    except Exception:
+        return None
+
+
+def get_strings(d0, cfg, rd_ddg_graph):
+    b0 = "not_static_string"
+    pcd0 = [d for d in rd_ddg_graph.predecessors(d0)]
+    memory_def_flag = False
+    for df in pcd0:
+        if type(df.atom) == MemoryLocation and df.atom.addr in cfg.memory_data:
+            memory_def_flag = True
+    if not memory_def_flag:
+        extended_defs = []
+        for df in pcd0:
+            extended_defs.extend(rd_ddg_graph.predecessors(df))
+        pcd0 = extended_defs
+    string_list = []
+    for df in pcd0:
+        if (type(df.atom) == MemoryLocation and
+                df.atom.addr in cfg.memory_data and
+                cfg.memory_data[df.atom.addr].content is not None):
+            bb0 = cfg.memory_data[df.atom.addr]
+            if bb0.content is not None:
+                i = 0
+                while str(
+                    cfg.project.loader.memory.load(bb0.addr, bb0.size + i)
+                )[bb0.size + i + 1] != "\\":
+                    i += 1
+                b0 = str(
+                    cfg.project.loader.memory.load(bb0.addr, bb0.size + i - 1)
+                )[2:-1]
+                string_list.append(b0)
+    if len(string_list) > 1:
+        b0 = "#".join(string_list)
+    return b0
+
+
+def extract_operands(operand, state=None):
+    if type(operand) == list:
+        return extract_operands(operand[0], state) + extract_operands(operand[1], state)
+    if type(operand) == ailment.expression.BinaryOp:
+        return extract_operands(operand.operands)
+    elif type(operand) == ailment.expression.Const:
+        return []
+    elif type(operand) == ailment.expression.Register:
+        return [operand]
+    elif hasattr(operand, "base"):
+        atom = MemoryLocation(SpOffset(state.arch.bits, operand.offset), operand.size)
+        return [atom]
+    elif type(operand) == ailment.expression.Load and hasattr(operand, "addr") and type(operand.addr) == ailment.expression.StackBaseOffset:
+        atom = MemoryLocation(SpOffset(state.arch.bits, operand.addr.offset), operand.size)
+        return [atom]
+    elif type(operand) == ailment.expression.Load and hasattr(operand, "addr") and type(operand.addr) == ailment.expression.BinaryOp and type(operand.addr.operands[1]) == ailment.expression.Const:
+        atom = MemoryLocation(SpOffset(state.arch.bits, operand.addr.operands[1].value), operand.addr.operands[1].size)
+        return [atom]
+    else:
+        return []
+
+
+def get_path_between_two_nodes(node_A, node_B, function):
+    reg_seen_defs = set()
+    defs_to_check = [(node_A, [])]
+    seen_defs = set()
+    paths = []
+    while defs_to_check:
+        current_def, current_path = defs_to_check.pop()
+        seen_defs.add(current_def)
+        current_path = current_path + [current_def.addr]
+        def_value = current_def == node_B
+        if def_value:
+            reg_seen_defs.add(def_value)
+            paths.append(current_path)
+        else:
+            if current_def in function.graph.nodes():
+                for pred in current_def.predecessors():
+                    if pred not in seen_defs:
+                        defs_to_check.append((pred, current_path))
+    if not paths:
+        return []
+    return paths[0]
+
+
+def get_path(desired_blocks, def_explorer):
+    RDA_handler = def_explorer.RDA_handler
+    final_blocks_list = []
+    for addr in desired_blocks:
+        if addr not in final_blocks_list:
+            final_blocks_list.append(addr)
+    connected_blocks = []
+    i = 0
+    not_equal = False
+    while i + 1 < len(final_blocks_list):
+        tmp_fun_0 = RDA_handler.cfg.functions.floor_func(final_blocks_list[i])
+        tmp_fun_1 = RDA_handler.cfg.functions.floor_func(final_blocks_list[i + 1])
+        if tmp_fun_0 != tmp_fun_1:
+            i += 1
+            connected_blocks.append(final_blocks_list[i - 1])
+            continue
+        node_A = tmp_fun_0.get_node(final_blocks_list[i])
+        node_B = tmp_fun_0.get_node(final_blocks_list[i + 1])
+        i += 1
+        if node_A is None or node_B is None:
+            continue
+        if node_B in node_A.predecessors():
+            connected_blocks.append(final_blocks_list[i - 1])
+            continue
+        else:
+            sub_path = get_path_between_two_nodes(node_A, node_B, tmp_fun_0)
+            connected_blocks.extend(sub_path[:-1])
+    for blk_addr in final_blocks_list:
+        if blk_addr not in connected_blocks:
+            connected_blocks.append(blk_addr)
+    return connected_blocks
+
+
+def connectDefination_with_sinks(function, project: Project, def_explorer=None, 
+                                 desired_blocks=None, desired_definations=None, 
+                                 keyword=None, connected_path=None):
+    RDA_handler = def_explorer.RDA_handler
+    clinic = RDA_handler.dec.clinic
+    connected_blocks = connected_path
+    type_list = []
+    intresting_blks = [] # contianisn condtions blocks addresses
+    false_blocks = []  # contianisn false condtions blocks addresses
+    path_blk = []
+    error_messges_list = []
+    fail2captureConditionsTime = 0
+    
+    for addr in connected_blocks:
+        tmp_fun = RDA_handler.cfg.functions.floor_func(addr)
+        tmp_clinic = clinic
+        tmp_state = def_explorer.current_state
+        blk = None
+        if tmp_fun != function:
+            for item in config_sgtaint.STACK:
+                if tmp_fun == item[0]:
+                    blk = get_clinic_block(project, item[2], addr)
+                    tmp_clinic = item[2]
+                    tmp_state = item[3]
+                    break
+        else:
+            blk = get_clinic_block(project, clinic, addr)
+            try:
+                tmp_state = RDA_handler._analysis.get_reaching_definitions_by_node(addr, 0)
+            except Exception as e:
+                tmp_state = def_explorer.current_state
+        if blk is not None and hasattr(blk,"statements") and len(blk.statements) > 0:
+            branch_type = type(blk.statements[-1]) 
+            if addr in desired_blocks:
+                path_blk.append((blk,branch_type))
+            if  branch_type not in [ailment.statement.Call, ailment.statement.Store, ailment.statement.Assignment]:
+                intresting_blks.append((blk,branch_type))
+                try:
+                    if type(blk.statements[-1]) == ailment.statement.Jump :                        
+                        continue
+                    false_block_address = blk.statements[-1].false_target.value if blk.statements[-1].true_target.value in connected_blocks else blk.statements[-1].true_target.value
+                    false_blk = get_clinic_block(project, tmp_clinic, false_block_address)
+                    false_blocks.append(false_block_address)
+                    if type(false_blk.statements[-1]) == ailment.statement.Return :
+                        print("blk_addr =", hex(false_block_address), "  Return -> ", false_blk.statements[-1], " ", false_blk.statements[-1].tags)
+                        tmp_error = "return*-1"
+                        if tmp_error not in error_messges_list:
+                            error_messges_list.append(tmp_error)
+                    elif type(false_blk.statements[0]) == ailment.statement.Assignment and type(false_blk.statements[0].src) == ailment.expression.Const and false_blk.statements[0].src.value in RDA_handler.cfg.memory_data:
+                            bb0 = RDA_handler.cfg.memory_data[false_blk.statements[0].src.value]
+                            b0 = ""
+                            if bb0.content is not None:
+                                i = 0
+                                while str(RDA_handler.cfg.project.loader.memory.load(bb0.addr, bb0.size + i))[bb0.size + i + 1] != '\\':
+                                    i += 1
+                                b0 = str(RDA_handler.cfg.project.loader.memory.load(bb0.addr, bb0.size + i - 1))[2:-1]
+                            tmp_error = "pcvar*"+b0 
+                            if tmp_error not in error_messges_list:
+                                error_messges_list.append(tmp_error)
+                            print("error function is -> ", tmp_error)
+                    elif type(false_blk.statements[-1]) == ailment.statement.Call and hasattr(false_blk.statements[-1], 'target') and hasattr(false_blk.statements[-1].target, 'value'):
+                        error_function = RDA_handler.cfg.functions.get_by_addr(addr = false_blk.statements[-1].target.value)
+                        b0 = ""
+                        if error_function is not None and false_blk.statements[-1].args is not None and len(false_blk.statements[-1].args) == 1 and hasattr(false_blk.statements[-1].args[0],'value') and false_blk.statements[-1].args[0].value in RDA_handler.cfg.memory_data:
+                            bb0 = RDA_handler.cfg.memory_data[false_blk.statements[-1].args[0].value]
+                            b0 = ""
+                            if bb0.content is not None:
+                                i = 0
+                                while str(RDA_handler.cfg.project.loader.memory.load(bb0.addr, bb0.size + i))[bb0.size + i + 1] != '\\':
+                                    i += 1
+                                b0 = str(RDA_handler.cfg.project.loader.memory.load(bb0.addr, bb0.size + i - 1))[2:-1]
+                            tmp_error = error_function.name + "*" + b0
+                            if tmp_error not in error_messges_list:
+                                error_messges_list.append(tmp_error)
+                            print("error function is -> ", error_function.name, "text=",b0)
+                        elif error_function is not None and hasattr(false_blk.statements[-1],"args") and false_blk.statements[-1].args is not None and len(false_blk.statements[-1].args) == 1 and type(false_blk.statements[-1].args[0]) == ailment.expression.Const:
+                            tmp_error = error_function.name + "*" + str(false_blk.statements[-1].args[0].value)
+                            if tmp_error not in error_messges_list:
+                                error_messges_list.append(tmp_error)
+                            print("error function is -> ", error_function.name, "value=", b0)
+                except Exception as e:
+                    print("ERROR AT 4131 ->", e)
+                    continue
+            if branch_type not in type_list:
+                type_list.append(branch_type)           
+    print(type_list)   
+    print("***")
+    print("Extracted conditional Blocks")
+    for itm in intresting_blks:
+        if itm[1] == ailment.statement.ConditionalJump:
+            print(itm[0].statements[-1].condition.verbose_op, " -> ", itm[0].statements[-1].condition)
+    print("########")
+    flag_list = [0]
+    reg_name_list = []    
+    for item in intresting_blks:
+        try:
+            cnd_statement = item[0].statements[-1]
+            if type(cnd_statement) != ailment.statement.ConditionalJump:
+                continue
+            blk_addr = cnd_statement.tags['vex_block_addr']
+            tmp_fun = RDA_handler.cfg.functions.floor_func(blk_addr)
+            if tmp_fun == function :
+                tmp_state = def_explorer.current_state
+            elif tmp_fun != function:
+                for stack_item in config_sgtaint.STACK:
+                    if tmp_fun == stack_item[0]:
+                        tmp_state = stack_item[3]
+                        break
+            else:
+                tmp_state = RDA_handler._analysis.get_reaching_definitions_by_node(blk_addr, 0)
+        except Exception as e:
+            tmp_state = def_explorer.current_state
+            print("error at 4139 ", e)
+        operands = cnd_statement.condition.operands
+        operands_list = []
+        for oprand in operands:
+            try:
+                if type(oprand) == ailment.expression.BinaryOp:
+                    operands_list.extend( extract_operands(oprand.operands,tmp_state))
+                elif type(oprand) == ailment.expression.Const:
+                    continue
+                elif type(oprand) == ailment.expression.Register:
+                    operands_list.append(oprand)
+                elif hasattr(oprand, 'base') :
+                    atom=MemoryLocation(SpOffset(tmp_state.arch.bits, oprand.offset), oprand.size)
+                    operands_list.append(atom)
+                elif type(oprand) == ailment.expression.Load and hasattr(oprand,'addr') and type(oprand.addr) == ailment.expression.StackBaseOffset:
+                    atom=MemoryLocation(SpOffset(tmp_state.arch.bits, oprand.addr.offset), oprand.size)
+                    operands_list.append(atom)
+                elif type(oprand) == ailment.expression.UnaryOp:
+                    operands_list.extend(extract_operands(oprand.operands[0], tmp_state))
+                else:
+                    print("we did not catch it  -->  ", oprand, " -> ", type(oprand))
+            except Exception as e:
+                print("error AT 4248 with --> ", oprand, " -> ", type(oprand))
+                continue
+        for oprand in operands_list:
+            try:
+                defination_checked_flag = False 
+                if type(oprand) == ailment.expression.Register:
+                    atom_1 = Register(oprand.reg_offset,oprand.size)
+                    df1 = next(iter(tmp_state.get_definitions(atom_1)))
+                    operand_name = oprand.tags["reg_name"]
+                elif type(oprand) == MemoryLocation:
+                    df1 = next(iter(tmp_state.get_definitions(oprand)))
+                    operand_name = oprand.addr
+                if df1 in desired_definations:
+                    if len(cnd_statement.condition.operands) == 2 and type(cnd_statement.condition.operands[1]) == ailment.expression.Const and cnd_statement.condition.operands[1].value == 0:
+                        no_sanitization_flag = False
+                        extrated_tags = df1.tags.copy()
+                        if len(extrated_tags) == 0:
+                            prd1 = [d for d in def_explorer.RDA_handler._analysis.dep_graph.predecessors(df1)]
+                            for dfdf in prd1:
+                                if dfdf in desired_definations:
+                                    extrated_tags = dfdf.tags.copy()
+                                    if len(extrated_tags) == 0:
+                                        continue
+                                    curr_tag = extrated_tags.pop()
+                                    while True:
+                                        if len(extrated_tags) == 0:
+                                            break
+                                        if type(curr_tag) == ReturnValueTag:
+                                            break
+                                        curr_tag = extrated_tags.pop()
+                                    taint_source_name = curr_tag.metadata['tagged_by'].split()[0]
+                                    print(taint_source_name)
+                                    if taint_source_name in config_sgtaint.SOURCES or taint_source_name in config_sgtaint.New_input_getters:
+                                        no_sanitization_flag = True
+                        else:
+                            curr_tag = extrated_tags.pop()
+                            while True:
+                                if len(extrated_tags) == 0:
+                                    break
+                                if type(curr_tag) == ReturnValueTag:
+                                    break
+                                curr_tag = extrated_tags.pop()
+                            taint_source_name = curr_tag.metadata['tagged_by'].split()[0]
+                            print(taint_source_name)
+                            if taint_source_name in config_sgtaint.SOURCES or taint_source_name in config_sgtaint.New_input_getters:
+                                no_sanitization_flag=True
+                        if not no_sanitization_flag:
+                            flag_list.append(1)
+                            reg_name_list.append(f'{operand_name}@{cnd_statement.condition}')
+                            print(f'{operand_name}@{cnd_statement.condition}') 
+                        else:
+                            print(f'{operand_name}@{cnd_statement.condition}  ', curr_tag.metadata['tagged_by'])
+                    else:
+                        flag_list.append(1)
+                        reg_name_list.append(f'{operand_name}@{cnd_statement.condition}')
+                elif df1 in def_explorer.RDA_handler._analysis.dep_graph.nodes():
+                    check_more = False
+                    prd1 = [d for d in def_explorer.RDA_handler._analysis.dep_graph.predecessors(df1)]
+                    for tmp_def in prd1:
+                        if tmp_def in desired_definations:
+                            flag_list.append(1)
+                            reg_name_list.append(f'{operand_name}@{cnd_statement.condition}' )
+                            print(tmp_def)
+                            print("#### we hit here for checking time  :)")
+                            check_more=True
+                            continue
+                        else:
+                            reg_def = tmp_def
+                            reg_seen_defs = set()
+                            defs_to_check = set()
+                            defs_to_check.add(reg_def)
+                            seen_defs = set()
+                            while len(defs_to_check) != 0:
+                                current_def = defs_to_check.pop()
+                                seen_defs.add(current_def)
+                                if current_def in desired_definations:
+                                    flag_list.append(1)
+                                    reg_name_list.append(f'{operand_name}@{cnd_statement.condition}' )
+                                    print(tmp_def, "--", current_def)
+                                    print("#### we hit the second for checking time  :)")
+                                else:
+                                    if current_def in def_explorer.RDA_handler._analysis.graph.nodes():
+                                        for pred in def_explorer.RDA_handler._analysis.graph.predecessors(current_def):
+                                            if pred not in seen_defs:
+                                                defs_to_check.add(pred)
+                    if not check_more:
+                        continue         
+            except Exception as e:
+                print("error ->", e)
+                print(oprand)
+                fail2captureConditionsTime += 1
+                continue
+    checking_time = sum(flag_list)
+    conditions_str = "#".join(reg_name_list)
+    error_messges_str = "#".join(error_messges_list)
+    if checking_time > 0:
+        print("checking_time =", checking_time, " ", conditions_str)
+    return checking_time, fail2captureConditionsTime, conditions_str, error_messges_str
+    
+    
+def backtrack_definations(def_explorer, reg_defs, result_file,
+                          memcpy_func_pred, FUNCS, sink, memcpy_addr, result_path,
+                          check_is_tainted_def=False):
+    for reg_def in reg_defs:
+        OVERALL_DEFS = set()
+        function_containing_sink = def_explorer.cfg.kb.functions.floor_func(memcpy_addr)
+        if function_containing_sink is not None:
+            function_containing_sink_name = function_containing_sink.name
+        else:
+            function_containing_sink_name = hex(memcpy_addr)
+
+        reg_seen_defs, Paths, visited_functions = def_explorer.resolve_use_def(reg_def)
+        if check_is_tainted_def:
+            return reg_seen_defs, Paths, visited_functions
+        for overall_def, path, visited_function in zip(reg_seen_defs, Paths, visited_functions):
+            print(overall_def)
+            print("path ->", path)
+            print(visited_function)
+            print("$$$$$$$$$$$$$$$$$$$")
+
+            if overall_def[0] == "get2set":
+                tmp_path = [i.codeloc.block_addr for i in path]
+                str_path = "#".join(str(hex(i)) for i in tmp_path)
+                connected_path = get_path(desired_blocks=tmp_path, def_explorer=def_explorer)
+                print("visited_function ->", visited_function)
+                tmp_visited_function = []
+                length_visited_function = []
+                for vfn in visited_function:
+                    if vfn[1] in connected_path and vfn[2] != -1:
+                        length_str = f"{vfn[0]}*{vfn[2]}"
+                        if length_str not in length_visited_function:
+                            length_visited_function.append(length_str)
+                    if vfn not in tmp_visited_function and vfn[1] in connected_path:
+                        tmp_visited_function.append(vfn)
+                tmp_visited_function = [fn[0] for fn in tmp_visited_function]
+                str_visited_fnctions = "#".join(tmp_visited_function)
+                str_length_visited_function = "#".join(length_visited_function)
+                print("\nget2set keyword is ->", overall_def[6])
+                print("str_visited_fnctions ->", str_visited_fnctions, tmp_visited_function)
+                try:
+                    checking_time, fail2captureConditionsTime, conditions_str, error_messges_str = \
+                        connectDefination_with_sinks(
+                            function=def_explorer.RDA_handler.cur_fun,
+                            project=def_explorer.RDA_handler._analysis.project,
+                            def_explorer=def_explorer,
+                            desired_blocks=tmp_path,
+                            desired_definations=path,
+                            keyword=overall_def[6],
+                            connected_path=connected_path
+                        )
+                except Exception:
+                    checking_time, fail2captureConditionsTime, conditions_str, error_messges_str = -1, -1, "", ""
+                # 完成之后进行合并，防止并行操作造成读写异常
+                result_dict = {
+                    "target_addr": memcpy_func_pred.addr,
+                    "target_name": memcpy_func_pred.name,
+                    "source_name": overall_def[5],
+                    "source_insr_addr": overall_def[3],
+                    "source_addr": overall_def[1],
+                    "taint_source": overall_def[2],
+                    "sink_insr_addr": overall_def[4],
+                    "sink_addr": function_containing_sink_name,
+                    "sink_name": sink,
+                    "checking_time": checking_time,
+                    "conditions_str": conditions_str,
+                    "visited_functions": str_visited_fnctions,
+                    "fail2captureConditionsTime": fail2captureConditionsTime,
+                    "error_messges_str": error_messges_str,
+                    "str_length_visited_function": str_length_visited_function,
+                    "path": str_path,
+                    "source_keyword": overall_def[6],
+                    "set_keyword": overall_def[7]
+                }
+                result_file.write(
+                    f"target_addr: {hex(memcpy_func_pred.addr)} ,  "
+                    f"target_name: {memcpy_func_pred.name} ,  "
+                    f"source_name: {overall_def[5]} ,  "
+                    f"source_insr_addr: {hex(overall_def[3])},  "
+                    f"source_addr: {hex(overall_def[1])} ,  "
+                    f"taint_source: {overall_def[2]} ,  "
+                    f"sink_insr_addr: {hex(overall_def[4])}  ,"
+                    f"sink_addr: {function_containing_sink_name} ,  "
+                    f"sink_name: {sink},  "
+                    f"checking_time:{checking_time},  "
+                    f"conditions_str:{conditions_str} ,  "
+                    f"visited_functions: {str_visited_fnctions},  "
+                    f"fail2captureConditionsTime: {fail2captureConditionsTime},  "
+                    f"error_messges_str: {error_messges_str},  "
+                    f"str_length_visited_function: {str_length_visited_function} ,  "
+                    f"path: {str_path} ,  {overall_def[6]} ,  {overall_def[7]}\n"
+                )
+                result_path.append(result_dict)
+                result_file.flush()
+
+            if overall_def[0] == "retval":
+                if overall_def[1] is not None:
+                    tmp_path = [i.codeloc.block_addr for i in path]
+                    str_path = "#".join(str(hex(i)) for i in tmp_path)
+                    connected_path = get_path(desired_blocks=tmp_path, def_explorer=def_explorer)
+                    print("connected_path ->", connected_path)
+                    print("visited_function ->", visited_function)
+                    tmp_visited_function = []
+                    length_visited_function = []
+                    for vfn in visited_function:
+                        if vfn[1] in connected_path and vfn[2] != -1:
+                            length_str = f"{vfn[0]}*{vfn[2]}"
+                            if length_str not in length_visited_function:
+                                length_visited_function.append(length_str)
+                        if vfn not in tmp_visited_function and vfn[1] in connected_path:
+                            tmp_visited_function.append(vfn)
+                    tmp_visited_function = [fn[0] for fn in tmp_visited_function]
+                    str_visited_fnctions = "#".join(tmp_visited_function)
+                    str_length_visited_function = "#".join(length_visited_function)
+                    print("\nkeyword is ->", overall_def[6])
+                    print("str_visited_fnctions ->", str_visited_fnctions)
+                    try:
+                        checking_time, fail2captureConditionsTime, conditions_str, error_messges_str = \
+                            connectDefination_with_sinks(
+                                function=def_explorer.RDA_handler.cur_fun,
+                                project=def_explorer.RDA_handler._analysis.project,
+                                def_explorer=def_explorer,
+                                desired_blocks=tmp_path,
+                                desired_definations=path,
+                                keyword=overall_def[6],
+                                connected_path=connected_path
+                            )
+                    except Exception:
+                        checking_time, fail2captureConditionsTime, conditions_str, error_messges_str = -1, -1, "", ""
+                    # 完成之后进行合并，防止并行操作造成读写异常
+                    result_dict = {
+                        "target_addr": memcpy_func_pred.addr,
+                        "target_name": memcpy_func_pred.name,
+                        "source_name": overall_def[5],
+                        "source_insr_addr": overall_def[3],
+                        "source_addr": overall_def[1],
+                        "taint_source": overall_def[2],
+                        "sink_insr_addr": overall_def[4],
+                        "sink_addr": function_containing_sink_name,
+                        "taint_sink": sink,
+                        "checking_time": checking_time,
+                        "conditions_str": conditions_str,
+                        "visited_functions": str_visited_fnctions,
+                        "fail2captureConditionsTime": fail2captureConditionsTime,
+                        "error_messges_str": error_messges_str,
+                        "str_length_visited_function": str_length_visited_function,
+                        "path": str_path,
+                        "source_keyword": overall_def[6]
+                    }
+                    result_file.write(
+                        f"target_addr: {hex(memcpy_func_pred.addr)} ,  "
+                        f"target_name: {memcpy_func_pred.name} ,  "
+                        f"source_name: {overall_def[5]} ,  "
+                        f"source_insr_addr: {hex(overall_def[3])},  "
+                        f"source_addr: {hex(overall_def[1])} ,  "
+                        f"taint_source: {overall_def[2]} ,  "
+                        f"sink_insr_addr: {hex(overall_def[4])}  ,"
+                        f"sink_addr: {function_containing_sink_name} ,  "
+                        f"taint_Sink: {sink},  "
+                        f"checking_time:{checking_time},  "
+                        f"conditions_str:{conditions_str} ,  "
+                        f"visited_functions: {str_visited_fnctions},  "
+                        f"fail2captureConditionsTime: {fail2captureConditionsTime},  "
+                        f"error_messges_str: {error_messges_str} ,  "
+                        f"str_length_visited_function: {str_length_visited_function} ,  "
+                        f"path: {str_path} ,  keyword: {overall_def[6]}\n"
+                    )
+                    result_path.append(result_dict)
+                    result_file.flush()
+                    
+
+# 获取分析对象
+def get_functions_to_analyse(sources, project, cfg):
+    observation_points_map = {}         # Maps observation points (instruction) to function name
+    function_callers_map = {}           # Maps function addr to list of CFG nodes that call the sink
+    function_observation_points = {}    # Maps function addr to list of observation point tuples
+
+    for target_function_name in sources:
+        sink_function = project.kb.functions.function(name=target_function_name)
+        if sink_function is None:
+            continue
+        sink_address = sink_function.addr
+        sink_node = cfg.model.get_any_node(sink_address)
+        if sink_node is None:
+            continue
+        sink_predecessors = sink_node.predecessors
+        caller_function_addresses = list(set(
+            pred.function_address for pred in sink_predecessors
+        ))
+        # Initialize mapping from caller function address to empty list
+        for caller_addr in caller_function_addresses:
+            function_callers_map[str(caller_addr)] = []
+        # Group all predecessor nodes by their caller function
+        for pred_node in sink_predecessors:
+            function_callers_map[str(pred_node.function_address)].append(pred_node)
+        # For each caller function, identify observation points (i.e., call sites)
+        for caller_str_addr, call_sites in function_callers_map.items():
+            caller_addr = int(caller_str_addr)
+            observation_points = []
+            for call_node in call_sites:
+                last_instr_addr = project.factory.block(call_node.addr).instruction_addrs[-1]
+                observation_point = ("insn", last_instr_addr, 0)
+                observation_points.append(observation_point)
+                observation_points_map[observation_point] = target_function_name
+            if caller_addr not in function_observation_points:
+                function_observation_points[caller_addr] = observation_points
+            else:
+                function_observation_points[caller_addr].extend(observation_points)
+    return function_callers_map
+
+
+def run_function_with_timeout(function, args=(), kwargs={}, timeout=10):
+    q = multiprocessing.Queue()
+    p = multiprocessing.Process(target=worker_function, args=(q, function, args, kwargs))
+    p.start()
+    p.join(timeout=timeout)
+    if p.is_alive():
+        p.terminate()
+        p.join()
+        raise TimeoutError("Function call timed out")
+    try:
+        status, data = q.get(timeout=1) 
+    except queue.Empty: 
+        raise TimeoutError("Failed to retrieve function result")
+    if status == 'success':
+        return data
+    elif status == 'error':
+        raise data
+    
+    
+def worker_function(queue, function, args, kwargs):
+    try:
+        result = function(*args, **kwargs)
+        queue.put(('success', result))
+    except Exception as e:
+        queue.put(('error', e))
+        
+
+# 将path序列转化为ghidra格式
+def transfer_path_to_ghidra(path_str, project: Project, cfg: CFGFast):
+    path_str_list = path_str.split("#")
+    addr_int_list = [int(addr, 16) for addr in path_str_list if addr]
+    addr_int_list.reverse()
+    # 构建block缓存
+    block_cache = {}
+    def get_block(addr):
+        if addr not in block_cache:
+            block_cache[addr] = project.factory.block(addr)
+        return block_cache[addr]
+    function_dict = defaultdict(list)
+    addr_to_func = {}
+    for addr in addr_int_list:
+        if addr not in addr_to_func:
+            func = cfg.functions.floor_func(addr)
+            if func is None:
+                continue  # skip if no enclosing function
+            addr_to_func[addr] = func.addr
+        func_addr = addr_to_func[addr]
+        function_dict[func_addr].append(addr)
+    function_ghidra_format = []
+    for func_addr, block_addrs in function_dict.items():
+        start_block = get_block(block_addrs[0])
+        end_block = get_block(block_addrs[-1])
+        function_ghidra_format.append([
+            func_addr,
+            start_block.addr, start_block.instruction_addrs[-1],
+            end_block.addr, end_block.instruction_addrs[-1]
+        ])
+    return function_ghidra_format
+
+
+# 两种正则模式
+pattern_source2sink = re.compile(
+    r"target_addr:\s*([^,]+)\s*,\s*"
+    r"target_name:\s*([^,]+)\s*,\s*"
+    r"source_name:\s*([^,]+)\s*,\s*"
+    r"source_insr_addr:\s*([^,]+)\s*,\s*"
+    r"source_addr:\s*([^,]+)\s*,\s*"
+    r"taint_source:\s*([^,]+)\s*,\s*"
+    r"sink_insr_addr:\s*([^,]+)\s*,\s*"
+    r"sink_addr:\s*([^,]+)\s*,\s*"
+    r"taint_Sink:\s*([^,]+)\s*,\s*"
+    r"checking_time:\s*([^,]+)\s*,\s*"
+    r"conditions_str:\s*(.*?)\s*,\s*"
+    r"visited_functions:\s*(.*?)\s*,\s*"
+    r"fail2captureConditionsTime:\s*([^,]+)\s*,\s*"
+    r"error_messges_str:\s*(.*?)\s*,\s*"
+    r"str_length_visited_function:\s*(.*?)\s*,\s*"
+    r"path:\s*(.*?)\s*,\s*"
+    r"keyword:\s*(.*?)\s*$"
+)
+
+
+pattern_get2set = re.compile(
+    r"target_addr: ([^,]+) ,\s*"
+    r"target_name: ([^,]+) ,\s*"
+    r"source_name: ([^,]+) ,\s*"
+    r"source_insr_addr: ([^,]+),\s*"
+    r"source_addr: ([^,]+) ,\s*"
+    r"taint_source: ([^,]+) ,\s*"
+    r"sink_insr_addr: ([^,]+)  ,\s*"
+    r"sink_addr: ([^,]+) ,\s*"
+    r"sink_name: ([^,]+),\s*"
+    r"checking_time:([^,]+),\s*"
+    r"conditions_str:([^,]*?) ,\s*"
+    r"visited_functions:\s*(.*?)\s*,\s*"
+    r"fail2captureConditionsTime:\s*([^,]+)\s*,\s*"
+    r"error_messges_str:\s*(.*?)\s*,\s*"
+    r"str_length_visited_function:\s*(.*?)\s*,\s*"
+    r"path: ([^,]*?) ,\s*"
+    r"([^,]*?) ,\s*([^,]*?)\s*$"
+)
+
+
+def parse_result_line_auto(line):
+    m = pattern_source2sink.match(line)
+    if m:
+        (
+            target_addr, target_name, source_name, source_insr_addr,
+            source_addr, taint_source, sink_insr_addr, sink_addr,
+            taint_sink, checking_time, conditions_str, visited_functions,
+            fail2captureConditionsTime, error_messges_str, str_length_visited_function,
+            path, source_keyword
+        ) = m.groups()
+        return {
+            "target_addr": target_addr.strip(),
+            "target_name": target_name.strip(),
+            "source_name": source_name.strip(),
+            "source_insr_addr": source_insr_addr.strip(),
+            "source_addr": source_addr.strip(),
+            "taint_source": taint_source.strip(),
+            "sink_insr_addr": sink_insr_addr.strip(),
+            "sink_addr": sink_addr.strip(),
+            "taint_sink": taint_sink.strip(),
+            "checking_time": checking_time.strip(),
+            "conditions_str": conditions_str.strip(),
+            "visited_functions": visited_functions.strip(),
+            "fail2captureConditionsTime": fail2captureConditionsTime.strip(),
+            "error_messges_str": error_messges_str.strip(),
+            "str_length_visited_function": str_length_visited_function.strip(),
+            "path": path.strip(),
+            "source_keyword": source_keyword.strip(),
+            "start_block": int(path.strip().split('#')[0], 16) if path.strip() else None,
+            "end_block": int(path.strip().split('#')[-1], 16) if path.strip() else None,
+        }
+    m = pattern_get2set.match(line)
+    if m:
+        (
+            target_addr, target_name, source_name, source_insr_addr,
+            source_addr, taint_source, sink_insr_addr, sink_addr,
+            sink_name, checking_time, conditions_str, visited_functions,
+            fail2captureConditionsTime, error_messges_str, str_length_visited_function,
+            path, source_keyword, set_keyword
+        ) = m.groups()
+        return {
+            "target_addr": target_addr.strip(),
+            "target_name": target_name.strip(),
+            "source_name": source_name.strip(),
+            "source_insr_addr": source_insr_addr.strip(),
+            "source_addr": source_addr.strip(),
+            "taint_source": taint_source.strip(),
+            "sink_insr_addr": sink_insr_addr.strip(),
+            "sink_addr": sink_addr.strip(),
+            "taint_sink": sink_name.strip(),
+            "checking_time": checking_time.strip(),
+            "conditions_str": conditions_str.strip(),
+            "visited_functions": visited_functions.strip(),
+            "fail2captureConditionsTime": fail2captureConditionsTime.strip(),
+            "error_messges_str": error_messges_str.strip(),
+            "str_length_visited_function": str_length_visited_function.strip(),
+            "path": path.strip(),
+            "source_keyword": source_keyword.strip(),
+            "set_keyword": set_keyword.strip(),
+            "start_block": int(path.strip().split('#')[-1], 16) if path.strip() else None,
+            "end_block": int(path.strip().split('#')[0], 16) if path.strip() else None,
+        }
+    return None
+
+
+# 解析结果文件到path路径之中
+def parse_result_file_auto(filepath):
+    results = []
+    seen = set()
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            result_dict = parse_result_line_auto(line)
+            if result_dict is None:
+                continue # 一般情况下不会进入到此条路径
+            tuple_repr = tuple(result_dict.items())
+            if tuple_repr not in seen:
+                seen.add(tuple_repr)
+                results.append(result_dict)
+    return results
+
+
+# 单个二进制文件的路径拼接（直接通过内容匹配进行）
+def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
+    # 读取潜在路径结果
+    source2sink_path = potential_path_dict[file_path]["source2sink_path"]
+    get2set_path = potential_path_dict[file_path]["get2set_path"]
+    diffusion_file = potential_path_dict[file_path]["diffusion_file"]
+    # 初始化complete_source2sink_path以及complete_get2sink_path
+    for source2sink_single_path in source2sink_path:
+        if source2sink_single_path["taint_source"] in config_sgtaint.transitive_get:
+            path_dict = {file_path: [source2sink_single_path["path"]]} # 键为二进制文件路径，值为对应的路径列表
+            potential_path_dict[file_path]["complete_get2sink_path"].append({
+                "kind": "intra-single", # 标记为原始的source2sink的路径
+                "source_function_name": source2sink_single_path["source_name"], # source调用点所在的函数
+                "taint_source": source2sink_single_path["taint_source"], # get函数的名称
+                "source_insr_addr": source2sink_single_path["source_insr_addr"], # get函数调用点地址
+                "start_block": source2sink_single_path["start_block"], # get函数调用点所在block的起始地址
+                "source_keyword": source2sink_single_path["source_keyword"], # get函数的关键字
+                "merge": False, # 标记为非合并路径
+                "binary": [file_path], # 所在二进制文件的list
+                "taint_sink": source2sink_single_path["taint_sink"], # sink函数的名称
+                "sink_insr_addr": source2sink_single_path["sink_insr_addr"], # sink函数调用点地址
+                "end_block": source2sink_single_path["end_block"], # sink函数调用点所在block的起始地址
+                "path": path_dict, # 存储路径信息
+                "visited_functions": source2sink_single_path["visited_functions"], # 存储访问过的函数名称的集合
+                "decompile_list": source2sink_single_path["decompile_list"], # 存储对应的反汇编片段
+            })
+        else: # 直接的潜在路径
+            path_dict = {file_path: [source2sink_single_path["path"]]}
+            potential_path_dict[file_path]["complete_source2sink_path"].append({
+                "kind": "intra-single", # 单个二进制文件内的潜在路径
+                "source_function_name": source2sink_single_path["source_name"], # source调用点所在的函数
+                "taint_source": source2sink_single_path["taint_source"], # source函数的名称
+                "source_insr_addr": source2sink_single_path["source_insr_addr"], # source函数调用点地址
+                "start_block": source2sink_single_path["start_block"], # source函数调用点所在block的起始地址
+                "source_keyword": source2sink_single_path["source_keyword"], # source函数的关键字
+                "merge": False, # 标记为非合并路径
+                "binary": [file_path], # 所在二进制文件的list
+                "taint_sink": source2sink_single_path["taint_sink"], # sink函数的名称
+                "sink_insr_addr": source2sink_single_path["sink_insr_addr"], # sink函数调用点地址
+                "end_block": source2sink_single_path["end_block"], # sink函数调用点所在block的起始地址
+                "path": path_dict, # 存储路径信息
+                "visited_functions": source2sink_single_path["visited_functions"], # 存储访问过的函数名称的集合
+                "decompile_list": source2sink_single_path["decompile_list"], # 存储对应的反汇编片段
+            })
+    # 进行去重
+    potential_path_dict[file_path]["complete_get2sink_path"] = dedupe_paths(potential_path_dict[file_path]["complete_get2sink_path"])
+    potential_path_dict[file_path]["complete_source2sink_path"] = dedupe_paths(potential_path_dict[file_path]["complete_source2sink_path"])
+    # 构建路径对应key的索引字典
+    for complete_get2sink_single_path in potential_path_dict[file_path]["complete_get2sink_path"]:
+        if complete_get2sink_single_path["source_keyword"] not in potential_path_dict[file_path]["complete_get2sink_path_dict"]:
+            potential_path_dict[file_path]["complete_get2sink_path_dict"][complete_get2sink_single_path["source_keyword"]] = []
+        potential_path_dict[file_path]["complete_get2sink_path_dict"][complete_get2sink_single_path["source_keyword"]].append(complete_get2sink_single_path)
+    diffusion_file_update = [file_path] + diffusion_file # 加入当前文件路径
+    new_complete_get2sink_path = [] # 用于存储新的完整的get2sink路径
+    # 进行跨文件的路径拼接
+    for get2set_single_path in get2set_path:
+        if get2set_single_path["set_keyword"] == "not_static_string": # 直接跳过非静态字符串
+            logger.warning(f"{file_path} has a non-static string set keyword, skipping path join.")
+            continue
+        is_find_cross_path = False # 标记是否找到跨二进制文件的路径
+        set_keyword = get2set_single_path["set_keyword"]
+        for binary_path in diffusion_file_update:
+            binary_get2sink_path_dict = potential_path_dict[binary_path]["complete_get2sink_path_dict"]
+            target_path_list = binary_get2sink_path_dict.get(set_keyword, [])[:]
+            if not target_path_list: # 如果没有对应的路径，则跳过
+                continue
+            is_find_cross_path = True
+            # 遍历所有目标路径进行拼接
+            for target_path in target_path_list:
+                if file_path not in target_path["binary"]: # 如果目标路径不包含当前二进制文件，则跳过
+                    binary_path_list = target_path["binary"] + [file_path] # 合并二进制文件路径
+                else:
+                    binary_path_list = target_path["binary"][:]
+                target_path_path_dict = target_path["path"].copy() # 复制目标路径的路径字典
+                if file_path in target_path_path_dict:
+                    target_path_path_dict[file_path].append(get2set_single_path["path"])
+                else:
+                    target_path_path_dict[file_path] = [get2set_single_path["path"]]
+                # 构建新的路径字典
+                new_path_dict = {
+                    "kind": "cross", # 标记为跨二进制文件的路径
+                    "source_function_name": get2set_single_path["source_name"], # source调用点所在的函数
+                    "taint_source": get2set_single_path["taint_source"], # get函数的名称
+                    "source_insr_addr": get2set_single_path["source_insr_addr"], # get函数调用点地址
+                    "start_block": get2set_single_path["start_block"], # source函数调用点所在block的起始地址
+                    "source_keyword": get2set_single_path["source_keyword"], # source函数的关键字
+                    "merge": f"{get2set_single_path['taint_sink']} ({get2set_single_path['sink_insr_addr']}) --- {target_path['source_keyword']} ---> {target_path['taint_source']} ({target_path['source_insr_addr']})", # 相应的合并信息
+                    "binary": binary_path_list, # 所在二进制文件的list
+                    "taint_sink": target_path["taint_sink"], # sink函数的名称
+                    "sink_insr_addr": target_path["sink_insr_addr"], # sink函数调用点地址
+                    "end_block": target_path["end_block"], # sink函数调用点所在block的起始地址
+                    "path": target_path_path_dict, # 存储路径信息
+                    "visited_functions": f"{get2set_single_path['visited_functions']} --> {target_path['visited_functions']}", # 存储访问过的函数名称的集合
+                    "decompile_list": get2set_single_path["decompile_list"] + target_path["decompile_list"], # 存储对应的反汇编片段
+                }
+                if new_path_dict["taint_source"] in config_sgtaint.transitive_get:
+                    # 如果是跨二进制的get2sink路径，则添加到complete_get2sink_path中
+                    new_complete_get2sink_path.append(new_path_dict)
+                else:
+                    # 如果是跨二进制的source2sink路径，则添加到complete_source2sink_path中
+                    potential_path_dict[file_path]["complete_source2sink_path"].append(new_path_dict)
+        if not is_find_cross_path:
+            logger.warning(f"No cross binary path found for {file_path} with set keyword '{set_keyword}'.")
+        else:
+            logger.info(f"Cross binary path join completed for {file_path} with set keyword '{set_keyword}'.")
+    # 合并新的完整的get2sink路径
+    potential_path_dict[file_path]["complete_get2sink_path"].extend(new_complete_get2sink_path)
+    potential_path_dict[file_path]["complete_get2sink_path"] = dedupe_paths(potential_path_dict[file_path]["complete_get2sink_path"]) # 去重
+    potential_path_dict[file_path]["complete_source2sink_path"] = dedupe_paths(potential_path_dict[file_path]["complete_source2sink_path"]) # 去重
+    # 更新complete_get2sink_path_dict
+    potential_path_dict[file_path]["complete_get2sink_path_dict"].clear() # 清空原有的字典
+    for complete_get2sink_single_path in potential_path_dict[file_path]["complete_get2sink_path"]:
+        if complete_get2sink_single_path["source_keyword"] not in potential_path_dict[file_path]["complete_get2sink_path_dict"]:
+            potential_path_dict[file_path]["complete_get2sink_path_dict"][complete_get2sink_single_path["source_keyword"]] = []
+        potential_path_dict[file_path]["complete_get2sink_path_dict"][complete_get2sink_single_path["source_keyword"]].append(complete_get2sink_single_path)

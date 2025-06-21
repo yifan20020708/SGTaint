@@ -1,0 +1,8 @@
+nodejs
+npm
+binutils
+file
+openjdk-21-jdk
+zip
+unzip
+wget
