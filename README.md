@@ -56,7 +56,7 @@ optional arguments:
 
 Directory structure：
 
-``````python
+``````bash
 |-- output  # Directory storing the final analysis results
 |   |-- log  # Contains core analytical outputs
 |       |-- <time>_set_get_graph.txt  
