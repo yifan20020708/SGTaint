@@ -4,7 +4,7 @@
 GHIDRA_VERSION="11.3.2"
 BUILD_DATE="20250415"
 DOWNLOAD_URL="https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_${GHIDRA_VERSION}_build/ghidra_${GHIDRA_VERSION}_PUBLIC_${BUILD_DATE}.zip"
-TARGET_DIR="ghidra"  # 固定解压后的文件夹名称
+TARGET_DIR="ghidra_tool"  # 固定解压后的文件夹名称
 
 # 下载 Ghidra
 echo "[*] 下载 Ghidra ${GHIDRA_VERSION}..."
