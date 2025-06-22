@@ -510,6 +510,10 @@ def set_get_graph_create(directory, analysis_binary_dict: AnalysisBinaryDict, se
             continue
         analysis_boundary_binary.set_board_binary() # 将其设定为边界二进制文件
         analysis_binary_dict.add_analysis_binary(analysis_boundary_binary) # 将所有的边界二进制文件加入到分析列表之中
+    # 处理边界二进制文件angr创建失败的情况
+    if not analysis_binary_dict.analysis_binary_dict:
+        logger.error(f"The creation of the boundary binary in angr failed.")
+        return
     # 使用LLM获取边界二进制文件的func_name
     try:
         func_name = get_func_name_from_llm(analysis_binary_dict)
