@@ -26,6 +26,9 @@ from tool.LLM.prompt_template import (
 
 logger = logging.getLogger("sgtaint.sggraph")
 
+local_loaded_binary_cache = {} # 维护全局analysis binary
+fail_to_build_angr_path_list = [] # 维护建立失败的二进制文件路径
+
 # （快速获取）针对指定的函数名称获取直接进行参数赋值的key，同样需要对第二个参数进行过滤
 def get_set_func_args_fast(project, cfg, func_name, index_key, index_value = None):
     call_sites = get_call_site_func_name(project, cfg, func_name)
@@ -419,16 +422,21 @@ def set_get_graph_create_single(analysis_binary_initial: AnalysisBinary, func_na
         return
     filtered_files = coarse_grained_binary_filter(get_func_name, key_set, directory) if not single_tag else [file_path]
     for filtered_file_path in filtered_files:
-        # 处理完成之后需要进行更新或者加入
-        if filtered_file_path not in analysis_binary_dict.analysis_binary_dict:
-            # 创建新的二进制文件类
+        # 首先检查是否会创建失败
+        if filtered_file_path in fail_to_build_angr_path_list:
+            continue
+        if filtered_file_path in analysis_binary_dict.analysis_binary_dict:
+            analysis_binary = analysis_binary_dict.get_analysis_binary_by_path(filtered_file_path)
+        elif filtered_file_path in local_loaded_binary_cache:
+            analysis_binary = local_loaded_binary_cache[filtered_file_path]
+        else: # 创建新的二进制文件类
             try: # 加载二进制文件，捕获CFG创建的异常
-                analysis_binary = AnalysisBinary(filtered_file_path) # 目前先不加入分析列表之中
+                analysis_binary = AnalysisBinary(filtered_file_path)
+                local_loaded_binary_cache[filtered_file_path] = analysis_binary
             except RuntimeError as e:
                 logger.error(f"Error loading binary {filtered_file_path}: {e}")
+                fail_to_build_angr_path_list.append(filtered_file_path)
                 continue
-        else:
-            analysis_binary = analysis_binary_dict.get_analysis_binary_by_path(filtered_file_path)
         # 首先判断是否真正存在get函数
         if not analysis_binary.has_call_site(get_func_name):
             continue
@@ -507,6 +515,7 @@ def set_get_graph_create(directory, analysis_binary_dict: AnalysisBinaryDict, se
             analysis_boundary_binary = AnalysisBinary(boundary_file)
         except RuntimeError as e:
             logger.error(f"Error loading binary {boundary_file}: {e}")
+            fail_to_build_angr_path_list.append(boundary_file)
             continue
         analysis_boundary_binary.set_board_binary() # 将其设定为边界二进制文件
         analysis_binary_dict.add_analysis_binary(analysis_boundary_binary) # 将所有的边界二进制文件加入到分析列表之中

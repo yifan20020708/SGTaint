@@ -3244,7 +3244,7 @@ class MyHandler(FunctionHandler):
             if len(recovered_args) > 0:
                 blk.statements[-1].args = recovered_args
 
-        func = getattr(MyHandler, 'handle_{}'.format(function_name), None)
+        func = getattr(self, 'handle_{}'.format(function_name), None)
         if func is not None:
             try:
                 flag, state = func(self, state, codeloc)
@@ -3344,7 +3344,7 @@ class MyHandler(FunctionHandler):
 
         callees = [item.name for item in function.functions_called() if item.name]
         if len(callees) == 1:
-            func = getattr(MyHandler, 'handle_{}'.format(callees[0]), None)
+            func = getattr(self, 'handle_{}'.format(callees[0]), None)
             if func is not None:
                 flag, state = func(self, state, codeloc)
                 return True, state, visited_blocks, dependency_graph
