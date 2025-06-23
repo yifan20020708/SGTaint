@@ -3247,7 +3247,7 @@ class MyHandler(FunctionHandler):
         func = getattr(self, 'handle_{}'.format(function_name), None)
         if func is not None:
             try:
-                flag, state = func(self, state, codeloc)
+                flag, state = func(state, codeloc)
             except Exception as e:
                 print(e)
             return True, state, visited_blocks, dependency_graph
@@ -3346,7 +3346,7 @@ class MyHandler(FunctionHandler):
         if len(callees) == 1:
             func = getattr(self, 'handle_{}'.format(callees[0]), None)
             if func is not None:
-                flag, state = func(self, state, codeloc)
+                flag, state = func(state, codeloc)
                 return True, state, visited_blocks, dependency_graph
             else:
                 tmp_fun = self._analysis.project.kb.functions.function(name=callees[0])
