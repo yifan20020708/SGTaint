@@ -70,7 +70,7 @@ def get_keyword_by_decompiled_func_ghidra(project, cfg, func_name, file_path, an
         if not os.path.exists(os.path.join(config_sgtaint.GHIDRA_DIR, f"{binary_mark}.gpr")):
             ghidra_load_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -import {file_path}"
             execute(ghidra_load_command)
-        ghidra_python_path = '/home/SGTaint/tool/Ghidra/ghidra_assist.py'   
+        ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH   
         ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -postScript {ghidra_python_path} "{angr_base_addr}" "{func_name}"'
         execute(ghidra_command)
         # 读取对应的结果文件
@@ -282,7 +282,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         analysis_binary.load_ghidra()
         angr_base_addr = hex(analysis_binary.get_angr_base_addr())
         binary_mark = os.path.basename(file_path)
-        ghidra_python_path = '/home/SGTaint/tool/Ghidra/ghidra_assist.py'
+        ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH
         ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -postScript {ghidra_python_path} "{angr_base_addr}" "*"'
         execute(ghidra_command)
         # 读取对应的结果文件

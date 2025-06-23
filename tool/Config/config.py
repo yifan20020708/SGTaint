@@ -18,6 +18,8 @@ BINARY_INFO_DIR = os.path.join(TMP_DIR, "BinaryInfo")
 BINARY_CONFIG_DIR = os.path.join(TMP_DIR, "BinaryConfig")
 BINARY_TMP = os.path.join(TMP_DIR, "BinaryTmp")
 NPM_DIR = os.path.join(BASE_DIR, "tool", "Keyword", "JS_Parse")
+GHIDRA_ASSIST_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "ghidra_assist.py")
+DECOMPILE_ASSIST_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "decompile_assist.py")
 
 # LLM配置
 LLM_API_KEY_DEEPSEEK = "sk-d6d28208fde8451192b401dbbf963b12"

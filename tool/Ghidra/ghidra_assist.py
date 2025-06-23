@@ -3,7 +3,7 @@ import os
 import json
 import re
 import sys
-sys.path.append("/home/SGTaint")
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 import tool.Config.config as config_sgtaint
 from ghidra.app.decompiler import DecompInterface, DecompileOptions # type: ignore
 from ghidra.app.decompiler.component import DecompilerUtils # type: ignore
