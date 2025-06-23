@@ -42,7 +42,7 @@ def get_set_func_args_fast(project, cfg, func_name, index_key, index_value = Non
             number_vsa += 1
             call_sites_parser.append([call_site_address, caller, block_addr, -1])
         else: # 将不为空字符串的key进行存储
-            call_sites_parser.append([call_site_address, caller, block_addr, key])
+            call_sites_parser.append([call_site_address, caller, block_addr, str(key)])
     success_rate = (number - number_vsa) / number if number != 0 else 0
     return call_sites_parser, success_rate
 
@@ -111,7 +111,7 @@ def get_keyword_by_decompiled_func_ghidra(project, cfg, func_name, file_path, an
             # 提取对应的关键字
             parameter = is_const(project, args_call_site[index_key], file_path)
             if parameter:
-                call_sites_parser.append([call_site_address, caller, block_addr, parameter])
+                call_sites_parser.append([call_site_address, caller, block_addr, str(parameter)])
             else:
                 number_vsa += 1
                 call_sites_parser.append([call_site_address, caller, block_addr, -1])
@@ -525,8 +525,11 @@ def set_get_graph_create(directory, analysis_binary_dict: AnalysisBinaryDict, se
         analysis_binary_dict.set_dict[set_func_name] = [] # 字典元素为对应的列表
         func_name_list = [set_func_name, get_func_name]
         # 判断边界二进制文件中是否存在对应的set_get函数
-        for boundary_file in boundary_files:
+        for boundary_file in boundary_files: # 边界二进制文件可能初始化失败
             analysis_boundary_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(boundary_file)
+            if analysis_boundary_binary is None: # 跳过创建失败的文件
+                logger.warning(f"[SGGraph] Binary {boundary_file} missing in analysis_binary_dict (probably CFG init failed)")
+                continue
             if analysis_boundary_binary.has_call_site(set_func_name) and analysis_boundary_binary.has_call_site(get_func_name):
                 analysis_binary_dict.set_dict[set_func_name].append(boundary_file) # 仅仅存储二进制文件路径即可
         # 此处扩展二进制分析列表，因此需要加入限制

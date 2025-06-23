@@ -126,6 +126,6 @@ python -m tool.sgtaint -f /home/firmware/Current_dataset/D-Link/DIR-878/cpio-roo
 3. **Execute parallel vulnerability analysis on the D-Link DIR-878 firmware with user-specified Set/Get function definitions**, allowing for customized taint graph construction based on domain-specific knowledge of data access semantics.
 
 ``````
-python -m tool.sgtaint -f /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root -n DIR-878 -o /home/output/DIR-878 -s [(nvram_bufset, nvram_bufget, 1, 1, 2, None), (nvram_safe_set, nvram_safe_get, 0, 0, 1, None)] -p -l
+python -m tool.sgtaint -f /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root -n DIR-878 -o /home/output/DIR-878 -s "[(nvram_bufset, nvram_bufget, 1, 1, 2, None), (nvram_safe_set, nvram_safe_get, 0, 0, 1, None)]" -p -l
 ``````
 
