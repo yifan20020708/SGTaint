@@ -22,9 +22,10 @@ GHIDRA_ASSIST_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "ghidra_assist.py"
 DECOMPILE_ASSIST_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "decompile_assist.py")
 
 # LLM配置
-LLM_API_KEY_DEEPSEEK = "sk-d6d28208fde8451192b401dbbf963b12"
 LLM_URL_DEEPSEEK = "https://api.deepseek.com"
-LLM_MODEL = "deepseek-chat"
+LLM_URL_CHATGPT = "https://api.openai.com/v1"
+LLM_MODEL_DEEPSEEK = "deepseek-chat"
+LLM_MODEL_CHATGPT = "gpt-4.1-mini"
 SG_TEMPERATURE = 0.7
 MAX_ERROR_COUNT = 3
 

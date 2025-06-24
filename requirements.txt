@@ -63,6 +63,7 @@ pyelftools==0.30
 Pygments==2.19.1
 PySMT==0.9.5
 python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
 python-utils==3.8.1
 pytz==2025.2
 pyvex==9.2.44

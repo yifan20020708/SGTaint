@@ -39,6 +39,15 @@ pip install -r requirements.txt
 
 ## Instructions for running this tool
 
+Before executing this tool, please create a `.env` file in the root directory of the project (`SGTaint`) to securely store the required API keys. The tool currently supports models from both OpenAI and DeepSeek. The `.env` file should be formatted as follows:
+
+`````ini
+OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxx" # your_openai_api_key_here
+DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxx" # your_deepseek_api_key_here
+`````
+
+It is recommended to include only the API key corresponding to the model in use and to ensure that the `.env` file is listed in the `.gitignore` to prevent potential credential leakage.
+
 ``````bash
 Usage: sgtaint [-h] -f FIRMWARE -n NAME -o OUTPUT [-p] [-l] [-s SGGRAPH] [--version]
 

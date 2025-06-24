@@ -1,20 +1,23 @@
+# -*- coding: utf-8 -*-
 import os
 import datetime
 import logging
 import httpx
 import tool.Config.config as config_sgtaint
+from dotenv import load_dotenv
 from openai import OpenAI, RateLimitError, APIConnectionError, APIError
 
 logger = logging.getLogger("sgtaint.llm")
+load_dotenv()
 
 # 实现开启LLM对话的类，方便进行调用，每一个类对象可表示一轮对话
 class LLM():
-    # 其中model指LLM模型，目前仅支持deepseek-chat以及deepseek-reasoner
+    # 其中model指LLM模型，目前支持deepseek以及gpt
     def __init__(self, temperature = 1.0, model = None): # 温度默认为1.0
         # 配置灵活获取
-        self.model = model or config_sgtaint.LLM_MODEL
-        self.api_key = config_sgtaint.LLM_API_KEY_DEEPSEEK
-        self.base_url = config_sgtaint.LLM_URL_DEEPSEEK
+        self.model = model or config_sgtaint.LLM_MODEL_DEEPSEEK # 默认使用deepseek
+        self.api_key = os.getenv("DEEPSEEK_API_KEY") if "deepseek" in self.model else os.getenv("OPENAI_API_KEY")
+        self.base_url = config_sgtaint.LLM_URL_DEEPSEEK if "deepseek" in self.model else config_sgtaint.LLM_URL_CHATGPT
         self.temperature = temperature
         # 参数检查
         if not self.api_key or not self.base_url:
@@ -59,7 +62,7 @@ class LLM():
             logger.error(f"Unexpected error during LLM chat: {e}")
             return f"[ERROR] Unexpected error: {e}"
         # 加入此轮对话的回复，方便开启多轮对话
-        if self.model == config_sgtaint.LLM_MODEL:
+        if self.model == config_sgtaint.LLM_MODEL_CHATGPT or self.model == config_sgtaint.LLM_MODEL_DEEPSEEK:
             self.messages.append(response.choices[0].message)
         else:
             self.messages.append({'role': 'assistant', 'content': response.choices[0].message.content})
