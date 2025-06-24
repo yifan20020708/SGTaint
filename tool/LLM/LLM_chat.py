@@ -15,7 +15,7 @@ class LLM():
     # 其中model指LLM模型，目前支持deepseek以及gpt
     def __init__(self, temperature = 1.0, model = None): # 温度默认为1.0
         # 配置灵活获取
-        self.model = model or config_sgtaint.LLM_MODEL_DEEPSEEK # 默认使用deepseek
+        self.model = model or config_sgtaint.LLM_MODEL # 通过用户参数进行配置
         self.api_key = os.getenv("DEEPSEEK_API_KEY") if "deepseek" in self.model else os.getenv("OPENAI_API_KEY")
         self.base_url = config_sgtaint.LLM_URL_DEEPSEEK if "deepseek" in self.model else config_sgtaint.LLM_URL_CHATGPT
         self.temperature = temperature
@@ -62,7 +62,7 @@ class LLM():
             logger.error(f"Unexpected error during LLM chat: {e}")
             return f"[ERROR] Unexpected error: {e}"
         # 加入此轮对话的回复，方便开启多轮对话
-        if self.model == config_sgtaint.LLM_MODEL_CHATGPT or self.model == config_sgtaint.LLM_MODEL_DEEPSEEK:
+        if self.model == config_sgtaint.LLM_MODEL:
             self.messages.append(response.choices[0].message)
         else:
             self.messages.append({'role': 'assistant', 'content': response.choices[0].message.content})

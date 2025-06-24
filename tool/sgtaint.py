@@ -46,7 +46,7 @@ class ColorFormatter(logging.Formatter):
 
 # SGTaint运行类
 class SGTaintRunner:
-    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, llm=True):
+    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, llm=True, model="deepseek"):
         self.firmware = firmware
         self.name = name
         self.output_dir = output_dir
@@ -57,6 +57,7 @@ class SGTaintRunner:
         config_sgtaint.FILE_SYSTEM = firmware
         config_sgtaint.FIRMWARE_NAME = name
         config_sgtaint.SG_FUNCTION_INFO = sggraph
+        config_sgtaint.LLM_MODEL = config_sgtaint.LLM_MODEL_DEEPSEEK if model == "deepseek" else config_sgtaint.LLM_MODEL_CHATGPT
         self._setup_logger()
         self.logger.info(f"Initialized SGTaintRunner (v{__version__})")
 
@@ -380,6 +381,7 @@ def parse_args():
     parser.add_argument("-p", "--parallel", action="store_true", help="Enable parallel mode")
     parser.add_argument("-l", "--llm", action="store_true", help="Enable final LLM check")
     parser.add_argument("-s", "--sggraph", help="Optional SGGraph info path")
+    parser.add_argument("-m", "--model", default="deepseek", choices=["gpt", "deepseek"], help="Choose LLM model to use (gpt or deepseek). Default is deepseek.")
     parser.add_argument("--version", action="version", version=__version__)
     return parser.parse_args()
 
@@ -393,7 +395,8 @@ def main():
         output_dir=args.output,
         sggraph=args.sggraph,
         parallel=args.parallel,
-        llm=args.llm
+        llm=args.llm,
+        model=args.model
     )
     try:
         runner.run()

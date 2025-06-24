@@ -26,7 +26,8 @@ LLM_URL_DEEPSEEK = "https://api.deepseek.com"
 LLM_URL_CHATGPT = "https://api.openai.com/v1"
 LLM_MODEL_DEEPSEEK = "deepseek-chat"
 LLM_MODEL_CHATGPT = "gpt-4.1-mini"
-SG_TEMPERATURE = 0.7
+LLM_MODEL = ""
+SG_TEMPERATURE = 0.3 # 进行代码分析
 MAX_ERROR_COUNT = 3
 
 # 读取config文件之后进行配置

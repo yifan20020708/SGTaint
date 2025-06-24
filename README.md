@@ -49,20 +49,22 @@ DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxx" # your_deepseek_api_key_here
 It is recommended to include only the API key corresponding to the model in use and to ensure that the `.env` file is listed in the `.gitignore` to prevent potential credential leakage.
 
 ``````bash
-Usage: sgtaint [-h] -f FIRMWARE -n NAME -o OUTPUT [-p] [-l] [-s SGGRAPH] [--version]
+usage: sgtaint [-h] -f FIRMWARE -n NAME -o OUTPUT [-p] [-l] [-s SGGRAPH] [-m {gpt,deepseek}] [--version]
 
 optional arguments:
-  -h, --help            Show this help message and exit
+  -h, --help            show this help message and exit
   -f FIRMWARE, --firmware FIRMWARE
-                        Path to the firmware filesystem
+                        Path to firmware filesystem
   -n NAME, --name NAME  Firmware identifier
   -o OUTPUT, --output OUTPUT
-                        Directory to save user output results
-  -p, --parallel        Enable parallel mode for analysis
-  -l, --llm             Enable final LLM (Large Language Model) check
+                        User output directory
+  -p, --parallel        Enable parallel mode
+  -l, --llm             Enable final LLM check
   -s SGGRAPH, --sggraph SGGRAPH
-                        (Optional) Path to SGGraph information file
-  --version             Show program's version number and exit
+                        Optional SGGraph info path
+  -m {gpt,deepseek}, --model {gpt,deepseek}
+                        Choose LLM model to use (gpt or deepseek). Default is deepseek.
+  --version             show program's version number and exit
 ``````
 
 ### output
