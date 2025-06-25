@@ -1700,8 +1700,7 @@ class MyHandler(FunctionHandler):
                     else: # fallback：拿原来的定义（可能是寄存器或其它）
                         defn = self.get_def_from_parameter(function, parameter_position=value_position, state=state)
                         atom = defn.atom
-                        
-                    
+                                     
         config_sgtaint.getenv_counter[0] += 1
 
         if function.name == "nvram_get" and len(function.arguments) == 2 and d0.codeloc.ins_addr not in self.cfg.insn_addr_to_memory_data:
@@ -1837,7 +1836,6 @@ class MyHandler(FunctionHandler):
 
         if token == "":
             # 可以从SGGraph中读取对应的token值
-            # token = self.get_stringby_use_def(d0, state)
             if function.name in self.call_sites_dict:
                 call_sites_dict_block_addr = self.call_sites_dict[function.name]
                 if state.current_codeloc.block_addr in call_sites_dict_block_addr:
@@ -1889,11 +1887,63 @@ class MyHandler(FunctionHandler):
         print("tags_2\n", tags_2)
         return True, state
     
+    def handle_acosNvramConfig_read_xx(self, function, state, codeloc, key_parameter=0, buf_parameter=1): # 处理将值存储在参数的情况
+        print("inside ->", function.name)
+        d1 = self.get_def_from_parameter(function, parameter_position=key_parameter, state=state)
+        blk = self.get_clinic_block(self.clinic, state.current_codeloc.block_addr)
+        if hasattr(blk, "statements") and len(blk.statements) > 0:
+            call_statement = blk.statements[-1]
+            if (
+                isinstance(call_statement, ailment.statement.Call)
+                and hasattr(call_statement, "args")
+                and call_statement.args is not None
+                and len(call_statement.args) > buf_parameter
+            ):
+                arg0 = call_statement.args[buf_parameter]
+                if hasattr(arg0, "base"): # 基于栈的局部变量
+                    atom = MemoryLocation(SpOffset(state.arch.bits, arg0.offset), arg0.size)
+                    bb = ""
+                    if self.dec is not None:
+                        xx = self.dec.codegen.ailexpr2cnode[(call_statement, False)].c_repr()
+                        if 'reference_variable' in call_statement.args[key_parameter].tags:
+                            bb = xx.split('"')[1]
+                    # 从set-get graph中读取字符值
+                    if not bb:
+                        if function.name in self.call_sites_dict:
+                            call_sites_dict_block_addr = self.call_sites_dict[function.name]
+                            if state.current_codeloc.block_addr in call_sites_dict_block_addr:
+                                call_site_info = call_sites_dict_block_addr[state.current_codeloc.block_addr]
+                                if call_site_info[3] != -1:
+                                    bb = call_site_info[3] # 从SG图中获取对应的键值
+                    tags = {
+                        ReturnValueTag(
+                            function=function.addr,
+                            metadata={
+                                'tagged_by': f'{function.name} simulation Effect',
+                                'block_addr': state.current_codeloc.block_addr,
+                                'token': bb
+                            }
+                        )
+                    }
+                    print("tags\n", tags)
+                    data: MultiValues = state.register_definitions.load(
+                        d1.atom.reg_offset, size=d1.atom.size
+                    )
+                    tmp_codeloc = state.current_codeloc
+                    mv = state.kill_and_add_definition(atom, d1.codeloc, data, tags=tags)
+                    ff_defs = state.live_definitions.extract_defs_from_mv(mv=mv)
+                    ff = next(iter(ff_defs))
+                    state.dep_graph.add_node(ff)
+                    state.dep_graph.add_edge(d1, ff)
+                    return True, state
+    
     # 动态创建getter函数的handle
     def _create_getter_handle(self, function_name, key_index, value_index):
         def _handler(state: "ReachingDefinitionsState", codeloc):
             function = self._analysis.project.kb.functions.function(name=function_name)
-            return self.handle_get_cgi_xx(function, state, codeloc, key_index, value_index)
+            if value_index is None:
+                return self.handle_get_cgi_xx(function, state, codeloc, position=key_index)
+            return self.handle_acosNvramConfig_read_xx(function, state, codeloc, key_parameter=key_index, buf_parameter=value_index)
         return _handler
     
     def getter_handle_dynamic(self, function_name, key_index, value_index):
@@ -1901,6 +1951,14 @@ class MyHandler(FunctionHandler):
         if not hasattr(self, method_name):
             handler = self._create_getter_handle(function_name, key_index, value_index)
             setattr(self, method_name, handler)
+    
+    def handle_acosNvramConfig_read(self, state, codeloc):
+        function = self._analysis.project.kb.functions.function(name="acosNvramConfig_read")
+        return self.handle_acosNvramConfig_read_xx(function, state, codeloc)
+    
+    def handle_nvram_get_ex2(self, state, codeloc):
+        function = self._analysis.project.kb.functions.function(name="nvram_get_ex2")
+        return self.handle_acosNvramConfig_read_xx(function, state, codeloc)
     
     def handle_sub_1d170(self, state, codeloc):
         function = self._analysis.project.kb.functions.function(name="sub_1d170")
@@ -2151,46 +2209,6 @@ class MyHandler(FunctionHandler):
         function = self._analysis.project.kb.functions.function(name="websGetVar")
         d1 = self.get_def_from_parameter(function, parameter_position=1, state=state)
         return  self.process_sub_42a978(function, state, codeloc, d1)
-    
-    def handle_acosNvramConfig_read(self, state, codeloc):
-        function = self._analysis.project.kb.functions.function(name="acosNvramConfig_read")
-        d1 = self.get_def_from_parameter(function, parameter_position=0, state=state)
-        blk = self.get_clinic_block(self.clinic, state.current_codeloc.block_addr)
-        if hasattr(blk, "statements") and len(blk.statements) > 0:
-            call_statement = blk.statements[-1]
-            if (
-                isinstance(call_statement, ailment.statement.Call)
-                and hasattr(call_statement, "args")
-                and call_statement.args is not None
-                and len(call_statement.args) > 0
-            ):
-                arg0 = call_statement.args[1]
-                if hasattr(arg0, "base"):
-                    atom = MemoryLocation(SpOffset(state.arch.bits, arg0.offset), arg0.size)
-                    bb = ""
-                    if self.dec is not None:
-                        xx = self.dec.codegen.ailexpr2cnode[(call_statement, False)].c_repr()
-                        bb = xx.split('"')[1]
-                    tags = {
-                        ReturnValueTag(
-                            function=function.addr,
-                            metadata={
-                                'tagged_by': f'{function.name} simulation Effect',
-                                'block_addr': state.current_codeloc.block_addr,
-                                'token': bb
-                            }
-                        )
-                    }
-                    data: MultiValues = state.register_definitions.load(
-                        d1.atom.reg_offset, size=d1.atom.size
-                    )
-                    tmp_codeloc = state.current_codeloc
-                    mv = state.kill_and_add_definition(atom, d1.codeloc, data, tags=tags)
-                    ff_defs = state.live_definitions.extract_defs_from_mv(mv=mv)
-                    ff = next(iter(ff_defs))
-                    state.dep_graph.add_node(ff)
-                    state.dep_graph.add_edge(d1, ff)
-                    return True, state
 
     def handle_nvram_set_xx(self, function, state, codeloc, function_name, key_position=0, value_position=1):
         blk = self.get_clinic_block(self.clinic, state.current_codeloc.block_addr)
@@ -2210,7 +2228,7 @@ class MyHandler(FunctionHandler):
                     if (
                         hasattr(call_statement, "args")
                         and call_statement.args is not None
-                        and len(call_statement.args) > 0
+                        and len(call_statement.args) > value_position
                         and 'reference_variable' not in call_statement.args[value_position].tags
                     ):
                         d1_constantCheckFlag = True

@@ -96,11 +96,11 @@ SOURCES = [
     "json_tokener_parse", "OM_ValFind", "get_parameter", "get_wlan_setting", "av_dict_get", "cgi_value", "stringOut",
     "cJSON_GetObjectItem", "sw_getValueByName", "querystr", "find_val", "log_query", "value_parser_by_index_D7000",
     "getoption", "WEB_GetVar", "av_opt_get", "paramValueFromObjGet", "help_getObjPtr", "NCONF_get_string",
-    "av_metadata_get", "httpGetEnv", "gets", "fgets", "recvfrom", "recvmsg"
+    "av_metadata_get", "httpGetEnv", "gets", "fgets", "recvfrom", "recvmsg", "nvram_get_ex2"
 ]
 transitive_get = [
     "config_get", "GetValue", "getenv", "nvram_get", "nvram_safe_get", "nvram_pf_get", "acosNvramConfig_get",
-    "uciGet", "wpa_config_get", "device_get_string_value", "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get"
+    "uciGet", "wpa_config_get", "device_get_string_value", "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "nvram_get_ex2"
 ]
 transitive_set = [
     "config_set", "SetValue", "setenv", "nvram_set", "nvram_safe_set", "nvram_pf_set", "artblock_set",
