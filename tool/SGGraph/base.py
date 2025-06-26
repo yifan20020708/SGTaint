@@ -263,7 +263,8 @@ class AnalysisBinary():
                 continue
             self.visited_function_list.append(caller_func.name)
             self.handler.set_current_function(caller_func)
-            self.visited_file.write("\n" + caller_func.name)
+            progress_str = f"[{visited_function_counter}/{len(function_callers_map)}] {caller_func.name}"
+            self.visited_file.write("\n" + progress_str)
             self.visited_file.flush()
             config_sgtaint.STACK.clear()
             self.handler.set_start_function(caller_func)
@@ -281,8 +282,13 @@ class AnalysisBinary():
                 continue
         # 额外处理New_input_getters
         if visited_function_counter == len(function_callers_map):
+            logger.info(f"New_input_getters functions: {', '.join(config_sgtaint.New_input_getters)}")
+            self.visited_file.write("\n" + f"New_input_getters functions: {', '.join(config_sgtaint.New_input_getters)}")
+            self.visited_file.flush()
             function_callers_map = get_functions_to_analyse(config_sgtaint.New_input_getters, self.project, self.cfg)
+            new_index = 0
             for caller_str_addr, call_sites in function_callers_map.items():
+                new_index += 1
                 caller_str_addr = int(caller_str_addr)
                 caller_func = self.cfg.functions.get_by_addr(caller_str_addr)
                 print("***********************************")
@@ -291,7 +297,8 @@ class AnalysisBinary():
                     continue
                 self.visited_function_list.append(caller_func.name)
                 self.handler.set_current_function(caller_func)
-                self.visited_file.write("\n" + caller_func.name)
+                progress_str = f"[{new_index}/{len(function_callers_map)}] {caller_func.name}"
+                self.visited_file.write("\n" + progress_str)
                 self.visited_file.flush()
                 config_sgtaint.STACK.clear()
                 self.handler.set_start_function(caller_func)
