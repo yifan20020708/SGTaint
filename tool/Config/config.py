@@ -32,8 +32,10 @@ MAX_ERROR_COUNT = 3
 
 # 读取config文件之后进行配置
 SG_FUNCTION_INFO = None  # 格式为[(set_1, get_1, set_key_pos, get_key_pos, set_value_pos, get_value_pos), ...]或None
+BOUNDARY_BINARIES = None
 FIRMWARE_NAME = ""
 FILE_SYSTEM = ""
+BOUNDARY_BINARY_NAME = ["prog.cgi", "httpd", "lighttpd", "goahead", "boa", "php.cgi"]
 
 # 从内存中提取字符串的相关配置
 MIN_STR_LEN = 3

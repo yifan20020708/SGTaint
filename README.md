@@ -49,7 +49,7 @@ DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxx" # your_deepseek_api_key_here
 It is recommended to include only the API key corresponding to the model in use and to ensure that the `.env` file is listed in the `.gitignore` to prevent potential credential leakage.
 
 ``````bash
-usage: sgtaint [-h] -f FIRMWARE -n NAME -o OUTPUT [-p] [-l] [-s SGGRAPH] [-m {gpt,deepseek}] [--version]
+usage: sgtaint [-h] -f FIRMWARE -n NAME -o OUTPUT [-p] [-l] [-s SGGRAPH] [-m {gpt,deepseek}] [-b BOUNDARY] [--version]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -61,9 +61,11 @@ optional arguments:
   -p, --parallel        Enable parallel mode
   -l, --llm             Enable final LLM check
   -s SGGRAPH, --sggraph SGGRAPH
-                        Optional SGGraph info path
+                        Optional SGGraph info path, e.g., a list of tuples like [(set_1, get_1, set_key_pos, get_key_pos, set_value_pos, get_value_pos), ...]
   -m {gpt,deepseek}, --model {gpt,deepseek}
                         Choose LLM model to use (gpt or deepseek). Default is deepseek.
+  -b BOUNDARY, --boundary BOUNDARY
+                        Comma-separated list of boundary binary files (absolute paths). Use ',' to separate multiple files.
   --version             show program's version number and exit
 ``````
 

@@ -509,7 +509,11 @@ def set_get_graph_create_single(analysis_binary_initial: AnalysisBinary, func_na
 def set_get_graph_create(directory, analysis_binary_dict: AnalysisBinaryDict, set_get_graph: SetGetGraph):
     start_time = time.time()
     # 首先进行边界二进制文件的获取
-    boundary_files = get_border_binaries_by_cluster_max_mean_gap(directory) # 获取一组边界二进制文件
+    try:
+        boundary_files = get_border_binaries_by_cluster_max_mean_gap(directory) # 获取一组边界二进制文件
+    except FileNotFoundError as e:
+        logger.error(f"Error getting boundary binaries: {e}")
+        boundary_files = [] # 设置为空，直接退出
     for boundary_file in boundary_files:
         try: # 加载边界二进制文件，捕获CFG创建的异常
             analysis_boundary_binary = AnalysisBinary(boundary_file)

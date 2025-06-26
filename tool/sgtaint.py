@@ -46,7 +46,7 @@ class ColorFormatter(logging.Formatter):
 
 # SGTaint运行类
 class SGTaintRunner:
-    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, llm=True, model="deepseek"):
+    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, llm=True, model="deepseek", boundary_binaries=None):
         self.firmware = firmware
         self.name = name
         self.output_dir = output_dir
@@ -58,6 +58,7 @@ class SGTaintRunner:
         config_sgtaint.FIRMWARE_NAME = name
         config_sgtaint.SG_FUNCTION_INFO = sggraph
         config_sgtaint.LLM_MODEL = config_sgtaint.LLM_MODEL_DEEPSEEK if model == "deepseek" else config_sgtaint.LLM_MODEL_CHATGPT
+        config_sgtaint.BOUNDARY_BINARIES = boundary_binaries
         self._setup_logger()
         self.logger.info(f"Initialized SGTaintRunner (v{__version__})")
 
@@ -380,8 +381,9 @@ def parse_args():
     parser.add_argument("-o", "--output", required=True, help="User output directory")
     parser.add_argument("-p", "--parallel", action="store_true", help="Enable parallel mode")
     parser.add_argument("-l", "--llm", action="store_true", help="Enable final LLM check")
-    parser.add_argument("-s", "--sggraph", help="Optional SGGraph info path")
+    parser.add_argument("-s", "--sggraph", help="Optional SGGraph info path, e.g., a list of tuples like [(set_1, get_1, set_key_pos, get_key_pos, set_value_pos, get_value_pos), ...]")
     parser.add_argument("-m", "--model", default="deepseek", choices=["gpt", "deepseek"], help="Choose LLM model to use (gpt or deepseek). Default is deepseek.")
+    parser.add_argument("-b", "--boundary", type=str, help="Comma-separated list of boundary binary files (absolute paths). Use ',' to separate multiple files.")
     parser.add_argument("--version", action="version", version=__version__)
     return parser.parse_args()
 
@@ -396,7 +398,8 @@ def main():
         sggraph=args.sggraph,
         parallel=args.parallel,
         llm=args.llm,
-        model=args.model
+        model=args.model,
+        boundary_binaries=args.boundary
     )
     try:
         runner.run()

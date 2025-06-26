@@ -2,6 +2,7 @@
 import time
 import logging
 import warnings
+import os
 import filecmp
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError
@@ -43,7 +44,7 @@ def binary_keyword_function(directory):
             keyword_number = binary.get_keyword_number()
             function_number = binary.get_function_number()
             binary.keyword_function_file()
-            if keyword_number + function_number >= config_sgtaint.MIN_KEYWORD_NUMBER:
+            if keyword_number + function_number >= config_sgtaint.MIN_KEYWORD_NUMBER or os.path.basename(path) in config_sgtaint.BOUNDARY_BINARY_NAME:
                 # 需要更新二进制文件内部的关键字信息
                 binary_keyword_function_list.append((path, keyword_number + function_number))
             logger.debug(f"[{index}/{len(binary_path)}] Analyze Finished! {path} : {keyword_number + function_number} matches")
@@ -66,7 +67,7 @@ def process_single_binary(path, keyword_set, function_set):
         keyword_number = binary.get_keyword_number()
         function_number = binary.get_function_number()
         binary.keyword_function_file()
-        if keyword_number + function_number >= config_sgtaint.MIN_KEYWORD_NUMBER:
+        if keyword_number + function_number >= config_sgtaint.MIN_KEYWORD_NUMBER or os.path.basename(path) in config_sgtaint.BOUNDARY_BINARY_NAME:
             return (path, keyword_number + function_number)
     except Exception:
         logger.exception(f"Worker failed for binary: {path}")
@@ -117,6 +118,15 @@ def binary_keyword_function_parallel(directory):
 # 使用聚类算法获取边界二进制文件组（获取边界二进制文件的文件地址）
 def get_border_binaries_by_cluster(directory):
     start_time = time.time()
+    if config_sgtaint.BOUNDARY_BINARIES: # 直接从配置中读取边界二进制文件
+        logger.info("Boundary binaries received successfully!")
+        boundary_binary_list = [x.strip() for x in config_sgtaint.BOUNDARY_BINARIES.split(",") if x.strip()]
+        for binary_path in boundary_binary_list:
+            if not os.path.exists(binary_path):
+                raise FileNotFoundError(f"Binary path not found: {binary_path}")
+        names = ", ".join(str(f) for f in boundary_binary_list)
+        logger.info(f"Boundary binaries identified: {names}")
+        return boundary_binary_list
     binary_file = []
     keyword_number = []
     binary_list = binary_keyword_function_parallel(directory) # 使用并行处理
@@ -128,6 +138,10 @@ def get_border_binaries_by_cluster(directory):
     if len(X) == 0:
         logger.warning(f"No binaries to cluster in {directory}")
         return []  # 没有文件，直接返回空列表
+    if len(X) == 1:
+        names = ", ".join(str(f) for f in binary_file)
+        logger.info(f"Boundary binaries identified: {names}")
+        return binary_file
     max_components = min(5, len(X))  # 最多不能超过样本数
     best_bic, best_n = np.inf, 1
     with warnings.catch_warnings():
@@ -152,6 +166,10 @@ def get_border_binaries_by_cluster(directory):
         if any(filecmp.cmp(f, seen, shallow=False) for seen in unique_boundary):
             continue
         unique_boundary.append(f)
+    # 默认项进行匹配
+    for file in binary_file:
+        if os.path.basename(file) in config_sgtaint.BOUNDARY_BINARY_NAME and file not in unique_boundary:
+            unique_boundary.append(file)
     # 将识别到的边界二进制写入日志中
     if unique_boundary:
         names = ", ".join([f for f in unique_boundary])
@@ -167,12 +185,25 @@ def get_border_binaries_by_cluster(directory):
 # 使用聚类算法获取边界二进制文件组，使用最大均值差
 def get_border_binaries_by_cluster_max_mean_gap(directory):
     start_time = time.time()
+    if config_sgtaint.BOUNDARY_BINARIES: # 直接从配置中读取边界二进制文件
+        logger.info("Boundary binaries received successfully!")
+        boundary_binary_list = [x.strip() for x in config_sgtaint.BOUNDARY_BINARIES.split(",") if x.strip()]
+        for binary_path in boundary_binary_list:
+            if not os.path.exists(binary_path):
+                raise FileNotFoundError(f"Binary path not found: {binary_path}")
+        names = ", ".join(str(f) for f in boundary_binary_list)
+        logger.info(f"Boundary binaries identified: {names}")
+        return boundary_binary_list
     results = binary_keyword_function_parallel(directory)
     files = [r[0] for r in results]
     counts = np.array([r[1] for r in results]).reshape(-1, 1)
     if counts.size == 0:
         logger.warning(f"No binaries to cluster in {directory}")
         return []
+    if counts.size == 1:
+        names = ", ".join(str(f) for f in files)
+        logger.info(f"Boundary binaries identified: {names}")
+        return files
     # 使用BIC选模型组件数
     max_components = min(5, len(counts))
     best_bic, best_n = np.inf, 1
@@ -200,6 +231,10 @@ def get_border_binaries_by_cluster_max_mean_gap(directory):
     for f in boundary_files:
         if not any(filecmp.cmp(str(f), str(seen), shallow=False) for seen in unique_boundary):
             unique_boundary.append(f)
+    # 默认项进行匹配
+    for file in files:
+        if os.path.basename(file) in config_sgtaint.BOUNDARY_BINARY_NAME and file not in unique_boundary:
+            unique_boundary.append(file)
     # 将识别到的边界二进制写入日志中
     if unique_boundary:
         names = ", ".join(str(f) for f in unique_boundary)
