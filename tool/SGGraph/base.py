@@ -268,9 +268,11 @@ class AnalysisBinary():
             config_sgtaint.STACK.clear()
             self.handler.set_start_function(caller_func)
             try:
-                result = run_function_with_timeout(self.rda_analyze_core, args=(caller_func,), timeout=20000)
+                result = run_function_with_timeout(self.rda_analyze_core, args=(caller_func,), timeout=1000) # 设置超时时间为1000s
             except TimeoutError:
                 logger.error(f"Function call for {caller_func.name} timed out")
+                self.error_file.write(f'target_addr: {hex(caller_func.addr)}, target_name: {caller_func.name}, timed out\n')
+                self.error_file.flush()
                 continue
             except Exception as e:
                 logger.exception(f"Error analyzing function {caller_func.name} (addr={hex(caller_func.addr)}): {e}")
@@ -294,9 +296,11 @@ class AnalysisBinary():
                 config_sgtaint.STACK.clear()
                 self.handler.set_start_function(caller_func)
                 try:
-                    result = run_function_with_timeout(self.rda_analyze_core, args=(caller_func,), timeout=20000)
+                    result = run_function_with_timeout(self.rda_analyze_core, args=(caller_func,), timeout=1000) # 设置超时时间为1000s
                 except TimeoutError:
                     logger.error(f"Function call for {caller_func.name} timed out")
+                    self.error_file.write(f'target_addr: {hex(caller_func.addr)}, target_name: {caller_func.name}, timed out\n')
+                    self.error_file.flush()
                     continue
                 except Exception as e:
                     logger.exception(f"Error analyzing function {caller_func.name} (addr={hex(caller_func.addr)}): {e}")
