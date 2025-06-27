@@ -25,7 +25,7 @@ DECOMPILE_ASSIST_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "decompile_assi
 LLM_URL_DEEPSEEK = "https://api.deepseek.com"
 LLM_URL_CHATGPT = "https://api.openai.com/v1"
 LLM_MODEL_DEEPSEEK = "deepseek-chat"
-LLM_MODEL_CHATGPT = "gpt-4.1-mini"
+LLM_MODEL_CHATGPT = "gpt-4.1"
 LLM_MODEL = ""
 SG_TEMPERATURE = 0.3 # 进行代码分析
 MAX_ERROR_COUNT = 3
@@ -124,6 +124,7 @@ SET_GET_INFO = {
     ("nvram_safe_set", "nvram_safe_get"): ["nvram_safe_set", "nvram_safe_get", 0, 0, 1, None],
     ("nvram_pf_set", "nvram_pf_get"): ["nvram_pf_set", "nvram_pf_get", 0, 0, 1, None],
     ("acosNvramConfig_set", "acosNvramConfig_get"): ["acosNvramConfig_set", "acosNvramConfig_get", 0, 0, 1, None],
+    ("acosNvramConfig_read", "acosNvramConfig_get"): ["acosNvramConfig_read", "acosNvramConfig_get", 0, 0, 1, 1],
     ("uciSet", "uciGet"): ["uciSet", "uciGet", 0, 0, 1, None],
     ("wpa_config_set", "wpa_config_get"): ["wpa_config_set", "wpa_config_get", 0, 0, 1, None],
     ("device_set_string_value", "device_get_string_value"): ["device_set_string_value", "device_get_string_value", 0, 0, 1, None],

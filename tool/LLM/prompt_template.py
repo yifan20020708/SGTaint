@@ -12,10 +12,10 @@ SYSTEM_SET_GET_OUTPUT_PHASE_TWO = "Please strictly output in the format [(set_1,
 DOUBLE_CHECK = "Please double check and answer again."
 
 def get_user_set_get_en_prompt_phase_one(name_list):
-    return f"Input for the first phase: {name_list}."
+    return f"Input for the first phase: {name_list}, please strictly output in the format [(set_1, get_1), (set_2, get_2), ...] or None in the phase."
 
 def get_user_set_get_en_prompt_phase_two(code_list):
-    return f"Input for the second phase: {code_list}."
+    return f"Input for the second phase: {code_list}, please strictly output in the format [(set_1, get_1, set_key_pos, get_key_pos, set_value_pos, get_value_pos), ...] or None in the phase."
 
 def double_check_phase_two(code_list):
     return f"Please double check and answer again with new input: {code_list}."
