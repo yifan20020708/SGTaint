@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import json
-import time
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 import tool.Config.config as config_sgtaint
@@ -136,7 +135,6 @@ def get_function_decompile_block2block_cached(program, identifier, start_block_s
             start_index_list.append(i)
         if max(end_block_start, min_addr) <= min(end_block_end, max_addr) and min_addr >= end_block_start:
             finish_index_list.append(i)
-    print("[+] Decompilation result for function {}:".format(identifier))
     return pseudo_code_lines, start_index_list, finish_index_list
             
 
@@ -277,11 +275,8 @@ def get_decompile_result_binary(program, angr_base_addr):
     
 
 if __name__ == "__main__":
-    start_time = time.time()
     program = getCurrentProgram() # type: ignore
     # 获取传递的参数
     args = list(getScriptArgs()) # type: ignore
     angr_base_addr = int(args[0], 16)
     get_decompile_result_binary(program, angr_base_addr)
-    end_time = time.time()
-    print("[+] Decompilation completed in {:.2f} seconds.".format(end_time - start_time))
