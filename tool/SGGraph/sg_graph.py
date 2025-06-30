@@ -79,8 +79,15 @@ def get_keyword_by_decompiled_func_ghidra(project, cfg, func_name, file_path, an
         # 读取对应的结果文件
         caller_file_result_name =  f"{func_name}_caller_parse_result.json"
         caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
-        with open(caller_file_result_path, "r") as file:
-            caller_parse_result = json.load(file)
+        try:
+            with open(caller_file_result_path, "r") as file:
+                caller_parse_result = json.load(file)
+        except FileNotFoundError as e:
+            logger.error((f"Error: File not found — {caller_file_result_path}")) # Ghidra命令执行失败
+            return [], 0
+        except Exception as e:
+            logger.error(f"Unexpected error: {e}")
+            return [], 0
         # 删除对应的中间文件
         rm_command = f"rm {caller_file_result_path}"
         execute(rm_command)
@@ -207,6 +214,8 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
     func_name_list_str = "[" + ", ".join(func_name_list) + "]"
     LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
     LLM_chat.system_role(SYSTEM_SET_GET)
+    logger.info("Initiating the first phase of the LLM-based analysis.")
+    llm_phase_one_start = time.time()
     response = LLM_chat.chat(get_user_set_get_en_prompt_phase_one(func_name_list_str), timeout=timeout)
     error_count = 0
     while not response.startswith("[(") and response != "None": # 其中可能存在[ERROR]超时情况
@@ -246,6 +255,8 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 error_count = 0
             response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_ONE, timeout=timeout)
         cycle_number += 1
+    llm_phase_one_end = time.time()
+    logger.info(f"The output of the first phase of the LLM analysis is {response_twice}, with a duration of {(llm_phase_one_end - llm_phase_one_start):.2f} seconds.")
     # 判断是否存在LLM分析出的内容
     if response_twice == "None":
         logger.info("Retrieve Set-Get function information directly from the configuration.")
@@ -253,6 +264,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         return func_name_previous_known
     func_name_phase_one = parse_set_get_string(response_twice)
     # 进行LLM的第二步分析，首先需要获取对应到的调用语句
+    logger.info("Extracting call information from the first phase to facilitate the second phase of LLM-based analysis.")
     func_name_phase_list = []
     for set_func_name, get_func_name in func_name_phase_one:
         # 找到包含set_func_name和get_func_name的边界二进制文件
@@ -266,7 +278,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                     is_correct_pair = True
                     break
         if not is_correct_pair: # 跳过不合法的函数对
-            print(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+            logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
             continue
         # 处理已知信息的合法对
         if (set_func_name, get_func_name) in config_sgtaint.SET_GET_INFO:
@@ -302,12 +314,23 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         binary_mark = os.path.basename(file_path)
         ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH
         ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -postScript {ghidra_python_path} "{angr_base_addr}" "*"'
+        logger.info(f"Executing Ghidra command: {ghidra_command}.")
+        ghidra_start = time.time()
         execute(ghidra_command)
+        ghidra_end = time.time()
+        logger.info(f"The execution time of the Ghidra command is {(ghidra_end - ghidra_start):.2f} seconds.")
         # 读取对应的结果文件
         func_name_phase_result_file_name = f"{file_path_process}_func_name_phase_result.json"
         func_name_phase_result_file_path = os.path.join(config_sgtaint.TMP_DIR, func_name_phase_result_file_name)
-        with open(func_name_phase_result_file_path, "r") as file:
-            func_name_phase_result = json.load(file)
+        try:
+            with open(func_name_phase_result_file_path, "r") as file:
+                func_name_phase_result = json.load(file)
+        except FileNotFoundError:
+            logger.error(f"Error: File not found — {func_name_phase_result_file_path}")
+            return func_name_previous_known
+        except Exception as e:
+            logger.error(f"Unexpected error: {e}")
+            return func_name_previous_known
         # 删除对应的中间文件
         rm_command = f"rm {func_name_phase_result_file_path}"
         execute(rm_command)
@@ -341,7 +364,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                     get_parameter_list += parameter_list
                     get_code_filter_list.append(complete_line)
             if not set(set_parameter_list) & set(get_parameter_list):
-                print(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+                logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
                 continue
             else: # 生成对应的func_name
                 func_name_eventually.append({
@@ -352,6 +375,8 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 })
     if func_name_eventually:
         # 开启第二阶段的LLM分析
+        logger.info("Initiating the second phase of the LLM-based analysis.")
+        llm_phase_two_start = time.time()
         prompt_phase_two = get_prompt_for_phase_two(func_name_eventually)
         logger.info(f"Prompt for phase two: {prompt_phase_two}")
         response = LLM_chat.chat(get_user_set_get_en_prompt_phase_two(prompt_phase_two))
@@ -394,6 +419,8 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_TWO)
             cycle_number += 1
         response_twice_list = parse_set_get_string(response_twice) if response_twice != "None" else []
+        llm_phase_two_end = time.time()
+        logger.info(f"The output of the second phase of the LLM analysis is {response_twice}, with a duration of {(llm_phase_two_end - llm_phase_two_start):.2f} seconds.")
     else:
         response_twice_list = []
     func_name = response_twice_list + func_name_previous_known
@@ -435,7 +462,7 @@ def set_get_graph_create_single(analysis_binary_initial: AnalysisBinary, func_na
     if not call_sites_parser:
         logger.warning(f"No exploitable call sites found for {set_func_name} in {file_path}")
         return
-    key_set = {key for (_, _, _, key) in call_sites_parser if key != -1} # 读取相关set函数对应的参数集合
+    key_set = {key for (_, _, _, key) in call_sites_parser if key not in (-1, 0)} # 读取相关set函数对应的参数集合
     # 若key_set为空则直接返回（key为动态可变）
     if not key_set:
         logger.warning(f"No exploitable key found for {set_func_name} in {file_path}")

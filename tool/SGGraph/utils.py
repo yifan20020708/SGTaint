@@ -279,60 +279,71 @@ def get_decompiled_code_by_call_site(project: Project, call_site_address, block_
 # 根据反编译结果提取函数调用的参数
 def get_parameters_by_code(call_site_code):
     argument_list = []
-    start_point = 0
-    while call_site_code[start_point] != '(':
+    # 处理特殊情况
+    if not call_site_code or '(' not in call_site_code:
+        # 加日志说明传入非法代码字符串
+        logger.warning(f"Invalid call_site_code: '{call_site_code}'")
+        return []
+    # 加入异常处理
+    try:
+        start_point = 0
+        while call_site_code[start_point] != '(':
+            start_point += 1
         start_point += 1
-    start_point += 1
-    while start_point < len(call_site_code) - 1:
-        parameter = "" # 提取的对应参数内容
-        # 首先跳过提取内容之前的空格
-        while start_point < len(call_site_code) and call_site_code[start_point] == " ":
-            start_point += 1
-        # 若提取内容为字符串，以"或'开头
-        if call_site_code[start_point] == '"':
-            parameter += call_site_code[start_point]
-            start_point += 1
-            while start_point < len(call_site_code) - 1 and call_site_code[start_point] != '"':
+        while start_point < len(call_site_code) - 1:
+            parameter = "" # 提取的对应参数内容
+            # 首先跳过提取内容之前的空格
+            while start_point < len(call_site_code) and call_site_code[start_point] == " ":
+                start_point += 1
+            # 若提取内容为字符串，以"或'开头
+            if call_site_code[start_point] == '"':
                 parameter += call_site_code[start_point]
                 start_point += 1
-            parameter += call_site_code[start_point]
-            argument_list.append(parameter)
-            start_point += 1
-            while start_point < len(call_site_code) - 1 and call_site_code[start_point] != ',':
-                start_point += 1
-            start_point += 1
-        elif call_site_code[start_point] == "'":
-            parameter += call_site_code[start_point]
-            start_point += 1
-            while start_point < len(call_site_code) - 1 and call_site_code[start_point] != "'":
-                parameter += call_site_code[start_point]
-                start_point += 1
-            parameter += call_site_code[start_point]
-            argument_list.append(parameter)
-            start_point += 1
-            while start_point < len(call_site_code) - 1 and call_site_code[start_point] != ',':
-                start_point += 1
-            start_point += 1
-        # 提取非字符串的内容
-        else: # 非字符串的格式
-            stack_argument = [] # 防止函数调用为参数
-            while start_point < len(call_site_code) - 1:
-                if call_site_code[start_point] == '(':
-                    stack_argument.append('(')
+                while start_point < len(call_site_code) - 1 and call_site_code[start_point] != '"':
                     parameter += call_site_code[start_point]
-                elif call_site_code[start_point] == ',':
-                    if not stack_argument:
-                        start_point += 1
-                        break
+                    start_point += 1
+                parameter += call_site_code[start_point]
+                argument_list.append(parameter)
+                start_point += 1
+                while start_point < len(call_site_code) - 1 and call_site_code[start_point] != ',':
+                    start_point += 1
+                start_point += 1
+            elif call_site_code[start_point] == "'":
+                parameter += call_site_code[start_point]
+                start_point += 1
+                while start_point < len(call_site_code) - 1 and call_site_code[start_point] != "'":
+                    parameter += call_site_code[start_point]
+                    start_point += 1
+                parameter += call_site_code[start_point]
+                argument_list.append(parameter)
+                start_point += 1
+                while start_point < len(call_site_code) - 1 and call_site_code[start_point] != ',':
+                    start_point += 1
+                start_point += 1
+            # 提取非字符串的内容
+            else: # 非字符串的格式
+                stack_argument = [] # 防止函数调用为参数
+                while start_point < len(call_site_code) - 1:
+                    if call_site_code[start_point] == '(':
+                        stack_argument.append('(')
+                        parameter += call_site_code[start_point]
+                    elif call_site_code[start_point] == ',':
+                        if not stack_argument:
+                            start_point += 1
+                            break
+                        else:
+                            parameter += call_site_code[start_point]
+                    elif call_site_code[start_point] == ')':
+                        stack_argument.pop()
+                        parameter += call_site_code[start_point]
                     else:
                         parameter += call_site_code[start_point]
-                elif call_site_code[start_point] == ')':
-                    stack_argument.pop()
-                    parameter += call_site_code[start_point]
-                else:
-                    parameter += call_site_code[start_point]
-                start_point += 1
-            argument_list.append(parameter)
+                    start_point += 1
+                argument_list.append(parameter)
+    except IndexError as e:
+        logger.error(f"IndexError while parsing call site: {repr(call_site_code)} - {e}")
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
     return argument_list
 
 
@@ -371,13 +382,13 @@ def coarse_grained_binary_filter(get_function_name, key_set, directory):
     candidate_files = execute(command).splitlines()
     if not candidate_files:
         return None
-    pattern = "|".join(re.escape(k) for k in key_set) # 将关键字列表转换为正则表达式
+    pattern = "|".join(re.escape(str(k)) for k in key_set) # 将关键字列表转换为正则表达式
     filtered_files = []
     for filepath in candidate_files:
         command = f"grep -E '{pattern}' {filepath}"
         if execute(command) and is_binary_file(filepath): # 过滤掉非二进制文件
             filtered_files.append(filepath)
-            print(filepath)
+            logger.info(filepath)
     return filtered_files
 
 
