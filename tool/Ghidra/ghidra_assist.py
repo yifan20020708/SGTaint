@@ -144,24 +144,32 @@ def get_all_decompile_code(program, angr_base_addr):
         set_code_dict = {}
         angr_assist_set_func_addr = []
         for set_func_addr_angr in set_func_addr:
-            set_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, set_func_addr_angr)
-            call_site_code_dict = get_args_string_call_sites(program, set_func_addr, set_func_name, angr_base_addr)
-            if call_site_code_dict:
-                set_code_dict.update(call_site_code_dict)
-            else:
-                angr_assist_set_func_addr.append(set_func_addr_angr) # 若ghidra没有找到对应的函数，则将其存储在列表中
+            try:
+                set_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, set_func_addr_angr)
+                call_site_code_dict = get_args_string_call_sites(program, set_func_addr, set_func_name, angr_base_addr)
+                if call_site_code_dict:
+                    set_code_dict.update(call_site_code_dict)
+                else:
+                    angr_assist_set_func_addr.append(set_func_addr_angr) # 若ghidra没有找到对应的函数，则将其存储在列表中
+            except Exception as e:
+                print(f"Failed during call site decompilation at addr {set_func_addr_angr}: {e}")
+                continue
         # 进行get函数的反编译代码行获取
         get_func_name = set_get_func_info.get("get_func_name")
         get_func_addr = set_get_func_info.get("get_func_addr")
         get_code_dict = {}
         angr_assist_get_func_addr = []
         for get_func_addr_angr in get_func_addr:
-            get_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, get_func_addr_angr)
-            call_site_code_dict = get_args_string_call_sites(program, get_func_addr, get_func_name, angr_base_addr)
-            if call_site_code_dict:
-                get_code_dict.update(call_site_code_dict)
-            else:
-                angr_assist_get_func_addr.append(get_func_addr_angr)
+            try:
+                get_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, get_func_addr_angr)
+                call_site_code_dict = get_args_string_call_sites(program, get_func_addr, get_func_name, angr_base_addr)
+                if call_site_code_dict:
+                    get_code_dict.update(call_site_code_dict)
+                else:
+                    angr_assist_get_func_addr.append(get_func_addr_angr)
+            except Exception as e:
+                print(f"Failed during call site decompilation at addr {get_func_addr_angr}: {e}")
+                continue
         func_name_phase_result.append({
             "set_func_name": set_func_name,
             "set_code_dict": set_code_dict,
@@ -192,14 +200,18 @@ def get_decompile_code_by_func_name(program, call_site_name, angr_base_addr):
     decompile_code_dict = {}
     angr_assist_func_addr = []
     for caller_addr_result in caller_addr_result_json:
-        func_addr_angr = int(caller_addr_result.get("caller"), 16)
-        # 输出所有的解析结果
-        func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, func_addr_angr)
-        call_site_code_list = get_args_string_call_sites(program, func_addr, call_site_name, angr_base_addr)
-        if call_site_code_list:
-            decompile_code_dict.update(call_site_code_list)
-        else:
-            angr_assist_func_addr.append(func_addr_angr)
+        try:
+            func_addr_angr = int(caller_addr_result.get("caller"), 16)
+            # 输出所有的解析结果
+            func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, func_addr_angr)
+            call_site_code_list = get_args_string_call_sites(program, func_addr, call_site_name, angr_base_addr)
+            if call_site_code_list:
+                decompile_code_dict.update(call_site_code_list)
+            else:
+                angr_assist_func_addr.append(func_addr_angr)
+        except Exception as e:
+            print(f"Failed during call site decompilation at addr {caller_addr_result}: {e}")
+            continue
     caller_parse_result.append({
         "code_dict": decompile_code_dict,
         "func_fail": angr_assist_func_addr

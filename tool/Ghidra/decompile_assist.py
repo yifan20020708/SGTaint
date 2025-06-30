@@ -148,7 +148,10 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
         start_block_end = base_addr_transform_angr2ghidra(program, angr_base_addr, function_ghidra_format[index][2])
         end_block_start = base_addr_transform_angr2ghidra(program, angr_base_addr, function_ghidra_format[index][3])
         end_block_end = base_addr_transform_angr2ghidra(program, angr_base_addr, function_ghidra_format[index][4])
-        pseudo_code_lines, start_index_list, finish_index_list = get_function_decompile_block2block_cached(program, func_addr, start_block_start, start_block_end, end_block_start, end_block_end)
+        result = get_function_decompile_block2block_cached(program, func_addr, start_block_start, start_block_end, end_block_start, end_block_end)
+        if not result:
+            return "Fail to Decompile by Ghidra"
+        pseudo_code_lines, start_index_list, finish_index_list = result
         complete_decompile_code = "\n".join(pseudo_code_lines)
         if start_index_list: # 一般情况存在
             # 获取start_index
@@ -195,21 +198,25 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
                             end_index = len(pseudo_code_lines) - 1
             else: # 与第二个片段的函数名称相关
                 next_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, function_ghidra_format[index + 1][0])
-                next_func_name = get_function(program, next_func_addr).getName() # 需要包含函数名称
-                end_index = next((i for i in finish_index_list if next_func_name in pseudo_code_lines[i]), None) 
-                if end_index is None: # 向后进行寻找（对于长调用函数而言，可能截断表示）
-                    # 首先判断前面的三行内是否存在对应的函数
-                    found = False
-                    for offset in range(1, 4): # 截断表示
-                        candidate = min(finish_index_list) - offset
-                        if candidate >= 0 and next_func_name in pseudo_code_lines[candidate]:
-                            end_index = min(finish_index_list)
-                            found = True
-                            break
-                    if not found: # 非截断表示
-                        end_index = min(max(finish_index_list) + 1, len(pseudo_code_lines) - 1)
-                        while end_index < len(pseudo_code_lines) and next_func_name not in pseudo_code_lines[end_index]:
-                            end_index += 1
+                next_func = get_function(program, next_func_addr)
+                if next_func:
+                    next_func_name = next_func.getName() # 需要包含函数名称
+                    end_index = next((i for i in finish_index_list if next_func_name in pseudo_code_lines[i]), None) 
+                    if end_index is None: # 向后进行寻找（对于长调用函数而言，可能截断表示）
+                        # 首先判断前面的三行内是否存在对应的函数
+                        found = False
+                        for offset in range(1, 4): # 截断表示
+                            candidate = min(finish_index_list) - offset
+                            if candidate >= 0 and next_func_name in pseudo_code_lines[candidate]:
+                                end_index = min(finish_index_list)
+                                found = True
+                                break
+                        if not found: # 非截断表示
+                            end_index = min(max(finish_index_list) + 1, len(pseudo_code_lines) - 1)
+                            while end_index < len(pseudo_code_lines) and next_func_name not in pseudo_code_lines[end_index]:
+                                end_index += 1
+                else:
+                    end_index = len(pseudo_code_lines) - 1
         else:
             end_index = len(pseudo_code_lines) - 1
         code_snippet_list = pseudo_code_lines[start_index:end_index + 1]
@@ -231,7 +238,10 @@ def get_decompile_result_binary(program, angr_base_addr):
         function_ghidra_format = source2sink_single_path["ghidra_path"]
         taint_source = source2sink_single_path["taint_source"]
         taint_sink = source2sink_single_path["taint_sink"]
-        source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
+        try:
+            source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
+        except Exception as e:
+            source2sink_single_path["decompile_list"] = "Fail to Decompile by Ghidra"
         source2sink_result.append(source2sink_single_path)
     # 写回文件
     source2sink_result_file_name = "{}_source2sink_path_result.json".format(file_path_process)
@@ -251,7 +261,10 @@ def get_decompile_result_binary(program, angr_base_addr):
         function_ghidra_format = get2set_single_path["ghidra_path"]
         taint_source = get2set_single_path["taint_source"]
         taint_sink = get2set_single_path["taint_sink"]
-        get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
+        try:
+            get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
+        except Exception as e:
+            get2set_single_path["decompile_list"] = "Fail to Decompile by Ghidra"
         get2set_result.append(get2set_single_path)
     # 写回文件
     get2set_result_file_name = "{}_get2set_path_result.json".format(file_path_process)
