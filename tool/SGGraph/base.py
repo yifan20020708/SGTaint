@@ -379,7 +379,7 @@ class AnalysisBinary():
             binary_mark = os.path.basename(self.binary_path)
             self.load_ghidra() # 加载ghidra程序
             ghidra_python_path = config_sgtaint.DECOMPILE_ASSIST_PATH
-            ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -postScript {ghidra_python_path} "{angr_base_addr}"'
+            ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}"'
             execute(ghidra_command)
             logger.info(f"Executed Ghidra command for decompilation: {ghidra_command}")
         except Exception as e:

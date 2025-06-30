@@ -74,7 +74,7 @@ def get_keyword_by_decompiled_func_ghidra(project, cfg, func_name, file_path, an
             ghidra_load_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -import {file_path}"
             execute(ghidra_load_command)
         ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH   
-        ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -postScript {ghidra_python_path} "{angr_base_addr}" "{func_name}"'
+        ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}" "{func_name}"'
         execute(ghidra_command)
         # 读取对应的结果文件
         caller_file_result_name =  f"{func_name}_caller_parse_result.json"
@@ -313,7 +313,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         angr_base_addr = hex(analysis_binary.get_angr_base_addr())
         binary_mark = os.path.basename(file_path)
         ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH
-        ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -postScript {ghidra_python_path} "{angr_base_addr}" "*"'
+        ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}" "*"'
         logger.info(f"Executing Ghidra command: {ghidra_command}.")
         ghidra_start = time.time()
         execute(ghidra_command)
