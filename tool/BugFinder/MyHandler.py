@@ -2110,7 +2110,7 @@ class MyHandler(FunctionHandler):
     
     def handle_nvram_get(self, state, codeloc):
         function = self._analysis.project.kb.functions.function(name="nvram_get")  
-        return self.handle_get_cgi_xx(function, state, codeloc)
+        return self.handle_get_cgi_xx(function, state, codeloc, position=1)
     
     def handle_config_get(self, state, codeloc):
         function = self._analysis.project.kb.functions.function(name="config_get")  
@@ -2298,7 +2298,7 @@ class MyHandler(FunctionHandler):
     def handle_nvram_set(self, state, codeloc):
         function_name = "nvram_set"
         function = self._analysis.project.kb.functions.function(name=function_name)
-        return self.handle_nvram_set_xx(function, state, codeloc, function_name)
+        return self.handle_nvram_set_xx(function, state, codeloc, function_name, key_position=1, value_position=2)
 
     def handle_SetValue(self, state, codeloc):
         function_name = "SetValue"
