@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import re
 import os
 import json
-import re
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 import tool.Config.config as config_sgtaint
@@ -9,11 +9,24 @@ from ghidra.app.decompiler import DecompInterface, DecompileOptions # type: igno
 from ghidra.app.decompiler.component import DecompilerUtils # type: ignore
 from ghidra.util.task import ConsoleTaskMonitor # type: ignore
 
+
+# 全局缓存
+decompile_cache = {} # 其中键值为函数地址，值为反编译结果
+
+
 # 执行任意命令
 def execute(command):
     from subprocess import check_output, STDOUT
     command = "{}; exit 0".format(command)
     return check_output(command, stderr=STDOUT, shell=True).decode("utf-8")
+
+
+# 基础地址换算（从ghidra到angr）
+def base_addr_transform_ghidra2angr(program, angr_base_addr, ghidra_addr):
+    image_base = program.getImageBase()
+    ghidra_base_addr = image_base.getOffset()
+    angr_addr = ghidra_addr + angr_base_addr - ghidra_base_addr
+    return angr_addr
 
 
 # 通过函数名称或函数地址获取函数对象   
@@ -38,23 +51,39 @@ def get_function(program, identifier):
                 return func
         print("[-] No function found with name '%s'" % identifier)
         return None
+    
 
-
-# 基础地址换算（从angr到ghidra）
-def base_addr_transform_angr2ghidra(program, angr_base_addr, angr_addr):
-    image_base = program.getImageBase()
-    ghidra_base_addr = image_base.getOffset()
-    ghidra_addr = angr_addr - angr_base_addr + ghidra_base_addr
-    return ghidra_addr
-
-
-# 基础地址换算（从ghidra到angr）
-def base_addr_transform_ghidra2angr(program, angr_base_addr, ghidra_addr):
-    image_base = program.getImageBase()
-    ghidra_base_addr = image_base.getOffset()
-    angr_addr = ghidra_addr + angr_base_addr - ghidra_base_addr
-    return angr_addr
-
+# 获取反编译结果
+def get_function_decompile(program, identifier):
+    if identifier not in decompile_cache:
+        try:
+            func = get_function(program, identifier)
+            if func is None:
+                return None
+            # 初始化反编译接口
+            decomp_iface = DecompInterface()
+            decomp_iface.openProgram(program)
+            # 设置反编译选项（例如调用约定等）
+            decompileOptions = DecompileOptions()
+            decompileOptions.setProtoEvalModel("__stdcall")
+            decomp_iface.setOptions(decompileOptions)
+            # 反编译函数，设置超时时间为60秒
+            monitor = ConsoleTaskMonitor()
+            decomp_res = decomp_iface.decompileFunction(func, 60, monitor)
+            # 利用DecompilerUtils将token组转换为ClangLine列表
+            lines = DecompilerUtils.toLines(decomp_res.getCCodeMarkup())
+            decompile_cache[identifier] = lines
+        except Exception as e:
+            print("[-] An exception occurred during decompilation: ", e)
+            return None
+        finally:
+            if 'decomp_iface' in locals():
+                decomp_iface.dispose()
+    else:
+        lines = decompile_cache[identifier]
+    # 返回反编译结果
+    return lines
+        
 
 # 给定反汇编后的代码行提取对应的函数调用内容
 def get_call_site_func_name_from_line(line, call_site_name):
@@ -86,45 +115,45 @@ def get_call_site_func_name_from_line(line, call_site_name):
         offset_finish += 1
     return offset_start, offset_finish
 
-
+    
 # 根据反编译代码获取函数调用参数信息辅助函数
 def get_args_string_call_sites(program, identifier, call_site_name, angr_base_addr):
-    try:
-        func = get_function(program, identifier)
-        if func is None:
-            return None
-        # 初始化反编译接口
-        decomp_iface = DecompInterface()
-        decomp_iface.openProgram(program)
-        # 设置反编译选项（例如调用约定等）
-        decompileOptions = DecompileOptions()
-        decompileOptions.setProtoEvalModel("__stdcall")
-        decomp_iface.setOptions(decompileOptions)
-        # 反编译函数，设置超时时间为60秒
-        monitor = ConsoleTaskMonitor()
-        decomp_res = decomp_iface.decompileFunction(func, 60, monitor)
-        # 利用DecompilerUtils将token组转换为ClangLine列表
-        lines = DecompilerUtils.toLines(decomp_res.getCCodeMarkup())
-        call_site_dict = {} # 将调用站点存储在字典中，键值为函数调用的地址
-        for clang_line in lines:
-            line_text = clang_line.toString()
-            clean_line = re.sub(r'^\s*\d+:\s*', '', line_text)
-            if call_site_name in line_text:
-                offset_start, offset_finish = get_call_site_func_name_from_line(line_text, call_site_name)
-                call_site_code = line_text[offset_start:offset_finish]
-                for clang_token in clang_line.getAllTokens():
-                    if clang_token.getText() == call_site_name:
-                        # 仅仅使用call_site点的地址
-                        min_addr = base_addr_transform_ghidra2angr(program, angr_base_addr, clang_token.getMinAddress().getOffset())
-                call_site_dict[hex(min_addr)[:-1]] = [clean_line, call_site_code]          
-        return call_site_dict
-    except Exception as e:
-        print("[-] An exception occurred during decompilation: ", e)
+    lines = get_function_decompile(program, identifier)
+    if not lines:
         return None
-    finally:
-        if 'decomp_iface' in locals():
-            decomp_iface.dispose()
-            
+    call_site_dict = {} # 将调用站点存储在字典中，键值为函数调用的地址
+    for clang_line in lines:
+        line_text = clang_line.toString()
+        clean_line = re.sub(r'^\s*\d+:\s*', '', line_text)
+        if call_site_name in line_text:
+            offset_start, offset_finish = get_call_site_func_name_from_line(line_text, call_site_name)
+            call_site_code = line_text[offset_start:offset_finish]
+            for clang_token in clang_line.getAllTokens():
+                if clang_token.getText() == call_site_name:
+                    # 仅仅使用call_site点的地址
+                    min_addr = base_addr_transform_ghidra2angr(program, angr_base_addr, clang_token.getMinAddress().getOffset())
+            call_site_dict[hex(min_addr)[:-1]] = [clean_line, call_site_code]          
+    return call_site_dict
+
+
+# 获取指定函数的所有系统调用
+def get_call_site_by_identifier(program, identifier, angr_base_addr):
+    target_func = get_function(program, identifier)
+    if target_func is None:
+        return None
+    call_site_dict = {}
+    callers = target_func.getCallingFunctions(monitor) # type: ignore
+    for idx, caller in enumerate(callers, start=1):
+        try:
+            caller_identifier = caller.getEntryPoint().getOffset()
+            call_site_dict_func = get_args_string_call_sites(program, caller_identifier, identifier, angr_base_addr)
+            if call_site_dict_func is not None:
+                call_site_dict.update(call_site_dict_func)
+        except Exception as e:
+            print("Failed during call site decompilation {}".format(e))
+            continue
+    return call_site_dict
+        
 
 # SG函数信息识别
 def get_all_decompile_code(program, angr_base_addr):
@@ -140,41 +169,22 @@ def get_all_decompile_code(program, angr_base_addr):
     for set_get_func_info in func_name_phase_result_json:
         # 进行set函数的反编译代码行获取
         set_func_name = set_get_func_info.get("set_func_name")
-        set_func_addr = set_get_func_info.get("set_func_addr")
-        set_code_dict = {}
-        angr_assist_set_func_addr = []
-        for set_func_addr_angr in set_func_addr:
-            try:
-                set_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, set_func_addr_angr)
-                call_site_code_dict = get_args_string_call_sites(program, set_func_addr, set_func_name, angr_base_addr)
-                if call_site_code_dict:
-                    set_code_dict.update(call_site_code_dict)
-                else:
-                    angr_assist_set_func_addr.append(set_func_addr_angr) # 若ghidra没有找到对应的函数，则将其存储在列表中
-            except Exception as e:
-                continue
-        # 进行get函数的反编译代码行获取
+        try:
+            set_code_dict = get_call_site_by_identifier(program, set_func_name, angr_base_addr) # 键值为函数调用点
+        except Exception as e: # 解析过程中存在错误
+            print("Failed during call site decompilation {}".format(e))
+            set_code_dict = {}
         get_func_name = set_get_func_info.get("get_func_name")
-        get_func_addr = set_get_func_info.get("get_func_addr")
-        get_code_dict = {}
-        angr_assist_get_func_addr = []
-        for get_func_addr_angr in get_func_addr:
-            try:
-                get_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, get_func_addr_angr)
-                call_site_code_dict = get_args_string_call_sites(program, get_func_addr, get_func_name, angr_base_addr)
-                if call_site_code_dict:
-                    get_code_dict.update(call_site_code_dict)
-                else:
-                    angr_assist_get_func_addr.append(get_func_addr_angr)
-            except Exception as e:
-                continue
+        try:
+            get_code_dict = get_call_site_by_identifier(program, get_func_name, angr_base_addr) # 键值为函数调用点
+        except Exception as e: # 解析过程中存在错误
+            print("Failed during call site decompilation {}".format(e))
+            set_code_dict = {}
         func_name_phase_result.append({
             "set_func_name": set_func_name,
             "set_code_dict": set_code_dict,
-            "set_func_fail": angr_assist_set_func_addr,
             "get_func_name": get_func_name,
             "get_code_dict": get_code_dict,
-            "get_func_fail": angr_assist_get_func_addr
         })
     # 存储对应的文件名称
     func_name_phase_file_result_name = "{}_func_name_phase_result.json".format(file_path_process)
@@ -183,43 +193,6 @@ def get_all_decompile_code(program, angr_base_addr):
         json.dump(func_name_phase_result, file, indent=4)
     # 删除第一个存储的中间文件
     command = "rm {}".format(func_name_phase_file_path)
-    execute(command)
-
-
-# 指定函数的调用站点的反编译获取
-def get_decompile_code_by_func_name(program, call_site_name, angr_base_addr):
-    # 获取对应的函数地址列表
-    caller_file_name = "{}_caller_addr.json".format(call_site_name)
-    caller_file_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_name)
-    with open(caller_file_path, "r") as file:
-        caller_addr_result_json = json.load(file)
-    # 存储解析结果
-    caller_parse_result = []
-    decompile_code_dict = {}
-    angr_assist_func_addr = []
-    for caller_addr_result in caller_addr_result_json:
-        try:
-            func_addr_angr = int(caller_addr_result.get("caller"), 16)
-            # 输出所有的解析结果
-            func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, func_addr_angr)
-            call_site_code_list = get_args_string_call_sites(program, func_addr, call_site_name, angr_base_addr)
-            if call_site_code_list:
-                decompile_code_dict.update(call_site_code_list)
-            else:
-                angr_assist_func_addr.append(func_addr_angr)
-        except Exception as e:
-            continue
-    caller_parse_result.append({
-        "code_dict": decompile_code_dict,
-        "func_fail": angr_assist_func_addr
-    })
-    # 存储对应的文件名称
-    caller_file_result_name =  "{}_caller_parse_result.json".format(call_site_name)
-    caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
-    with open(caller_file_result_path, "w") as file:
-        json.dump(caller_parse_result, file, indent=4)
-    # 删除第一个存储的中间文件
-    command = "rm {}".format(caller_file_path)
     execute(command)
     
 
@@ -233,4 +206,13 @@ if __name__ == "__main__":
     if call_site_name == "*": # 进行SG函数信息的识别
         get_all_decompile_code(program, angr_base_addr)
     else: # 进行函数调用的解析
-        get_decompile_code_by_func_name(program, call_site_name, angr_base_addr)
+        try:
+            call_site_dict = get_call_site_by_identifier(program, call_site_name, angr_base_addr)
+        except Exception as e: # 解析过程中存在错误
+            print("Failed during call site decompilation {}".format(e))
+            call_site_dict = {}
+        # 存储结果
+        caller_file_result_name = "{}_caller_parse_result.json".format(call_site_name)
+        caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
+        with open(caller_file_result_path, "w") as file:
+            json.dump(call_site_dict, file, indent=4)

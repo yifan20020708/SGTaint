@@ -57,59 +57,42 @@ def get_keyword_by_decompiled_func_ghidra(project, cfg, func_name, file_path, an
     analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
     if analysis_binary and func_name in analysis_binary.set_get_code_snippet:
         func_decompile_code_snippet = analysis_binary.set_get_code_snippet[func_name]
-        ghidra_func_identify_failed = analysis_binary.ghidra_func_identify_failed[func_name]
     else: # 若不存在调用新的Ghidra脚本进行获取
-        # 首先对call_sites进行遍历获取所有的函数地址
-        unique_callers = {caller for _, caller, _ in call_sites}
-        func_addr_list = [{"caller": hex(caller)} for caller in unique_callers]
-        # 保存为json文件传递给Ghidra程序
-        caller_file_name = f"{func_name}_caller_addr.json"
-        caller_file_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_name)
-        with open(caller_file_path, "w") as file:
-            json.dump(func_addr_list, file, indent=4)
         # 构造执行Ghidra脚本的命令
         angr_base_addr = hex(project.loader.main_object.min_addr)
         binary_mark = os.path.basename(file_path)
         if not os.path.exists(os.path.join(config_sgtaint.GHIDRA_DIR, f"{binary_mark}.gpr")):
             ghidra_load_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -import {file_path}"
             execute(ghidra_load_command)
-        ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH   
+        ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH  
         ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}" "{func_name}"'
         execute(ghidra_command)
         # 读取对应的结果文件
-        caller_file_result_name =  f"{func_name}_caller_parse_result.json"
+        caller_file_result_name = f"{func_name}_caller_parse_result.json"
         caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
         try:
             with open(caller_file_result_path, "r") as file:
-                caller_parse_result = json.load(file)
-        except FileNotFoundError as e:
-            logger.error((f"Error: File not found — {caller_file_result_path}")) # Ghidra命令执行失败
-            return [], 0
+                func_decompile_code_snippet = json.load(file) # 反编译字典
         except Exception as e:
             logger.error(f"Unexpected error: {e}")
-            return [], 0
-        # 删除对应的中间文件
-        rm_command = f"rm {caller_file_result_path}"
-        execute(rm_command)
-        func_decompile_code_snippet = caller_parse_result[0].get("code_dict")
-        ghidra_func_identify_failed = caller_parse_result[0].get("func_fail")
-    # 若存在Ghidra不可识别的函数，使用angr进行处理
-    if ghidra_func_identify_failed:
-        for func_addr in ghidra_func_identify_failed:
-            call_site_dict = get_args_string_call_sites(project, cfg, func_addr, func_name)
-            if call_site_dict:
-                func_decompile_code_snippet.update(call_site_dict)
-    if analysis_binary:
-        analysis_binary.set_get_code_snippet[func_name] = func_decompile_code_snippet
-        analysis_binary.ghidra_func_identify_failed[func_name] = [] # 清空对应的函数
-        analysis_binary_dict.update_analysis_binary_by_path(file_path, analysis_binary)
+            # 使用angr进行反编译获取
+            unique_callers = {caller for _, caller, _ in call_sites}
+            func_decompile_code_snippet = {}
+            for func_addr in unique_callers:
+                call_site_dict = get_args_string_call_sites(project, cfg, func_addr, func_name)
+                if call_site_dict:
+                    func_decompile_code_snippet.update(call_site_dict)
+        if os.path.exists(caller_file_result_path):
+            # 删除对应的中间文件
+            rm_command = f"rm {caller_file_result_path}"
+            execute(rm_command)
     # 进行函数调用参数的解析
     call_sites_parser = []
     number = 0
     number_vsa = 0
-    for call_site_address, caller, block_addr in call_sites:
+    for call_site_address, caller, block_addr in call_sites: # 需要使用其block信息
         decompiled_code = get_decompiled_code_by_call_site(project, call_site_address, block_addr, func_decompile_code_snippet)
-        if not decompiled_code: # 若没有解析出对应的反汇编代码
+        if decompiled_code is None:
             call_sites_parser.append([call_site_address, caller, block_addr, 0])
             continue
         args_call_site = get_parameters_by_code(decompiled_code[1])
@@ -121,7 +104,7 @@ def get_keyword_by_decompiled_func_ghidra(project, cfg, func_name, file_path, an
             # 提取对应的关键字
             parameter = is_const(project, args_call_site[index_key], file_path)
             if parameter:
-                call_sites_parser.append([call_site_address, caller, block_addr, str(parameter)])
+                call_sites_parser.append([call_site_address, caller, block_addr, parameter])
             else:
                 number_vsa += 1
                 call_sites_parser.append([call_site_address, caller, block_addr, -1])
@@ -280,17 +263,9 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         if not is_correct_pair: # 跳过不合法的函数对
             logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
             continue
-        # 处理已知信息的合法对
-        if (set_func_name, get_func_name) in config_sgtaint.SET_GET_INFO:
-            func_name_previous_known.append(config_sgtaint.SET_GET_INFO[(set_func_name, get_func_name)])
-            continue
-        set_func_list = list(set([func_addr for _, func_addr, _ in set_func_call_sites]))
-        get_func_list = list(set([func_addr for _, func_addr, _ in get_func_call_sites]))
         func_name_phase_list.append({
             "set_func_name": set_func_name,
-            "set_func_addr": set_func_list,
             "get_func_name": get_func_name,
-            "get_func_addr": get_func_list,
             "file_path": analysis_binary.get_path()
         })
     # 将输出写成文件传递给Ghidra进行分析
@@ -337,9 +312,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         for func_name_result in func_name_phase_result:
             set_func_name = func_name_result["set_func_name"]
             set_code_dict = func_name_result["set_code_dict"]
-            set_func_fail = func_name_result["set_func_fail"]
             analysis_binary.set_get_code_snippet[set_func_name] = set_code_dict
-            analysis_binary.ghidra_func_identify_failed[set_func_name] = set_func_fail
             set_code_list = list(set(tuple(v) for v in set_code_dict.values()))
             set_code_filter_list = []
             set_parameter_list = []
@@ -351,9 +324,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                     set_code_filter_list.append(complete_line)
             get_func_name = func_name_result["get_func_name"]
             get_code_dict = func_name_result["get_code_dict"]
-            get_func_fail = func_name_result["get_func_fail"]
             analysis_binary.set_get_code_snippet[get_func_name] = get_code_dict
-            analysis_binary.ghidra_func_identify_failed[get_func_name] = get_func_fail
             get_code_list = list(set(tuple(v) for v in get_code_dict.values())) 
             get_code_filter_list = []
             get_parameter_list = []
@@ -363,6 +334,9 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 if parameter_list:
                     get_parameter_list += parameter_list
                     get_code_filter_list.append(complete_line)
+            if not set_code_dict or not get_code_dict: # 若解析失败则跳过
+                logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+                continue
             if not set(set_parameter_list) & set(get_parameter_list):
                 logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
                 continue
