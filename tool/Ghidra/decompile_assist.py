@@ -148,7 +148,7 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
         end_block_end = base_addr_transform_angr2ghidra(program, angr_base_addr, function_ghidra_format[index][4])
         result = get_function_decompile_block2block_cached(program, func_addr, start_block_start, start_block_end, end_block_start, end_block_end)
         if not result:
-            return "Fail to Decompile by Ghidra"
+            return ["Fail to Decompile by Ghidra"]
         pseudo_code_lines, start_index_list, finish_index_list = result
         complete_decompile_code = "\n".join(pseudo_code_lines)
         if start_index_list: # 一般情况存在
@@ -239,7 +239,7 @@ def get_decompile_result_binary(program, angr_base_addr):
         try:
             source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
         except Exception as e:
-            source2sink_single_path["decompile_list"] = "Fail to Decompile by Ghidra"
+            source2sink_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
         source2sink_result.append(source2sink_single_path)
     # 写回文件
     source2sink_result_file_name = "{}_source2sink_path_result.json".format(file_path_process)
@@ -262,7 +262,7 @@ def get_decompile_result_binary(program, angr_base_addr):
         try:
             get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
         except Exception as e:
-            get2set_single_path["decompile_list"] = "Fail to Decompile by Ghidra"
+            get2set_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
         get2set_result.append(get2set_single_path)
     # 写回文件
     get2set_result_file_name = "{}_get2set_path_result.json".format(file_path_process)
