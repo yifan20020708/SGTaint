@@ -143,18 +143,48 @@ def get_call_site_by_identifier(program, identifier, angr_base_addr):
         return None
     call_site_dict = {}
     callers = target_func.getCallingFunctions(monitor) # type: ignore
-    for idx, caller in enumerate(callers, start=1):
+    callers_ghidra = [] # 保存Ghidra成功识别的函数
+    for caller in callers:
         try:
             caller_identifier = caller.getEntryPoint().getOffset()
+            callers_ghidra.append(base_addr_transform_ghidra2angr(program, angr_base_addr, caller_identifier))
             call_site_dict_func = get_args_string_call_sites(program, caller_identifier, identifier, angr_base_addr)
             if call_site_dict_func is not None:
                 call_site_dict.update(call_site_dict_func)
         except Exception as e:
             print("Failed during call site decompilation {}".format(e))
             continue
-    return call_site_dict
-        
+    return call_site_dict, callers_ghidra
 
+
+# 指定函数的调用站点的反编译获取
+def get_decompile_code_by_func_name(program, call_site_name, angr_base_addr):
+    # 获取对应的函数地址列表
+    caller_file_name = "{}_caller_addr.json".format(call_site_name)
+    caller_file_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_name)
+    with open(caller_file_path, "r") as file:
+        caller_func_list = json.load(file) # angr中识别出的所有调用函数
+    try:
+        call_site_dict, callers_ghidra = get_call_site_by_identifier(program, call_site_name, angr_base_addr)
+    except Exception as e:
+        print("Failed during call site decompilation {}".format(e))
+        call_site_dict = {}
+        callers_ghidra = []
+    angr_assist_callers = [addr for addr in caller_func_list if addr not in callers_ghidra]
+    caller_parse_result = {
+        "code_dict": call_site_dict,
+        "angr_assist": angr_assist_callers
+    }
+    # 存储结果
+    caller_file_result_name = "{}_caller_parse_result.json".format(call_site_name)
+    caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
+    with open(caller_file_result_path, "w") as file:
+        json.dump(caller_parse_result, file, indent=4)
+    # 删除第一个存储的中间文件
+    command = "rm {}".format(caller_file_path)
+    execute(command)
+    
+    
 # SG函数信息识别
 def get_all_decompile_code(program, angr_base_addr):
     # 获取对应的函数列表信息
@@ -169,22 +199,30 @@ def get_all_decompile_code(program, angr_base_addr):
     for set_get_func_info in func_name_phase_result_json:
         # 进行set函数的反编译代码行获取
         set_func_name = set_get_func_info.get("set_func_name")
+        set_func_addr = set_get_func_info.get("set_func_addr")
         try:
-            set_code_dict = get_call_site_by_identifier(program, set_func_name, angr_base_addr) # 键值为函数调用点
+            set_code_dict, set_callers_ghidra = get_call_site_by_identifier(program, set_func_name, angr_base_addr) # 键值为函数调用点
         except Exception as e: # 解析过程中存在错误
             print("Failed during call site decompilation {}".format(e))
             set_code_dict = {}
+            set_callers_ghidra = []
+        set_angr_assist_callers = [addr for addr in set_func_addr if addr not in set_callers_ghidra]
         get_func_name = set_get_func_info.get("get_func_name")
+        get_func_addr = set_get_func_info.get("get_func_addr")
         try:
-            get_code_dict = get_call_site_by_identifier(program, get_func_name, angr_base_addr) # 键值为函数调用点
+            get_code_dict, get_callers_ghidra = get_call_site_by_identifier(program, get_func_name, angr_base_addr) # 键值为函数调用点
         except Exception as e: # 解析过程中存在错误
             print("Failed during call site decompilation {}".format(e))
             set_code_dict = {}
+            get_callers_ghidra = []
+        get_angr_assist_callers = [addr for addr in get_func_addr if addr not in get_callers_ghidra]
         func_name_phase_result.append({
             "set_func_name": set_func_name,
             "set_code_dict": set_code_dict,
+            "set_func_fail": set_angr_assist_callers,
             "get_func_name": get_func_name,
             "get_code_dict": get_code_dict,
+            "get_func_fail": get_angr_assist_callers
         })
     # 存储对应的文件名称
     func_name_phase_file_result_name = "{}_func_name_phase_result.json".format(file_path_process)
@@ -206,13 +244,4 @@ if __name__ == "__main__":
     if call_site_name == "*": # 进行SG函数信息的识别
         get_all_decompile_code(program, angr_base_addr)
     else: # 进行函数调用的解析
-        try:
-            call_site_dict = get_call_site_by_identifier(program, call_site_name, angr_base_addr)
-        except Exception as e: # 解析过程中存在错误
-            print("Failed during call site decompilation {}".format(e))
-            call_site_dict = {}
-        # 存储结果
-        caller_file_result_name = "{}_caller_parse_result.json".format(call_site_name)
-        caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
-        with open(caller_file_result_path, "w") as file:
-            json.dump(call_site_dict, file, indent=4)
+        get_decompile_code_by_func_name(program, call_site_name, angr_base_addr)

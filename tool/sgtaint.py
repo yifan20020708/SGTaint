@@ -323,7 +323,7 @@ def start_sgtaint_parallel():
         for future in as_completed(futures):
             file_path, idx = futures[future]
             try:
-                binary_path, potential_info_dict = future.result(timeout=7200)  # 单个分析最大2小时
+                binary_path, potential_info_dict = future.result(timeout=config_sgtaint.BINARY_TIMEOUT)  # 单个分析最大3小时
                 potential_path_dict[binary_path] = potential_info_dict
                 finished += 1
                 logger.info(f"[PARALLEL] Finished analysis for: {file_path} ({finished}/{len(file_path_list)})")

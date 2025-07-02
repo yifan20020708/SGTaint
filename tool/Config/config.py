@@ -60,6 +60,11 @@ MAX_DISTANCE = 2
 MIN_KEYWORD_NUMBER = 30
 WORKER_TIMEOUT_SECONDS = 20
 
+# 超时时间设置
+DECOMPILE_TIMEOUT = 120
+BINARY_TIMEOUT = 3 * 60 * 60
+FUNC_TIMEOUT = 1000
+
 # angr中常见的前缀
 PREFIXES = [
     "g", "dword", "word", "byte", "qword",

@@ -5,7 +5,9 @@ import json
 import random
 import re
 import logging
+import time
 import tool.Config.config as config_sgtaint
+from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError
 from collections import defaultdict, deque
 from archinfo import Endness
 from angr.project import Project
@@ -232,9 +234,13 @@ def get_args_string_call_sites(project, cfg, func_addr, call_site_name):
         print(f"[-] Function at address {func_addr:#x} not found.")
         return []
     # 反编译
-    dec = project.analyses.Decompiler(target, cfg=cfg)
-    text = dec.codegen.text
-    pos2addr = dec.codegen.map_pos_to_addr
+    try:
+        dec = project.analyses.Decompiler(target, cfg=cfg)
+        text = dec.codegen.text
+        pos2addr = dec.codegen.map_pos_to_addr
+    except Exception as e:
+        logger.error(f"[!] Decompile failed on {func_addr:#x}: {e}")
+        return {}
     # 按行拆分并保留换行符，用于统一行偏移和输出
     lines = text.splitlines(keepends=True)
     # 计算每行的起始偏移
@@ -262,6 +268,41 @@ def get_args_string_call_sites(project, cfg, func_addr, call_site_name):
         for pos_single in pos_set: # 存在不精确的识别情况
             call_site_dict[hex(pos_single)] = [ln, text[start_off:end_off]]
     return call_site_dict # 返回提取结果
+
+
+# 针对单个函数的angr反汇编
+def decompile_single_func(project, cfg, func_name, func_addr):
+    call_site_dict = get_args_string_call_sites(project, cfg, func_addr, func_name)
+    if call_site_dict:
+        return call_site_dict    
+    return None
+
+
+# 并行处理angr反编译
+def parallel_decompile_funcs(ghidra_func_identify_failed, project, cfg, func_name, timeout_seconds=120):
+    func_decompile_code_snippet = {} # angr获取到call site片段
+    total = len(ghidra_func_identify_failed)
+    start_time = time.time()
+    with ProcessPoolExecutor() as executor:
+        futures = {
+            executor.submit(decompile_single_func, project, cfg, func_name, func_addr): func_addr
+            for func_addr in ghidra_func_identify_failed
+        }
+        for idx, future in enumerate(as_completed(futures), 1):
+            try:
+                call_site_dict = future.result(timeout=timeout_seconds)
+                if call_site_dict:
+                    logger.info(f"[{idx}/{total}] Decompilation of {hex(futures[future])} from angr success.")
+                    func_decompile_code_snippet.update(call_site_dict)
+                else:
+                    logger.error(f"[{idx}/{total}] Decompilation of {hex(futures[future])} from angr fail.")
+            except TimeoutError:
+                logger.error(f"[{idx}/{total}] Timeout during decompilation of {hex(futures[future])}")
+            except Exception:
+                logger.exception(f"[{idx}/{total}] Exception during decompilation of {hex(futures[future])}")
+    duration = time.time() - start_time
+    logger.info(f"Completed parallel decompilation of {total} functions in {duration:.2f} seconds")
+    return func_decompile_code_snippet
 
 
 # 根据函数调用信息获取对应的反汇编代码

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 定义版本和下载链接
-GHIDRA_VERSION="11.3.2"
-BUILD_DATE="20250415"
+GHIDRA_VERSION="11.4"
+BUILD_DATE="20250620"
 DOWNLOAD_URL="https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_${GHIDRA_VERSION}_build/ghidra_${GHIDRA_VERSION}_PUBLIC_${BUILD_DATE}.zip"
 TARGET_DIR="ghidra_tool"  # 固定解压后的文件夹名称
 
