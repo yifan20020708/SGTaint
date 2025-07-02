@@ -6,11 +6,11 @@ from collections import defaultdict
 import logging
 import tool.Config.config as config_sgtaint
 from tool.SGGraph.utils import (
-    parameter_parsing_by_index, get_args_string_call_sites,
+    parameter_parsing_by_index, parallel_decompile_funcs,
     get_decompiled_code_by_call_site, get_parameters_by_code, is_const,
     parse_set_get_string, get_extern_func_name, parse_function_call,
     get_prompt_for_phase_two, coarse_grained_binary_filter, execute,
-    get_call_site_func_name, parallel_decompile_funcs
+    get_call_site_func_name
 )
 from tool.SGGraph.border_binary import get_border_binaries_by_cluster_max_mean_gap
 from tool.SGGraph.base import (
