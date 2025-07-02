@@ -35,7 +35,7 @@ SG_FUNCTION_INFO = None  # 格式为[(set_1, get_1, set_key_pos, get_key_pos, se
 BOUNDARY_BINARIES = None
 FIRMWARE_NAME = ""
 FILE_SYSTEM = ""
-BOUNDARY_BINARY_NAME = ["prog.cgi", "httpd", "lighttpd", "goahead", "boa", "php.cgi"]
+BOUNDARY_BINARY_NAME = ["cgi", "httpd", "goahead", "boa", "upnp"]
 
 # 从内存中提取字符串的相关配置
 MIN_STR_LEN = 3
@@ -47,12 +47,22 @@ EXTENDED_ALLOWED_CHARS = ALLOWED_CHARS + EXTENDED_CHARS
 # 进行参数提取的相关配置
 MIN_SUCCESS_RATE = 0.5
 MAX_BINARY_LIMIT = 30
+THRESHOLD = 5
 
 # 关键字过滤的相关配置
 MIN_KEYWORD_LEN = 3
 MAX_KEYWORD_LEN = 30
 BLOCK_CHARS = [" ", "{", "}", ";", ".", "<", ">", "\'", '\"', "(", ")", "[", "]", ":", "*", "`", "!", "+", "^", "&"]
 WHITE_LIST = ["True", "true", "False", "false", "None", "none", "ERROR", "Error"]
+BOUNDARY_BINARIES_WHITE_LIST = [
+    "busybox", "egrep", "hostname", "iptunnel", "cat", "chmod", "cp", "data", "echo", "false", "fgrep", "grep", "gunzip", "gzip",
+    "ip", "ipaddr", "iplink", "iproute", "iprule", "kill", "ln", "ls", "mkdir", "mknod", "mount", "msh", "mv", "netstat", "ping",
+    "ping6", "ps", "pwd", "rm", "sed", "sh", "sleep", "tar", "touch", "true", "umount", "uname", "vi", "zcat", "halt", "init", 
+    "modprobe", "insmod", "lsmod", "poweroff", "reboot", "rmmod", "route", "ifconfig", "sysctl", "vconfig", "tunctl", "arp",
+    "arping", "basename", "bzcat", "bunzip2", "bzip2", "cut", "free", "killall", "killall5", "top", "uptime", "yes", "[[", "awk", 
+    "expr", "test", "tr", "wc", "xargs", "brctl", "genuuid", "getbootver", "gethostip", "logger", "logd", "klogd", "syslog_msg", 
+    "gpioc", "gpiod", "pidmon", "trigger", "fonts", "ethreg", "vconfig", "seama"
+]
 
 # 模糊匹配相关配置
 MIN_SIMILARITY = 90

@@ -5,6 +5,7 @@ import json
 import random
 import re
 import logging
+import subprocess
 import time
 import tool.Config.config as config_sgtaint
 from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError
@@ -563,3 +564,10 @@ def generate_binary_processing_order_robust(analysis_binary_dict):
     for idx, binary_path in enumerate(processing_order):
         logger.debug(f"[{idx}] {binary_path}")
     return processing_order
+
+
+# 判断函数中是否包含对应字符串
+def file_contains_function(filepath, func_name):
+    command = f"grep -q {shlex.quote(func_name)} {shlex.quote(filepath)}"
+    result = subprocess.run(command, shell=True)
+    return result.returncode == 0

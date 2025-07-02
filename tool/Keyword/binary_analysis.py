@@ -16,6 +16,7 @@ class AnalysisBinary():
         self.binary_keyword = set() # (string, keyword)
         self.binary_function = set() # (string, function)
         self.binary_endian = AnalysisBinary.check_lsb_or_msb(binary_path)
+        self.binary_only_string = set()
         
     # 获取二进制文件的名称
     def get_name(self):
@@ -61,6 +62,7 @@ class AnalysisBinary():
             if keyword:
                 keyword.add_binary(self.binary_path)
                 self.binary_keyword.add((string, keyword))
+                self.binary_only_string.add(string)
         return self.binary_keyword
     
     # 获取二进制文件中匹配到的函数（使用精确匹配方法）
@@ -70,6 +72,7 @@ class AnalysisBinary():
             if function:
                 function.add_binary(self.binary_path)
                 self.binary_function.add((string, function))
+                self.binary_only_string.add(string)
         return self.binary_keyword
     
     # 获取二进制文件中匹配到的关键字个数
