@@ -20,6 +20,7 @@ BINARY_TMP = os.path.join(TMP_DIR, "BinaryTmp")
 NPM_DIR = os.path.join(BASE_DIR, "tool", "Keyword", "JS_Parse")
 GHIDRA_ASSIST_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "ghidra_assist.py")
 DECOMPILE_ASSIST_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "decompile_assist.py")
+AGGRESSIVE_GHIDRA_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "enable_aggressive_all.py")
 
 # LLM配置
 LLM_URL_DEEPSEEK = "https://api.deepseek.com"

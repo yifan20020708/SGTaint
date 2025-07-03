@@ -408,7 +408,8 @@ class AnalysisBinary():
     def load_ghidra(self):
         if not self.ghidra_project:
             file_mark = os.path.basename(self.binary_path)
-            ghidra_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {file_mark} -import {self.binary_path}"
+            ghidra_python_path = config_sgtaint.AGGRESSIVE_GHIDRA_PATH
+            ghidra_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {file_mark} -import {self.binary_path} -preScript {ghidra_python_path}"
             try:
                 logger.info(f"Importing {self.binary_path} into Ghidra project with command: {ghidra_command}")
                 execute(ghidra_command)

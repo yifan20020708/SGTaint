@@ -71,7 +71,8 @@ def get_keyword_by_decompiled_func_ghidra(project, cfg, func_name, file_path, an
         angr_base_addr = hex(project.loader.main_object.min_addr)
         binary_mark = os.path.basename(file_path)
         if not os.path.exists(os.path.join(config_sgtaint.GHIDRA_DIR, f"{binary_mark}.gpr")):
-            ghidra_load_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -import {file_path}"
+            ghidra_python_path = config_sgtaint.AGGRESSIVE_GHIDRA_PATH
+            ghidra_load_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -import {file_path} -preScript {ghidra_python_path}"
             execute(ghidra_load_command)
         ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH  
         ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}" "{func_name}"'
