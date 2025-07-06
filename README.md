@@ -49,7 +49,7 @@ DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxx" # your_deepseek_api_key_here
 It is recommended to include only the API key corresponding to the model in use and to ensure that the `.env` file is listed in the `.gitignore` to prevent potential credential leakage.
 
 ``````bash
-usage: sgtaint [-h] -f FIRMWARE -n NAME -o OUTPUT [-p] [-l] [-s SGGRAPH] [-m {gpt,deepseek}] [-b BOUNDARY] [--version]
+usage: sgtaint [-h] -f FIRMWARE -n NAME -o OUTPUT [-p] [-g] [-l] [-s SGGRAPH] [-m {gpt,deepseek}] [-b BOUNDARY] [--version]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -59,6 +59,7 @@ optional arguments:
   -o OUTPUT, --output OUTPUT
                         User output directory
   -p, --parallel        Enable parallel mode
+  -g, --ghidra          Enable Ghidra-assisted analysis during the decompilation process
   -l, --llm             Enable final LLM check
   -s SGGRAPH, --sggraph SGGRAPH
                         Optional SGGraph info path, e.g., a list of tuples like [(set_1, get_1, set_key_pos, get_key_pos, set_value_pos, get_value_pos), ...]

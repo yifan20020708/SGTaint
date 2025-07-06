@@ -319,7 +319,11 @@ class AnalysisBinary():
         # 解析结果文件到path路径之中
         self.source2sink_path = parse_result_file_auto(self.result_file.name)[:]
         self.get2set_path = parse_result_file_auto(self.get2set_file.name)[:]
-        self.get_decompile_code_by_ghidra() # 通过ghidra获取反编译片段
+        if config_sgtaint.GHIDRA_ASSIST:
+            self.get_decompile_code_by_ghidra() # 通过ghidra获取反编译片段
+        else:
+            self.get_decompile_code_by_angr()
+        self.save_path2json()
         end_time = datetime.datetime.now()
         elapsed = (end_time - start_time).seconds
         self.visited_file.write(f"Total time: {elapsed}s \n")
@@ -448,6 +452,41 @@ class AnalysisBinary():
         # 删除中间文件
         command = f"rm {get2set_result_file_path}"
         execute(command)
+        # 补充Ghidra不可反编译的片段
+        for source2sink_single_path in self.source2sink_path:
+            if "Fail to Decompile by Ghidra" in source2sink_single_path["decompile_list"]: # 表示Ghidra反编译失败
+                function_angr_format = source2sink_single_path["ghidra_path"]
+                try:
+                    for i, function_format in enumerate(function_angr_format):
+                        if function_format[0] in self.angr_dec_cache:
+                            dec = self.angr_dec_cache[function_format[0]]
+                        else: # 缓存中不存在
+                            dec = self.project.analyses.Decompiler(self.project.kb.functions.get(function_format[0]), cfg=self.cfg)
+                            self.angr_dec_cache[function_format[0]] = dec
+                        function_angr_format[i] = [dec] + function_format
+                except Exception as e:
+                    logger.error(f"Decompiler generation failed: {e}!")
+                    continue
+                taint_source = source2sink_single_path["taint_source"]
+                taint_sink = source2sink_single_path["taint_sink"] 
+                source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+        for get2set_single_path in self.get2set_path:
+            if "Fail to Decompile by Ghidra" in get2set_single_path["decompile_list"]: # 表示Ghidra反编译失败
+                function_angr_format = get2set_single_path["ghidra_path"]
+                try:
+                    for i, function_format in enumerate(function_angr_format):
+                        if function_format[0] in self.angr_dec_cache:
+                            dec = self.angr_dec_cache[function_format[0]]
+                        else: # 缓存中不存在
+                            dec = self.project.analyses.Decompiler(self.project.kb.functions.get(function_format[0]), cfg=self.cfg)
+                            self.angr_dec_cache[function_format[0]] = dec
+                        function_angr_format[i] = [dec] + function_format
+                except Exception as e:
+                    logger.error(f"Decompiler generation failed: {e}!")
+                    continue
+                taint_source = get2set_single_path["taint_source"]
+                taint_sink = get2set_single_path["taint_sink"]
+                get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
         
     # 将二进制文件加载到Ghidra中
     def load_ghidra(self):

@@ -9,7 +9,7 @@ from angr.analyses.cfg.cfg_fast import CFGFast
 from angr.knowledge_plugins.key_definitions.atoms import Register, SpOffset, MemoryLocation
 from angr.knowledge_plugins.key_definitions.tag import ReturnValueTag
 import tool.Config.config as config_sgtaint
-from tool.SGGraph.utils import dedupe_paths, get_call_site_func_name
+from tool.SGGraph.utils import dedupe_paths, get_call_site_func_name, get_ins_addr_from_range
 
 logger = logging.getLogger("sgtaint.merge")
 
@@ -902,17 +902,6 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
 def get_call_site_func_name_from_line(line, call_site_name):
     offset_start = line.find(call_site_name)
     return offset_start, len(line)
-
-
-# 遍历调用语句
-def get_ins_addr_from_range(pos_range, pos2addr):
-    for pos in pos_range:
-        elem = pos2addr.get_element(pos)
-        if elem:
-            ins_addr = elem.obj.tags.get("ins_addr")
-            if ins_addr is not None:
-                return ins_addr
-    return None
 
 
 # 寻找距离最近的函数调用

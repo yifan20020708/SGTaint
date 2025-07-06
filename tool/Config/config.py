@@ -37,6 +37,7 @@ BOUNDARY_BINARIES = None
 FIRMWARE_NAME = ""
 FILE_SYSTEM = ""
 BOUNDARY_BINARY_NAME = ["cgi", "httpd", "goahead", "boa", "upnp"]
+GHIDRA_ASSIST = False
 
 # 从内存中提取字符串的相关配置
 MIN_STR_LEN = 3

@@ -46,18 +46,20 @@ class ColorFormatter(logging.Formatter):
 
 # SGTaint运行类
 class SGTaintRunner:
-    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, llm=True, model="deepseek", boundary_binaries=None):
+    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, ghidra=True, llm=True, model="deepseek", boundary_binaries=None):
         self.firmware = firmware
         self.name = name
         self.output_dir = output_dir
         self.sggraph = sggraph
         self.parallel = parallel
         self.llm = llm
+        self.ghidra = ghidra
         # 配置全局参数
         config_sgtaint.FILE_SYSTEM = firmware
         config_sgtaint.FIRMWARE_NAME = name
         config_sgtaint.SG_FUNCTION_INFO = sggraph
         config_sgtaint.LLM_MODEL = config_sgtaint.LLM_MODEL_DEEPSEEK if model == "deepseek" else config_sgtaint.LLM_MODEL_CHATGPT
+        config_sgtaint.GHIDRA_ASSIST = ghidra
         config_sgtaint.BOUNDARY_BINARIES = boundary_binaries
         self._setup_logger()
         self.logger.info(f"Initialized SGTaintRunner (v{__version__})")
@@ -380,6 +382,7 @@ def parse_args():
     parser.add_argument("-n", "--name", required=True, help="Firmware identifier")
     parser.add_argument("-o", "--output", required=True, help="User output directory")
     parser.add_argument("-p", "--parallel", action="store_true", help="Enable parallel mode")
+    parser.add_argument("-g", "--ghidra", action="store_true", help="Enable Ghidra-assisted analysis during the decompilation process")
     parser.add_argument("-l", "--llm", action="store_true", help="Enable final LLM check")
     parser.add_argument("-s", "--sggraph", help="Optional SGGraph info path, e.g., a list of tuples like [(set_1, get_1, set_key_pos, get_key_pos, set_value_pos, get_value_pos), ...]")
     parser.add_argument("-m", "--model", default="deepseek", choices=["gpt", "deepseek"], help="Choose LLM model to use (gpt or deepseek). Default is deepseek.")
@@ -397,6 +400,7 @@ def main():
         output_dir=args.output,
         sggraph=args.sggraph,
         parallel=args.parallel,
+        ghidra=args.ghidra,
         llm=args.llm,
         model=args.model,
         boundary_binaries=args.boundary

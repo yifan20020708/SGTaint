@@ -228,10 +228,21 @@ def get_call_site_func_name_from_line(line, call_site_name):
         return offset_start, offset_finish
     except Exception as e:
         return offset_start, offset_start + len(call_site_name)
+    
+    
+# 遍历调用语句
+def get_ins_addr_from_range(pos_range, pos2addr):
+    for pos in pos_range:
+        elem = pos2addr.get_element(pos)
+        if elem:
+            ins_addr = elem.obj.tags.get("ins_addr")
+            if ins_addr is not None:
+                return ins_addr
+    return None
 
     
 # 根据反编译代码获取函数调用参数信息辅助函数
-def get_args_string_call_sites(project, cfg, func_addr, call_site_name):
+def get_args_string_call_sites(project: Project, cfg: CFGFast, func_addr, call_site_name):
      # 获取目标函数
     target = project.kb.functions.get(func_addr)
     if not target:
@@ -243,7 +254,7 @@ def get_args_string_call_sites(project, cfg, func_addr, call_site_name):
         text = dec.codegen.text
         pos2addr = dec.codegen.map_pos_to_addr
     except Exception as e:
-        logger.error(f"[!] Decompile failed on {func_addr:#x}: {e}")
+        logger.error(f"Decompile failed on {func_addr:#x}: {e}")
         return {}
     # 按行拆分并保留换行符，用于统一行偏移和输出
     lines = text.splitlines(keepends=True)
@@ -256,21 +267,36 @@ def get_args_string_call_sites(project, cfg, func_addr, call_site_name):
         if call_site_name in ln:
             offset_start, offset_finish = get_call_site_func_name_from_line(ln, call_site_name)
             if offset_start is not None and offset_finish is not None:
-                call_site_offset.append((offset + offset_start, offset + offset_finish, ln))
+                call_site_offset.append((offset, offset + offset_start, offset + offset_finish, offset + len(ln), ln))
         offset += len(ln)
+    call_site_info = []
     call_site_dict = {}
-    for start_off, end_off, ln in call_site_offset:
-        # 对该行内所有字符逐个扫描
-        pos_set = set()
-        for pos in range(start_off, end_off):
-            elem = pos2addr.get_element(pos)
-            if not elem:
-                continue
-            ins_addr = elem.obj.tags.get("ins_addr")
-            if ins_addr is not None:
-                pos_set.add(ins_addr)
-        for pos_single in pos_set: # 存在不精确的识别情况
-            call_site_dict[hex(pos_single)] = [ln, text[start_off:end_off]]
+    for line_start, call_site_start, call_site_end, line_end, ln in call_site_offset:
+        # 优先在call_site内部查找
+        pos_range = range(call_site_start, call_site_end)
+        ins_addr = get_ins_addr_from_range(pos_range, pos2addr)
+        # 若其中没有找到，向后查找
+        if ins_addr is None:
+            pos_range = range(call_site_end, line_end)
+            ins_addr = get_ins_addr_from_range(pos_range, pos2addr)
+        # 若没有找到，逆向向前查找
+        if ins_addr is None:
+            pos_range = range(call_site_start - 1, line_start - 1, -1)
+            ins_addr = get_ins_addr_from_range(pos_range, pos2addr)
+        if ins_addr is not None: # 仅当识别成功的情况下直接加入到集合中
+            call_site_info.append((ins_addr, ln, text[call_site_start:call_site_end])) # 按照识别出的指令地址进行排序，利用相对位置的一致性
+    call_site_info = sorted(call_site_info, key=lambda x: x[0])
+    # 修正函数调用地址
+    call_sites = get_call_site_func_name(project, cfg, call_site_name)
+    call_sites_function = [call_site_addr for call_site_addr, caller_addr, _ in call_sites if caller_addr == func_addr] # 按照call_site_addr进行排序
+    if len(call_site_info) != len(call_sites_function): # 若不匹配直接返回
+        for ins_addr, ln, call_site_code in call_site_info:
+            call_site_dict[hex(ins_addr)] = [ln, call_site_code]
+    else: # 一般情况均满足
+        for idx, call_site_addr in enumerate(call_sites_function): # 使用相对关系进行对应
+            _, ln, call_site_code = call_site_info[idx]
+            ins_addr = call_site_addr
+            call_site_dict[hex(ins_addr)] = [ln, call_site_code]
     return call_site_dict # 返回提取结果
 
 
