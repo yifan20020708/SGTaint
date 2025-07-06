@@ -8,7 +8,7 @@ from typing import Any, Callable, Iterable
 import angr
 import angr.analyses.reaching_definitions.dep_graph as dep_graph
 import tool.Config.config as config_sgtaint
-from tool.BugFinder.utils import get_functions_to_analyse, run_function_with_timeout, parse_result_file_auto, transfer_path_to_ghidra
+from tool.BugFinder.utils import get_functions_to_analyse, run_function_with_timeout, parse_result_file_auto, transfer_path_to_ghidra, get_function_decompile_list_by_path
 from tool.SGGraph.utils import execute, get_call_site_func_name
 from tool.BugFinder.MyHandler import MyHandler
 
@@ -53,6 +53,7 @@ class AnalysisBinary():
         self.source2sink_path = [] # 对应的文件为result.txt
         self.get2set_path = [] # 对应的文件为get2set.txt
         self.visited_function_list = []
+        self.angr_dec_cache = {} # angr的反编译工具缓存
     
     # 保存全局属性
     def save_config(self):
@@ -303,7 +304,7 @@ class AnalysisBinary():
                 config_sgtaint.STACK.clear()
                 self.handler.set_start_function(caller_func)
                 try:
-                    result = run_function_with_timeout(self.rda_analyze_core, args=(caller_func,), timeout=1000) # 设置超时时间为1000s
+                    result = run_function_with_timeout(self.rda_analyze_core, args=(caller_func,), timeout=config_sgtaint.FUNC_TIMEOUT) # 设置超时时间为1000s
                 except TimeoutError:
                     logger.error(f"Function call for {caller_func.name} timed out")
                     self.error_file.write(f'target_addr: {hex(caller_func.addr)}, target_name: {caller_func.name}, timed out\n')
@@ -334,6 +335,7 @@ class AnalysisBinary():
             clinic = dec.clinic
             self.handler.set_clinic(clinic)
             self.handler.set_dec(dec)
+            self.angr_dec_cache[caller_func.addr] = dec
         except Exception as e:
             self.handler.set_clinic(None)
             self.handler.set_dec(None)
@@ -353,24 +355,67 @@ class AnalysisBinary():
         self.handler.get_visited_file().write(f", {elapsed}s")
         self.handler.get_visited_file().flush()
         
+    # 通过Angr获取反编译片段
+    def get_decompile_code_by_angr(self):
+        # 处理source2sink片段
+        for idx, source2sink_single_path in enumerate(self.source2sink_path, start=1):
+            function_angr_format = transfer_path_to_ghidra(source2sink_single_path["path"], self.project, self.cfg)
+            try:
+                for i, function_format in enumerate(function_angr_format):
+                    if function_format[0] in self.angr_dec_cache:
+                        dec = self.angr_dec_cache[function_format[0]]
+                    else: # 缓存中不存在
+                        dec = self.project.analyses.Decompiler(self.project.kb.functions.get(function_format[0]), cfg=self.cfg)
+                        self.angr_dec_cache[function_format[0]] = dec
+                    function_angr_format[i] = [dec] + function_format
+            except Exception as e:
+                logger.error(f"[{idx}/{len(self.source2sink_path)}] Decompiler generation failed: {e}!")
+                continue
+            taint_source = source2sink_single_path["taint_source"]
+            taint_sink = source2sink_single_path["taint_sink"]
+            source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+            logger.info(f"[{idx}/{len(self.source2sink_path)}] Analysis Finished for source2sink path in {self.binary_path}!")
+        # 处理get2set片段
+        for idx, get2set_single_path in enumerate(self.get2set_path, start=1):
+            function_angr_format = transfer_path_to_ghidra(get2set_single_path["path"], self.project, self.cfg)
+            try:
+                for i, function_format in enumerate(function_angr_format):
+                    if function_format[0] in self.angr_dec_cache:
+                        dec = self.angr_dec_cache[function_format[0]]
+                    else: # 缓存中不存在
+                        dec = self.project.analyses.Decompiler(self.project.kb.functions.get(function_format[0]), cfg=self.cfg)
+                        self.angr_dec_cache[function_format[0]] = dec
+                    function_angr_format[i] = [dec] + function_format
+            except Exception as e:
+                logger.error(f"[{idx}/{len(self.get2set_path)}] Decompiler generation failed: {e}!")
+                continue
+            taint_source = get2set_single_path["taint_source"]
+            taint_sink = get2set_single_path["taint_sink"]
+            get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+            logger.info(f"[{idx}/{len(self.get2set_path)}] Analysis Finished for get2set path in {self.binary_path}!")
+        
     # 通过Ghidra获取反编译片段
     def get_decompile_code_by_ghidra(self):
         source2sink_ghidra_list = []
         get2set_ghidra_list = []
         for source2sink_single_path in self.source2sink_path:
             source2sink_single_path["ghidra_path"] = transfer_path_to_ghidra(source2sink_single_path["path"], self.project, self.cfg)
+            source2sink_single_path["taint_source_addr"] = self.cfg.kb.functions.function(name=source2sink_single_path["taint_source"]).addr
+            source2sink_single_path["taint_sink_addr"] = self.cfg.kb.functions.function(name=source2sink_single_path["taint_sink"]).addr
             source2sink_ghidra_list.append(source2sink_single_path)
         for get2set_single_path in self.get2set_path:
             get2set_single_path["ghidra_path"] = transfer_path_to_ghidra(get2set_single_path["path"], self.project, self.cfg)
+            get2set_single_path["taint_source_addr"] = self.cfg.kb.functions.function(name=get2set_single_path["taint_source"]).addr
+            get2set_single_path["taint_sink_addr"] = self.cfg.kb.functions.function(name=get2set_single_path["taint_sink"]).addr
             get2set_ghidra_list.append(get2set_single_path)
         # 生成对应的json文件传递给Ghidra程序
         file_path_process = self.binary_path.replace("/", "_")
         source2sink_file_name = f"{file_path_process}_source2sink_path.json"
-        source2sink_file_path = os.path.join(config_sgtaint.TMP_DIR, source2sink_file_name)
+        source2sink_file_path = os.path.join(config_sgtaint.BINARY_TMP, source2sink_file_name)
         with open(source2sink_file_path, "w") as file:
             json.dump(source2sink_ghidra_list, file, indent=4)
         get2set_file_name = f"{file_path_process}_get2set_path.json"
-        get2set_file_path = os.path.join(config_sgtaint.TMP_DIR, get2set_file_name)
+        get2set_file_path = os.path.join(config_sgtaint.BINARY_TMP, get2set_file_name)
         with open(get2set_file_path, "w") as file:
             json.dump(get2set_ghidra_list, file, indent=4)
         # 执行Ghidra辅助程序
@@ -387,7 +432,7 @@ class AnalysisBinary():
             return
         # 读取source2sink的结果文件
         source2sink_result_file_name = f"{file_path_process}_source2sink_path_result.json"
-        source2sink_result_file_path = os.path.join(config_sgtaint.TMP_DIR, source2sink_result_file_name)
+        source2sink_result_file_path = os.path.join(config_sgtaint.BINARY_TMP, source2sink_result_file_name)
         with open(source2sink_result_file_path, "r") as file:
             source2sink_ghidra_list_result = json.load(file)
         self.source2sink_path = source2sink_ghidra_list_result[:] # 获取反编译函数列表
@@ -396,7 +441,7 @@ class AnalysisBinary():
         execute(command)
         # 读取get2set的结果文件
         get2set_result_file_name = f"{file_path_process}_get2set_path_result.json"
-        get2set_result_file_path = os.path.join(config_sgtaint.TMP_DIR, get2set_result_file_name)
+        get2set_result_file_path = os.path.join(config_sgtaint.BINARY_TMP, get2set_result_file_name)
         with open(get2set_result_file_path, "r") as file:
             get2set_ghidra_list_result = json.load(file)
         self.get2set_path = get2set_ghidra_list_result[:] # 获取反编译函数列表
@@ -421,6 +466,17 @@ class AnalysisBinary():
         else:
             logger.info(f"Ghidra project already exists for {self.binary_path}, skipping import.")
             
+    # 将路径信息存储在json文件之中
+    def save_path2json(self):
+        source2sink_json_name = f"{os.path.basename(self.binary_path)}_source2sink_path.json"
+        source2sink_json_path = os.path.join(config_sgtaint.BINARY_TMP, source2sink_json_name)
+        with open(source2sink_json_path, "w") as file:
+            json.dump(self.source2sink_path, file, indent=4)
+        get2set_json_name = f"{os.path.basename(self.binary_path)}_get2set_path.json"
+        get2set_json_path = os.path.join(config_sgtaint.BINARY_TMP, get2set_json_name)
+        with open(get2set_json_path, "w") as file:
+            json.dump(self.get2set_path, file, indent=4)
+    
     # 判断其是否存在对应的函数调用
     def has_call_site(self, func_name):
         if not self.has_func(func_name): # 首先判断函数是否存在

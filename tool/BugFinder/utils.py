@@ -9,7 +9,7 @@ from angr.analyses.cfg.cfg_fast import CFGFast
 from angr.knowledge_plugins.key_definitions.atoms import Register, SpOffset, MemoryLocation
 from angr.knowledge_plugins.key_definitions.tag import ReturnValueTag
 import tool.Config.config as config_sgtaint
-from tool.SGGraph.utils import dedupe_paths
+from tool.SGGraph.utils import dedupe_paths, get_call_site_func_name
 
 logger = logging.getLogger("sgtaint.merge")
 
@@ -845,9 +845,11 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
             target_path_list = binary_get2sink_path_dict.get(set_keyword, [])[:]
             if not target_path_list: # 如果没有对应的路径，则跳过
                 continue
-            is_find_cross_path = True
             # 遍历所有目标路径进行拼接
             for target_path in target_path_list:
+                if (get2set_single_path['taint_sink'], target_path['taint_source']) not in config_sgtaint.SET_GET_INFO: # API不匹配
+                    continue
+                is_find_cross_path = True
                 if file_path not in target_path["binary"]: # 如果目标路径不包含当前二进制文件，则跳过
                     binary_path_list = target_path["binary"] + [file_path] # 合并二进制文件路径
                 else:
@@ -894,3 +896,129 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
         if complete_get2sink_single_path["source_keyword"] not in potential_path_dict[file_path]["complete_get2sink_path_dict"]:
             potential_path_dict[file_path]["complete_get2sink_path_dict"][complete_get2sink_single_path["source_keyword"]] = []
         potential_path_dict[file_path]["complete_get2sink_path_dict"][complete_get2sink_single_path["source_keyword"]].append(complete_get2sink_single_path)
+        
+
+# 给定反汇编后的代码行提取对应的函数调用内容
+def get_call_site_func_name_from_line(line, call_site_name):
+    offset_start = line.find(call_site_name)
+    return offset_start, len(line)
+
+
+# 遍历调用语句
+def get_ins_addr_from_range(pos_range, pos2addr):
+    for pos in pos_range:
+        elem = pos2addr.get_element(pos)
+        if elem:
+            ins_addr = elem.obj.tags.get("ins_addr")
+            if ins_addr is not None:
+                return ins_addr
+    return None
+
+
+# 寻找距离最近的函数调用
+def find_nearest_call_site(call_site_dict, start_addr, end_addr):
+    call_addrs = list(call_site_dict.keys())
+    # 判断是否存在于block内部
+    for addr in call_addrs:
+        if start_addr <= addr <= end_addr:
+            return call_site_dict[addr] 
+    # 若不存在，寻找距离边界最近的调用
+    nearest_addr = min(call_addrs, key=lambda x: min(abs(x - start_addr), abs(x - end_addr)))
+    return call_site_dict[nearest_addr]
+
+
+# 根据函数调用名称获取函数调用点地址
+def get_call_site_order_by_func_name(lines, pos2addr, call_site_name):
+    # 计算每行的起始偏移
+    line_starts = []
+    offset = 0
+    call_site_offset = []
+    for idx, ln in enumerate(lines):
+        line_starts.append(offset)
+        if call_site_name in ln:
+            offset_start, offset_finish = get_call_site_func_name_from_line(ln, call_site_name)
+            if offset_start and offset_finish:
+                # 行数开始偏移，函数调用开始偏移，行数结束
+                call_site_offset.append((offset, offset + offset_start, offset + offset_finish, idx))
+        offset += len(ln)
+    call_site_info = []
+    for line_start, call_site_start, line_end, idx in call_site_offset: # 对该行内所有字符逐个扫描
+        # 优先向后查找
+        pos_range = range(call_site_start, line_end)
+        ins_addr = get_ins_addr_from_range(pos_range, pos2addr)
+        # 如果后向没找到，再向前查找
+        if ins_addr is None:
+            pos_range = range(call_site_start - 1, line_start - 1, -1)
+            ins_addr = get_ins_addr_from_range(pos_range, pos2addr)
+        if ins_addr is not None: # 仅当识别成功的情况下直接加入到集合中
+            call_site_info.append((idx, ins_addr)) # 按照识别出的指令地址进行排序，利用相对位置的一致性
+    call_site_info = sorted(call_site_info, key=lambda x: x[1])
+    return call_site_info
+
+
+# 获取指定函数的调用点
+def get_call_site_decompile_code_from_function(project: Project, cfg: CFGFast, call_site_name, func_addr, dec):
+    call_sites = get_call_site_func_name(project, cfg, call_site_name) # 对调用点地址进行修正
+    target_func = project.kb.functions.function(addr=func_addr)
+    if not target_func:
+        logger.error(f"[-] Function at {hex(func_addr)} not found.")
+        return None
+    # 获取函数之中的调用点
+    call_sites_function = [call_site_addr for call_site_addr, caller_addr, _ in call_sites if caller_addr == func_addr] # 按照call_site_addr进行排序
+    # 获取反编译与指令的关系
+    decompile_code = dec.codegen.text
+    lines = decompile_code.splitlines(keepends=True)
+    pos2addr = dec.codegen.map_pos_to_addr
+    line_tmp = get_call_site_order_by_func_name(lines, pos2addr, call_site_name)
+    if len(line_tmp) != len(call_sites_function): # 若不匹配直接返回
+        return {ins_addr: idx for idx, ins_addr in line_tmp}
+    call_site_decompile_dict = {}
+    for idx, call_site_addr in enumerate(call_sites_function): # 使用相对关系进行对应
+        line_number = line_tmp[idx][0]
+        insn_addr = call_site_addr
+        call_site_decompile_dict[insn_addr] = line_number
+    return call_site_decompile_dict
+
+
+# 获取反汇编函数列表
+def get_function_decompile_list_by_path(project, cfg, function_angr_format, taint_source, taint_sink):
+    function_decompile_list = []
+    for idx, function_format in enumerate(function_angr_format):
+        dec, func_addr, start_block_start, start_block_end, end_block_start, end_block_end = function_format
+        pseudo_code_lines = dec.codegen.text.splitlines()
+        if end_block_start < start_block_start:
+            logger.error(f"The start block at {hex(start_block_start)} precedes the end block at {hex(end_block_start)}, resulting in an invalid code segment.")
+            return ["Invaild code snippet"]
+        # 获取start_index
+        if idx == 0: # 处理第一个含有source的片段
+            call_site_dict = get_call_site_decompile_code_from_function(project, cfg, taint_source, func_addr, dec)
+            if not call_site_dict: # 反编译函数中不包含taint_source
+                logger.error(f"The decompiled function does not contain the {taint_source} or the address resolution failed.")
+                return ["Fail to Decompile by Angr"]
+            start_index = find_nearest_call_site(call_site_dict, start_block_start, start_block_end)
+        else:
+            for i, line in enumerate(pseudo_code_lines):
+                if line.strip(): # 找到第一个非空的行
+                    start_index = i
+                    break
+        # 获取end_index
+        if idx == len(function_angr_format) - 1: # 最后一个代码片段
+            target_func_name = taint_sink
+        else: # 其他代码片段的结尾为调用函数的函数名称
+            next_func_addr = function_angr_format[idx + 1][1]
+            next_func = project.kb.functions.get(next_func_addr)
+            if not next_func: # 不能识别此函数
+                logger.error(f"The decompiled function does not contain the {next_func.name}")
+                return ["Fail to Decompile by Angr"]
+            target_func_name = next_func.name
+        call_site_dict_unfilter = get_call_site_decompile_code_from_function(project, cfg, target_func_name, func_addr, dec)
+        call_site_dict = {addr: idx for addr, idx in call_site_dict_unfilter.items() if idx >= start_index}
+        if not call_site_dict:
+            logger.error(f"No valid call instruction to {next_func.name} was identified within the analyzed code.")
+            return ["Fail to Decompile by Angr"]
+        end_index = find_nearest_call_site(call_site_dict, end_block_start, end_block_end)
+        # 使用start_index以及end_index截取片段
+        code_snippet_list = pseudo_code_lines[start_index:end_index + 1]
+        code_snippet = "\n".join(code_snippet_list)
+        function_decompile_list.append(code_snippet)
+    return function_decompile_list

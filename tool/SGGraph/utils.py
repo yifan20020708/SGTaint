@@ -209,22 +209,25 @@ def get_call_site_func_name_from_line(line, call_site_name):
             continue
         else:
             break
-    offset_finish = offset_start + len(call_site_name)
-    # 获取最靠近函数调用的‘（’
-    while offset_finish < len(line) and line[offset_finish] != '(':
+    try:
+        offset_finish = offset_start + len(call_site_name)
+        # 获取最靠近函数调用的‘（’
+        while offset_finish < len(line) and line[offset_finish] != '(':
+            offset_finish += 1
         offset_finish += 1
-    offset_finish += 1
-    stack_line.append('(')
-    while offset_finish < len(line):
-        if line[offset_finish] == '(':
-            stack_line.append('(')
-        elif line[offset_finish] == ')':
-            stack_line.pop()
-            if not stack_line:
-                offset_finish += 1
-                break
-        offset_finish += 1
-    return offset_start, offset_finish
+        stack_line.append('(')
+        while offset_finish < len(line):
+            if line[offset_finish] == '(':
+                stack_line.append('(')
+            elif line[offset_finish] == ')':
+                stack_line.pop()
+                if not stack_line:
+                    offset_finish += 1
+                    break
+            offset_finish += 1
+        return offset_start, offset_finish
+    except Exception as e:
+        return offset_start, offset_start + len(call_site_name)
 
     
 # 根据反编译代码获取函数调用参数信息辅助函数

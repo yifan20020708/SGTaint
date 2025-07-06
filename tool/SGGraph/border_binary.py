@@ -196,7 +196,7 @@ def get_border_binaries_by_cluster_max_mean_gap(directory):
     # 对unique文件进行功能性过滤      
     filtered_boundary = []
     for path in unique_boundary:
-        if any(file_contains_function(path, func) for func in config_sgtaint.SOURCES):
+        if any(file_contains_function(path, func) for func in config_sgtaint.SOURCES) and path in files: # 至少存在一个关键字匹配
             filtered_boundary.append(path)
     boundary_list = filtered_boundary if filtered_boundary else unique_boundary # 若不存在进行回退
     # 将识别到的边界二进制写入日志中

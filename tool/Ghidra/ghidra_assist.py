@@ -132,7 +132,7 @@ def get_args_string_call_sites(program, identifier, call_site_name, angr_base_ad
                 if clang_token.getText() == call_site_name:
                     # 仅仅使用call_site点的地址
                     min_addr = base_addr_transform_ghidra2angr(program, angr_base_addr, clang_token.getMinAddress().getOffset())
-            call_site_dict[hex(min_addr)[:-1]] = [clean_line, call_site_code]          
+                    call_site_dict[hex(min_addr)[:-1]] = [clean_line, call_site_code]          
     return call_site_dict
 
 
