@@ -781,6 +781,9 @@ def parse_result_file_auto(filepath):
 
 # 单个二进制文件的路径拼接（直接通过内容匹配进行）
 def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
+    if file_path not in potential_path_dict:
+        logger.error(f"RDA Analysis failed for {file_path}")
+        return
     # 读取潜在路径结果
     source2sink_path = potential_path_dict[file_path]["source2sink_path"]
     get2set_path = potential_path_dict[file_path]["get2set_path"]
