@@ -1003,7 +1003,7 @@ def get_function_decompile_list_by_path(project, cfg, function_angr_format, tain
         call_site_dict_unfilter = get_call_site_decompile_code_from_function(project, cfg, target_func_name, func_addr, dec)
         call_site_dict = {addr: idx for addr, idx in call_site_dict_unfilter.items() if idx >= start_index}
         if not call_site_dict:
-            logger.error(f"No valid call instruction to {next_func.name} was identified within the analyzed code.")
+            logger.error(f"No valid call instruction to {target_func_name} was identified within the analyzed code.")
             return ["Fail to Decompile by Angr"]
         end_index = find_nearest_call_site(call_site_dict, end_block_start, end_block_end)
         # 使用start_index以及end_index截取片段

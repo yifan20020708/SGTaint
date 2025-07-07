@@ -1,4 +1,4 @@
-Binary Path: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/ntpclient
+Binary Path: /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/ntpclient
 
 ========== Binary Function Keywords ==========
 No keywords found.
@@ -9,7 +9,7 @@ nvram_safe_get:
   [2] Call Site Address: 0x401da0, Caller: 0x4016dc, Block Address: 0x401d8c, Key: ntp_DaylightSavingsUsed
 
 ========== Related File Paths ==========
-[1] /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi
+[1] /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi
 
 ========== Diffusion File Paths ==========
 No diffusion file paths found.
@@ -20,115 +20,110 @@ No diffusion file paths found.
 
 ========== Source2Sink Paths ==========
 *** Path #1 ***
-error_messges_str   : 
-source_keyword      : ntp_timezone
-str_length_visited_function: 
-decompile_list      : ['    __s = (char *)nvram_safe_get("ntp_timezone");\n    pcVar3 = (char *)nvram_safe_get("ntp_DaylightSavingsUsed");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,"+%d:%d",&local_94,&local_98);']
-target_name         : sub_4016dc
-ghidra_path         : [[4200156, 4201776, 4201864, 4201948, 4201964]]
 target_addr         : 0x4016dc
-conditions_str      : 
-end_block           : 4201776
+target_name         : sub_4016dc
+source_name         : sub_4016dc
+source_insr_addr    : 0x401d88
+source_addr         : 0x5000c8
 taint_source        : nvram_safe_get
-start_block         : 4201948
+sink_insr_addr      : 0x40203c
+sink_addr           : sub_4016dc
 taint_sink          : sscanf
-path                : 0x401ddc#0x401d8c#0x401d30
+checking_time       : 0
+conditions_str      : 
 visited_functions   : nvram_safe_get
 fail2captureConditionsTime: 0
-source_insr_addr    : 0x401d88
-sink_addr           : sub_4016dc
-sink_insr_addr      : 0x40203c
-checking_time       : 0
-source_name         : sub_4016dc
-source_addr         : 0x5000c8
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x401ddc#0x401d8c#0x401d30
+source_keyword      : ntp_timezone
+start_block         : 4201948
+end_block           : 4201776
+decompile_list      : ['        v50 = nvram_safe_get("ntp_timezone", ((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 12) - ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) + ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) << 5)), (a0[10] << 24 | v35 | v26 >> 8 | (a0[10] & 0xff00) << 8) + 2085978496);\n        v51 = atoi(nvram_safe_get("ntp_DaylightSavingsUsed", ((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 12) - ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) + ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) << 5)), (a0[10] << 24 | v35 | v26 >> 8 | (a0[10] & 0xff00) << 8) + 2085978496));\n        if (strchr(v50, 0x2d) != 0)\n        {\n            sscanf(v50, "-%d:%d", &v11, &v10);']
 *** Path #2 ***
-error_messges_str   : 
-source_keyword      : ntp_timezone
-str_length_visited_function: 
-decompile_list      : ['    __s = (char *)nvram_safe_get("ntp_timezone");\n    pcVar3 = (char *)nvram_safe_get("ntp_DaylightSavingsUsed");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,"+%d:%d",&local_94,&local_98);']
-target_name         : sub_4016dc
-ghidra_path         : [[4200156, 4201776, 4201864, 4201868, 4201892]]
 target_addr         : 0x4016dc
-conditions_str      : 
-end_block           : 4201776
-taint_source        : nvram_safe_get
-start_block         : 4201868
-taint_sink          : sscanf
-path                : 0x401d8c#0x401d30
-visited_functions   : nvram_safe_get
-fail2captureConditionsTime: 0
+target_name         : sub_4016dc
+source_name         : sub_4016dc
 source_insr_addr    : 0x401d88
-sink_addr           : sub_4016dc
+source_addr         : 0x5000c8
+taint_source        : nvram_safe_get
 sink_insr_addr      : 0x40203c
-checking_time       : 0
-source_name         : sub_4016dc
-source_addr         : 0x5000c8
-*** Path #3 ***
-error_messges_str   : 
-source_keyword      : ntp_timezone
-str_length_visited_function: 
-decompile_list      : ['    __s = (char *)nvram_safe_get("ntp_timezone");\n    pcVar3 = (char *)nvram_safe_get("ntp_DaylightSavingsUsed");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,"+%d:%d",&local_94,&local_98);']
-target_name         : sub_4016dc
-ghidra_path         : [[4200156, 4201776, 4201864, 4201948, 4201964]]
-target_addr         : 0x4016dc
-conditions_str      : 
-end_block           : 4201776
-taint_source        : nvram_safe_get
-start_block         : 4201948
+sink_addr           : sub_4016dc
 taint_sink          : sscanf
-path                : 0x401ddc#0x401d8c#0x401d30
+checking_time       : 0
+conditions_str      : 
 visited_functions   : nvram_safe_get
 fail2captureConditionsTime: 0
-source_insr_addr    : 0x401d88
-sink_addr           : sub_4016dc
-sink_insr_addr      : 0x401e00
-checking_time       : 0
-source_name         : sub_4016dc
-source_addr         : 0x5000c8
-*** Path #4 ***
 error_messges_str   : 
-source_keyword      : ntp_timezone
 str_length_visited_function: 
-decompile_list      : ['    __s = (char *)nvram_safe_get("ntp_timezone");\n    pcVar3 = (char *)nvram_safe_get("ntp_DaylightSavingsUsed");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,"+%d:%d",&local_94,&local_98);']
-target_name         : sub_4016dc
-ghidra_path         : [[4200156, 4201776, 4201864, 4201868, 4201892]]
-target_addr         : 0x4016dc
-conditions_str      : 
-end_block           : 4201776
-taint_source        : nvram_safe_get
-start_block         : 4201868
-taint_sink          : sscanf
 path                : 0x401d8c#0x401d30
+source_keyword      : ntp_timezone
+start_block         : 4201868
+end_block           : 4201776
+decompile_list      : ['        v50 = nvram_safe_get("ntp_timezone", ((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 12) - ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) + ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) << 5)), (a0[10] << 24 | v35 | v26 >> 8 | (a0[10] & 0xff00) << 8) + 2085978496);\n        v51 = atoi(nvram_safe_get("ntp_DaylightSavingsUsed", ((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 12) - ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) + ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) << 5)), (a0[10] << 24 | v35 | v26 >> 8 | (a0[10] & 0xff00) << 8) + 2085978496));\n        if (strchr(v50, 0x2d) != 0)\n        {\n            sscanf(v50, "-%d:%d", &v11, &v10);']
+*** Path #3 ***
+target_addr         : 0x4016dc
+target_name         : sub_4016dc
+source_name         : sub_4016dc
+source_insr_addr    : 0x401d88
+source_addr         : 0x5000c8
+taint_source        : nvram_safe_get
+sink_insr_addr      : 0x401e00
+sink_addr           : sub_4016dc
+taint_sink          : sscanf
+checking_time       : 0
+conditions_str      : 
 visited_functions   : nvram_safe_get
 fail2captureConditionsTime: 0
-source_insr_addr    : 0x401d88
-sink_addr           : sub_4016dc
-sink_insr_addr      : 0x401e00
-checking_time       : 0
-source_name         : sub_4016dc
-source_addr         : 0x5000c8
-*** Path #5 ***
 error_messges_str   : 
-source_keyword      : not_static_string
 str_length_visited_function: 
-decompile_list      : ['    pcVar1 = fgets(acStack_98,100,_stdin);\n    if (pcVar1 == (char *)0x0) {\n      return;\n    }\n    iVar2 = sscanf(acStack_98,"%d %f %f %f %lf %f %d",&local_a4,&local_ac,&local_b0,auStack_b4,\n                   &local_a0,&local_b8,&local_a8);\n    if (iVar2 != 7) {\n      fwrite("Replay input error\\n",1,0x13,_stderr);\n                    /* WARNING: Subroutine does not return */\n      exit(2);\n    }\n    fputs(acStack_98,_stdout);\n    iVar2 = local_a4 * 0x15180;\n    iVar3 = __fixsfsi(local_ac);\n    iVar2 = iVar2 + iVar3;\n    uVar4 = __addsf3(local_b0,local_b8);\n    uVar7 = __extendsfdf2(uVar4);\n    if (debug == 0) {\n      iVar3 = 0;\n      if (iVar6 != 0) goto LAB_0040274c;\nLAB_00402884:\n      uVar7 = 0;\n      iVar5 = local_a8;\n    }\n    else {\n      printf("contemplate %u %.1f %.1f %d\\n",iVar2,(undefined4)local_a0,local_a0._4_4_,(int)uVar7,\n             (int)((ulonglong)uVar7 >> 0x20),local_a8);\n      iVar3 = debug;\n      if (iVar6 == 0) goto LAB_00402884;\nLAB_0040274c:\n      uVar7 = __floatsidf(local_a8 - iVar5);\n    }\n    local_30 = uVar7;\n    uVar7 = __floatunsidf(iVar2 - iVar6);\n    uVar7 = __muldf3((int)uVar7,(int)((ulonglong)uVar7 >> 0x20),(undefined4)local_30,local_30._4_4_)\n    ;\n    uVar7 = __muldf3((int)uVar7,(int)((ulonglong)uVar7 >> 0x20),0,0x3ef00000);\n    uVar8 = __adddf3((int)uVar8,(int)((ulonglong)uVar8 >> 0x20),(int)uVar7,\n                     (int)((ulonglong)uVar7 >> 0x20));\n    uVar4 = (undefined4)((ulonglong)uVar8 >> 0x20);\n    uVar7 = local_a0;\n    if (iVar3 != 0) {\n      local_30._0_4_ = uVar4;\n      printf("fake %f %d \\n",0x400000,(int)uVar8,uVar4,iVar5);\n      uVar4 = (undefined4)local_30;\n      uVar7 = local_a0;\n    }\n    local_a0._4_4_ = (undefined4)((ulonglong)uVar7 >> 0x20);\n    local_a0._0_4_ = (undefined4)uVar7;\n    uVar9 = __adddf3((int)uVar8,uVar4,(undefined4)local_a0,local_a0._4_4_);\n    local_a0 = uVar7;\n    local_a8 = iVar5;\n    local_a0 = uVar9;\n    iVar5 = contemplate_data(iVar2);\n    iVar6 = iVar2;\n  } while( true );\n}\n']
-target_name         : sub_4025f4
-ghidra_path         : [[4204020, 4204096, 4204116, 4204096, 4204116]]
-target_addr         : 0x4025f4
-conditions_str      : 
-end_block           : 4204096
-taint_source        : fgets
-start_block         : 4204096
+path                : 0x401ddc#0x401d8c#0x401d30
+source_keyword      : ntp_timezone
+start_block         : 4201948
+end_block           : 4201776
+decompile_list      : ['        v50 = nvram_safe_get("ntp_timezone", ((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 12) - ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) + ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) << 5)), (a0[10] << 24 | v35 | v26 >> 8 | (a0[10] & 0xff00) << 8) + 2085978496);\n        v51 = atoi(nvram_safe_get("ntp_DaylightSavingsUsed", ((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 12) - ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) + ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) << 5)), (a0[10] << 24 | v35 | v26 >> 8 | (a0[10] & 0xff00) << 8) + 2085978496));\n        if (strchr(v50, 0x2d) != 0)\n        {\n            sscanf(v50, "-%d:%d", &v11, &v10);']
+*** Path #4 ***
+target_addr         : 0x4016dc
+target_name         : sub_4016dc
+source_name         : sub_4016dc
+source_insr_addr    : 0x401d88
+source_addr         : 0x5000c8
+taint_source        : nvram_safe_get
+sink_insr_addr      : 0x401e00
+sink_addr           : sub_4016dc
 taint_sink          : sscanf
-path                : 0x402640#0x402640
+checking_time       : 0
+conditions_str      : 
+visited_functions   : nvram_safe_get
+fail2captureConditionsTime: 0
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x401d8c#0x401d30
+source_keyword      : ntp_timezone
+start_block         : 4201868
+end_block           : 4201776
+decompile_list      : ['        v50 = nvram_safe_get("ntp_timezone", ((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 12) - ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) + ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) << 5)), (a0[10] << 24 | v35 | v26 >> 8 | (a0[10] & 0xff00) << 8) + 2085978496);\n        v51 = atoi(nvram_safe_get("ntp_DaylightSavingsUsed", ((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 12) - ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) + ((((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 5) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16 << 3) - (((v28 | v29 | v30 >> 8 | (a0[11] & 0xff00) << 8) >> 10) + 0x8000 >> 16) << 5)), (a0[10] << 24 | v35 | v26 >> 8 | (a0[10] & 0xff00) << 8) + 2085978496));\n        if (strchr(v50, 0x2d) != 0)\n        {\n            sscanf(v50, "-%d:%d", &v11, &v10);']
+*** Path #5 ***
+target_addr         : 0x4025f4
+target_name         : sub_4025f4
+source_name         : sub_4025f4
+source_insr_addr    : 0x402648
+source_addr         : 0x5000b4
+taint_source        : fgets
+sink_insr_addr      : 0x4026a0
+sink_addr           : sub_4025f4
+taint_sink          : sscanf
+checking_time       : 0
+conditions_str      : 
 visited_functions   : fgets
 fail2captureConditionsTime: 0
-source_insr_addr    : 0x402648
-sink_addr           : sub_4025f4
-sink_insr_addr      : 0x4026a0
-checking_time       : 0
-source_name         : sub_4025f4
-source_addr         : 0x5000b4
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x402640#0x402640
+source_keyword      : not_static_string
+start_block         : 4204096
+end_block           : 4204096
+decompile_list      : ['        if (fgets(&v13, 0x64, stdin) != 0)\n        {\n            v0 = stack_base + -176;\n            v1 = stack_base + -180;\n            v2 = stack_base + -160;\n            v3 = stack_base + -184;\n            v4 = stack_base + -168;\n            if (sscanf(&v13, "%d %f %f %f %lf %f %d", &v10, &v8, v0, v1, v2, v3) == 7)']
 
 ========== Get2Set Paths ==========
 No paths paths found.
@@ -190,7 +185,9 @@ No paths paths found.
 [54] fgets
 [55] recvfrom
 [56] recvmsg
-[57] nvram_bufget
+[57] nvram_get_ex2
+[58] nvram_bufget
+[59] apmib_get
 
 ========== TRANSITIVE SET ==========
 [1] config_set
@@ -212,4 +209,5 @@ No paths paths found.
 [17] OM_ValSet
 [18] CAL_abstract_set
 [19] nvram_bufset
+[20] apmib_set
 

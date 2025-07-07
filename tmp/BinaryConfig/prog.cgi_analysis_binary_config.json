@@ -1,555 +1,555 @@
 {
-    "binary_path": "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi",
+    "binary_path": "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi",
     "binary_function_keyword": [
-        "Manual",
-        "/RenewIPv6WanConnection/Action",
-        "PPPoEConnect",
-        "/SetTimeSettings/NTPServer",
-        "/SetNetworkSettings/Broadcast",
-        "GetDynamicDNSIPv6Settings",
-        "/SetIPv6AutoConfigurationSettings/IPv6_LanRouterAdvertisementLifeTime",
-        "/SetIPv66to4TunnelSettings/IPv6_6To4Relay",
-        "/SetIPv66rdTunnelSettings/IPv6_6Rd_MaskLength",
-        "DelMACFilters2",
-        "/SetIPv66rdTunnelSettings/IPv6_LanAutoConfigurationType",
-        "/SetAdvNetworkSettings/MulticastIPv4",
-        "/Login/LoginPassword",
-        "Unknown",
-        "/SetIPv66in4TunnelSettings/IPv6_6In4RemoteIPv4Address",
-        "/SetWebFilterSettings/NumberOfEntry",
-        "GetIPv6AutoConfigurationSettings",
-        "GetIPv6SimpleSecurity",
-        "GetIPv6StaticSettings",
-        "GetSysLogSettings",
-        "SetWLanRadioSettings",
-        "GetStaticRouteIPv4Settings",
-        "DestInterface",
-        "GetInternetConnUpTime",
-        "GetUSBStorageDevice",
-        "SLAAC_RDNSS",
-        "/SetIPv6StaticSettings/IPv6_LanAddress",
-        "SetFirewallSettings",
-        "SetVirtualServerSettings",
-        "success",
-        "GetMultipleHNAPs",
-        "GetSmartconnectSettings",
-        "/SetWanSettings/MacAddress",
-        "SetQoSSettings",
-        "L2TPDisconnect",
-        "Interface",
-        "/SetIPv6PppoeSettings/IPv6_PppoeMTU",
-        "RADIO_5GHz_2_Guest",
-        "Username",
-        "SetAdvNetworkSettings",
-        "Disconnected",
-        "RADIO_5GHz_2",
-        "/SetGuestZoneRouterSettings/DHCPServer",
-        "SrcIPv4AddressRangeStart",
-        "/SetIPv66in4TunnelSettings/IPv6_LanIPv6AddressAutoAssignment",
-        "/SetIPv66to4TunnelSettings/IPv6_SecondaryDNS",
-        "/Login/Username",
-        "Result",
-        "LIMITED_CONNECTION",
-        "/SetIPv6StaticSettings/IPv6_Address",
-        "RenewIPv6WanConnection",
-        "/SetIPv4FirewallSettings/IPv4_FirewallStatus",
-        "GetIPv6AutoDetectionSettings",
-        "enable",
-        "/SetWLanRadioSecurity/KeyRenewal",
-        "/SetWLanRadioSecurity/RadiusPort1",
-        "GetScheduleSettings",
-        "/SetIPv66rdTunnelSettings/IPv6_ConnectionType",
-        "/SetGuestZoneRouterSettings/SubnetMask",
-        "/SetIPv6AutoConfigurationSettings/IPv6_LanIPv6AddressAutoAssignment",
-        "GetUSBStorageSettings",
-        "SrcIPv4AddressRangeEnd",
-        "pppoe",
-        "PPPoE",
-        "/SetIPv6IngressFiltering/Status",
-        "/SetGuestZoneRouterSettings/DHCPRangeEnd",
-        "Priority",
-        "/SetIPv6AutoDetectionSettings/IPv6_DhcpPd",
-        "0123456789abcdefP",
-        "/SetWanSettings/DsLite_B4IPv4Address",
-        "/SetWanSettings/Type",
-        "/SetIPv6PppoeSettings/IPv6_PppoeMaxIdleTime",
-        "/SetGuestZoneRouterSettings/DHCPRangeStart",
-        "SetPortForwardingSettings",
-        "stop_",
-        "/SetIPv6AutoConfigurationSettings/IPv6_DhcpPd",
-        "/SetIPv66to4TunnelSettings/IPv6_PrimaryDNS",
-        "/SetIPv6AutoConfigurationSettings/IPv6_SecondaryDNS",
-        "/SetTimeSettings/CurrentTime",
-        "NewSession",
-        "/SetIPv66in4TunnelSettings/IPv6_DhcpPd",
-        "ScheduleAllDay",
-        "GetDMZSettings",
-        "SetSysEmailSettings/EmailFrom",
-        "/SetIPv66in4TunnelSettings/IPv6_LanIPv6AddressRangeStart",
-        "/SetDynamicDNSSettings/Timeout",
-        "GetMACFilters2",
-        "/SetNetworkSettings/DeviceName",
-        "GetOperationMode",
-        "CAPTCHA",
-        "SetScheduleReboot",
-        "GetSysEmailSettings",
-        "webs",
-        "Enable_BlackList",
-        "SetSysEmailSettings/OnSchedule",
-        "/SetIPv6AutoDetectionSettings/IPv6_SecondaryDNS",
-        "SetSysEmailSettings/OnLogFull",
-        "GetNetworkSettings",
-        "/SetTimeSettings/CurrentDate",
-        "/SetIPv6AutoDetectionSettings/IPv6_LanRouterAdvertisementLifeTime",
-        "/SetClientInfo/ClientInfoLists/ClientInfo/NickName",
-        "SrcIPv6AddressRangeEnd",
-        "StartFirmwareDownload",
-        "/SetIPv6AutoConfigurationSettings/IPv6_LanAutoConfigurationType",
-        "/SetIPv6LinkLocalOnlySettings/IPv6_ConnectionType",
-        "/SetIPv66in4TunnelSettings/IPv6_LanAutoConfigurationType",
-        "/SetWanSettings/DsLite_Configuration",
-        "/SetWanSettings/DsLite_AFTR_IPv6Address",
-        "ProtocolType",
-        "GetWPSSettings",
-        "Hostname",
-        "/SetIPv6AutoDetectionSettings/IPv6_LanIPv6AddressAutoAssignment",
-        "/SetIPv6PppoeSettings/IPv6_ConnectionType",
-        "/SetWanSettings/ConfigDNS/Secondary",
-        "GetIPv6WanType",
-        "/SetIPv66rdTunnelSettings/IPv6_LanIPv6AddressRangeEnd",
-        "/SetIPv6PppoeSettings/IPv6_LanAutomaticDhcpPd",
-        "SetTriggerADIC",
-        "IPv6_6RD",
-        "/SetTimeSettings/NTP",
-        "OK_CONNECTED",
-        "/SetIPv66rdTunnelSettings/IPv6_SecondaryDNS",
-        "OFFLINE",
-        "SetIPv6AutoConfigurationSettings",
-        "Always",
-        "/SetWLanRadioSettings/Coexistence",
-        "/SetWanSettings/Password",
-        "/SetIPv66rdTunnelSettings/IPv6_6Rd_IPv6PrefixLength",
-        "/SetAdvNetworkSettings/WANPortSpeed",
-        "DHCPv6Renew",
-        "SetDeviceSettings/CAPTCHA",
-        "/SetRouterLanSettings/RouterIPAddress",
-        "/SetIPv6PppoeSettings/IPv6_PppoeType",
-        "/SetIPv6LinkLocalOnlySettings/IPv6_LanUniqueLocalAddressStatus",
-        "method=",
-        "/SetIPv6StaticSettings/IPv6_LanIPv6AddressRangeEnd",
-        "PrefixLen",
-        "GetUSBDevice",
-        "CONNECTED",
-        "SetUsersSettings",
-        "/SetTriggerADIC/TriggerADIC",
-        "IPv6_IPv6InIPv4Tunnel",
-        "GetIPv6IngressFiltering",
-        "SAMBA",
-        "/SetIPv66in4TunnelSettings/IPv6_PrimaryDNS",
-        "Automatic",
-        "/SetIPv6PppoeSettings/IPv6_PrimaryDNS",
-        "/SetDMZSettings/IPAddress",
-        "POST",
-        "/SetWLanRadioSettings/Channel",
-        "GetIPv66to4TunnelSettings",
-        "IPv6_AutoConfiguration",
-        "GetCAPTCHAsetting",
-        "GetWLanRadios",
-        "SetRouterLanSettings",
-        "/GetInterfaceStatistics",
-        "SSID2",
-        "/SetIPv6PppoeSettings/IPv6_LanAutoConfigurationType",
-        "/SetWLanRadioSettings/RadioID",
-        "SetFTPSettings",
-        "GetQoSSettings",
-        "GetIPv66in4TunnelSettings",
-        "WLAN5G",
-        "/SetWanSettings/HostName",
-        "GetGuestZoneRouterSettings",
-        "/SetIPv6AutoDetectionSettings/IPv6_ObtainDNS",
-        "GetFTPSettings",
-        "/SetDMZSettings/Enabled",
-        "/SetNetworkSettings/IPAddress",
-        "SetDMZSettings",
-        "/SetClientInfo/ClientInfoLists/ClientInfo/ReserveIP",
-        "GetClientInfo",
-        "Internet",
-        "/SetDynamicDNSIPv6Settings/DynamicDNSIPv6List/DDNSIPv6Info/Status",
-        "UDPPorts",
         "/SetIPv6PppoeSettings/IPv6_LanAddress",
-        "SetSysLogSettings",
-        "failed",
-        "/SetIPv66in4TunnelSettings/IPv6_ObtainDNS",
-        "SetIPv6SimpleSecurity",
-        "request",
-        "/Login/Action",
-        "/SetStaticRouteIPv4Settings/StaticRouteIPv4Data/SRIPv4Info#",
-        "/SetIPv66to4TunnelSettings/IPv6_6to4LanAddress",
-        "WPA2PSK",
-        "/SetIPv6StaticSettings/IPv6_UseLinkLocalAddress",
-        "/SetIPv6AutoConfigurationSettings/IPv6_PrimaryDNS",
-        "6in4",
-        "/GetWLanRadioSecurity/RadioID",
-        "_ftext",
-        "/SetIPv66in4TunnelSettings/IPv6_LanAddress",
-        "/SetIPv6AutoConfigurationSettings/IPv6_ConnectionType",
-        "SSID",
-        "/SetDynamicDNSIPv6Settings/DynamicDNSIPv6List/DDNSIPv6Info/IPv6Address",
-        "ScheduleDate",
-        "/SetIPv66rdTunnelSettings/IPv6_6Rd_Configuration",
-        "Enabled",
-        "/SetIPv6AutoDetectionSettings/IPv6_ConnectionType",
-        "GetWLanRadioSettings",
-        "GetInterfaceStatistics",
-        "/SetWanSettings/IPAddress",
-        "auto",
-        "/SetIPv66rdTunnelSettings/IPv6_6Rd_IPv6Prefix",
-        "HTTPS",
-        "/SetIPv6AutoDetectionSettings/IPv6_LanAutomaticDhcpPd",
-        "listen",
-        "Body",
-        "SetTimeSettings",
-        "/SetMACFilters2/MACList/MACInfo#",
-        "/SetWLanRadioSettings/ScheduleName",
-        "/SetIPv6PppoeSettings/IPv6_DhcpPd",
-        "/SetRouterLanSettings/DHCPServerEnabled",
-        "_edata",
-        "Response",
-        "/SetIPv6PppoeSettings/IPv6_LanIPv6AddressRangeStart",
-        "/SetRouterLanSettings/RouterSubnetMask",
-        "ifname",
-        "DsLite",
-        "SetClientInfo",
-        "/SetIPv6AutoConfigurationSettings/IPv6_ObtainDNS",
-        "GetWLanRadioSecurity",
-        "/SetIPv6FirewallSettings/IPv6FirewallRuleLists/IPv6FirewallRule#",
-        "IPv6_LinkLocalOnly",
-        "/SetIPv6LinkLocalOnlySettings/IPv6_LanUniqueLocalAddressDefaultPrefix",
-        "UploadBandwidth",
-        "_end",
-        "Static",
-        "SetDeviceSettings/DeviceName",
-        "/SetSMBStatus/Enabled",
-        "DHCP",
-        "/SetIPv4FirewallSettings/IPv4FirewallRuleLists/IPv4FirewallRule#",
-        "VOIP",
-        "SetQoSManagementType",
-        "SetWLanRadioSecurity",
-        "language",
-        "/SetWanSettings/ServiceName",
-        "GetIPv6FirewallSettings",
-        "10Mbps",
-        "DHCPv4_Option",
-        "GetDLNA",
-        "string",
-        "DestIPv4AddressRangeEnd",
-        "dhcp",
-        "/SetIPv6AutoDetectionSettings/IPv6_LanIPv6AddressRangeEnd",
-        "/SetDynamicDNSIPv6Settings/DynamicDNSIPv6List/DDNSIPv6Info",
-        "SetNetworkSettings",
-        "/SetWebFilterSettings/WebFilterURLs/string#",
-        "SetSMBStatus",
-        "LocalIPAddress",
-        "SetStaticRouteIPv6Settings",
-        "/GetWLanRadioSettings/RadioID",
-        "ScheduleTimeFormat",
-        "SetSysEmailSettings/SysEmail",
-        "/SetNetworkSettings/SubnetMask",
-        "/SetFirewallSettings/ALGIPSec",
-        "IPv6_AutoDetection",
-        "OK_PPPoE",
-        "WirelessMode",
-        "GetPortForwardingSettings",
-        "DDNS",
-        "/SetScheduleSettings/ScheduleInfoLists#",
-        "GetVPNProfile",
-        "/SetDynamicDNSSettings/Username",
-        "TCPPorts",
-        "GetSMBStatus",
-        "Gateway",
-        "GetTimeSettings",
-        "GetDeviceSettings",
-        "GetCurrentInternetStatus",
-        "/SetIPv66to4TunnelSettings/IPv6_LanAutoConfigurationType",
-        "/SetFirewallSettings/ALGRTSP",
-        "Reboot",
-        "WPAORWPA2-PSK",
-        "GetSMBSettings",
-        "SetIPv6IngressFiltering",
-        "schedule",
-        "IPv6_Static",
-        "GetWanSettings",
-        "GetTimeMachineSettings",
-        "SetMultipleActions",
-        "/SetQoSSettings/QoSInfoData/QoSInfo#",
-        "GetFirmwareValidation",
-        "/SetWLanRadioSettings/ChannelWidth",
-        "name",
-        "/SetIPv66in4TunnelSettings/IPv6_6In4RemoteIPv6Address",
-        "GetIPv6Settings",
-        "/SetGuestZoneRouterSettings/IPAddress",
-        "/SetIPv6StaticSettings/IPv6_SecondaryDNS",
-        "Auto",
-        "/SetWLanRadioSecurity/RadiusIP2",
-        "/SetIPv6AutoDetectionSettings/IPv6_LanAddress",
-        "admin",
-        "SetFactoryDefault",
-        "PortForwardingDescription",
-        "GetIPv6PppoeSettings",
-        "SetDLNA",
-        "IPAddress",
-        "/SetNetworkSettings/LeaseTime",
-        "/SetIPv66to4TunnelSettings/IPv6_LanIPv6AddressRangeEnd",
-        "GetScheduleReboot",
-        "/SetWLanRadioSettings/QoS",
-        "SrcIPv6AddressRangeStart",
-        "SetMACFilters2",
-        "/SetIPv6StaticSettings/IPv6_LanIPv6AddressAutoAssignment",
-        "SetSmartconnectSettings",
-        "WPA2-PSK",
-        "6to4",
-        "/SetVirtualServerSettings/VirtualServerList/VirtualServerInfo#",
-        "/SetIPv6PppoeSettings/IPv6_LanIPv6AddressRangeEnd",
-        "SetGuestZoneRouterSettings",
-        "SetStaticRouteIPv4Settings",
-        "pppoe_username",
-        "GetQoSManagementType",
-        "/SetFirewallSettings/ALGPPTP",
-        "/SetIPv6SimpleSecurity/Status",
-        "/SetDLNA/Enabled",
-        "/SetTimeSettings/TimeZone",
-        "GetWanStatus",
-        "ERROR_UnableToDetect",
-        "SrcInterface",
-        "SetSysEmailSettings",
-        "SetSysEmailSettings/EmailTo",
-        "SetDynamicDNSIPv6Settings",
-        "/SetIPv66rdTunnelSettings/IPv6_6Rd_BorderRelayIPv4Address",
-        "GetDeviceFeatureAlpha",
-        "WPAPSK",
-        "RADIO_5GHz_Guest",
-        "/SetIPv6StaticSettings/IPv6_SubnetPrefixLength",
-        "PPTPConnect",
-        "/SetWanSettings/Gateway",
-        "/SetWLanRadioSettings/SSIDBroadcast",
-        "VirtualServerDescription",
-        "/SetIPv66in4TunnelSettings/IPv6_LanIPv6AddressRangeEnd",
-        "/SetIPv6StaticSettings/IPv6_ConnectionType",
-        "TimeHourValue",
-        "/SetIPv6StaticSettings/IPv6_PrimaryDNS",
-        "/SetDynamicDNSSettings/Enabled",
-        "fork",
-        "/SetWLanRadioSecurity/RadiusSecret1",
-        "/SetIPv6AutoConfigurationSettings/IPv6_LanIPv6AddressRangeEnd",
-        "/SetWLanRadioSecurity/RadiusSecret2",
-        "SetIPv4FirewallSettings",
-        "/GetListDirectory/ListDirectoryPath",
-        "/SetMACFilters2/Enabled",
-        "GetFirmwareStatus",
-        "/SetIPv66rdTunnelSettings/IPv6_PrimaryDNS",
-        "SetIPv66in4TunnelSettings",
-        "_fdata",
-        "StaticL2TP",
-        "GetIPv6LinkLocalOnlySettings",
-        "/SetWanSettings/SubnetMask",
-        "Connecting",
-        "PPTP",
-        "logout",
-        "/SetWanSettings/MTU",
-        "SetIPv6LinkLocalOnlySettings",
-        "/SetWLanRadioSettings/TXPower",
-        "/SetIPv6AutoConfigurationSettings/IPv6_LanAutomaticDhcpPd",
-        "/SetDynamicDNSIPv6Settings/DynamicDNSIPv6List/DDNSIPv6Info/Hostname",
-        "Name",
-        "/SetIPv66to4TunnelSettings/IPv6_LanIPv6AddressAutoAssignment",
-        "DestIPv6AddressRangeEnd",
-        "/SetIPv6PppoeSettings/IPv6_PppoeStaticIp",
-        "/SetIPv66rdTunnelSettings/IPv6_LanIPv6AddressRangeStart",
-        "Password",
-        "/SetIPv66in4TunnelSettings/IPv6_LanRouterAdvertisementLifeTime",
-        "DestIPv6AddressRangeStart",
-        "/SetMACFilters2/IsAllowList",
-        "ByDevice",
-        "PortRangeStart",
-        "/SetAdvNetworkSettings/UPNP",
-        "/SetIPv6StaticSettings/IPv6_LanRouterAdvertisementLifeTime",
-        "UserName",
-        "/SetWLanRadioSettings/SSID",
-        "DHCPv6Release",
-        "/SetIPv6PppoeSettings/IPv6_PppoeReconnectMode",
-        "L2TPConnect",
-        "Schedule",
-        "/SetWanSettings/ConfigDNS/Primary",
-        "PollingFirmwareDownload",
-        "NetMask",
-        "/SetNetworkSettings/IPRangeEnd",
-        "Connected",
-        "SharedWithIPv4",
-        "SetIPv66rdTunnelSettings",
-        "ProtocolNumber",
-        "/SetWLanRadioSecurity/Key",
-        "MacAddress",
-        "Protocol",
-        "/SetMultipleActions/SetWLanRadioSettings#",
-        "/SetIPv6AutoDetectionSettings/IPv6_LanIPv6AddressRangeStart",
-        "/SetIPv6PppoeSettings/IPv6_PppoeUsername",
-        "uid=",
-        "MACAddress",
-        "InternalPort",
-        "TKIPORAES",
-        "select",
-        "Channel",
-        "/SetIPv66in4TunnelSettings/IPv6_ConnectionType",
-        "SetDeviceSettings",
-        "/SetGuestZoneRouterSettings/InternetAccessOnly",
-        "/SetWLanRadioSettings/Mode",
-        "/SetMultipleActions/SetWLanRadioSecurity#",
-        "GetWebFilterSettings",
-        "AlwaysOn",
-        "GetIPv6Status",
-        "abort",
-        "GetVLANSettings",
-        "/SetTimeSettings/DaylightSaving",
-        "/SetIPv6AutoDetectionSettings/IPv6_PrimaryDNS",
-        "/SetIPv66rdTunnelSettings/IPv6_6rdHubSpokeMode",
-        "SetIPv6FirewallSettings",
-        "/SetIPv6StaticSettings/IPv6_LanIPv6AddressRangeStart",
-        "ExternalPort",
-        "SetSysLogSettings/IPAddress",
-        "/SetIPv66rdTunnelSettings/IPv6_LanIPv6AddressAutoAssignment",
-        "SetDynamicDNSSettings",
-        "Enable",
-        "/SetIPv6PppoeSettings/IPv6_PppoeNewSession",
-        "SetWanSettings",
-        "StaticPPPoE",
-        "/SetWanSettings/Username",
-        "ServiceName",
-        "SetWebFilterSettings",
-        "GetVersionInfo",
-        "DeviceName",
-        "IPv6_6To4",
-        "ScheduleName",
-        "SetQuickVPNSettings",
-        "Disabled",
-        "/SetIPv6AutoConfigurationSettings/IPv6_LanAddress",
-        "Status",
-        "PPPoEDisconnect",
-        "OK_DETECTING_2",
-        "PortRangeEnd",
-        "DISCONNECTED",
-        "/SetIPv66to4TunnelSettings/IPv6_LanIPv6AddressRangeStart",
-        "GetFirmwareSettings",
-        "SetIPv6PppoeSettings",
-        "/SetPortForwardingSettings/PortForwardingList/PortForwardingInfo#",
-        "null",
-        "static",
-        "GetIPv66rdTunnelSettings",
-        "/SetWLanRadioSecurity/RadiusIP1",
-        "Enable_WhiteList",
-        "/SetWLanRadioSecurity/Enabled",
-        "REBOOT",
-        "GetListDirectory",
-        "GetStaticRouteIPv6Settings",
-        "DestNetwork",
-        "SetAdministrationSettings",
-        "/SetDynamicDNSSettings/ServerAddress",
-        "Mozilla",
-        "ClearStatistics",
-        "/SetDynamicDNSSettings/Hostname",
-        "Edge",
-        "_eval",
-        "/Login/Captcha",
-        "Type",
-        "StaticPPTP",
-        "/SetStaticRouteIPv6Settings/StaticRouteIPv6List/SRIPv6Info#",
-        "/SetIPv66to4TunnelSettings/IPv6_ConnectionType",
-        "pptp",
-        "DestIPv4AddressRangeStart",
-        "/SetIPv6PppoeSettings/IPv6_PppoePassword",
-        "/SetGuestZoneRouterSettings/DHCPLeaseTime",
-        "/SetWLanRadioSecurity/Type",
-        "DelUserSettings",
-        "AccessPath",
-        "GetDynamicDNSSettings",
-        "GetAdministrationSettings",
-        "/SetIPv66in4TunnelSettings/IPv6_SecondaryDNS",
-        "SetIPv66to4TunnelSettings",
-        "SSID1",
-        "/SetIPv6PppoeSettings/IPv6_ObtainDNS",
-        "NONE",
-        "DHCPRenew",
-        "/SetClientInfo/ClientInfoLists/ClientInfo/MacAddress",
-        "SetIPv6AutoDetectionSettings",
-        "GetUsersSettings",
-        "IPTV",
-        "/SetIPv6AutoConfigurationSettings/IPv6_LanIPv6AddressRangeStart",
-        "/SetIPv66in4TunnelSettings/IPv6_LanAutomaticDhcpPd",
-        "/SetFirewallSettings/SPIIPv4",
-        "GetVirtualServerSettings",
-        "WAIT",
-        "login",
-        "GetQuickVPNSettings",
-        "/SetWLanRadioSecurity/RadiusPort2",
-        "Permission",
-        "SetTimeMachineSettings",
-        "GetRouterLanSettings",
-        "/SetIPv6AutoDetectionSettings/IPv6_LanAutoConfigurationType",
-        "/SetAdvNetworkSettings/MulticastIPv6",
-        "RADIO_5GHz",
-        "/SetWLanRadioSettings/Enabled",
-        "/SetFirewallSettings/ALGSIP",
-        "/SetNetworkSettings/DNSRelay",
-        "/SetIPv6StaticSettings/IPv6_LanAutoConfigurationType",
-        "GetWiFiVerifyAlpha",
-        "/SetWLanRadioSecurity/Encryption",
-        "Dynamic",
-        "/SetIPv6PppoeSettings/IPv6_SecondaryDNS",
-        "ERROR_WANLinkDown",
-        "/SetIPv6PppoeSettings/IPv6_LanIPv6AddressAutoAssignment",
-        "SetVLANSettings",
-        "GetAdvNetworkSettings",
-        "SetIPv6StaticSettings",
-        "/SetNetworkSettings/LocalDomainName",
-        "/SetWanSettings/AutoReconnect",
-        "/SetIPv6PppoeSettings/IPv6_LanRouterAdvertisementLifeTime",
-        "/SetNetworkSettings/IPRangeStart",
-        "Admin",
-        "GetIPv4FirewallSettings",
-        "SetSysLogSettings/SysLog",
-        "DHCPPPPoE",
-        "/SetIPv6FirewallSettings/IPv6_FirewallStatus",
-        "/SetIPv6LinkLocalOnlySettings/IPv6_LanUniqueLocalAddressPrefix",
-        "Disable",
-        "SetScheduleSettings",
-        "OK_NOTCONNECTED",
-        "/SetIPv6PppoeSettings/IPv6_PppoeServiceName",
-        "disable",
-        "/SetDynamicDNSSettings/Password",
         "/SetWanSettings/MaxIdleTime",
-        "OK_DHCP",
-        "DownloadBandwidth",
-        "FTP_Port",
+        "IPAddress",
+        "SetFTPSettings",
+        "DDNS",
+        "/SetWLanRadioSettings/Enabled",
+        "SetWLanRadioSecurity",
+        "/SetNetworkSettings/LeaseTime",
+        "abort",
         "GetFirewallSettings",
-        "/SetDLNA/DeviceName",
-        "/SetIPv6StaticSettings/IPv6_DefaultGateway",
-        "IPv6_PPPoE",
-        "/SetWLanRadioSecurity/RadioID",
-        "signal",
-        "100Mbps",
-        "1000Mbps",
-        "/SetWebFilterSettings/WebFilterMethod",
-        "/SetWLanRadioSettings/SecondaryChannel",
-        "TimeMinuteValue",
-        "RenewWanConnection",
+        "6to4",
+        "GetRouterLanSettings",
+        "/SetNetworkSettings/LocalDomainName",
+        "/SetNetworkSettings/IPAddress",
+        "Automatic",
+        "UserName",
+        "/SetIPv6LinkLocalOnlySettings/IPv6_LanUniqueLocalAddressDefaultPrefix",
+        "GetWLanRadioSecurity",
+        "GetListDirectory",
+        "/SetIPv6PppoeSettings/IPv6_PppoeMTU",
+        "L2TPConnect",
+        "/SetIPv6IngressFiltering/Status",
+        "AlwaysOn",
+        "SetQoSManagementType",
+        "/SetAdvNetworkSettings/MulticastIPv4",
+        "GetUSBStorageSettings",
+        "RenewIPv6WanConnection",
+        "/SetClientInfo/ClientInfoLists/ClientInfo/MacAddress",
+        "Enable_WhiteList",
+        "/SetIPv66in4TunnelSettings/IPv6_LanAutomaticDhcpPd",
+        "GetWanStatus",
+        "failed",
         "GetAPClientSettings",
-        "DHCPRelease",
-        "/HNAP1/",
-        "#text",
-        "/RenewWanConnection/Action",
-        "Metric",
-        "/SetIPv66in4TunnelSettings/IPv6_6In4LocalIPv6Address",
+        "SetTimeMachineSettings",
+        "GetWiFiVerifyAlpha",
+        "DestNetwork",
+        "HTTPS",
+        "GetVersionInfo",
+        "/SetIPv4FirewallSettings/IPv4FirewallRuleLists/IPv4FirewallRule#",
+        "/SetWLanRadioSecurity/Type",
+        "Internet",
+        "Auto",
+        "/SetIPv6StaticSettings/IPv6_SubnetPrefixLength",
+        "DHCPv6Release",
+        "Result",
+        "/SetWebFilterSettings/WebFilterURLs/string#",
+        "/SetIPv6PppoeSettings/IPv6_LanAutoConfigurationType",
         "/SetFirewallSettings/AntiSpoof",
-        "PPPTPDisconnect"
+        "/SetDynamicDNSSettings/Hostname",
+        "SetTriggerADIC",
+        "ProtocolNumber",
+        "SetDeviceSettings",
+        "DestIPv4AddressRangeEnd",
+        "/SetIPv6PppoeSettings/IPv6_PppoeType",
+        "SetIPv6FirewallSettings",
+        "Priority",
+        "SrcInterface",
+        "SetIPv66rdTunnelSettings",
+        "/SetTimeSettings/TimeZone",
+        "SetScheduleReboot",
+        "/SetRouterLanSettings/RouterSubnetMask",
+        "/SetIPv6PppoeSettings/IPv6_PppoeNewSession",
+        "/SetDynamicDNSIPv6Settings/DynamicDNSIPv6List/DDNSIPv6Info/Status",
+        "GetIPv4FirewallSettings",
+        "/SetIPv6LinkLocalOnlySettings/IPv6_LanUniqueLocalAddressStatus",
+        "SetFactoryDefault",
+        "/SetIPv6FirewallSettings/IPv6_FirewallStatus",
+        "GetNetworkSettings",
+        "VOIP",
+        "GetQuickVPNSettings",
+        "/SetIPv66to4TunnelSettings/IPv6_LanIPv6AddressRangeEnd",
+        "/SetIPv66rdTunnelSettings/IPv6_PrimaryDNS",
+        "/SetIPv6AutoConfigurationSettings/IPv6_SecondaryDNS",
+        "/SetIPv66in4TunnelSettings/IPv6_6In4RemoteIPv4Address",
+        "enable",
+        "/SetIPv6StaticSettings/IPv6_UseLinkLocalAddress",
+        "LIMITED_CONNECTION",
+        "GetCAPTCHAsetting",
+        "TimeHourValue",
+        "/SetIPv6PppoeSettings/IPv6_LanAutomaticDhcpPd",
+        "/SetMACFilters2/IsAllowList",
+        "RADIO_5GHz_2_Guest",
+        "/SetIPv66in4TunnelSettings/IPv6_ConnectionType",
+        "StaticPPPoE",
+        "uid=",
+        "NetMask",
+        "PrefixLen",
+        "/SetQoSSettings/QoSInfoData/QoSInfo#",
+        "SetIPv6LinkLocalOnlySettings",
+        "/Login/Action",
+        "/SetIPv6StaticSettings/IPv6_LanRouterAdvertisementLifeTime",
+        "IPv6_6RD",
+        "/SetDMZSettings/Enabled",
+        "auto",
+        "Hostname",
+        "SetFirewallSettings",
+        "GetDeviceSettings",
+        "Type",
+        "ScheduleAllDay",
+        "SrcIPv4AddressRangeStart",
+        "PortForwardingDescription",
+        "null",
+        "Admin",
+        "SetDynamicDNSIPv6Settings",
+        "/SetWLanRadioSecurity/RadiusIP1",
+        "/SetDynamicDNSIPv6Settings/DynamicDNSIPv6List/DDNSIPv6Info/IPv6Address",
+        "GetIPv6WanType",
+        "GetWPSSettings",
+        "/SetIPv6PppoeSettings/IPv6_ConnectionType",
+        "WirelessMode",
+        "10Mbps",
+        "SetIPv6AutoConfigurationSettings",
+        "GetCurrentInternetStatus",
+        "DeviceName",
+        "DHCPv6Renew",
+        "Connecting",
+        "/SetIPv6AutoDetectionSettings/IPv6_LanAutoConfigurationType",
+        "Name",
+        "/SetGuestZoneRouterSettings/SubnetMask",
+        "DHCPPPPoE",
+        "success",
+        "/SetIPv6StaticSettings/IPv6_Address",
+        "OK_NOTCONNECTED",
+        "/SetNetworkSettings/DNSRelay",
+        "/SetPortForwardingSettings/PortForwardingList/PortForwardingInfo#",
+        "ScheduleName",
+        "GetSMBSettings",
+        "WPA2PSK",
+        "SetSysEmailSettings/SysEmail",
+        "RenewWanConnection",
+        "GetFirmwareSettings",
+        "UploadBandwidth",
+        "select",
+        "/SetIPv6SimpleSecurity/Status",
+        "RADIO_5GHz",
+        "/SetIPv66in4TunnelSettings/IPv6_LanRouterAdvertisementLifeTime",
+        "/SetWLanRadioSecurity/RadiusPort1",
+        "Static",
+        "/SetIPv66in4TunnelSettings/IPv6_LanIPv6AddressRangeStart",
+        "SetStaticRouteIPv4Settings",
+        "SSID1",
+        "GetStaticRouteIPv6Settings",
+        "ByDevice",
+        "ScheduleTimeFormat",
+        "SetIPv4FirewallSettings",
+        "/SetDynamicDNSSettings/Enabled",
+        "PollingFirmwareDownload",
+        "SetWebFilterSettings",
+        "GetWebFilterSettings",
+        "/SetIPv6StaticSettings/IPv6_DefaultGateway",
+        "GetInternetConnUpTime",
+        "/SetFirewallSettings/ALGRTSP",
+        "SetVirtualServerSettings",
+        "GetIPv6Settings",
+        "SetSysEmailSettings/EmailTo",
+        "SetQuickVPNSettings",
+        "SetMACFilters2",
+        "StartFirmwareDownload",
+        "SetScheduleSettings",
+        "pppoe",
+        "REBOOT",
+        "Metric",
+        "Password",
+        "method=",
+        "SetAdministrationSettings",
+        "SetIPv6PppoeSettings",
+        "/SetWanSettings/DsLite_AFTR_IPv6Address",
+        "Body",
+        "GetIPv6IngressFiltering",
+        "/SetStaticRouteIPv6Settings/StaticRouteIPv6List/SRIPv6Info#",
+        "/SetIPv6FirewallSettings/IPv6FirewallRuleLists/IPv6FirewallRule#",
+        "Schedule",
+        "/SetWLanRadioSettings/ChannelWidth",
+        "NONE",
+        "GetWanSettings",
+        "ERROR_UnableToDetect",
+        "/SetIPv6PppoeSettings/IPv6_LanRouterAdvertisementLifeTime",
+        "SetSMBStatus",
+        "SetClientInfo",
+        "/SetGuestZoneRouterSettings/DHCPLeaseTime",
+        "RADIO_5GHz_2",
+        "/SetIPv4FirewallSettings/IPv4_FirewallStatus",
+        "/SetIPv6LinkLocalOnlySettings/IPv6_ConnectionType",
+        "logout",
+        "_end",
+        "Connected",
+        "/SetIPv66to4TunnelSettings/IPv6_LanIPv6AddressAutoAssignment",
+        "GetAdministrationSettings",
+        "PPPoEConnect",
+        "CONNECTED",
+        "SetMultipleActions",
+        "/SetIPv6StaticSettings/IPv6_ConnectionType",
+        "GetSmartconnectSettings",
+        "GetDynamicDNSSettings",
+        "stop_",
+        "SetTimeSettings",
+        "pppoe_username",
+        "static",
+        "L2TPDisconnect",
+        "/SetIPv6PppoeSettings/IPv6_PppoeReconnectMode",
+        "/SetMultipleActions/SetWLanRadioSettings#",
+        "/SetIPv6StaticSettings/IPv6_PrimaryDNS",
+        "SetIPv6IngressFiltering",
+        "/SetWLanRadioSettings/TXPower",
+        "6in4",
+        "DHCPRenew",
+        "/SetRouterLanSettings/RouterIPAddress",
+        "SetIPv66to4TunnelSettings",
+        "DsLite",
+        "webs",
+        "/SetWLanRadioSettings/SecondaryChannel",
+        "OK_DHCP",
+        "Always",
+        "OK_DETECTING_2",
+        "GetQoSManagementType",
+        "PPPoEDisconnect",
+        "/GetWLanRadioSettings/RadioID",
+        "/SetIPv66rdTunnelSettings/IPv6_LanIPv6AddressRangeStart",
+        "/SetIPv66to4TunnelSettings/IPv6_ConnectionType",
+        "/SetIPv6PppoeSettings/IPv6_LanIPv6AddressRangeStart",
+        "/SetIPv66in4TunnelSettings/IPv6_PrimaryDNS",
+        "/SetClientInfo/ClientInfoLists/ClientInfo/ReserveIP",
+        "PPPoE",
+        "/SetIPv6AutoDetectionSettings/IPv6_DhcpPd",
+        "/SetWebFilterSettings/WebFilterMethod",
+        "dhcp",
+        "/Login/Username",
+        "WLAN5G",
+        "/SetIPv6PppoeSettings/IPv6_PppoeServiceName",
+        "SetQoSSettings",
+        "/SetIPv66in4TunnelSettings/IPv6_SecondaryDNS",
+        "WAIT",
+        "Status",
+        "DownloadBandwidth",
+        "Username",
+        "GetTimeMachineSettings",
+        "/SetDynamicDNSSettings/Timeout",
+        "/SetWebFilterSettings/NumberOfEntry",
+        "/SetDynamicDNSSettings/Password",
+        "_fdata",
+        "/SetIPv6PppoeSettings/IPv6_PppoePassword",
+        "SetWanSettings",
+        "/SetIPv6StaticSettings/IPv6_SecondaryDNS",
+        "/SetIPv66rdTunnelSettings/IPv6_6Rd_IPv6Prefix",
+        "Response",
+        "/SetWanSettings/MTU",
+        "GetIPv6AutoConfigurationSettings",
+        "/SetNetworkSettings/IPRangeEnd",
+        "GetAdvNetworkSettings",
+        "/SetIPv6AutoDetectionSettings/IPv6_SecondaryDNS",
+        "RADIO_5GHz_Guest",
+        "SetNetworkSettings",
+        "Disconnected",
+        "GetUSBStorageDevice",
+        "/SetAdvNetworkSettings/WANPortSpeed",
+        "SetWLanRadioSettings",
+        "/SetWanSettings/Username",
+        "Protocol",
+        "GetIPv6PppoeSettings",
+        "SetSysEmailSettings/OnSchedule",
+        "/SetWanSettings/ServiceName",
+        "/SetAdvNetworkSettings/MulticastIPv6",
+        "OK_CONNECTED",
+        "/SetWLanRadioSettings/RadioID",
+        "/SetIPv66rdTunnelSettings/IPv6_LanAutoConfigurationType",
+        "/SetIPv66rdTunnelSettings/IPv6_6Rd_IPv6PrefixLength",
+        "GetFirmwareValidation",
+        "disable",
+        "/SetRouterLanSettings/DHCPServerEnabled",
+        "/SetIPv6AutoConfigurationSettings/IPv6_LanAutoConfigurationType",
+        "GetDLNA",
+        "GetTimeSettings",
+        "GetClientInfo",
+        "ScheduleDate",
+        "GetOperationMode",
+        "SetSmartconnectSettings",
+        "/SetWanSettings/Password",
+        "/SetIPv6AutoConfigurationSettings/IPv6_LanIPv6AddressRangeStart",
+        "request",
+        "/SetIPv6PppoeSettings/IPv6_PppoeUsername",
+        "SLAAC_RDNSS",
+        "SSID2",
+        "/SetNetworkSettings/Broadcast",
+        "TCPPorts",
+        "/SetIPv6AutoDetectionSettings/IPv6_LanIPv6AddressRangeStart",
+        "POST",
+        "/SetIPv66rdTunnelSettings/IPv6_LanIPv6AddressAutoAssignment",
+        "/SetIPv6AutoDetectionSettings/IPv6_LanAddress",
+        "/SetIPv66in4TunnelSettings/IPv6_LanAutoConfigurationType",
+        "MACAddress",
+        "/SetWLanRadioSecurity/RadioID",
+        "name",
+        "Permission",
+        "/SetIPv66in4TunnelSettings/IPv6_ObtainDNS",
+        "/SetWLanRadioSettings/Coexistence",
+        "/SetWLanRadioSecurity/Encryption",
+        "/HNAP1/",
+        "Channel",
+        "/SetDynamicDNSSettings/ServerAddress",
+        "/SetScheduleSettings/ScheduleInfoLists#",
+        "SetGuestZoneRouterSettings",
+        "GetUSBDevice",
+        "NewSession",
+        "/SetIPv66to4TunnelSettings/IPv6_SecondaryDNS",
+        "/SetWanSettings/SubnetMask",
+        "/SetWLanRadioSettings/SSIDBroadcast",
+        "SetSysLogSettings/SysLog",
+        "/SetIPv66to4TunnelSettings/IPv6_LanIPv6AddressRangeStart",
+        "LocalIPAddress",
+        "/SetIPv6AutoDetectionSettings/IPv6_ConnectionType",
+        "GetMACFilters2",
+        "/SetWanSettings/MacAddress",
+        "/SetDLNA/Enabled",
+        "/SetWLanRadioSecurity/Key",
+        "/SetTimeSettings/DaylightSaving",
+        "/SetMACFilters2/Enabled",
+        "GetWLanRadios",
+        "/SetWLanRadioSecurity/RadiusIP2",
+        "/SetIPv66in4TunnelSettings/IPv6_6In4RemoteIPv6Address",
+        "/SetFirewallSettings/ALGPPTP",
+        "schedule",
+        "Dynamic",
+        "GetVLANSettings",
+        "/SetIPv6PppoeSettings/IPv6_LanIPv6AddressAutoAssignment",
+        "DelMACFilters2",
+        "/SetMACFilters2/MACList/MACInfo#",
+        "ServiceName",
+        "/SetStaticRouteIPv4Settings/StaticRouteIPv4Data/SRIPv4Info#",
+        "SetIPv66in4TunnelSettings",
+        "_edata",
+        "/SetIPv6StaticSettings/IPv6_LanIPv6AddressRangeEnd",
+        "/SetWLanRadioSettings/Channel",
+        "SetAdvNetworkSettings",
+        "SetStaticRouteIPv6Settings",
+        "/SetWLanRadioSecurity/KeyRenewal",
+        "language",
+        "/SetIPv66rdTunnelSettings/IPv6_LanIPv6AddressRangeEnd",
+        "/SetDynamicDNSSettings/Username",
+        "/SetIPv6LinkLocalOnlySettings/IPv6_LanUniqueLocalAddressPrefix",
+        "/SetIPv66rdTunnelSettings/IPv6_6Rd_Configuration",
+        "/SetIPv6StaticSettings/IPv6_LanIPv6AddressAutoAssignment",
+        "DestIPv4AddressRangeStart",
+        "100Mbps",
+        "#text",
+        "/GetWLanRadioSecurity/RadioID",
+        "GetVirtualServerSettings",
+        "/SetDLNA/DeviceName",
+        "GetWLanRadioSettings",
+        "IPv6_AutoDetection",
+        "1000Mbps",
+        "VirtualServerDescription",
+        "GetMultipleHNAPs",
+        "/SetDynamicDNSIPv6Settings/DynamicDNSIPv6List/DDNSIPv6Info/Hostname",
+        "GetScheduleReboot",
+        "/SetNetworkSettings/IPRangeStart",
+        "/SetIPv6AutoConfigurationSettings/IPv6_LanIPv6AddressRangeEnd",
+        "/SetTimeSettings/NTPServer",
+        "SrcIPv6AddressRangeStart",
+        "/SetWanSettings/DsLite_Configuration",
+        "/SetWanSettings/IPAddress",
+        "SetDeviceSettings/DeviceName",
+        "UDPPorts",
+        "/SetGuestZoneRouterSettings/DHCPRangeEnd",
+        "GetSysEmailSettings",
+        "/SetIPv6AutoConfigurationSettings/IPv6_LanAutomaticDhcpPd",
+        "/SetTimeSettings/CurrentDate",
+        "WPA2-PSK",
+        "PPTP",
+        "/SetWanSettings/HostName",
+        "/SetWLanRadioSecurity/RadiusSecret2",
+        "DestIPv6AddressRangeEnd",
+        "/SetIPv6AutoConfigurationSettings/IPv6_ConnectionType",
+        "IPv6_6To4",
+        "/SetIPv66to4TunnelSettings/IPv6_6To4Relay",
+        "fork",
+        "DISCONNECTED",
+        "DHCP",
+        "/SetIPv66in4TunnelSettings/IPv6_LanIPv6AddressAutoAssignment",
+        "/GetListDirectory/ListDirectoryPath",
+        "IPv6_Static",
+        "SetDLNA",
+        "listen",
+        "/SetIPv6StaticSettings/IPv6_LanAddress",
+        "GetIPv6FirewallSettings",
+        "/SetVirtualServerSettings/VirtualServerList/VirtualServerInfo#",
+        "/SetWLanRadioSettings/Mode",
+        "string",
+        "/SetWanSettings/ConfigDNS/Secondary",
+        "Unknown",
+        "/SetIPv66in4TunnelSettings/IPv6_LanAddress",
+        "/SetIPv66in4TunnelSettings/IPv6_6In4LocalIPv6Address",
+        "/SetIPv66to4TunnelSettings/IPv6_6to4LanAddress",
+        "/SetTriggerADIC/TriggerADIC",
+        "ClearStatistics",
+        "SrcIPv6AddressRangeEnd",
+        "IPTV",
+        "PPTPConnect",
+        "GetPortForwardingSettings",
+        "SetIPv6AutoDetectionSettings",
+        "GetIPv6SimpleSecurity",
+        "/SetIPv66rdTunnelSettings/IPv6_6rdHubSpokeMode",
+        "/SetIPv6AutoConfigurationSettings/IPv6_DhcpPd",
+        "/SetIPv66in4TunnelSettings/IPv6_DhcpPd",
+        "Disable",
+        "GetDynamicDNSIPv6Settings",
+        "/SetDMZSettings/IPAddress",
+        "/SetIPv6AutoDetectionSettings/IPv6_LanIPv6AddressAutoAssignment",
+        "AccessPath",
+        "/SetGuestZoneRouterSettings/InternetAccessOnly",
+        "SetSysLogSettings",
+        "SrcIPv4AddressRangeEnd",
+        "WPAPSK",
+        "SetIPv6StaticSettings",
+        "GetGuestZoneRouterSettings",
+        "GetSysLogSettings",
+        "Enable",
+        "/SetIPv6AutoConfigurationSettings/IPv6_LanIPv6AddressAutoAssignment",
+        "admin",
+        "/SetIPv66rdTunnelSettings/IPv6_6Rd_BorderRelayIPv4Address",
+        "GetSMBStatus",
+        "SetDynamicDNSSettings",
+        "signal",
+        "/SetIPv6AutoConfigurationSettings/IPv6_LanRouterAdvertisementLifeTime",
+        "/SetWanSettings/DsLite_B4IPv4Address",
+        "/SetIPv6AutoDetectionSettings/IPv6_ObtainDNS",
+        "SetSysLogSettings/IPAddress",
+        "ExternalPort",
+        "/SetIPv6PppoeSettings/IPv6_LanIPv6AddressRangeEnd",
+        "/SetWanSettings/Type",
+        "/SetWLanRadioSecurity/RadiusSecret1",
+        "/RenewWanConnection/Action",
+        "GetIPv6StaticSettings",
+        "GetDMZSettings",
+        "SetVLANSettings",
+        "PortRangeStart",
+        "/SetIPv66to4TunnelSettings/IPv6_LanAutoConfigurationType",
+        "PPPTPDisconnect",
+        "GetIPv6Status",
+        "TimeMinuteValue",
+        "SetSysEmailSettings/OnLogFull",
+        "GetDeviceFeatureAlpha",
+        "ProtocolType",
+        "/SetIPv6PppoeSettings/IPv6_SecondaryDNS",
+        "/SetMultipleActions/SetWLanRadioSecurity#",
+        "CAPTCHA",
+        "/SetWLanRadioSettings/ScheduleName",
+        "SetIPv6SimpleSecurity",
+        "/RenewIPv6WanConnection/Action",
+        "/SetIPv66to4TunnelSettings/IPv6_PrimaryDNS",
+        "FTP_Port",
+        "Manual",
+        "/SetIPv66rdTunnelSettings/IPv6_ConnectionType",
+        "/SetGuestZoneRouterSettings/DHCPRangeStart",
+        "/SetAdvNetworkSettings/UPNP",
+        "_eval",
+        "GetIPv66to4TunnelSettings",
+        "OK_PPPoE",
+        "/SetFirewallSettings/SPIIPv4",
+        "Enable_BlackList",
+        "GetFirmwareStatus",
+        "/Login/Captcha",
+        "SetDeviceSettings/CAPTCHA",
+        "DHCPv4_Option",
+        "SharedWithIPv4",
+        "ifname",
+        "/SetIPv6PppoeSettings/IPv6_PppoeMaxIdleTime",
+        "GetIPv6LinkLocalOnlySettings",
+        "/SetIPv6AutoConfigurationSettings/IPv6_LanAddress",
+        "IPv6_LinkLocalOnly",
+        "/GetInterfaceStatistics",
+        "SetRouterLanSettings",
+        "StaticPPTP",
+        "GetUsersSettings",
+        "InternalPort",
+        "Interface",
+        "SetUsersSettings",
+        "IPv6_IPv6InIPv4Tunnel",
+        "/SetTimeSettings/NTP",
+        "GetIPv6AutoDetectionSettings",
+        "_ftext",
+        "/SetNetworkSettings/DeviceName",
+        "StaticL2TP",
+        "0123456789abcdefP",
+        "OFFLINE",
+        "/SetGuestZoneRouterSettings/IPAddress",
+        "GetInterfaceStatistics",
+        "DHCPRelease",
+        "DelUserSettings",
+        "/SetIPv6StaticSettings/IPv6_LanAutoConfigurationType",
+        "/Login/LoginPassword",
+        "MacAddress",
+        "/SetWLanRadioSettings/QoS",
+        "SetSysEmailSettings",
+        "WPAORWPA2-PSK",
+        "GetIPv66in4TunnelSettings",
+        "DestInterface",
+        "/SetFirewallSettings/ALGIPSec",
+        "/SetIPv6PppoeSettings/IPv6_PppoeStaticIp",
+        "/SetIPv6PppoeSettings/IPv6_DhcpPd",
+        "GetScheduleSettings",
+        "GetStaticRouteIPv4Settings",
+        "/SetWanSettings/ConfigDNS/Primary",
+        "/SetIPv6AutoDetectionSettings/IPv6_LanAutomaticDhcpPd",
+        "SetPortForwardingSettings",
+        "GetQoSSettings",
+        "pptp",
+        "/SetFirewallSettings/ALGSIP",
+        "Enabled",
+        "/SetIPv6AutoDetectionSettings/IPv6_LanIPv6AddressRangeEnd",
+        "/SetWLanRadioSecurity/Enabled",
+        "/SetIPv6AutoConfigurationSettings/IPv6_PrimaryDNS",
+        "/SetDynamicDNSIPv6Settings/DynamicDNSIPv6List/DDNSIPv6Info",
+        "Reboot",
+        "SetSysEmailSettings/EmailFrom",
+        "/SetIPv6StaticSettings/IPv6_LanIPv6AddressRangeStart",
+        "ERROR_WANLinkDown",
+        "/SetIPv66rdTunnelSettings/IPv6_SecondaryDNS",
+        "/SetIPv66rdTunnelSettings/IPv6_6Rd_MaskLength",
+        "IPv6_AutoConfiguration",
+        "/SetWanSettings/Gateway",
+        "PortRangeEnd",
+        "GetVPNProfile",
+        "/SetWanSettings/AutoReconnect",
+        "Disabled",
+        "/SetWLanRadioSecurity/RadiusPort2",
+        "Edge",
+        "/SetClientInfo/ClientInfoLists/ClientInfo/NickName",
+        "/SetSMBStatus/Enabled",
+        "login",
+        "/SetNetworkSettings/SubnetMask",
+        "SSID",
+        "/SetWLanRadioSettings/SSID",
+        "/SetIPv6PppoeSettings/IPv6_PrimaryDNS",
+        "Mozilla",
+        "/SetIPv66in4TunnelSettings/IPv6_LanIPv6AddressRangeEnd",
+        "/SetIPv6PppoeSettings/IPv6_ObtainDNS",
+        "/SetIPv6AutoDetectionSettings/IPv6_LanRouterAdvertisementLifeTime",
+        "GetFTPSettings",
+        "DestIPv6AddressRangeStart",
+        "IPv6_PPPoE",
+        "/SetTimeSettings/CurrentTime",
+        "SetDMZSettings",
+        "Gateway",
+        "/SetGuestZoneRouterSettings/DHCPServer",
+        "/SetIPv6AutoDetectionSettings/IPv6_PrimaryDNS",
+        "TKIPORAES",
+        "SAMBA",
+        "GetIPv66rdTunnelSettings",
+        "/SetIPv6AutoConfigurationSettings/IPv6_ObtainDNS"
     ],
     "set_get_call_sites_dict": {
         "nvram_bufset": [
@@ -4750,993 +4750,86 @@
         ]
     },
     "relate_file_path": [
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/rc",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/ralink_init",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/ntpclient"
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/ralink_init",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/rc",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/ntpclient"
     ],
     "is_board_binary": true,
     "is_set_role": true,
     "construct_intra_graph_tag": true,
     "diffusion_file": [
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/rc",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/ralink_init",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/ntpclient"
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/ralink_init",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/rc",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/ntpclient"
     ],
     "set_get_code_snippet": {
         "nvram_bufset": {
             "0x43a784": [
-                "nvram_bufset(uVar3,uVar11,__s);",
-                "nvram_bufset(uVar3,uVar11,__s)"
+                "nvram_bufset(uVar3,puVar12,pcVar5);",
+                "nvram_bufset(uVar3,puVar12,pcVar5)"
             ],
             "0x43c858": [
-                "nvram_bufset(uVar7,uVar9,auStack_510);",
-                "nvram_bufset(uVar7,uVar9,auStack_510)"
+                "nvram_bufset(uVar11,puVar2,auStack_510);",
+                "nvram_bufset(uVar11,puVar2,auStack_510)"
             ],
             "0x43cbe8": [
-                "nvram_bufset(uVar7,uVar9,auStack_510);",
-                "nvram_bufset(uVar7,uVar9,auStack_510)"
+                "nvram_bufset(uVar11,puVar2,auStack_510);",
+                "nvram_bufset(uVar11,puVar2,auStack_510)"
             ],
             "0x43b984": [
-                "nvram_bufset(local_294,uVar2,auStack_10c);",
-                "nvram_bufset(local_294,uVar2,auStack_10c)"
+                "nvram_bufset(local_294,puVar2,auStack_10c);",
+                "nvram_bufset(local_294,puVar2,auStack_10c)"
             ],
             "0x44183c": [
-                "nvram_bufset(uVar14,uVar13,auStack_110);",
-                "nvram_bufset(uVar14,uVar13,auStack_110)"
+                "nvram_bufset(uVar16,puVar13,auStack_110);",
+                "nvram_bufset(uVar16,puVar13,auStack_110)"
             ],
             "0x4423a0": [
-                "nvram_bufset(iVar5,uVar13,pcVar9);",
-                "nvram_bufset(iVar5,uVar13,pcVar9)"
+                "nvram_bufset(iVar5,puVar13,pcVar8);",
+                "nvram_bufset(iVar5,puVar13,pcVar8)"
             ],
             "0x43d7b4": [
-                "nvram_bufset(iVar4,uVar9,pcVar15);",
-                "nvram_bufset(iVar4,uVar9,pcVar15)"
+                "nvram_bufset(iVar9,puVar2,pcVar6);",
+                "nvram_bufset(iVar9,puVar2,pcVar6)"
             ],
             "0x43c8b4": [
-                "nvram_bufset(uVar7,uVar9,auStack_798);",
-                "nvram_bufset(uVar7,uVar9,auStack_798)"
+                "nvram_bufset(uVar11,puVar2,acStack_798);",
+                "nvram_bufset(uVar11,puVar2,acStack_798)"
             ],
             "0x441594": [
-                "nvram_bufset(uVar14,uVar13,auStack_110);",
-                "nvram_bufset(uVar14,uVar13,auStack_110)"
-            ],
-            "0x442404": [
-                "nvram_bufset(1,\"SSID1\",pcVar9);",
-                "nvram_bufset(1,\"SSID1\",pcVar9)"
+                "nvram_bufset(uVar16,puVar13,auStack_110);",
+                "nvram_bufset(uVar16,puVar13,auStack_110)"
             ],
             "0x43cc44": [
-                "nvram_bufset(uVar7,uVar9,auStack_798);",
-                "nvram_bufset(uVar7,uVar9,auStack_798)"
+                "nvram_bufset(uVar11,puVar2,acStack_798);",
+                "nvram_bufset(uVar11,puVar2,acStack_798)"
+            ],
+            "0x442404": [
+                "nvram_bufset(1,\"SSID1\",pcVar8);",
+                "nvram_bufset(1,\"SSID1\",pcVar8)"
             ],
             "0x436a48": [
-                "nvram_bufset(param_1,param_3,uVar1);",
-                "nvram_bufset(param_1,param_3,uVar1)"
-            ],
-            "0x43a828": [
-                "nvram_bufset(1,\"SSID1\",__s);",
-                "nvram_bufset(1,\"SSID1\",__s)"
+                "nvram_bufset(param_1,param_3,puVar1);",
+                "nvram_bufset(param_1,param_3,puVar1)"
             ],
             "0x43d818": [
-                "nvram_bufset(1,\"SSID1\",pcVar15);",
-                "nvram_bufset(1,\"SSID1\",pcVar15)"
-            ]
-        },
-        "nvram_bufget": {
-            "0x47d494": [
-                "pcVar2 = (char *)nvram_bufget(1,\"CountryRegionABand\");",
-                "nvram_bufget(1,\"CountryRegionABand\")"
-            ],
-            "0x442758": [
-                "pcVar7 = (char *)nvram_bufget(1,\"CountryCode\");",
-                "nvram_bufget(1,\"CountryCode\")"
-            ],
-            "0x437100": [
-                "uVar5 = nvram_bufget(uVar2,\"EncrypType\");",
-                "nvram_bufget(uVar2,\"EncrypType\")"
-            ],
-            "0x43dcb0": [
-                "pcVar6 = (char *)nvram_bufget(1,\"CountryCode\");",
-                "nvram_bufget(1,\"CountryCode\")"
-            ],
-            "0x4372bc": [
-                "__s = (char *)nvram_bufget(uVar2,uVar4);",
-                "nvram_bufget(uVar2,uVar4)"
-            ],
-            "0x44289c": [
-                "pcVar7 = (char *)nvram_bufget(1,\"CountryCode\");",
-                "nvram_bufget(1,\"CountryCode\")"
-            ],
-            "0x4428f0": [
-                "pcVar7 = (char *)nvram_bufget(1,\"Channel\");",
-                "nvram_bufget(1,\"Channel\")"
-            ],
-            "0x43db6c": [
-                "pcVar6 = (char *)nvram_bufget(1,\"CountryCode\");",
-                "nvram_bufget(1,\"CountryCode\")"
-            ],
-            "0x4369e8": [
-                "local_10 = (undefined *)nvram_bufget(param_1,param_3);",
-                "nvram_bufget(param_1,param_3)"
-            ],
-            "0x43dd04": [
-                "pcVar6 = (char *)nvram_bufget(1,\"Channel\");",
-                "nvram_bufget(1,\"Channel\")"
-            ],
-            "0x43835c": [
-                "uVar2 = nvram_bufget(uVar2,\"HideSSID\");",
-                "nvram_bufget(uVar2,\"HideSSID\")"
-            ],
-            "0x436c30": [
-                "pcVar1 = (char *)nvram_bufget(0,\"CountryRegion\");",
-                "nvram_bufget(0,\"CountryRegion\")"
-            ],
-            "0x436cdc": [
-                "pcVar1 = (char *)nvram_bufget(1,\"CountryRegionABand\");",
-                "nvram_bufget(1,\"CountryRegionABand\")"
-            ],
-            "0x4370d8": [
-                "uVar4 = nvram_bufget(uVar2,\"AuthMode\");",
-                "nvram_bufget(uVar2,\"AuthMode\")"
-            ]
-        },
-        "nvram_set_int": {
-            "0x468b44": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0)"
-            ],
-            "0x46f20c": [
-                "nvram_set_int(uVar3,2);",
-                "nvram_set_int(uVar3,2)"
-            ],
-            "0x46f64c": [
-                "nvram_set_int(uVar3,1);",
-                "nvram_set_int(uVar3,1)"
-            ],
-            "0x47331c": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1)"
-            ],
-            "0x459700": [
-                "nvram_set_int(\"wan_conn_uptime\",0);",
-                "nvram_set_int(\"wan_conn_uptime\",0)"
-            ],
-            "0x471828": [
-                "nvram_set_int(uVar13,1);",
-                "nvram_set_int(uVar13,1)"
-            ],
-            "0x4750cc": [
-                "nvram_set_int(uVar12,0);",
-                "nvram_set_int(uVar12,0)"
-            ],
-            "0x46f738": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1)"
-            ],
-            "0x46a4f8": [
-                "nvram_set_int(uVar12,1);",
-                "nvram_set_int(uVar12,1)"
-            ],
-            "0x468bf0": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1)"
-            ],
-            "0x4732f0": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0)"
-            ],
-            "0x467050": [
-                "nvram_set_int(\"lan0_ipv6_ula_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_ula_prefix_length\",0x40)"
-            ],
-            "0x44051c": [
-                "nvram_set_int(\"wan_conn_uptime\",0);",
-                "nvram_set_int(\"wan_conn_uptime\",0)"
-            ],
-            "0x43f640": [
-                "nvram_set_int(\"wan_conn_uptime\",0);",
-                "nvram_set_int(\"wan_conn_uptime\",0)"
-            ],
-            "0x4717dc": [
-                "nvram_set_int(uVar13,0);",
-                "nvram_set_int(uVar13,0)"
-            ],
-            "0x475118": [
-                "nvram_set_int(uVar12,1);",
-                "nvram_set_int(uVar12,1)"
-            ],
-            "0x46c2d4": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1)"
-            ],
-            "0x46ec98": [
-                "nvram_set_int(uVar3,1);",
-                "nvram_set_int(uVar3,1)"
-            ],
-            "0x46c230": [
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40)"
-            ],
-            "0x467000": [
-                "nvram_set_int(\"lan0_ipv6_ula_defprefix_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_defprefix_enable\",0)"
-            ],
-            "0x46f500": [
-                "nvram_set_int(uVar3,1);",
-                "nvram_set_int(uVar3,1)"
-            ],
-            "0x458efc": [
-                "nvram_set_int(\"wan_conn_uptime\",0);",
-                "nvram_set_int(\"wan_conn_uptime\",0)"
-            ],
-            "0x46a4ac": [
-                "nvram_set_int(uVar12,0);",
-                "nvram_set_int(uVar12,0)"
-            ],
-            "0x468814": [
-                "nvram_set_int(uVar9,0);",
-                "nvram_set_int(uVar9,0)"
-            ],
-            "0x46c354": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1)"
-            ],
-            "0x46ec4c": [
-                "nvram_set_int(uVar3,0);",
-                "nvram_set_int(uVar3,0)"
-            ],
-            "0x46f190": [
-                "nvram_set_int(uVar3,1);",
-                "nvram_set_int(uVar3,1)"
-            ],
-            "0x46ed04": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x46702c": [
-                "nvram_set_int(\"lan0_ipv6_ula_defprefix_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_ula_defprefix_enable\",1)"
-            ],
-            "0x475484": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x46ed84": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1)"
-            ],
-            "0x466fac": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",1)"
-            ],
-            "0x46eb00": [
-                "nvram_set_int(uVar3,0);",
-                "nvram_set_int(uVar3,0)"
-            ],
-            "0x475528": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0)"
-            ],
-            "0x471894": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x473278": [
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40)"
-            ],
-            "0x46c2a8": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0)"
-            ],
-            "0x4730cc": [
-                "nvram_set_int(uVar10,0);",
-                "nvram_set_int(uVar10,0)"
-            ],
-            "0x46bfc4": [
-                "nvram_set_int(uVar9,1);",
-                "nvram_set_int(uVar9,1)"
-            ],
-            "0x46f7b8": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1)"
-            ],
-            "0x471690": [
-                "nvram_set_int(uVar13,0);",
-                "nvram_set_int(uVar13,0)"
-            ],
-            "0x468b70": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1)"
-            ],
-            "0x46a784": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1)"
-            ],
-            "0x4752b4": [
-                "nvram_set_int(uVar12,0);",
-                "nvram_set_int(uVar12,0)"
-            ],
-            "0x466f80": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x46a704": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x43fd90": [
-                "nvram_set_int(\"wan_conn_uptime\",0);",
-                "nvram_set_int(\"wan_conn_uptime\",0)"
-            ],
-            "0x46c19c": [
-                "nvram_set_int(uVar9,0);",
-                "nvram_set_int(uVar9,0)"
-            ],
-            "0x46ed58": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0)"
-            ],
-            "0x46c328": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0)"
-            ],
-            "0x46f70c": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0)"
-            ],
-            "0x475058": [
-                "nvram_set_int(uVar12,1);",
-                "nvram_set_int(uVar12,1)"
-            ],
-            "0x468af0": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x471968": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0)"
-            ],
-            "0x47329c": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x46f78c": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0)"
-            ],
-            "0x4716dc": [
-                "nvram_set_int(uVar13,1);",
-                "nvram_set_int(uVar13,1)"
-            ],
-            "0x468bc4": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0)"
-            ],
-            "0x46f600": [
-                "nvram_set_int(uVar3,0);",
-                "nvram_set_int(uVar3,0)"
-            ],
-            "0x473340": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0)"
-            ],
-            "0x47500c": [
-                "nvram_set_int(uVar12,0);",
-                "nvram_set_int(uVar12,0)"
-            ],
-            "0x46ece0": [
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40)"
-            ],
-            "0x4718e8": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0)"
-            ],
-            "0x468a84": [
-                "nvram_set_int(uVar9,1);",
-                "nvram_set_int(uVar9,1)"
-            ],
-            "0x46c254": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x46eb4c": [
-                "nvram_set_int(uVar3,1);",
-                "nvram_set_int(uVar3,1)"
-            ],
-            "0x46f4b4": [
-                "nvram_set_int(uVar3,0);",
-                "nvram_set_int(uVar3,0)"
-            ],
-            "0x475460": [
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40)"
-            ],
-            "0x46a758": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0)"
-            ],
-            "0x46ee04": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1)"
-            ],
-            "0x4731a0": [
-                "nvram_set_int(uVar10,1);",
-                "nvram_set_int(uVar10,1)"
-            ],
-            "0x468acc": [
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40)"
-            ],
-            "0x46bf78": [
-                "nvram_set_int(uVar9,0);",
-                "nvram_set_int(uVar9,0)"
-            ],
-            "0x471914": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1)"
-            ],
-            "0x475388": [
-                "nvram_set_int(uVar12,1);",
-                "nvram_set_int(uVar12,1)"
-            ],
-            "0x46a6e0": [
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40)"
-            ],
-            "0x468a38": [
-                "nvram_set_int(uVar9,0);",
-                "nvram_set_int(uVar9,0)"
-            ],
-            "0x46c1e8": [
-                "nvram_set_int(uVar9,1);",
-                "nvram_set_int(uVar9,1)"
-            ],
-            "0x475504": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",1)"
-            ],
-            "0x471994": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",1)"
-            ],
-            "0x46f258": [
-                "nvram_set_int(uVar3,0);",
-                "nvram_set_int(uVar3,0)"
-            ],
-            "0x459edc": [
-                "nvram_set_int(\"wan_conn_uptime\",0);",
-                "nvram_set_int(\"wan_conn_uptime\",0)"
-            ],
-            "0x46edd8": [
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_dhcppd_enable\",0)"
-            ],
-            "0x471870": [
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40)"
-            ],
-            "0x468860": [
-                "nvram_set_int(uVar9,1);",
-                "nvram_set_int(uVar9,1)"
-            ],
-            "0x46f6b8": [
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_ula_enable\",0)"
-            ],
-            "0x46f694": [
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40);",
-                "nvram_set_int(\"lan0_ipv6_prefix_length\",0x40)"
-            ],
-            "0x4754d8": [
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0);",
-                "nvram_set_int(\"lan0_ipv6_autoconf_enable\",0)"
-            ]
-        },
-        "nvram_get_int": {
-            "0x446ecc": [
-                "iVar6 = nvram_get_int(\"alg_sip_enable\");",
-                "nvram_get_int(\"alg_sip_enable\")"
-            ],
-            "0x46925c": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x46ff00": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x4663c0": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_ula_defprefix_enable\");",
-                "nvram_get_int(\"lan0_ipv6_ula_defprefix_enable\")"
-            ],
-            "0x46ad78": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x46553c": [
-                "iVar1 = nvram_get_int(uVar7);",
-                "nvram_get_int(uVar7)"
-            ],
-            "0x473c50": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x46d4e8": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_dhcppd_enable\");",
-                "nvram_get_int(\"lan0_ipv6_dhcppd_enable\")"
-            ],
-            "0x46763c": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_dhcppd_enable\");",
-                "nvram_get_int(\"lan0_ipv6_dhcppd_enable\")"
-            ],
-            "0x48255c": [
-                "iVar1 = nvram_get_int(\"USB_Max_Account_Num\");",
-                "nvram_get_int(\"USB_Max_Account_Num\")"
-            ],
-            "0x471fb0": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x46b0fc": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x479b24": [
-                "iVar1 = nvram_get_int(\"SAMBA_Enabled\");",
-                "nvram_get_int(\"SAMBA_Enabled\")"
-            ],
-            "0x468fe0": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x470054": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_dhcppd_enable\");",
-                "nvram_get_int(\"lan0_ipv6_dhcppd_enable\")"
-            ],
-            "0x47d46c": [
-                "iVar3 = nvram_get_int(\"CountryRegion\");",
-                "nvram_get_int(\"CountryRegion\")"
-            ],
-            "0x45e3c0": [
-                "iVar3 = nvram_get_int(\"mac_filter_enable\");",
-                "nvram_get_int(\"mac_filter_enable\")"
-            ],
-            "0x483414": [
-                "iVar3 = nvram_get_int(\"USB_Max_Account_Num\");",
-                "nvram_get_int(\"USB_Max_Account_Num\")"
-            ],
-            "0x450e64": [
-                "iVar1 = nvram_get_int(\"quickVPN_Enable\");",
-                "nvram_get_int(\"quickVPN_Enable\")"
-            ],
-            "0x46ca2c": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x446788": [
-                "iVar1 = nvram_get_int(\"dmz_enable\");",
-                "nvram_get_int(\"dmz_enable\")"
-            ],
-            "0x4703d8": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x485ef8": [
-                "iVar1 = nvram_get_int(\"DLNA_Enable\");",
-                "nvram_get_int(\"DLNA_Enable\")"
-            ],
-            "0x45f128": [
-                "iVar1 = nvram_get_int(\"schedule_max_num\");",
-                "nvram_get_int(\"schedule_max_num\")"
-            ],
-            "0x46cc84": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x462944": [
-                "iVar1 = nvram_get_int(\"schedule_max_num\");",
-                "nvram_get_int(\"schedule_max_num\")"
-            ],
-            "0x479440": [
-                "iVar1 = nvram_get_int(\"FTP_Enabled\");",
-                "nvram_get_int(\"FTP_Enabled\")"
-            ],
-            "0x446e84": [
-                "iVar4 = nvram_get_int(\"alg_ipsec_enable\");",
-                "nvram_get_int(\"alg_ipsec_enable\")"
-            ],
-            "0x479488": [
-                "uVar3 = nvram_get_int(\"FTP_Port\");",
-                "nvram_get_int(\"FTP_Port\")"
-            ],
-            "0x4674e8": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x4679c0": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_dhcppd_enable\");",
-                "nvram_get_int(\"lan0_ipv6_dhcppd_enable\")"
-            ],
-            "0x46786c": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x4476f8": [
-                "iVar1 = nvram_get_int(\"ipv6_simple_security\");",
-                "nvram_get_int(\"ipv6_simple_security\")"
-            ],
-            "0x4438a8": [
-                "iVar3 = nvram_get_int(\"guest_login_blocked\");",
-                "nvram_get_int(\"guest_login_blocked\")"
-            ],
-            "0x42f3e0": [
-                "iVar4 = nvram_get_int(\"SysLogMail_Auth_Enable\");",
-                "nvram_get_int(\"SysLogMail_Auth_Enable\")"
-            ],
-            "0x46c9c8": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x470004": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x432c84": [
-                "iVar6 = nvram_get_int(\"lan0_dhcps_broadcast_enable\");",
-                "nvram_get_int(\"lan0_dhcps_broadcast_enable\")"
-            ],
-            "0x4704dc": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x4675ec": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x474048": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x4812f4": [
-                "iVar1 = nvram_get_int(\"USB_Max_Account_Num\");",
-                "nvram_get_int(\"USB_Max_Account_Num\")"
-            ],
-            "0x46cdd8": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_dhcppd_enable\");",
-                "nvram_get_int(\"lan0_ipv6_dhcppd_enable\")"
-            ],
-            "0x446ea8": [
-                "iVar5 = nvram_get_int(\"alg_rtsp_enable\");",
-                "nvram_get_int(\"alg_rtsp_enable\")"
-            ],
-            "0x46d498": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x447a90": [
-                "iVar1 = nvram_get_int(\"ipv6_ingress_filtering\");",
-                "nvram_get_int(\"ipv6_ingress_filtering\")"
-            ],
-            "0x4737b4": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x432c44": [
-                "iVar5 = nvram_get_int(\"lan0_dhcps_lease\");",
-                "nvram_get_int(\"lan0_dhcps_lease\")"
-            ],
-            "0x42f460": [
-                "iVar4 = nvram_get_int(\"SysLogMail_Schedule_Enable\");",
-                "nvram_get_int(\"SysLogMail_Schedule_Enable\")"
-            ],
-            "0x46515c": [
-                "iVar5 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x46aff8": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x4763dc": [
-                "iVar3 = nvram_get_int(\"ntp_DaylightSavingsUsed\");",
-                "nvram_get_int(\"ntp_DaylightSavingsUsed\")"
-            ],
-            "0x44a218": [
-                "nvram_get_int(\"firewall_ipv6_filter_max_num\");",
-                "nvram_get_int(\"firewall_ipv6_filter_max_num\")"
-            ],
-            "0x446e18": [
-                "iVar1 = nvram_get_int(\"firewall_spi_enable\");",
-                "nvram_get_int(\"firewall_spi_enable\")"
-            ],
-            "0x4794ac": [
-                "uVar4 = nvram_get_int(\"FTP_Idletime\");",
-                "nvram_get_int(\"FTP_Idletime\")"
-            ],
-            "0x46b14c": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_dhcppd_enable\");",
-                "nvram_get_int(\"lan0_ipv6_dhcppd_enable\")"
-            ],
-            "0x469370": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x46ac74": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x434ad8": [
-                "iVar4 = nvram_get_int(\"lan0_dhcps_enable\");",
-                "nvram_get_int(\"lan0_dhcps_enable\")"
-            ],
-            "0x446e3c": [
-                "iVar2 = nvram_get_int(\"Anti_Spoofing_enable\");",
-                "nvram_get_int(\"Anti_Spoofing_enable\")"
-            ],
-            "0x42f37c": [
-                "iVar4 = nvram_get_int(\"SysLogMail_Enable\");",
-                "nvram_get_int(\"SysLogMail_Enable\")"
-            ],
-            "0x463f04": [
-                "iVar2 = nvram_get_int(\"schedule_max_num\");",
-                "nvram_get_int(\"schedule_max_num\")"
-            ],
-            "0x473744": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x476bec": [
-                "iVar3 = nvram_get_int(\"ntp_DaylightSavingsUsed\");",
-                "nvram_get_int(\"ntp_DaylightSavingsUsed\")"
-            ],
-            "0x466498": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_ula_defprefix_enable\");",
-                "nvram_get_int(\"lan0_ipv6_ula_defprefix_enable\")"
-            ],
-            "0x473b3c": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x452ddc": [
-                "iVar4 = nvram_get_int(\"wan_conn_uptime\");",
-                "nvram_get_int(\"wan_conn_uptime\")"
-            ],
-            "0x443978": [
-                "iVar3 = nvram_get_int(\"lan1_dhcps_lease\");",
-                "nvram_get_int(\"lan1_dhcps_lease\")"
-            ],
-            "0x42f420": [
-                "iVar4 = nvram_get_int(\"SysLogMail_LogFull_Enable\");",
-                "nvram_get_int(\"SysLogMail_LogFull_Enable\")"
-            ],
-            "0x443930": [
-                "iVar3 = nvram_get_int(\"lan1_dhcps_enable\");",
-                "nvram_get_int(\"lan1_dhcps_enable\")"
-            ],
-            "0x43bf80": [
-                "iVar2 = nvram_get_int(\"BandSteering\");",
-                "nvram_get_int(\"BandSteering\")"
-            ],
-            "0x46d13c": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x47231c": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x4662f0": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_ula_defprefix_enable\");",
-                "nvram_get_int(\"lan0_ipv6_ula_defprefix_enable\")"
-            ],
-            "0x42eb3c": [
-                "iVar1 = nvram_get_int(\"SysLogRemote_Enable\");",
-                "nvram_get_int(\"SysLogRemote_Enable\")"
-            ],
-            "0x46adc8": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_dhcppd_enable\");",
-                "nvram_get_int(\"lan0_ipv6_dhcppd_enable\")"
-            ],
-            "0x479464": [
-                "iVar2 = nvram_get_int(\"FTP_RemoteFTP\");",
-                "nvram_get_int(\"FTP_RemoteFTP\")"
-            ],
-            "0x44802c": [
-                "nvram_get_int(\"firewall_filter_max_num\");",
-                "nvram_get_int(\"firewall_filter_max_num\")"
-            ],
-            "0x446e60": [
-                "iVar3 = nvram_get_int(\"alg_pptp_enable\");",
-                "nvram_get_int(\"alg_pptp_enable\")"
-            ],
-            "0x4662b4": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_ula_enable\");",
-                "nvram_get_int(\"lan0_ipv6_ula_enable\")"
-            ],
-            "0x46cd88": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x46d0d8": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x432cc4": [
-                "iVar6 = nvram_get_int(\"lan0_dns_relay_enable\");",
-                "nvram_get_int(\"lan0_dns_relay_enable\")"
-            ],
-            "0x46d394": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x467970": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x4695ec": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_autoconf_enable\");",
-                "nvram_get_int(\"lan0_ipv6_autoconf_enable\")"
-            ],
-            "0x473cc0": [
-                "iVar1 = nvram_get_int(uVar4);",
-                "nvram_get_int(uVar4)"
-            ],
-            "0x47052c": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_dhcppd_enable\");",
-                "nvram_get_int(\"lan0_ipv6_dhcppd_enable\")"
-            ],
-            "0x466448": [
-                "iVar1 = nvram_get_int(\"lan0_ipv6_ula_enable\");",
-                "nvram_get_int(\"lan0_ipv6_ula_enable\")"
-            ]
-        },
-        "nvram_match": {
-            "0x46ab60": [
-                "iVar1 = nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x4702c4": [
-                "iVar1 = nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x4673d4": [
-                "iVar1 = nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x46cb70": [
-                "iVar1 = nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x471de8": [
-                "nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x46fdec": [
-                "iVar1 = nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x46d280": [
-                "iVar1 = nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x472154": [
-                "nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x46aee4": [
-                "iVar1 = nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ],
-            "0x467758": [
-                "iVar1 = nvram_match(uVar4,&DAT_004ab7ac);",
-                "nvram_match(uVar4,&DAT_004ab7ac)"
-            ]
-        },
-        "nvram_get": {
-            "0x4380b0": [
-                "local_220 = (char *)nvram_get(uVar2,\"TxPower\");",
-                "nvram_get(uVar2,\"TxPower\")"
-            ],
-            "0x437938": [
-                "local_238 = nvram_get(uVar2,\"SSID1\");",
-                "nvram_get(uVar2,\"SSID1\")"
-            ],
-            "0x437afc": [
-                "pcVar4 = (char *)nvram_get(uVar2,\"Radio24Vap1En\");",
-                "nvram_get(uVar2,\"Radio24Vap1En\")"
-            ],
-            "0x47cf2c": [
-                "pcVar2 = (char *)nvram_get(0,\"CountryCode\");",
-                "nvram_get(0,\"CountryCode\")"
-            ],
-            "0x47d448": [
-                "iVar3 = nvram_get_int(\"CountryRegion\");",
-                "nvram_get_int(\"CountryRegion\")"
-            ],
-            "0x437994": [
-                "local_238 = nvram_get(uVar2,\"SSID2\");",
-                "nvram_get(uVar2,\"SSID2\")"
-            ],
-            "0x47cfe0": [
-                "pcVar2 = (char *)nvram_get(1,\"CountryCode\");",
-                "nvram_get(1,\"CountryCode\")"
-            ],
-            "0x47d420": [
-                "uVar4 = nvram_get(0,\"SSID1\");",
-                "nvram_get(0,\"SSID1\")"
-            ],
-            "0x437f2c": [
-                "nvram_get(1,\"HT_BW\");",
-                "nvram_get(1,\"HT_BW\")"
-            ],
-            "0x437e08": [
-                "__s1_00 = (char *)nvram_get(0,\"HT_BSSCoexistence\");",
-                "nvram_get(0,\"HT_BSSCoexistence\")"
-            ],
-            "0x437b9c": [
-                "pcVar4 = (char *)nvram_get(uVar2,\"Radio58On\");",
-                "nvram_get(uVar2,\"Radio58On\")"
-            ],
-            "0x437a5c": [
-                "pcVar4 = (char *)nvram_get(uVar2,\"Radio24On\");",
-                "nvram_get(uVar2,\"Radio24On\")"
-            ],
-            "0x43a7d4": [
-                "pcVar4 = (char *)nvram_get(uVar3,\"BandSteering\");",
-                "nvram_get(uVar3,\"BandSteering\")"
-            ],
-            "0x437880": [
-                "local_238 = nvram_get(uVar2,\"SSID1\");",
-                "nvram_get(uVar2,\"SSID1\")"
-            ],
-            "0x437c3c": [
-                "pcVar4 = (char *)nvram_get(uVar2,\"Radio58Vap1En\");",
-                "nvram_get(uVar2,\"Radio58Vap1En\")"
-            ],
-            "0x437cd8": [
-                "(pcVar4 = (char *)nvram_get(uVar2,\"WirelessMode\"), __s1 != (char *)0x0)) &&",
-                "nvram_get(uVar2,\"WirelessMode\")"
-            ],
-            "0x4378dc": [
-                "local_238 = nvram_get(uVar2,\"SSID2\");",
-                "nvram_get(uVar2,\"SSID2\")"
-            ],
-            "0x437de0": [
-                "pcVar6 = (char *)nvram_get(0,\"HT_BW\");",
-                "nvram_get(0,\"HT_BW\")"
-            ],
-            "0x438220": [
-                "local_21c = (char *)nvram_get(0,\"wifi24Vap1ScheduleName\");",
-                "nvram_get(0,\"wifi24Vap1ScheduleName\")"
-            ],
-            "0x437d30": [
-                "(uVar5 = nvram_get(uVar2,\"CusChannel\"), __s1 != (char *)0x0)) {",
-                "nvram_get(uVar2,\"CusChannel\")"
-            ],
-            "0x4381c4": [
-                "local_21c = (char *)nvram_get(0,\"wifi24RootScheduleName\");",
-                "nvram_get(0,\"wifi24RootScheduleName\")"
-            ],
-            "0x437f54": [
-                "pcVar6 = (char *)nvram_get(1,\"VHT_BW\");",
-                "nvram_get(1,\"VHT_BW\")"
+                "nvram_bufset(1,\"SSID1\",pcVar6);",
+                "nvram_bufset(1,\"SSID1\",pcVar6)"
+            ],
+            "0x43a828": [
+                "nvram_bufset(1,\"SSID1\",pcVar5);",
+                "nvram_bufset(1,\"SSID1\",pcVar5)"
             ]
         }
     },
     "ghidra_func_identify_failed": {
-        "nvram_bufset": [],
-        "nvram_bufget": [],
-        "nvram_set_int": [],
-        "nvram_get_int": [],
-        "nvram_match": [],
-        "nvram_get": []
+        "nvram_bufset": []
     },
-    "ghidra_project": true,
+    "ghidra_project": false,
     "get_set_function_info": [
         [
             "nvram_bufset",

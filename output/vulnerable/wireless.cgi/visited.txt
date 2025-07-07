@@ -1,0 +1,8 @@
+
+[1/4] sub_4010d8, 7s
+[2/4] sub_400d14, 3s
+[3/4] sub_400c78, 1s
+[4/4] sub_400b10, 0s
+New_input_getters functions: 
+ Done 
+Total time: 19s 

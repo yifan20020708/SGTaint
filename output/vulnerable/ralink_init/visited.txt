@@ -1,8 +1,9 @@
 
-sub_401ac8
-sub_408718
-sub_408a74
-main, 41s
-sub_401978, 0s
+[1/5] sub_401ac8
+[2/5] sub_408718
+[3/5] sub_408a74
+[4/5] main, 35s
+[5/5] sub_401978, 1s
+New_input_getters functions: 
  Done 
-Total time: 66s 
+Total time: 44s 

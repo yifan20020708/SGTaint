@@ -339,7 +339,6 @@ class AnalysisBinary():
             clinic = dec.clinic
             self.handler.set_clinic(clinic)
             self.handler.set_dec(dec)
-            self.angr_dec_cache[caller_func.addr] = dec
         except Exception as e:
             self.handler.set_clinic(None)
             self.handler.set_dec(None)
@@ -361,6 +360,7 @@ class AnalysisBinary():
         
     # 通过Angr获取反编译片段
     def get_decompile_code_by_angr(self):
+        start_time = datetime.datetime.now()
         # 处理source2sink片段
         for idx, source2sink_single_path in enumerate(self.source2sink_path, start=1):
             function_angr_format = transfer_path_to_ghidra(source2sink_single_path["path"], self.project, self.cfg)
@@ -368,17 +368,25 @@ class AnalysisBinary():
                 for i, function_format in enumerate(function_angr_format):
                     if function_format[0] in self.angr_dec_cache:
                         dec = self.angr_dec_cache[function_format[0]]
+                        dec_source = "cache"
                     else: # 缓存中不存在
                         dec = self.project.analyses.Decompiler(self.project.kb.functions.get(function_format[0]), cfg=self.cfg)
                         self.angr_dec_cache[function_format[0]] = dec
+                        dec_source = "create"
                     function_angr_format[i] = [dec] + function_format
             except Exception as e:
                 logger.error(f"[{idx}/{len(self.source2sink_path)}] Decompiler generation failed: {e}!")
+                source2sink_single_path["decompile_list"] = ["Fail to Decompile by Angr"]
                 continue
             taint_source = source2sink_single_path["taint_source"]
             taint_sink = source2sink_single_path["taint_sink"]
-            source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
-            logger.info(f"[{idx}/{len(self.source2sink_path)}] Analysis Finished for source2sink path in {self.binary_path}!")
+            try:
+                source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+            except Exception as e:
+                logger.error(f"[{idx}/{len(self.source2sink_path)}] Decompiler generation failed: {e}!")
+                source2sink_single_path["decompile_list"] = ["Fail to Decompile by Angr"]
+                continue
+            logger.info(f"[{idx}/{len(self.source2sink_path)}] Analysis Finished for source2sink path in {self.binary_path} from {dec_source}!")
         # 处理get2set片段
         for idx, get2set_single_path in enumerate(self.get2set_path, start=1):
             function_angr_format = transfer_path_to_ghidra(get2set_single_path["path"], self.project, self.cfg)
@@ -386,17 +394,28 @@ class AnalysisBinary():
                 for i, function_format in enumerate(function_angr_format):
                     if function_format[0] in self.angr_dec_cache:
                         dec = self.angr_dec_cache[function_format[0]]
+                        dec_source = "cache"
                     else: # 缓存中不存在
                         dec = self.project.analyses.Decompiler(self.project.kb.functions.get(function_format[0]), cfg=self.cfg)
                         self.angr_dec_cache[function_format[0]] = dec
+                        dec_source = "create"
                     function_angr_format[i] = [dec] + function_format
             except Exception as e:
                 logger.error(f"[{idx}/{len(self.get2set_path)}] Decompiler generation failed: {e}!")
+                get2set_single_path["decompile_list"] = ["Fail to Decompile by Angr"]
                 continue
             taint_source = get2set_single_path["taint_source"]
             taint_sink = get2set_single_path["taint_sink"]
-            get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
-            logger.info(f"[{idx}/{len(self.get2set_path)}] Analysis Finished for get2set path in {self.binary_path}!")
+            try:
+                get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+            except Exception as e:
+                logger.error(f"[{idx}/{len(self.get2set_path)}] Decompiler generation failed: {e}!")
+                get2set_single_path["decompile_list"] = ["Fail to Decompile by Angr"]
+                continue
+            logger.info(f"[{idx}/{len(self.get2set_path)}] Analysis Finished for get2set path in {self.binary_path} from {dec_source}!")
+        end_time = datetime.datetime.now()
+        elapsed = (end_time - start_time).seconds
+        logger.info(f"Decompile by angr for {self.binary_path} finished in {elapsed}s")
         
     # 通过Ghidra获取反编译片段
     def get_decompile_code_by_ghidra(self):
@@ -466,10 +485,16 @@ class AnalysisBinary():
                         function_angr_format[i] = [dec] + function_format
                 except Exception as e:
                     logger.error(f"Decompiler generation failed: {e}!")
+                    source2sink_single_path["decompile_list"] = ["Fail to Decompile by Angr and Ghidra"]
                     continue
                 taint_source = source2sink_single_path["taint_source"]
-                taint_sink = source2sink_single_path["taint_sink"] 
-                source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+                taint_sink = source2sink_single_path["taint_sink"]
+                try:
+                    source2sink_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+                except Exception as e:
+                    logger.error(f"Decompiler generation failed: {e}!")
+                    source2sink_single_path["decompile_list"] = ["Fail to Decompile by Angr and Ghidra"]
+                    continue
         for get2set_single_path in self.get2set_path:
             if "Fail to Decompile by Ghidra" in get2set_single_path["decompile_list"]: # 表示Ghidra反编译失败
                 function_angr_format = get2set_single_path["ghidra_path"]
@@ -483,10 +508,16 @@ class AnalysisBinary():
                         function_angr_format[i] = [dec] + function_format
                 except Exception as e:
                     logger.error(f"Decompiler generation failed: {e}!")
+                    get2set_single_path["decompile_list"] = ["Fail to Decompile by Angr"]
                     continue
                 taint_source = get2set_single_path["taint_source"]
                 taint_sink = get2set_single_path["taint_sink"]
-                get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+                try:
+                    get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
+                except Exception as e:
+                    logger.error(f"Decompiler generation failed: {e}!")
+                    get2set_single_path["decompile_list"] = ["Fail to Decompile by Angr"]
+                    continue
         
     # 将二进制文件加载到Ghidra中
     def load_ghidra(self):

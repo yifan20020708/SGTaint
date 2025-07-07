@@ -1,202 +1,203 @@
 
-TW_GetFactoryMode, 0s
-iptables_upnp_run, 13s
-FIREWALL_IPv6_FILTER_run
-sub_406184
-WLAN_guest_login_block, 10s
-alg_ipseccommit_handler, 1s
-tw_add_device_mac
-tw_add_porttrigger_iptables_rule, 39s
-tw_get_cur_wan_type
-tw_add_reserve_ip_to_file, 3s
-PORTFORWARD_run
-tw_start_ftpd, 22s
-ipv6_router_address, 2s
-nvifname_to_osifname
-LAN_WANIPConflictHandler, 25s
-TW_get_wan_ifname, 1s
-TW_get_use_wan_prefix, 20s
-nvram_get_double
-tw_sroute_init, 4s
-nvram_get_int
-ure_any_enabled, 0s
-getRouteDev, 13s
-alg_sipcommit_handler, 0s
-TW_Spi_Fw_Config, 148s
-get_wan6_mac, 2s
-upload_trigger_rules, 1s
-DMZ_run, 51s
-get_lan_mac, 0s
-start_miniupnpd_finish, 4s
-TW_Anti_Spoofing_Init, 16s
-tw_get_usb_wan_interface, 0s
-MACFILTER_run
-Get_The_Interface_By_Proto, 1s
-get_bridged_interfaces
-Gobi_SignalLevel_Int, 11s
-Gobi_SignalQuality_Int, 11s
-add_iptables_for_lan, 3s
-alg_rtspcommit_handler, 1s
-sub_4220c0, 3s
-creat_miniupnpd_iptables, 11s
-upload_url_filter_rules, 19s
-tw_check_Iscurrtime_Indsrange, 2s
-TW_get_wan_netmask, 0s
-ipv6_wan_getconntype, 2s
-Gobi_ConnectISP, 19s
-upload_ping_block_rules, 5s
-getRCModeType, 2s
-start_syslogd, 1s
-USBWAN_generate_3G_ppp_conf, 84s
-Gobi_ConnectStatus_Int, 11s
-delete_trigger_rules, 12s
-tw_get_wan_interface, 1s
-USBWAN_remove_card, 2s
-setRCWANModeType, 2s
-ipv6_wan_getdetectconntype, 2s
-VIRTUALSERVER_run
-trigger_timeout, 0s
-ipv6_wan_prefix, 5s
-MASQUERADENAT_run
-ipv6_lan_prefix, 2s
-TW_IPv6_Ingress_Filtering_Init, 3s
-IPFILTER_run, 37s
-FIREWALL_FILTER_run
-TW_Anti_DOS_Config
-tw_wl_guest_cafestyle, 6s
-parse_parental_control_rules, 11s
-QOS_start, 4s
-tw_set_timezone, 0s
-tw_lanip_reserve_check
-alg_pptpcommit_handler, 1s
-sub_415ff0, 3s
-Qos_init_sw_rules
-miniupnpd, 1s
-REMOTEMANGE_run
-TW_get_wan_ipaddr, 0s
-stupidftp_ruleCreate
-tw_set_dstoffset, 0s
-Gobi_SelectBand, 3s
-kill_pidfile_s, 0s
-getIfIpv6addr, 2s
-sub_418b10, 0s
-USBWAN_find_card_switch_file
-Gobi_QcnVersion, 2s
-getFlashContentByOffset, 0s
-kill_pidfile, 0s
-Gobi_FwVersion, 2s
-detect_process, 1s
-Gobi_SimCard, 1s
-get_pid_by_name, 1s
-get_meminfo_item, 0s
-Gobi_IMEI, 3s
-set_miniupnpd_config, 2s
-Gobi_BandChannel, 42s
-send_signal_to_pid, 1s
-sub_404c14
-set_nth_value_flash, 3s
-TW_StrReplace, 2s
-get_ifname_unit, 1s
-set_nth_value, 2s
-splitNvram, 1s
-ipv6_lan_genulaprefix, 1s
-psname, 0s
-get_process_name_by_pid, 0s
-sub_418f04
-check_if_dir_writable, 0s
-ether_etoa
-tw_add_static_route, 1s
-mac_check_and_change, 0s
-getIfMac, 0s
-file_lock, 1s
-USBWAN_check_card_support, 2s
-ipv6_wan_getpathprefix
-tw_set_localtime_to_nvram, 0s
-start_logmonitor, 0s
-tw_enable_coredump, 0s
-loadFactoryDefault, 0s
-loadDefault, 0s
-COMM_SystemEx, 0s
-start_alg_service, 0s
-IPFILTER_chain_init, 0s
-tw_add_url_filter_chain, 0s
-start_timer, 0s
-VIRTUALSERVER_chain_destroy, 1s
-tw_add_parent_control_chain, 0s
-tw_add_porttrigger_chain_for_nat, 0s
-tw_del_parent_skipctf_chain, 0s
-TW_IPv6_Simple_Security_Destroy, 1s
-FIREWALL_IPv6_FILTER_chain_init, 0s
-PORTFORWARD_chain_destroy, 1s
-DMZ_chain_init, 1s
-sub_40fc50, 4s
-del_acl_ping_chain, 0s
-tw_add_url_filter_iptables_rule, 0s
-TW_grc_run, 1s
-load_iptalbes, 1s
-VIRTUALSERVER_chain_init, 1s
-QOS_chain_init
-QOS_stop
-tw_del_skipctf_chain, 0s
-TCPMSS_run, 0s
-MACFILTER_chain_destroy, 0s
-tw_add_parent_skipctf_chain, 0s
-TW_Anti_Spoofing_Destroy, 2s
-FIREWALL_FILTER_add_allow_rule_drop, 0s
-REMOTEMANGE_chain_init, 0s
-PORTFORWARD_chain_init, 1s
-IPFILTER_chain_destroy, 0s
-tw_del_parent_skipctf_iptables_rule, 0s
-FIREWALL_IPv6_FILTER_chain_destroy, 0s
-tw_del_url_filter_chain, 0s
-Anti_DOS_rule_clear, 4s
-iptables_upnp_destroy, 1s
-tw_del_porttrigger_chain_for_filter, 0s
-FIREWALL_FILTER_chain_init, 0s
-tw_add_url_allow_filter_iptables_rule, 0s
-tw_add_skipctf_chain, 0s
-USBWAN_switch_card_common, 1s
-QOS_init_interface
-tw_add_porttrigger_chain_for_filter, 0s
-tw_add_skipctf_iptables_rule, 0s
-tw_add_parental_control_rules, 0s
-add_acl_ping_chain, 0s
-tw_del_parent_control_chain, 0s
-TW_IPv6_Ingress_Filtering_Destroy, 1s
-tw_del_skipctf_iptables_rule, 0s
-MACFILTER_add_allow_rule_drop, 0s
-ping_unblock_iptables_rules, 0s
-tw_add_parent_skipctf_iptables_rule, 0s
-QOS_chain_destroy, 1s
-TW_flush_all_chain, 0s
-tw_del_url_filter_iptables_rule, 0s
-IPFILTER_add_allow_rule_drop, 0s
-TW_IPv6_Simple_Security_Init, 13s
-TW_wan_pre_run
-FIREWALL_FILTER_chain_destroy, 0s
-FIREWALL_IPv6_FILTER_add_allow_rule_drop, 0s
-REMOTEMANGE_chain_destroy, 1s
-MACFILTER_chain_init, 0s
-tw_add_url_filter_iptables_rule_drop
-DMZ_chain_destroy, 1s
-tw_del_porttrigger_chain_for_nat, 0s
-ping_block_iptables_rules, 0s
-reset_ipv6_linklocal_addr, 1s
-stop_syslogd, 0s
-start_btn, 0s
-stop_logmonitor, 0s
-start_klogd, 0s
-stop_miniupnpd, 0s
-tw_stop_ftpd, 0s
-stop_btn, 0s
-start_downloader, 0s
-stop_timer, 0s
-stop_klogd, 0s
-_eval, 3s
-nvram_set_double, 0s
-cleanRCModeType, 0s
-setAllRCModetype, 0s
-nvram_set_int, 0s
-TW_Anti_DOS_ReConfig, 0s
+[1/199] TW_GetFactoryMode, 0s
+[2/199] iptables_upnp_run, 7s
+[3/199] FIREWALL_IPv6_FILTER_run
+[4/199] sub_406184
+[5/199] WLAN_guest_login_block, 51s
+[6/199] alg_ipseccommit_handler, 1s
+[7/199] tw_add_device_mac
+[8/199] tw_add_porttrigger_iptables_rule, 183s
+[9/199] tw_get_cur_wan_type
+[10/199] tw_add_reserve_ip_to_file, 51s
+[11/199] PORTFORWARD_run
+[12/199] tw_start_ftpd, 24s
+[13/199] ipv6_router_address, 2s
+[14/199] nvifname_to_osifname
+[15/199] LAN_WANIPConflictHandler, 27s
+[16/199] TW_get_wan_ifname, 1s
+[17/199] TW_get_use_wan_prefix, 22s
+[18/199] nvram_get_double
+[19/199] tw_sroute_init, 4s
+[20/199] nvram_get_int
+[21/199] ure_any_enabled, 0s
+[22/199] getRouteDev, 6s
+[23/199] alg_sipcommit_handler, 0s
+[24/199] TW_Spi_Fw_Config, 339s
+[25/199] get_wan6_mac, 2s
+[26/199] upload_trigger_rules, 1s
+[27/199] DMZ_run, 33s
+[28/199] get_lan_mac, 0s
+[29/199] start_miniupnpd_finish, 4s
+[30/199] TW_Anti_Spoofing_Init, 114s
+[31/199] tw_get_usb_wan_interface, 0s
+[32/199] MACFILTER_run
+[33/199] Get_The_Interface_By_Proto, 48s
+[34/199] get_bridged_interfaces
+[35/199] Gobi_SignalLevel_Int, 6s
+[36/199] Gobi_SignalQuality_Int, 58s
+[37/199] add_iptables_for_lan, 54s
+[38/199] alg_rtspcommit_handler, 1s
+[39/199] sub_4220c0, 57s
+[40/199] creat_miniupnpd_iptables, 6s
+[41/199] upload_url_filter_rules, 40s
+[42/199] tw_check_Iscurrtime_Indsrange, 2s
+[43/199] TW_get_wan_netmask, 0s
+[44/199] ipv6_wan_getconntype, 2s
+[45/199] Gobi_ConnectISP, 13s
+[46/199] upload_ping_block_rules, 5s
+[47/199] getRCModeType, 2s
+[48/199] start_syslogd, 1s
+[49/199] USBWAN_generate_3G_ppp_conf, 105s
+[50/199] Gobi_ConnectStatus_Int, 57s
+[51/199] delete_trigger_rules, 39s
+[52/199] tw_get_wan_interface, 1s
+[53/199] USBWAN_remove_card, 2s
+[54/199] setRCWANModeType, 2s
+[55/199] ipv6_wan_getdetectconntype, 2s
+[56/199] VIRTUALSERVER_run
+[57/199] trigger_timeout, 0s
+[58/199] ipv6_wan_prefix, 5s
+[59/199] MASQUERADENAT_run
+[60/199] ipv6_lan_prefix, 55s
+[61/199] TW_IPv6_Ingress_Filtering_Init, 3s
+[62/199] IPFILTER_run, 120s
+[63/199] FIREWALL_FILTER_run
+[64/199] TW_Anti_DOS_Config
+[65/199] tw_wl_guest_cafestyle, 6s
+[66/199] parse_parental_control_rules, 5s
+[67/199] QOS_start, 47s
+[68/199] tw_set_timezone, 0s
+[69/199] tw_lanip_reserve_check
+[70/199] alg_pptpcommit_handler, 49s
+[71/199] sub_415ff0, 4s
+[72/199] Qos_init_sw_rules
+[73/199] miniupnpd, 48s
+[74/199] REMOTEMANGE_run
+[75/199] TW_get_wan_ipaddr, 0s
+[76/199] stupidftp_ruleCreate
+[77/199] tw_set_dstoffset, 1s
+[78/199] Gobi_SelectBand, 3s
+[79/199] kill_pidfile_s, 0s
+[80/199] getIfIpv6addr, 2s
+[81/199] sub_418b10, 0s
+[82/199] USBWAN_find_card_switch_file
+[83/199] Gobi_QcnVersion, 2s
+[84/199] getFlashContentByOffset, 1s
+[85/199] kill_pidfile, 0s
+[86/199] Gobi_FwVersion, 3s
+[87/199] detect_process, 1s
+[88/199] Gobi_SimCard, 1s
+[89/199] get_pid_by_name, 1s
+[90/199] get_meminfo_item, 46s
+[91/199] Gobi_IMEI, 3s
+[92/199] set_miniupnpd_config, 2s
+[93/199] Gobi_BandChannel, 3s
+[94/199] send_signal_to_pid, 1s
+[95/199] sub_404c14
+[96/199] set_nth_value_flash, 3s
+[97/199] TW_StrReplace, 2s
+[98/199] get_ifname_unit, 47s
+[99/199] set_nth_value, 2s
+[100/199] splitNvram, 1s
+[101/199] ipv6_lan_genulaprefix, 1s
+[102/199] psname, 1s
+[103/199] get_process_name_by_pid, 1s
+[104/199] sub_418f04
+[105/199] check_if_dir_writable, 0s
+[106/199] ether_etoa
+[107/199] tw_add_static_route, 1s
+[108/199] mac_check_and_change, 1s
+[109/199] getIfMac, 1s
+[110/199] file_lock, 54s
+[111/199] USBWAN_check_card_support, 2s
+[112/199] ipv6_wan_getpathprefix
+[113/199] tw_set_localtime_to_nvram, 0s
+[114/199] start_logmonitor, 0s
+[115/199] tw_enable_coredump, 0s
+[116/199] loadFactoryDefault, 1s
+[117/199] loadDefault, 1s
+[118/199] COMM_SystemEx, 0s
+[119/199] start_alg_service, 0s
+[120/199] IPFILTER_chain_init, 0s
+[121/199] tw_add_url_filter_chain, 0s
+[122/199] start_timer, 0s
+[123/199] VIRTUALSERVER_chain_destroy, 1s
+[124/199] tw_add_parent_control_chain, 0s
+[125/199] tw_add_porttrigger_chain_for_nat, 0s
+[126/199] tw_del_parent_skipctf_chain, 43s
+[127/199] TW_IPv6_Simple_Security_Destroy, 2s
+[128/199] FIREWALL_IPv6_FILTER_chain_init, 0s
+[129/199] PORTFORWARD_chain_destroy, 1s
+[130/199] DMZ_chain_init, 1s
+[131/199] sub_40fc50, 4s
+[132/199] del_acl_ping_chain, 0s
+[133/199] tw_add_url_filter_iptables_rule, 0s
+[134/199] TW_grc_run, 1s
+[135/199] load_iptalbes, 1s
+[136/199] VIRTUALSERVER_chain_init, 1s
+[137/199] QOS_chain_init
+[138/199] QOS_stop
+[139/199] tw_del_skipctf_chain, 0s
+[140/199] TCPMSS_run, 1s
+[141/199] MACFILTER_chain_destroy, 0s
+[142/199] tw_add_parent_skipctf_chain, 0s
+[143/199] TW_Anti_Spoofing_Destroy, 2s
+[144/199] FIREWALL_FILTER_add_allow_rule_drop, 0s
+[145/199] REMOTEMANGE_chain_init, 52s
+[146/199] PORTFORWARD_chain_init, 1s
+[147/199] IPFILTER_chain_destroy, 0s
+[148/199] tw_del_parent_skipctf_iptables_rule, 0s
+[149/199] FIREWALL_IPv6_FILTER_chain_destroy, 0s
+[150/199] tw_del_url_filter_chain, 0s
+[151/199] Anti_DOS_rule_clear, 4s
+[152/199] iptables_upnp_destroy, 1s
+[153/199] tw_del_porttrigger_chain_for_filter, 0s
+[154/199] FIREWALL_FILTER_chain_init, 47s
+[155/199] tw_add_url_allow_filter_iptables_rule, 0s
+[156/199] tw_add_skipctf_chain, 0s
+[157/199] USBWAN_switch_card_common, 1s
+[158/199] QOS_init_interface
+[159/199] tw_add_porttrigger_chain_for_filter, 0s
+[160/199] tw_add_skipctf_iptables_rule, 0s
+[161/199] tw_add_parental_control_rules, 0s
+[162/199] add_acl_ping_chain, 0s
+[163/199] tw_del_parent_control_chain, 0s
+[164/199] TW_IPv6_Ingress_Filtering_Destroy, 52s
+[165/199] tw_del_skipctf_iptables_rule, 0s
+[166/199] MACFILTER_add_allow_rule_drop, 0s
+[167/199] ping_unblock_iptables_rules, 0s
+[168/199] tw_add_parent_skipctf_iptables_rule, 0s
+[169/199] QOS_chain_destroy, 1s
+[170/199] TW_flush_all_chain, 0s
+[171/199] tw_del_url_filter_iptables_rule, 0s
+[172/199] IPFILTER_add_allow_rule_drop, 0s
+[173/199] TW_IPv6_Simple_Security_Init, 8s
+[174/199] TW_wan_pre_run
+[175/199] FIREWALL_FILTER_chain_destroy, 0s
+[176/199] FIREWALL_IPv6_FILTER_add_allow_rule_drop, 0s
+[177/199] REMOTEMANGE_chain_destroy, 1s
+[178/199] MACFILTER_chain_init, 0s
+[179/199] tw_add_url_filter_iptables_rule_drop
+[180/199] DMZ_chain_destroy, 1s
+[181/199] tw_del_porttrigger_chain_for_nat, 0s
+[182/199] ping_block_iptables_rules, 0s
+[183/199] reset_ipv6_linklocal_addr, 2s
+[184/199] stop_syslogd, 0s
+[185/199] start_btn, 0s
+[186/199] stop_logmonitor, 0s
+[187/199] start_klogd, 0s
+[188/199] stop_miniupnpd, 0s
+[189/199] tw_stop_ftpd, 0s
+[190/199] stop_btn, 0s
+[191/199] start_downloader, 0s
+[192/199] stop_timer, 0s
+[193/199] stop_klogd, 0s
+[194/199] _eval, 3s
+[195/199] nvram_set_double, 0s
+[196/199] cleanRCModeType, 0s
+[197/199] setAllRCModetype, 0s
+[198/199] nvram_set_int, 0s
+[199/199] TW_Anti_DOS_ReConfig, 0s
+New_input_getters functions: 
  Done 
-Total time: 1752s 
+Total time: 4415s 

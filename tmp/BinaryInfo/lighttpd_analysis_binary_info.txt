@@ -1,0 +1,165 @@
+Binary Path: /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/lighttpd
+
+========== Binary Function Keywords ==========
+[1] 0123456789abcdef
+[2] Accepted
+[3] Allow
+[4] Content-Type
+[5] Cookie
+[6] Date
+[7] Host
+[8] If-Modified-Since
+[9] If-None-Match
+[10] Locked
+[11] Unknown
+[12] __start
+[13] _edata
+[14] _end
+[15] _fdata
+[16] _ftext
+[17] abort
+[18] aelements
+[19] array
+[20] bytes=
+[21] chroot
+[22] close
+[23] disable
+[24] dlclose
+[25] dlerror
+[26] dlopen
+[27] enable
+[28] fork
+[29] input
+[30] listen
+[31] mmap
+[32] perror
+[33] select
+[34] signal
+[35] text/html
+[36] tzset
+[37] unknown
+[38] unlink
+[39] value
+
+========== Set-Get Call Sites ==========
+No set-get call sites found.
+
+========== Related File Paths ==========
+No related file paths found.
+
+========== Diffusion File Paths ==========
+No diffusion file paths found.
+
+========== Set-Get Function Info ==========
+[1] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+[2] Set: nvram_safe_set, Get: nvram_safe_get, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+
+========== Source2Sink Paths ==========
+*** Path #1 ***
+target_addr         : 0x4154f0
+target_name         : proc_open
+source_name         : proc_open
+source_insr_addr    : 0x415530
+source_addr         : 0x500268
+taint_source        : getenv
+sink_insr_addr      : 0x415694
+sink_addr           : proc_open
+taint_sink          : execl
+checking_time       : 0
+conditions_str      : 
+visited_functions   : getenv
+fail2captureConditionsTime: 0
+error_messges_str   : return*-1
+str_length_visited_function: 
+path                : 0x415674#0x415534#0x4154f0
+source_keyword      : SHELL
+start_block         : 4281972
+end_block           : 4281584
+decompile_list      : ['    v3 = getenv("SHELL");\n    v4 = v3;\n    if (v3 == 0)\n    {\n        v4 = "/bin/sh";\n    }\n    v5 = sub_415368(a0);\n    v10 = -1;\n    if (v5 == 0)\n    {\n        v6 = sub_415368(&v2[3]);\n        if (v6 == 0)\n        {\n            v7 = sub_415368(&v2[6]);\n            if (v7 == 0)\n            {\n                v8 = fork();\n                if (!(v8 != 0))\n                {\n                    _ftext();\n                    _ftext(&v2[3]);\n                    _ftext(&v2[6]);\n                    v0 = 0;\n                    execl(v4, v4);']
+
+========== Get2Set Paths ==========
+No paths paths found.
+
+========== SOURCE ==========
+[1] sub_1d170
+[2] config_get
+[3] NK_query_entry_get
+[4] webGetVarString
+[5] bcm_nvram_get
+[6] GetValue
+[7] acosNvramConfig_read
+[8] sub_42af24
+[9] sub_42a978
+[10] get_cgi
+[11] websGetVar
+[12] nvram_get
+[13] nvram_safe_get
+[14] nvram_default_get
+[15] getenv
+[16] nvram_pf_get
+[17] acosNvramConfig_get
+[18] uciGet
+[19] entry
+[20] wpa_config_get
+[21] httpGenListDataGet
+[22] cJSON_GetArrayItem
+[23] vici_find_str
+[24] DoHardwareComponent
+[25] device_get_string_value
+[26] cJSON_Parse
+[27] OM_ValGet
+[28] acosUciConfig_get
+[29] CAL_abstract_get
+[30] json_object_object_get
+[31] json_object_object_get_ex
+[32] json_tokener_parse
+[33] OM_ValFind
+[34] get_parameter
+[35] get_wlan_setting
+[36] av_dict_get
+[37] cgi_value
+[38] stringOut
+[39] cJSON_GetObjectItem
+[40] sw_getValueByName
+[41] querystr
+[42] find_val
+[43] log_query
+[44] value_parser_by_index_D7000
+[45] getoption
+[46] WEB_GetVar
+[47] av_opt_get
+[48] paramValueFromObjGet
+[49] help_getObjPtr
+[50] NCONF_get_string
+[51] av_metadata_get
+[52] httpGetEnv
+[53] gets
+[54] fgets
+[55] recvfrom
+[56] recvmsg
+[57] nvram_get_ex2
+[58] nvram_bufget
+[59] apmib_get
+
+========== TRANSITIVE SET ==========
+[1] config_set
+[2] SetValue
+[3] setenv
+[4] nvram_set
+[5] nvram_safe_set
+[6] nvram_pf_set
+[7] artblock_set
+[8] acos_nvram_set
+[9] acosNvramConfig_set
+[10] acosNvramConfig_write
+[11] envz_add
+[12] uciSet
+[13] device_set_string_value
+[14] wpa_config_set
+[15] scfgmgr_set_by_index_D7000
+[16] acosUciConfig_set
+[17] OM_ValSet
+[18] CAL_abstract_set
+[19] nvram_bufset
+[20] apmib_set
+

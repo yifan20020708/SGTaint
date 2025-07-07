@@ -1,4 +1,4 @@
-Binary Path: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer
+Binary Path: /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer
 
 ========== Binary Function Keywords ==========
 No keywords found.
@@ -57,11 +57,11 @@ nvram_safe_set:
   [5] Call Site Address: 0x403620, Caller: 0x4033c4, Block Address: 0x403620, Key: schedule_enable
 
 ========== Related File Paths ==========
-[1] /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi
-[2] /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so
+[1] /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi
+[2] /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so
 
 ========== Diffusion File Paths ==========
-[1] /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so
+[1] /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so
 
 ========== Set-Get Function Info ==========
 [1] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
@@ -69,27 +69,26 @@ nvram_safe_set:
 
 ========== Source2Sink Paths ==========
 *** Path #1 ***
-error_messges_str   : 
-source_keyword      : RC_ModeType
-str_length_visited_function: 
-decompile_list      : ['  puVar2 = (undefined4 *)nvram_safe_get("RC_ModeType");\n  puVar4 = puVar2;\n  pcVar1 = local_50;\n  do {\n    pcVar5 = pcVar1;\n    puVar3 = puVar4;\n    uVar8 = puVar3[1];\n    uVar7 = puVar3[2];\n    uVar6 = puVar3[3];\n    puVar4 = puVar3 + 4;\n    *(undefined4 *)pcVar5 = *puVar3;\n    *(undefined4 *)(pcVar5 + 4) = uVar8;\n    *(undefined4 *)(pcVar5 + 8) = uVar7;\n    *(undefined4 *)(pcVar5 + 0xc) = uVar6;\n    pcVar1 = pcVar5 + 0x10;\n  } while (puVar4 != puVar2 + 0xc);\n  uVar7 = puVar3[5];\n  uVar6 = puVar3[6];\n  *(undefined4 *)(pcVar5 + 0x10) = *puVar4;\n  *(undefined4 *)(pcVar5 + 0x14) = uVar7;\n  *(undefined4 *)(pcVar5 + 0x18) = uVar6;\n  pcVar5[0x1c] = *(char *)(puVar3 + 7);\n  pcVar5[0x1d] = *(char *)((int)puVar3 + 0x1d);\n  pcVar5[0x1e] = *(char *)((int)puVar3 + 0x1e);\n  uVar9 = 0;\n  if (local_50[0] != \'\\0\') {\n    uVar9 = atoi(local_50);\n  }\n  sprintf(local_50,"%d",uVar9 | 1 << (param_1 & 0x1f));']
-target_name         : setRCWANModeType
-ghidra_path         : [[4203980, 4204040, 4204060, 4204248, 4204276]]
 target_addr         : 0x4025cc
-conditions_str      : t0@(v0<4> != t0<4>)
-end_block           : 4204040
+target_name         : setRCWANModeType
+source_name         : setRCWANModeType
+source_insr_addr    : 0x40261c
+source_addr         : 0x5000a0
 taint_source        : nvram_safe_get
-start_block         : 4204248
+sink_insr_addr      : 0x4026f4
+sink_addr           : setRCWANModeType
 taint_sink          : sprintf
-path                : 0x4026d8#0x4026d8#0x4026d0#0x4026c0#0x4026c0#0x40262c#0x40262c#0x40262c#0x40262c#0x40262c#0x402608
+checking_time       : 1
+conditions_str      : t0@(v0<4> != t0<4>)
 visited_functions   : sprintf#atoi#nvram_safe_get
 fail2captureConditionsTime: 0
-source_insr_addr    : 0x40261c
-sink_addr           : setRCWANModeType
-sink_insr_addr      : 0x4026f4
-checking_time       : 1
-source_name         : setRCWANModeType
-source_addr         : 0x5000a0
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x4026d8#0x4026d8#0x4026d0#0x4026c0#0x4026c0#0x40262c#0x40262c#0x40262c#0x40262c#0x40262c#0x402608
+source_keyword      : RC_ModeType
+start_block         : 4204248
+end_block           : 4204040
+decompile_list      : ['    v12 = nvram_safe_get("RC_ModeType");\n    v13 = &v1;\n    v10 = &v12[1].field_8;\n    do\n    {\n        a3 = (a3 & 16777215 >> (char)(8 * (&((char *)&v12->field_0)[3] & 3)) | *((int *)((char *)&v12->field_0 + 3 & -0x4)) << (char)(3 - (&((char *)&v12->field_0)[3] & 3) << 3)) & !(-1 >> (char)((v12 & 3) << 3)) | *((int *)(v12 & -0x4)) >> (char)((v12 & 3) << 3);\n        v7 = (v7 & 16777215 >> (char)(8 * (&((char *)&v12->field_3)[3] & 3)) | *((int *)((char *)&v12->field_3 + 3 & -0x4)) << (char)(3 - (&((char *)&v12->field_3)[3] & 3) << 3)) & !(-1 >> (char)((&v12->field_3 & 3) << 3)) | *((int *)(&v12->field_3 & -0x4)) >> (char)((&v12->field_3 & 3) << 3);\n        v6 = (v6 & 16777215 >> (char)(8 * (&((char *)&v12->field_4)[3] & 3)) | *((int *)((char *)&v12->field_4 + 3 & -0x4)) << (char)(3 - (&((char *)&v12->field_4)[3] & 3) << 3)) & !(-1 >> (char)((&v12->field_4 & 3) << 3)) | *((int *)(&v12->field_4 & -0x4)) >> (char)((&v12->field_4 & 3) << 3);\n        v11 = (v11 & 16777215 >> (char)(8 * (&((char *)&v12->field_7)[3] & 3)) | *((int *)((char *)&v12->field_7 + 3 & -0x4)) << (char)(3 - (&((char *)&v12->field_7)[3] & 3) << 3)) & !(-1 >> (char)((&v12->field_7 & 3) << 3)) | *((int *)(&v12->field_7 & -0x4)) >> (char)((&v12->field_7 & 3) << 3);\n        v12 = &v12->field_8;\n        v1 = a3;\n        v2 = v7;\n        v3 = v6;\n        v4 = v11;\n        v13 = &v5;\n    }\n    while (v12 != v10);\n    v14 = (v6 & 16777215 >> (char)(8 * (&((char *)&v12->field_3)[3] & 3)) | *((int *)((char *)&v12->field_3 + 3 & -0x4)) << (char)(3 - (&((char *)&v12->field_3)[3] & 3) << 3)) & !(-1 >> (char)((&v12->field_3 & 3) << 3)) | *((int *)(&v12->field_3 & -0x4)) >> (char)((&v12->field_3 & 3) << 3);\n    tmp_130 = (v11 & 16777215 >> (char)(8 * (&((char *)&v12->field_4)[3] & 3)) | *((int *)((char *)&v12->field_4 + 3 & -0x4)) << (char)(3 - (&((char *)&v12->field_4)[3] & 3) << 3)) & !(-1 >> (char)((&v12->field_4 & 3) << 3)) | *((int *)(&v12->field_4 & -0x4)) >> (char)((&v12->field_4 & 3) << 3);\n    v13->field_0 = (v7 & 16777215 >> (char)(8 * (&((char *)&v12->field_0)[3] & 3)) | *((int *)((char *)&v12->field_0 + 3 & -0x4)) << (char)(3 - (&((char *)&v12->field_0)[3] & 3) << 3)) & !(-1 >> (char)((v12 & 3) << 3)) | *((int *)(v12 & -0x4)) >> (char)((v12 & 3) << 3);\n    v13->field_4 = v14;\n    v13->field_8 = tmp_130;\n    v13->field_c = v12->field_7;\n    v13->field_d = *(&((char *)&v12->field_7)[1]);\n    v13->field_e = *(&((char *)&v12->field_7)[2]);\n    v15 = 0;\n    if ((char)v1 != 0)\n    {\n        v15 = atoi(&v1);\n    }\n    v16 = 1 << (char)(a0 & 31);\n    v17 = v15 | v16;\n    sprintf(&v1, "%d", v17);']
 
 ========== Get2Set Paths ==========
 No paths paths found.
@@ -151,7 +150,9 @@ No paths paths found.
 [54] fgets
 [55] recvfrom
 [56] recvmsg
-[57] nvram_bufget
+[57] nvram_get_ex2
+[58] nvram_bufget
+[59] apmib_get
 
 ========== TRANSITIVE SET ==========
 [1] config_set
@@ -173,4 +174,5 @@ No paths paths found.
 [17] OM_ValSet
 [18] CAL_abstract_set
 [19] nvram_bufset
+[20] apmib_set
 

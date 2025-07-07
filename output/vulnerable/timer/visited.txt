@@ -1,13 +1,14 @@
 
-sub_401c80, 4s
-main, 30s
-sub_402cc0, 1s
-tw_check_parental_control_time, 2s
-sub_402724, 8s
-sub_402f68, 3s
-setRCWANModeType, 2s
-parse_parental_control_rules, 3s
-sub_402074, 5s
-sub_402510, 0s
+[1/10] sub_401c80, 5s
+[2/10] main, 24s
+[3/10] sub_402cc0, 2s
+[4/10] tw_check_parental_control_time, 3s
+[5/10] sub_402724, 8s
+[6/10] sub_402f68, 3s
+[7/10] setRCWANModeType, 2s
+[8/10] parse_parental_control_rules, 4s
+[9/10] sub_402074, 5s
+[10/10] sub_402510, 0s
+New_input_getters functions: 
  Done 
-Total time: 75s 
+Total time: 62s 

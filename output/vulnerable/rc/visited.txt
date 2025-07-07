@@ -1,209 +1,210 @@
 
-sub_43b980, 1s
-load_wifi_driver, 2s
-sub_4076d0, 1s
-sub_429e18, 8s
-start_wlan, 4s
-start_wan
-sub_448608, 102s
-sub_43e614, 8s
-main, 13s
-stop_lan_up, 8s
-stop_staticroute_ipv4, 5s
-sub_408e20, 1s
-sub_42ee30, 83s
-sub_43b630, 1s
-sub_413c30, 55s
-sub_404c30, 1s
-add_ip6_lanaddr, 1s
-stop_wan6, 3s
-wan_up, 63s
-sub_44ac40, 46s
-stop_staticroute_ipv6, 2s
-sub_433244
-start_lan_br, 32s
-sub_41da4c, 5s
-sub_420e4c, 1s
-sub_408c54, 0s
-sub_440c58, 6s
-sub_40c258, 2s
-sub_420060, 1s
-sub_459664, 3s
-sub_42ec64, 1s
-start_staticroute_ipv4, 7s
-sub_40ac68, 4s
-sub_44ce68, 19s
-sub_44546c, 20s
-start_lan_ipv6, 5s
-start_staticroute_ipv6, 18s
-start_wan6, 54s
-start_lan_up, 20s
-sub_411a90, 2s
-stop_wan, 28s
-start_get_online_fw_version, 1s
-sub_439498, 5s
-sub_440498, 0s
-stop_ipv6_tunnel, 2s
-stop_dslite_tunnel, 2s
-wan_wan0_vlan_create_interface, 46s
-start_DDNS_ipv4, 13s
-sub_4038c4, 16s
-sub_434cc8, 16s
-sub_42d2cc, 2s
-start_ipv6_tunnel
-set_wan_speed, 2s
-sub_40b6e0, 14s
-sub_437ee0, 8s
-wan_wan0_vlan_delete_interface, 1s
-sub_4450e4, 0s
-stop_lan_ipv6, 0s
-sub_4544f0, 20s
-sub_40c8f4, 0s
-sub_40b2f8, 1s
-sub_43f300, 4s
-sub_441100, 5s
-sub_404900, 0s
-sub_438508, 0s
-sub_40cd0c, 0s
-start_lan_ipv6serivce, 0s
-stop_lan_br, 5s
-sub_420724, 2s
-sub_438f24, 2s
-sub_411324, 1s
-sub_40e324, 7s
-sub_44252c, 0s
-sub_44273c, 18s
-sub_42d544, 7s
-init_switch, 2s
-sub_44f748, 5s
-sub_405f50, 2s
-sub_445b50, 183s
-sub_440554, 20s
-start_dnsmasq, 41s
-wan_down
-sub_40ef5c, 4s
-sub_413960, 2s
-start_ntpc, 2s
-sub_427360, 5s
-update_resolvconf, 30s
-start_dev_mgt_link, 19s
-sub_404170, 5s
-sub_40c974, 0s
-sub_449974, 23s
-start_igmp_proxy, 6s
-setup_passwd, 1s
-sub_453584, 248s
-sub_423988
-sub_411590, 2s
-start_schedule, 87s
-sub_438d94
-sub_40b59c, 0s
-sub_447f9c, 35s
-sub_4079a4, 17s
-lan_wan_ip_conflict_handler, 39s
-sub_41fbb4, 2s
-handle_notifications, 25s
-start_services, 1s
-sub_4247c0, 22s
-sub_4337dc, 29s
-sub_41e1dc, 3s
-sub_44f3e0, 1s
-hotplug_net, 7s
-start_DDNS_ipv6, 9s
-sub_44e7e8, 8s
-sub_435bec
-start_dslite_tunnel, 3s
-sub_4049f4, 1s
-sub_40bbfc, 14s
-sub_4451e0, 1s
-sub_451dec, 2s
-sub_454e0c, 5s
-sub_4550cc, 57s
-hotplug_usb, 3s
-sub_44e6b4, 3s
-sub_42bf04, 3s
-init_eth_hwaddr, 2s
-sub_428994, 3s
-sub_440824, 2s
-sub_4500a8, 4s
-sub_450834, 1s
-sub_412d3c, 8s
-sub_4279bc, 2s
-sub_40744c, 1s
-sub_43fdd0, 4s
-hotplug_block, 17s
-sub_4285dc, 2s
-sub_45276c, 0s
-sub_41d56c, 3s
-sub_428e6c, 0s
-mtd_open, 1s
-sub_4175fc, 1s
-sub_453510, 0s
-sub_40b528, 0s
-sub_42d8b4
-sub_4122c0, 2s
-sub_455458, 0s
-sub_403160, 0s
-sub_445070, 0s
-sub_424670, 0s
-wan_if_getpathprefix, 0s
-sub_4414a0, 4s
-sub_4097a8, 0s
-sub_425928, 0s
-start_ftp, 3s
-sub_4062dc, 1s
-sub_452a68, 3s
-sub_452974, 0s
-sub_429380, 1s
-sub_412898, 0s
-stop_DDNS_ipv4, 0s
-sub_409050
-tw_enable_coredump, 0s
-sub_4126f4, 0s
-sub_42c974, 3s
-sub_43fb80, 0s
-sub_406f8c, 1s
-sub_442690, 0s
-sub_43bd90, 0s
-init_mod, 0s
-stop_schedule, 0s
-stop_quick_vpn, 0s
-sub_4064b0, 3s
-sub_43bcdc, 0s
-sub_43bdfc, 0s
-sub_40ce6c, 1s
-stop_ftp, 0s
-sub_458374, 2s
-stop_dnsmasq, 0s
-sub_441df8, 0s
-sub_437cfc, 0s
-stop_ntpc, 0s
-sub_452900, 0s
-sub_438800, 0s
-sub_412110, 0s
-start_dhcp6c, 2s
-sub_43a4a0, 0s
-sub_4121ac, 0s
-sub_4335ac, 0s
-sub_43887c, 0s
-sub_43abf8, 0s
-sub_43863c, 0s
-sub_41e7c4, 0s
-sub_41e748, 0s
-sub_4336d4, 0s
-sub_437dd8, 0s
-sub_411fdc, 0s
-sub_43875c, 0s
-sub_452f60, 0s
-sub_4386e0, 0s
-sub_434b64, 0s
-sub_43ac64, 0s
-stop_igmp_proxy, 0s
-sub_4388e8, 0s
-sub_412078, 0s
-sub_403814, 0s
-sub_4037a8, 0s
-init_product_info, 0s
-start_services_once, 0s
+[1/206] sub_43b980, 1s
+[2/206] load_wifi_driver, 2s
+[3/206] sub_4076d0, 1s
+[4/206] sub_429e18, 8s
+[5/206] start_wlan, 40s
+[6/206] start_wan
+[7/206] sub_448608, 236s
+[8/206] sub_43e614, 56s
+[9/206] main, 13s
+[10/206] stop_lan_up, 53s
+[11/206] stop_staticroute_ipv4, 5s
+[12/206] sub_408e20, 1s
+[13/206] sub_42ee30, 116s
+[14/206] sub_43b630, 1s
+[15/206] sub_413c30, 49s
+[16/206] sub_404c30, 1s
+[17/206] add_ip6_lanaddr, 1s
+[18/206] stop_wan6, 3s
+[19/206] wan_up, 60s
+[20/206] sub_44ac40, 234s
+[21/206] stop_staticroute_ipv6, 7s
+[22/206] sub_433244
+[23/206] start_lan_br, 7s
+[24/206] sub_41da4c, 5s
+[25/206] sub_420e4c, 1s
+[26/206] sub_408c54, 1s
+[27/206] sub_440c58, 7s
+[28/206] sub_40c258, 2s
+[29/206] sub_420060, 1s
+[30/206] sub_459664, 3s
+[31/206] sub_42ec64, 1s
+[32/206] start_staticroute_ipv4, 7s
+[33/206] sub_40ac68, 4s
+[34/206] sub_44ce68, 12s
+[35/206] sub_44546c, 13s
+[36/206] start_lan_ipv6, 6s
+[37/206] start_staticroute_ipv6, 12s
+[38/206] start_wan6, 198s
+[39/206] start_lan_up, 59s
+[40/206] sub_411a90, 54s
+[41/206] stop_wan, 134s
+[42/206] start_get_online_fw_version, 1s
+[43/206] sub_439498, 30s
+[44/206] sub_440498, 0s
+[45/206] stop_ipv6_tunnel, 2s
+[46/206] stop_dslite_tunnel, 2s
+[47/206] wan_wan0_vlan_create_interface, 15s
+[48/206] start_DDNS_ipv4, 13s
+[49/206] sub_4038c4, 10s
+[50/206] sub_434cc8, 11s
+[51/206] sub_42d2cc, 2s
+[52/206] start_ipv6_tunnel
+[53/206] set_wan_speed, 2s
+[54/206] sub_40b6e0, 9s
+[55/206] sub_437ee0, 96s
+[56/206] wan_wan0_vlan_delete_interface, 1s
+[57/206] sub_4450e4, 0s
+[58/206] stop_lan_ipv6, 1s
+[59/206] sub_4544f0, 14s
+[60/206] sub_40c8f4, 0s
+[61/206] sub_40b2f8, 1s
+[62/206] sub_43f300, 4s
+[63/206] sub_441100, 6s
+[64/206] sub_404900, 0s
+[65/206] sub_438508, 0s
+[66/206] sub_40cd0c, 1s
+[67/206] start_lan_ipv6serivce, 0s
+[68/206] stop_lan_br, 6s
+[69/206] sub_420724, 3s
+[70/206] sub_438f24, 2s
+[71/206] sub_411324, 1s
+[72/206] sub_40e324, 7s
+[73/206] sub_44252c, 1s
+[74/206] sub_44273c, 10s
+[75/206] sub_42d544, 8s
+[76/206] init_switch, 3s
+[77/206] sub_44f748, 5s
+[78/206] sub_405f50, 2s
+[79/206] sub_445b50, 570s
+[80/206] sub_440554, 14s
+[81/206] start_dnsmasq, 40s
+[82/206] wan_down
+[83/206] sub_40ef5c, 4s
+[84/206] sub_413960, 2s
+[85/206] start_ntpc, 2s
+[86/206] sub_427360, 5s
+[87/206] update_resolvconf, 30s
+[88/206] start_dev_mgt_link, 44s
+[89/206] sub_404170, 56s
+[90/206] sub_40c974, 1s
+[91/206] sub_449974, 60s
+[92/206] start_igmp_proxy, 55s
+[93/206] setup_passwd, 57s
+[94/206] sub_453584, 782s
+[95/206] sub_423988
+[96/206] sub_411590, 2s
+[97/206] start_schedule, 85s
+[98/206] sub_438d94
+[99/206] sub_40b59c, 0s
+[100/206] sub_447f9c, 37s
+[101/206] sub_4079a4, 51s
+[102/206] lan_wan_ip_conflict_handler, 69s
+[103/206] sub_41fbb4, 2s
+[104/206] handle_notifications, 51s
+[105/206] start_services, 1s
+[106/206] sub_4247c0, 56s
+[107/206] sub_4337dc, 109s
+[108/206] sub_41e1dc, 3s
+[109/206] sub_44f3e0, 1s
+[110/206] hotplug_net, 7s
+[111/206] start_DDNS_ipv6, 9s
+[112/206] sub_44e7e8, 8s
+[113/206] sub_435bec
+[114/206] start_dslite_tunnel, 3s
+[115/206] sub_4049f4, 1s
+[116/206] sub_40bbfc, 8s
+[117/206] sub_4451e0, 1s
+[118/206] sub_451dec, 2s
+[119/206] sub_454e0c, 5s
+[120/206] sub_4550cc, 79s
+[121/206] hotplug_usb, 3s
+[122/206] sub_44e6b4, 3s
+[123/206] sub_42bf04, 3s
+[124/206] init_eth_hwaddr, 39s
+[125/206] sub_428994, 3s
+[126/206] sub_440824, 3s
+[127/206] sub_4500a8, 4s
+[128/206] sub_450834, 1s
+[129/206] sub_412d3c, 8s
+[130/206] sub_4279bc, 37s
+[131/206] sub_40744c, 1s
+[132/206] sub_43fdd0, 4s
+[133/206] hotplug_block, 12s
+[134/206] sub_4285dc, 40s
+[135/206] sub_45276c, 1s
+[136/206] sub_41d56c, 3s
+[137/206] sub_428e6c, 0s
+[138/206] mtd_open, 1s
+[139/206] sub_4175fc, 1s
+[140/206] sub_453510, 0s
+[141/206] sub_40b528, 0s
+[142/206] sub_42d8b4
+[143/206] sub_4122c0, 2s
+[144/206] sub_455458, 0s
+[145/206] sub_403160, 0s
+[146/206] sub_445070, 0s
+[147/206] sub_424670, 0s
+[148/206] wan_if_getpathprefix, 0s
+[149/206] sub_4414a0, 28s
+[150/206] sub_4097a8, 0s
+[151/206] sub_425928, 1s
+[152/206] start_ftp, 3s
+[153/206] sub_4062dc, 1s
+[154/206] sub_452a68, 3s
+[155/206] sub_452974, 0s
+[156/206] sub_429380, 1s
+[157/206] sub_412898, 0s
+[158/206] stop_DDNS_ipv4, 0s
+[159/206] sub_409050
+[160/206] tw_enable_coredump, 0s
+[161/206] sub_4126f4, 1s
+[162/206] sub_42c974, 3s
+[163/206] sub_43fb80, 0s
+[164/206] sub_406f8c, 2s
+[165/206] sub_442690, 0s
+[166/206] sub_43bd90, 0s
+[167/206] init_mod, 23s
+[168/206] stop_schedule, 0s
+[169/206] stop_quick_vpn, 0s
+[170/206] sub_4064b0, 3s
+[171/206] sub_43bcdc, 0s
+[172/206] sub_43bdfc, 0s
+[173/206] sub_40ce6c, 1s
+[174/206] stop_ftp, 0s
+[175/206] sub_458374, 2s
+[176/206] stop_dnsmasq, 0s
+[177/206] sub_441df8, 0s
+[178/206] sub_437cfc, 0s
+[179/206] stop_ntpc, 0s
+[180/206] sub_452900, 0s
+[181/206] sub_438800, 0s
+[182/206] sub_412110, 0s
+[183/206] start_dhcp6c, 2s
+[184/206] sub_43a4a0, 0s
+[185/206] sub_4121ac, 0s
+[186/206] sub_4335ac, 0s
+[187/206] sub_43887c, 0s
+[188/206] sub_43abf8, 0s
+[189/206] sub_43863c, 0s
+[190/206] sub_41e7c4, 0s
+[191/206] sub_41e748, 0s
+[192/206] sub_4336d4, 0s
+[193/206] sub_437dd8, 0s
+[194/206] sub_411fdc, 32s
+[195/206] sub_43875c, 0s
+[196/206] sub_452f60, 0s
+[197/206] sub_4386e0, 0s
+[198/206] sub_434b64, 0s
+[199/206] sub_43ac64, 0s
+[200/206] stop_igmp_proxy, 0s
+[201/206] sub_4388e8, 0s
+[202/206] sub_412078, 0s
+[203/206] sub_403814, 0s
+[204/206] sub_4037a8, 0s
+[205/206] init_product_info, 0s
+[206/206] start_services_once, 0s
+New_input_getters functions: 
  Done 
-Total time: 2240s 
+Total time: 5095s 

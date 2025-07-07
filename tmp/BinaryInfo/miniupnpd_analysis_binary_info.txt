@@ -1,0 +1,189 @@
+Binary Path: /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/miniupnpd
+
+========== Binary Function Keywords ==========
+[1] /event
+[2] /modelName
+[3] APSettings
+[4] APStatus
+[5] Connected
+[6] Connecting
+[7] Disconnected
+[8] ExternalPort
+[9] InternalPort
+[10] POST
+[11] RebootAP
+[12] RemotePort
+[13] SOAPAction
+[14] Timeout
+[15] Unconfigured
+[16] _edata
+[17] _end
+[18] _fdata
+[19] _ftext
+[20] abort
+[21] boolean
+[22] event
+[23] fclose
+[24] fgets
+[25] filter
+[26] fopen
+[27] fork
+[28] listen
+[29] main
+[30] perror
+[31] port
+[32] rejected
+[33] remove
+[34] rename
+[35] select
+[36] send
+[37] signal
+[38] string
+[39] text/html
+[40] text/xml
+[41] unlink
+[42] uuid
+
+========== Set-Get Call Sites ==========
+No set-get call sites found.
+
+========== Related File Paths ==========
+No related file paths found.
+
+========== Diffusion File Paths ==========
+No diffusion file paths found.
+
+========== Set-Get Function Info ==========
+[1] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+[2] Set: nvram_safe_set, Get: nvram_safe_get, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+
+========== Source2Sink Paths ==========
+*** Path #1 ***
+target_addr         : 0x419518
+target_name         : sub_419518
+source_name         : sub_419518
+source_insr_addr    : 0x4195c0
+source_addr         : 0x500160
+taint_source        : fgets
+sink_insr_addr      : 0x4195ec
+sink_addr           : sub_419518
+taint_sink          : sscanf
+checking_time       : 0
+conditions_str      : 
+visited_functions   : fgets
+fail2captureConditionsTime: 0
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x4195d4#0x4195b8#0x4195b8
+source_keyword      : not_static_string
+start_block         : 4298196
+end_block           : 4298168
+decompile_list      : ['        fgets(&v2, 0x64, stdin);\n        sscanf(&v2, "%s", &v1);']
+*** Path #2 ***
+target_addr         : 0x419518
+target_name         : sub_419518
+source_name         : sub_419518
+source_insr_addr    : 0x4195c0
+source_addr         : 0x500160
+taint_source        : fgets
+sink_insr_addr      : 0x4195ec
+sink_addr           : sub_419518
+taint_sink          : sscanf
+checking_time       : 0
+conditions_str      : 
+visited_functions   : fgets
+fail2captureConditionsTime: 0
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x4195b8#0x4195b8
+source_keyword      : not_static_string
+start_block         : 4298168
+end_block           : 4298168
+decompile_list      : ['        fgets(&v2, 0x64, stdin);\n        sscanf(&v2, "%s", &v1);']
+
+========== Get2Set Paths ==========
+No paths paths found.
+
+========== SOURCE ==========
+[1] sub_1d170
+[2] config_get
+[3] NK_query_entry_get
+[4] webGetVarString
+[5] bcm_nvram_get
+[6] GetValue
+[7] acosNvramConfig_read
+[8] sub_42af24
+[9] sub_42a978
+[10] get_cgi
+[11] websGetVar
+[12] nvram_get
+[13] nvram_safe_get
+[14] nvram_default_get
+[15] getenv
+[16] nvram_pf_get
+[17] acosNvramConfig_get
+[18] uciGet
+[19] entry
+[20] wpa_config_get
+[21] httpGenListDataGet
+[22] cJSON_GetArrayItem
+[23] vici_find_str
+[24] DoHardwareComponent
+[25] device_get_string_value
+[26] cJSON_Parse
+[27] OM_ValGet
+[28] acosUciConfig_get
+[29] CAL_abstract_get
+[30] json_object_object_get
+[31] json_object_object_get_ex
+[32] json_tokener_parse
+[33] OM_ValFind
+[34] get_parameter
+[35] get_wlan_setting
+[36] av_dict_get
+[37] cgi_value
+[38] stringOut
+[39] cJSON_GetObjectItem
+[40] sw_getValueByName
+[41] querystr
+[42] find_val
+[43] log_query
+[44] value_parser_by_index_D7000
+[45] getoption
+[46] WEB_GetVar
+[47] av_opt_get
+[48] paramValueFromObjGet
+[49] help_getObjPtr
+[50] NCONF_get_string
+[51] av_metadata_get
+[52] httpGetEnv
+[53] gets
+[54] fgets
+[55] recvfrom
+[56] recvmsg
+[57] nvram_get_ex2
+[58] nvram_bufget
+[59] apmib_get
+
+========== TRANSITIVE SET ==========
+[1] config_set
+[2] SetValue
+[3] setenv
+[4] nvram_set
+[5] nvram_safe_set
+[6] nvram_pf_set
+[7] artblock_set
+[8] acos_nvram_set
+[9] acosNvramConfig_set
+[10] acosNvramConfig_write
+[11] envz_add
+[12] uciSet
+[13] device_set_string_value
+[14] wpa_config_set
+[15] scfgmgr_set_by_index_D7000
+[16] acosUciConfig_set
+[17] OM_ValSet
+[18] CAL_abstract_set
+[19] nvram_bufset
+[20] apmib_set
+

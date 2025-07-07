@@ -1,5 +1,5 @@
 {
-    "binary_path": "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer",
+    "binary_path": "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer",
     "binary_function_keyword": [],
     "set_get_call_sites_dict": {
         "nvram_safe_get": [
@@ -302,14 +302,14 @@
         ]
     },
     "relate_file_path": [
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi",
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so"
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi",
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so"
     ],
     "is_board_binary": false,
     "is_set_role": true,
     "construct_intra_graph_tag": true,
     "diffusion_file": [
-        "/home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so"
+        "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so"
     ],
     "set_get_code_snippet": {
         "nvram_safe_set": {
@@ -345,16 +345,16 @@
                 "nvram_safe_set(\"wan_wan0_vpn_manual_action\",&DAT_004055d8);",
                 "nvram_safe_set(\"wan_wan0_vpn_manual_action\",&DAT_004055d8)"
             ],
-            "0x403334": [
+            "0x403240": [
+                "            nvram_safe_set();\n",
+                "nvram_safe_set()"
+            ],
+            "0x403258": [
+                "            nvram_safe_set();\n",
+                "nvram_safe_set()"
+            ],
+            "0x403330": [
                 "                        nvram_safe_set();\n",
-                "nvram_safe_set()"
-            ],
-            "0x403244": [
-                "            nvram_safe_set();\n",
-                "nvram_safe_set()"
-            ],
-            "0x40325c": [
-                "            nvram_safe_set();\n",
                 "nvram_safe_set()"
             ]
         }

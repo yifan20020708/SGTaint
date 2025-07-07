@@ -1,0 +1,52 @@
+[
+    {
+        "target_addr": "0x4008e0",
+        "target_name": "sub_4008e0",
+        "source_name": "sub_4010d8",
+        "source_insr_addr": "0x4011bc",
+        "source_addr": "0x500020",
+        "taint_source": "nvram_get",
+        "sink_insr_addr": "0x400ae0",
+        "sink_addr": "sub_4008e0",
+        "taint_sink": "memcpy",
+        "checking_time": "0",
+        "conditions_str": "",
+        "visited_functions": "memcpy#strchr#sub_4008e0#nvram_get",
+        "fail2captureConditionsTime": "9",
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "path": "0x400abc#0x400abc#0x400abc#0x400988#0x400988#0x400988#0x400978#0x40094c#0x40094c#0x40094c#0x40094c#0x4008e0#0x401230#0x4011c0#0x401178",
+        "source_keyword": "HideSSID",
+        "start_block": 4197052,
+        "end_block": 4198776,
+        "decompile_list": [
+            "            v5 = nvram_get(g_412350[v3], \"HideSSID\");\n            v6 = nvram_get(g_412350[v3], sub_400c24(g_412350[v3]));\n            v0 = 128;\n            sub_4008e0(0, v5, 59, &v12);",
+            "int sub_4008e0(unsigned int a0, void *a1, unsigned int a2, char *a3, unsigned int a4)\n{\n    unsigned int v0;  // [bp-0x20]\n    unsigned int v1;  // [bp-0x18]\n    char *v2;  // [bp-0x14], Other Possible Types: unsigned int\n    void *v3;  // [bp-0x10], Other Possible Types: char *\n    unsigned int v4;  // [bp-0xc]\n    unsigned int v5;  // v0\n    char *v6;  // v0\n    unsigned int v7;  // v1\n    char *v8;  // v0\n    char *v10;  // v1\n\n    v0 = 4301696;\n    v1 = 0;\n    v2 = 0;\n    if (a1 != 0 && a3 != 0 && a4 != 0)\n    {\n        v3 = a1;\n        for (v4 = strchr(v3, a2); v1 < a0; v1 += 1)\n        {\n            if (v4 == 0)\n            {\n                break;\n            }\n            v3 = v4 + 1;\n            v4 = strchr(v3, a2);\n        }\n        if (v4 == 0)\n        {\n            v7 = v1;\n            if (v1 == a0)\n            {\n                v4 = v3 + strlen(v3);\n                v8 = v4 - v3;\n                if (a4 - 1 < v4 - v3)\n                {\n                    v8 = a4 - 1;\n                }\n                v2 = v8;\n            }\n            else\n            {\n                v5 = -1;\n            }\n        }\n        else\n        {\n            v6 = v4 - v3;\n            if (a4 - 1 < v4 - v3)\n            {\n                v6 = a4 - 1;\n            }\n            v2 = v6;\n        }\n        if (v1 == a0 || v4 != 0)\n        {\n            memcpy(a3, v3, v2);"
+        ]
+    },
+    {
+        "target_addr": "0x4008e0",
+        "target_name": "sub_4008e0",
+        "source_name": "sub_400d14",
+        "source_insr_addr": "0x400d58",
+        "source_addr": "0x500020",
+        "taint_source": "nvram_get",
+        "sink_insr_addr": "0x400ae0",
+        "sink_addr": "sub_4008e0",
+        "taint_sink": "memcpy",
+        "checking_time": "0",
+        "conditions_str": "",
+        "visited_functions": "memcpy#strchr#sub_4008e0#nvram_get",
+        "fail2captureConditionsTime": "9",
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "path": "0x400abc#0x400abc#0x400abc#0x400988#0x400988#0x400988#0x400978#0x40094c#0x40094c#0x40094c#0x40094c#0x4008e0#0x400db4#0x400d5c#0x400d14",
+        "source_keyword": "HideSSID",
+        "start_block": 4197052,
+        "end_block": 4197652,
+        "decompile_list": [
+            "    v4 = nvram_get(a0, \"HideSSID\");\n    v3 = nvram_safe_get(\"WscConfMode\");\n    v5 = nvram_get(a0, sub_400c24(a0));\n    v0 = 128;\n    sub_4008e0(0x0, v4, 0x3b, &v10, v0);",
+            "int sub_4008e0(unsigned int a0, void *a1, unsigned int a2, char *a3, unsigned int a4)\n{\n    unsigned int v0;  // [bp-0x20]\n    unsigned int v1;  // [bp-0x18]\n    char *v2;  // [bp-0x14], Other Possible Types: unsigned int\n    void *v3;  // [bp-0x10], Other Possible Types: char *\n    unsigned int v4;  // [bp-0xc]\n    unsigned int v5;  // v0\n    char *v6;  // v0\n    unsigned int v7;  // v1\n    char *v8;  // v0\n    char *v10;  // v1\n\n    v0 = 4301696;\n    v1 = 0;\n    v2 = 0;\n    if (a1 != 0 && a3 != 0 && a4 != 0)\n    {\n        v3 = a1;\n        for (v4 = strchr(v3, a2); v1 < a0; v1 += 1)\n        {\n            if (v4 == 0)\n            {\n                break;\n            }\n            v3 = v4 + 1;\n            v4 = strchr(v3, a2);\n        }\n        if (v4 == 0)\n        {\n            v7 = v1;\n            if (v1 == a0)\n            {\n                v4 = v3 + strlen(v3);\n                v8 = v4 - v3;\n                if (a4 - 1 < v4 - v3)\n                {\n                    v8 = a4 - 1;\n                }\n                v2 = v8;\n            }\n            else\n            {\n                v5 = -1;\n            }\n        }\n        else\n        {\n            v6 = v4 - v3;\n            if (a4 - 1 < v4 - v3)\n            {\n                v6 = a4 - 1;\n            }\n            v2 = v6;\n        }\n        if (v1 == a0 || v4 != 0)\n        {\n            memcpy(a3, v3, v2);"
+        ]
+    }
+]

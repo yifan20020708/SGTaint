@@ -1,0 +1,34 @@
+{
+    "binary_path": "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/etc_ro/lighttpd/www/web/wireless.cgi",
+    "binary_function_keyword": [],
+    "set_get_call_sites_dict": {},
+    "relate_file_path": [],
+    "is_board_binary": true,
+    "is_set_role": false,
+    "construct_intra_graph_tag": false,
+    "diffusion_file": [],
+    "set_get_code_snippet": {},
+    "ghidra_func_identify_failed": {},
+    "ghidra_project": false,
+    "get_set_function_info": [
+        [
+            "nvram_bufset",
+            "nvram_bufget",
+            1,
+            1,
+            2,
+            null
+        ],
+        [
+            "nvram_safe_set",
+            "nvram_safe_get",
+            0,
+            0,
+            1,
+            null
+        ]
+    ],
+    "source2sink_path": [],
+    "get2set_path": [],
+    "visited_function_list": []
+}

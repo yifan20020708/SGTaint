@@ -1,4 +1,4 @@
-Binary Path: /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/ralink_init
+Binary Path: /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/ralink_init
 
 ========== Binary Function Keywords ==========
 [1] BlockCh
@@ -489,7 +489,7 @@ nvram_bufset:
   [2] Call Site Address: 0x408ca0, Caller: 0x408a74, Block Address: 0x408c8c, Key: WAN_MAC_ADDR
 
 ========== Related File Paths ==========
-[1] /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi
+[1] /home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi
 
 ========== Diffusion File Paths ==========
 No diffusion file paths found.
@@ -500,137 +500,131 @@ No diffusion file paths found.
 
 ========== Source2Sink Paths ==========
 *** Path #1 ***
-error_messges_str   : 
-source_keyword      : TR_CLIENT_CERT_FILE
-str_length_visited_function: 
-decompile_list      : ['    pcVar2 = (char *)nvram_bufget(4,"TR_CLIENT_CERT_FILE");\n    if (*pcVar2 != \'\\0\') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,"nvram_get tr069cert TR069_CC > %s",pcVar2);']
-target_name         : sub_401978
-ghidra_path         : [[4200824, 4200960, 4200968, 4201008, 4201032]]
 target_addr         : 0x401978
-conditions_str      : 
-end_block           : 4200960
-taint_source        : nvram_bufget
-start_block         : 4201008
-taint_sink          : sprintf
-path                : 0x401a30#0x401a30#0x401a0c#0x401a00
-visited_functions   : sprintf#nvram_bufget
-fail2captureConditionsTime: 0
+target_name         : sub_401978
+source_name         : sub_401978
 source_insr_addr    : 0x401a08
-sink_addr           : sub_401978
+source_addr         : 0x500064
+taint_source        : nvram_bufget
 sink_insr_addr      : 0x401a48
-checking_time       : 0
-source_name         : sub_401978
-source_addr         : 0x500064
-*** Path #2 ***
-error_messges_str   : 
-source_keyword      : TR_CA_CERT_FILE
-str_length_visited_function: 
-decompile_list      : ['    pcVar2 = (char *)nvram_bufget(4,"TR_CA_CERT_FILE");\n    if (*pcVar2 != \'\\0\') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,"nvram_get tr069cert TR069_CA > %s",pcVar2);']
-target_name         : sub_401978
-ghidra_path         : [[4200824, 4200912, 4200920, 4201092, 4201116]]
-target_addr         : 0x401978
-conditions_str      : 
-end_block           : 4200912
-taint_source        : nvram_bufget
-start_block         : 4201092
+sink_addr           : sub_401978
 taint_sink          : sprintf
-path                : 0x401a84#0x401a84#0x4019dc#0x4019d0
+checking_time       : 0
+conditions_str      : 
 visited_functions   : sprintf#nvram_bufget
 fail2captureConditionsTime: 0
-source_insr_addr    : 0x4019d8
-sink_addr           : sub_401978
-sink_insr_addr      : 0x401a9c
-checking_time       : 0
-source_name         : sub_401978
-source_addr         : 0x500064
-*** Path #3 ***
 error_messges_str   : 
-source_keyword      : TR_CLIENT_CERT_FILE
 str_length_visited_function: 
-decompile_list      : ['    pcVar2 = (char *)nvram_bufget(4,"TR_CLIENT_CERT_FILE");\n    if (*pcVar2 != \'\\0\') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,"nvram_get tr069cert TR069_CC > %s",pcVar2);\n      system(acStack_1020);']
-target_name         : sub_401978
-ghidra_path         : [[4200824, 4200960, 4200968, 4201036, 4201056]]
-target_addr         : 0x401978
-conditions_str      : 
-end_block           : 4200960
-taint_source        : nvram_bufget
-start_block         : 4201036
-taint_sink          : system
-path                : 0x401a4c#0x401a30#0x401a30#0x401a0c#0x401a00
-visited_functions   : sprintf#nvram_bufget
-fail2captureConditionsTime: 0
-source_insr_addr    : 0x401a08
-sink_addr           : sub_401978
-sink_insr_addr      : 0x401a60
-checking_time       : 0
-source_name         : sub_401978
-source_addr         : 0x500064
-*** Path #4 ***
-error_messges_str   : 
-source_keyword      : TR_CLIENT_CERT_FILE
-str_length_visited_function: 
-decompile_list      : ['    pcVar2 = (char *)nvram_bufget(4,"TR_CLIENT_CERT_FILE");\n    if (*pcVar2 != \'\\0\') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,"nvram_get tr069cert TR069_CC > %s",pcVar2);\n      system(acStack_1020);']
-target_name         : sub_401978
-ghidra_path         : [[4200824, 4200960, 4200968, 4201008, 4201032]]
-target_addr         : 0x401978
-conditions_str      : 
-end_block           : 4200960
-taint_source        : nvram_bufget
-start_block         : 4201008
-taint_sink          : system
 path                : 0x401a30#0x401a30#0x401a0c#0x401a00
-visited_functions   : sprintf#nvram_bufget
-fail2captureConditionsTime: 0
-source_insr_addr    : 0x401a08
-sink_addr           : sub_401978
-sink_insr_addr      : 0x401a60
-checking_time       : 0
-source_name         : sub_401978
-source_addr         : 0x500064
-*** Path #5 ***
-error_messges_str   : 
-source_keyword      : TR_CA_CERT_FILE
-str_length_visited_function: 
-decompile_list      : ['    pcVar2 = (char *)nvram_bufget(4,"TR_CA_CERT_FILE");\n    if (*pcVar2 != \'\\0\') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,"nvram_get tr069cert TR069_CA > %s",pcVar2);\n      system(acStack_2038);']
-target_name         : sub_401978
-ghidra_path         : [[4200824, 4200912, 4200920, 4201120, 4201140]]
+source_keyword      : TR_CLIENT_CERT_FILE
+start_block         : 4201008
+end_block           : 4200960
+decompile_list      : ['        v4 = nvram_bufget(0x4, "TR_CLIENT_CERT_FILE");\n        v7 = *(v4);\n        if (v7 != 0)\n        {\n            memset(&v2, 0x0, 0x1000);\n            sprintf(&v2, "nvram_get tr069cert TR069_CC > %s", v4);']
+*** Path #2 ***
 target_addr         : 0x401978
-conditions_str      : 
-end_block           : 4200912
-taint_source        : nvram_bufget
-start_block         : 4201120
-taint_sink          : system
-path                : 0x401aa0#0x401a84#0x401a84#0x4019dc#0x4019d0
-visited_functions   : sprintf#nvram_bufget
-fail2captureConditionsTime: 0
+target_name         : sub_401978
+source_name         : sub_401978
 source_insr_addr    : 0x4019d8
-sink_addr           : sub_401978
-sink_insr_addr      : 0x401ab4
-checking_time       : 0
-source_name         : sub_401978
 source_addr         : 0x500064
-*** Path #6 ***
-error_messges_str   : 
-source_keyword      : TR_CA_CERT_FILE
-str_length_visited_function: 
-decompile_list      : ['    pcVar2 = (char *)nvram_bufget(4,"TR_CA_CERT_FILE");\n    if (*pcVar2 != \'\\0\') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,"nvram_get tr069cert TR069_CA > %s",pcVar2);\n      system(acStack_2038);']
-target_name         : sub_401978
-ghidra_path         : [[4200824, 4200912, 4200920, 4201092, 4201116]]
-target_addr         : 0x401978
-conditions_str      : 
-end_block           : 4200912
 taint_source        : nvram_bufget
-start_block         : 4201092
-taint_sink          : system
+sink_insr_addr      : 0x401a9c
+sink_addr           : sub_401978
+taint_sink          : sprintf
+checking_time       : 0
+conditions_str      : 
+visited_functions   : sprintf#nvram_bufget
+fail2captureConditionsTime: 0
+error_messges_str   : 
+str_length_visited_function: 
 path                : 0x401a84#0x401a84#0x4019dc#0x4019d0
+source_keyword      : TR_CA_CERT_FILE
+start_block         : 4201092
+end_block           : 4200912
+decompile_list      : ['        v5 = nvram_bufget(0x4, "TR_CA_CERT_FILE");\n        v7 = *(v5);\n        if (v7 != 0)\n        {\n            memset(&v1, 0x0, 0x800);\n            sprintf(&v1, "nvram_get tr069cert TR069_CA > %s", v5);']
+*** Path #3 ***
+target_addr         : 0x401978
+target_name         : sub_401978
+source_name         : sub_401978
+source_insr_addr    : 0x401a08
+source_addr         : 0x500064
+taint_source        : nvram_bufget
+sink_insr_addr      : 0x401a60
+sink_addr           : sub_401978
+taint_sink          : system
+checking_time       : 0
+conditions_str      : 
 visited_functions   : sprintf#nvram_bufget
 fail2captureConditionsTime: 0
-source_insr_addr    : 0x4019d8
-sink_addr           : sub_401978
-sink_insr_addr      : 0x401ab4
-checking_time       : 0
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x401a4c#0x401a30#0x401a30#0x401a0c#0x401a00
+source_keyword      : TR_CLIENT_CERT_FILE
+start_block         : 4201036
+end_block           : 4200960
+decompile_list      : ['        v4 = nvram_bufget(0x4, "TR_CLIENT_CERT_FILE");\n        v7 = *(v4);\n        if (v7 != 0)\n        {\n            memset(&v2, 0x0, 0x1000);\n            sprintf(&v2, "nvram_get tr069cert TR069_CC > %s", v4);\n            return system(&v2);']
+*** Path #4 ***
+target_addr         : 0x401978
+target_name         : sub_401978
 source_name         : sub_401978
+source_insr_addr    : 0x401a08
 source_addr         : 0x500064
+taint_source        : nvram_bufget
+sink_insr_addr      : 0x401a60
+sink_addr           : sub_401978
+taint_sink          : system
+checking_time       : 0
+conditions_str      : 
+visited_functions   : sprintf#nvram_bufget
+fail2captureConditionsTime: 0
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x401a30#0x401a30#0x401a0c#0x401a00
+source_keyword      : TR_CLIENT_CERT_FILE
+start_block         : 4201008
+end_block           : 4200960
+decompile_list      : ['        v4 = nvram_bufget(0x4, "TR_CLIENT_CERT_FILE");\n        v7 = *(v4);\n        if (v7 != 0)\n        {\n            memset(&v2, 0x0, 0x1000);\n            sprintf(&v2, "nvram_get tr069cert TR069_CC > %s", v4);\n            return system(&v2);']
+*** Path #5 ***
+target_addr         : 0x401978
+target_name         : sub_401978
+source_name         : sub_401978
+source_insr_addr    : 0x4019d8
+source_addr         : 0x500064
+taint_source        : nvram_bufget
+sink_insr_addr      : 0x401ab4
+sink_addr           : sub_401978
+taint_sink          : system
+checking_time       : 0
+conditions_str      : 
+visited_functions   : sprintf#nvram_bufget
+fail2captureConditionsTime: 0
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x401aa0#0x401a84#0x401a84#0x4019dc#0x4019d0
+source_keyword      : TR_CA_CERT_FILE
+start_block         : 4201120
+end_block           : 4200912
+decompile_list      : ['        v5 = nvram_bufget(0x4, "TR_CA_CERT_FILE");\n        v7 = *(v5);\n        if (v7 != 0)\n        {\n            memset(&v1, 0x0, 0x800);\n            sprintf(&v1, "nvram_get tr069cert TR069_CA > %s", v5);\n            return system(&v1);']
+*** Path #6 ***
+target_addr         : 0x401978
+target_name         : sub_401978
+source_name         : sub_401978
+source_insr_addr    : 0x4019d8
+source_addr         : 0x500064
+taint_source        : nvram_bufget
+sink_insr_addr      : 0x401ab4
+sink_addr           : sub_401978
+taint_sink          : system
+checking_time       : 0
+conditions_str      : 
+visited_functions   : sprintf#nvram_bufget
+fail2captureConditionsTime: 0
+error_messges_str   : 
+str_length_visited_function: 
+path                : 0x401a84#0x401a84#0x4019dc#0x4019d0
+source_keyword      : TR_CA_CERT_FILE
+start_block         : 4201092
+end_block           : 4200912
+decompile_list      : ['        v5 = nvram_bufget(0x4, "TR_CA_CERT_FILE");\n        v7 = *(v5);\n        if (v7 != 0)\n        {\n            memset(&v1, 0x0, 0x800);\n            sprintf(&v1, "nvram_get tr069cert TR069_CA > %s", v5);\n            return system(&v1);']
 
 ========== Get2Set Paths ==========
 No paths paths found.
@@ -692,7 +686,9 @@ No paths paths found.
 [54] fgets
 [55] recvfrom
 [56] recvmsg
-[57] nvram_bufget
+[57] nvram_get_ex2
+[58] nvram_bufget
+[59] apmib_get
 
 ========== TRANSITIVE SET ==========
 [1] config_set
@@ -714,4 +710,5 @@ No paths paths found.
 [17] OM_ValSet
 [18] CAL_abstract_set
 [19] nvram_bufset
+[20] apmib_set
 
