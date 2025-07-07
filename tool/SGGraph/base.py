@@ -474,7 +474,7 @@ class AnalysisBinary():
         # 补充Ghidra不可反编译的片段
         for source2sink_single_path in self.source2sink_path:
             if "Fail to Decompile by Ghidra" in source2sink_single_path["decompile_list"]: # 表示Ghidra反编译失败
-                function_angr_format = source2sink_single_path["ghidra_path"]
+                function_angr_format = [sublist[:] for sublist in source2sink_single_path["ghidra_path"]]
                 try:
                     for i, function_format in enumerate(function_angr_format):
                         if function_format[0] in self.angr_dec_cache:
@@ -497,7 +497,7 @@ class AnalysisBinary():
                     continue
         for get2set_single_path in self.get2set_path:
             if "Fail to Decompile by Ghidra" in get2set_single_path["decompile_list"]: # 表示Ghidra反编译失败
-                function_angr_format = get2set_single_path["ghidra_path"]
+                function_angr_format = [sublist[:] for sublist in get2set_single_path["ghidra_path"]]
                 try:
                     for i, function_format in enumerate(function_angr_format):
                         if function_format[0] in self.angr_dec_cache:
@@ -508,7 +508,7 @@ class AnalysisBinary():
                         function_angr_format[i] = [dec] + function_format
                 except Exception as e:
                     logger.error(f"Decompiler generation failed: {e}!")
-                    get2set_single_path["decompile_list"] = ["Fail to Decompile by Angr"]
+                    get2set_single_path["decompile_list"] = ["Fail to Decompile by Angr and Ghidra"]
                     continue
                 taint_source = get2set_single_path["taint_source"]
                 taint_sink = get2set_single_path["taint_sink"]
@@ -516,7 +516,7 @@ class AnalysisBinary():
                     get2set_single_path["decompile_list"] = get_function_decompile_list_by_path(self.project, self.cfg, function_angr_format, taint_source, taint_sink)
                 except Exception as e:
                     logger.error(f"Decompiler generation failed: {e}!")
-                    get2set_single_path["decompile_list"] = ["Fail to Decompile by Angr"]
+                    get2set_single_path["decompile_list"] = ["Fail to Decompile by Angr and Ghidra"]
                     continue
         
     # 将二进制文件加载到Ghidra中
