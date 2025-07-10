@@ -844,6 +844,9 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
         is_find_cross_path = False # 标记是否找到跨二进制文件的路径
         set_keyword = get2set_single_path["set_keyword"]
         for binary_path in diffusion_file_update:
+            if binary_path not in potential_path_dict:
+                logger.error(f"RDA Analysis failed for {file_path}")
+                continue
             binary_get2sink_path_dict = potential_path_dict[binary_path]["complete_get2sink_path_dict"]
             target_path_list = binary_get2sink_path_dict.get(set_keyword, [])[:]
             if not target_path_list: # 如果没有对应的路径，则跳过
