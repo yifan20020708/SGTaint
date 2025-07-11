@@ -452,6 +452,7 @@ class AnalysisBinary():
             logger.info(f"Executed Ghidra command for decompilation: {ghidra_command}")
         except Exception as e:
             logger.error(f"Failed to execute Ghidra decompilation: {e}")
+            self.get_decompile_code_by_angr() # 使用回退机制
             return
         try:
             # 读取source2sink的结果文件
