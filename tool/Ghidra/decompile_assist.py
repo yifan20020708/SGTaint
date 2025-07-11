@@ -133,8 +133,9 @@ def get_call_site_addr_by_func_name(lines, call_site_name):
         if call_site_name in line_text:
             for clang_token in clang_line.getAllTokens():
                 if clang_token.getText() == call_site_name:
-                    min_addr = clang_token.getMinAddress().getOffset() # 获取对应call_site的地址
-                    call_site_dict[min_addr] = idx
+                    min_addr = clang_token.getMinAddress()
+                    if min_addr is not None:
+                        call_site_dict[min_addr.getOffset()] = idx
                     break
     return call_site_dict       
 
