@@ -453,24 +453,29 @@ class AnalysisBinary():
         except Exception as e:
             logger.error(f"Failed to execute Ghidra decompilation: {e}")
             return
-        # 读取source2sink的结果文件
-        source2sink_result_file_name = f"{file_path_process}_source2sink_path_result.json"
-        source2sink_result_file_path = os.path.join(config_sgtaint.BINARY_TMP, source2sink_result_file_name)
-        with open(source2sink_result_file_path, "r") as file:
-            source2sink_ghidra_list_result = json.load(file)
-        self.source2sink_path = source2sink_ghidra_list_result[:] # 获取反编译函数列表
-        # 删除中间文件
-        command = f"rm {source2sink_result_file_path}"
-        execute(command)
-        # 读取get2set的结果文件
-        get2set_result_file_name = f"{file_path_process}_get2set_path_result.json"
-        get2set_result_file_path = os.path.join(config_sgtaint.BINARY_TMP, get2set_result_file_name)
-        with open(get2set_result_file_path, "r") as file:
-            get2set_ghidra_list_result = json.load(file)
-        self.get2set_path = get2set_ghidra_list_result[:] # 获取反编译函数列表
-        # 删除中间文件
-        command = f"rm {get2set_result_file_path}"
-        execute(command)
+        try:
+            # 读取source2sink的结果文件
+            source2sink_result_file_name = f"{file_path_process}_source2sink_path_result.json"
+            source2sink_result_file_path = os.path.join(config_sgtaint.BINARY_TMP, source2sink_result_file_name)
+            with open(source2sink_result_file_path, "r") as file:
+                source2sink_ghidra_list_result = json.load(file)
+            self.source2sink_path = source2sink_ghidra_list_result[:] # 获取反编译函数列表
+            # 删除中间文件
+            command = f"rm {source2sink_result_file_path}"
+            execute(command)
+            # 读取get2set的结果文件
+            get2set_result_file_name = f"{file_path_process}_get2set_path_result.json"
+            get2set_result_file_path = os.path.join(config_sgtaint.BINARY_TMP, get2set_result_file_name)
+            with open(get2set_result_file_path, "r") as file:
+                get2set_ghidra_list_result = json.load(file)
+            self.get2set_path = get2set_ghidra_list_result[:] # 获取反编译函数列表
+            # 删除中间文件
+            command = f"rm {get2set_result_file_path}"
+            execute(command)
+        except Exception as e:
+            logger.error(f"Failed to read Ghidra decompilation result files: {e}")
+            self.get_decompile_code_by_angr() # 使用回退机制
+            return
         # 补充Ghidra不可反编译的片段
         for source2sink_single_path in self.source2sink_path:
             if "Fail to Decompile by Ghidra" in source2sink_single_path["decompile_list"]: # 表示Ghidra反编译失败

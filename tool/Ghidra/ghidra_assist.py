@@ -70,6 +70,8 @@ def get_function_decompile(program, identifier):
             # 反编译函数，设置超时时间为60秒
             monitor = ConsoleTaskMonitor()
             decomp_res = decomp_iface.decompileFunction(func, 60, monitor)
+            if decomp_res is None or not decomp_res.decompileCompleted():
+                return None
             # 利用DecompilerUtils将token组转换为ClangLine列表
             lines = DecompilerUtils.toLines(decomp_res.getCCodeMarkup())
             decompile_cache[identifier] = lines
