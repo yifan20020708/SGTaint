@@ -4,6 +4,7 @@ import ast
 import json
 import random
 import re
+import os
 import logging
 import subprocess
 import time
@@ -43,7 +44,35 @@ def execute(command):
 def find_binary_path(directory):
     command = 'find ' + directory + ' -type f -exec file {} \; | grep -Ei "ELF|executable" | cut -d: -f1'
     res = execute(command)
-    binary_path = list(set(res.split("\n")))
+    file_paths = [line for line in res.split('\n') if line.strip()] # 获取所有的二进制文件路径
+    # 统计文件名出现次数（一般出现一次）
+    name_to_paths = defaultdict(list)
+    for full_path in file_paths:
+        name = os.path.basename(full_path)
+        name_to_paths[name].append(full_path)
+    # 遍历并重命名冲突项
+    binary_path = []
+    for name, paths in name_to_paths.items():
+        if len(paths) == 1: # 文件名未冲突，直接加入
+            binary_path.append(paths[0])
+        else: # 文件名冲突，逐个重命名
+            for idx, old_path in enumerate(paths):
+                dir_name = os.path.dirname(old_path)
+                file_name, ext = os.path.splitext(name)
+                if idx == 0: # 第一个不用重命名
+                    new_path = old_path
+                else:
+                    new_name = f"{file_name}_{idx}{ext}"
+                    new_path = os.path.join(dir_name, new_name)
+                    # 防止目标文件已存在
+                    seq = idx
+                    while os.path.exists(new_path):
+                        seq += 1
+                        new_name = f"{file_name}_{seq}{ext}"
+                        new_path = os.path.join(dir_name, new_name)
+                    os.rename(old_path, new_path)
+                    logger.info(f"Change path from {old_path} to {new_path} to fix name conflict.")
+                binary_path.append(new_path)
     return binary_path
 
 # 在console中打印绿色文本
@@ -77,7 +106,7 @@ def get_mem_string(mem_bytes, extended=False):
 def is_binary_file(filepath):
     command = f"file {filepath}"
     result = execute(command)
-    if "ELF" in result or "binary" in result:
+    if "ELF" in result or "binary" in result or "executable" in result:
         return True
     return False
 

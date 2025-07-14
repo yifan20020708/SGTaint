@@ -4,6 +4,7 @@ import time
 import datetime
 import logging
 import json
+import filecmp
 from typing import Any, Callable, Iterable
 import angr
 import angr.analyses.reaching_definitions.dep_graph as dep_graph
@@ -643,7 +644,9 @@ class AnalysisBinaryDict():
         if binary_path in self.analysis_binary_dict:
             self.analysis_binary_dict[binary_path] = analysis_binary
         else:
-            self.add_analysis_binary(analysis_binary)
+            # 检查是否存在重复的相同二进制文件
+            if not any(filecmp.cmp(binary_path, seen, shallow=False) for seen in self.analysis_binary_dict):
+                self.add_analysis_binary(analysis_binary)
             
     # 返回边界二进制文件路径列表
     def get_border_binary_path_list(self):
