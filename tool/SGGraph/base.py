@@ -75,7 +75,8 @@ class AnalysisBinary():
             "get2set_path": self.get2set_path,
             "visited_function_list": self.visited_function_list,
         }
-        file_path = os.path.join(config_sgtaint.BINARY_CONFIG_DIR, f"{os.path.basename(self.binary_path)}_analysis_binary_config.json")
+        file_process = self.binary_path.replace("/", "_")  # 替换路径中的斜杠
+        file_path = os.path.join(config_sgtaint.BINARY_CONFIG_DIR, f"{file_process}_analysis_binary_config.json")
         try:
             with open(file_path, 'w', encoding='utf-8') as file:
                 json.dump(config, file, indent=4)
@@ -86,7 +87,8 @@ class AnalysisBinary():
             
     # 从配置文件中加载全局属性
     def load_config(self):
-        file_path = os.path.join(config_sgtaint.BINARY_CONFIG_DIR, f"{os.path.basename(self.binary_path)}_analysis_binary_config.json")
+        file_process = self.binary_path.replace("/", "_")  # 替换路径中的斜杠
+        file_path = os.path.join(config_sgtaint.BINARY_CONFIG_DIR, f"{file_process}_analysis_binary_config.json")
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
                 config = json.load(file)
@@ -111,7 +113,8 @@ class AnalysisBinary():
     
     # 将AnalysisBinary对象的信息写入到文件之中（调试使用）
     def write_to_file(self):
-        file_path = os.path.join(config_sgtaint.BINARY_INFO_DIR, f"{os.path.basename(self.binary_path)}_analysis_binary_info.txt")
+        file_process = self.binary_path.replace("/", "_")  # 替换路径中的斜杠
+        file_path = os.path.join(config_sgtaint.BINARY_INFO_DIR, f"{file_process}_analysis_binary_info.txt")
         def write_section(title: str, data: Any, *, empty_msg: str, formatter: Callable[[Any], Iterable[str]]):
             file.write(f"{title}\n")
             if not data:
@@ -203,6 +206,12 @@ class AnalysisBinary():
     def create_binary_file(self):
         # 获取以二进制文件名命名的子目录路径
         binary_dir = os.path.join(config_sgtaint.VULN_OUT_DIR, os.path.basename(self.binary_path))
+        # 检查并自动递增文件夹名直到不存在
+        orig_binary_dir = binary_dir
+        index = 1
+        while os.path.exists(binary_dir):
+            binary_dir = f"{orig_binary_dir}_{index}"
+            index += 1
         try:
             # 如果子目录不存在则创建
             os.makedirs(binary_dir, exist_ok=True)
@@ -545,11 +554,12 @@ class AnalysisBinary():
             
     # 将路径信息存储在json文件之中
     def save_path2json(self):
-        source2sink_json_name = f"{os.path.basename(self.binary_path)}_source2sink_path.json"
+        file_process = f'{os.path.basename(self.binary_path)}{os.path.dirname(self.binary_path).replace("/", "_")}'
+        source2sink_json_name = f"{file_process}_source2sink_path.json"
         source2sink_json_path = os.path.join(config_sgtaint.BINARY_TMP, source2sink_json_name)
         with open(source2sink_json_path, "w") as file:
             json.dump(self.source2sink_path, file, indent=4)
-        get2set_json_name = f"{os.path.basename(self.binary_path)}_get2set_path.json"
+        get2set_json_name = f"{file_process}_get2set_path.json"
         get2set_json_path = os.path.join(config_sgtaint.BINARY_TMP, get2set_json_name)
         with open(get2set_json_path, "w") as file:
             json.dump(self.get2set_path, file, indent=4)
