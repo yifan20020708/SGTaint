@@ -2,13 +2,14 @@
 import shlex
 import ast  
 import json
+import time
 import random
 import re
 import logging
 import subprocess
-import time
+import multiprocessing
+import concurrent.futures
 import tool.Config.config as config_sgtaint
-from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError
 from collections import defaultdict, deque
 from archinfo import Endness
 from angr.project import Project
@@ -300,6 +301,35 @@ def get_args_string_call_sites(project: Project, cfg: CFGFast, func_addr, call_s
     return call_site_dict # 返回提取结果
 
 
+def worker_wrapper(q, target_func, project, cfg, func_name, func_addr):
+    try:
+        result = target_func(project, cfg, func_name, func_addr)
+        q.put(('success', result))
+    except Exception as e:
+        q.put(('error', e))
+
+# 手动管理进程，超时直接清除
+def run_with_timeout(target_func, project, cfg, func_name, func_addr, timeout):
+    q = multiprocessing.Queue()
+    p = multiprocessing.Process(
+        target=worker_wrapper,
+        args=(q, target_func, project, cfg, func_name, func_addr)
+    )
+    p.start()
+    p.join(timeout)
+    if p.is_alive():
+        p.terminate()
+        p.join()
+        raise TimeoutError(f"Task for {hex(func_addr)} timed out.")
+    if not q.empty():
+        status, data = q.get()
+        if status == 'success':
+            return data
+        else:
+            raise data
+    raise TimeoutError(f"No result returned for {hex(func_addr)}.")
+
+
 # 针对单个函数的angr反汇编
 def decompile_single_func(project, cfg, func_name, func_addr):
     call_site_dict = get_args_string_call_sites(project, cfg, func_addr, func_name)
@@ -308,28 +338,37 @@ def decompile_single_func(project, cfg, func_name, func_addr):
     return None
 
 
-# 并行处理angr反编译
+# 使用angr并行反编译函数
 def parallel_decompile_funcs(ghidra_func_identify_failed, project, cfg, func_name, timeout_seconds=120):
-    func_decompile_code_snippet = {} # angr获取到call site片段
+    func_decompile_code_snippet = {}
     total = len(ghidra_func_identify_failed)
     start_time = time.time()
-    with ProcessPoolExecutor() as executor:
+    def task_wrapper(func_addr):
+        try:
+            call_site_dict = run_with_timeout(decompile_single_func, project, cfg, func_name, func_addr, timeout=timeout_seconds)
+            return (func_addr, 'success', call_site_dict)
+        except TimeoutError:
+            return (func_addr, 'timeout', None)
+        except Exception as e:
+            return (func_addr, 'error', str(e))
+    with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = {
-            executor.submit(decompile_single_func, project, cfg, func_name, func_addr): func_addr
+            executor.submit(task_wrapper, func_addr): func_addr
             for func_addr in ghidra_func_identify_failed
         }
-        for idx, future in enumerate(as_completed(futures), 1):
+        for idx, future in enumerate(concurrent.futures.as_completed(futures), 1):
             try:
-                call_site_dict = future.result(timeout=timeout_seconds)
-                if call_site_dict:
-                    logger.info(f"[{idx}/{total}] Decompilation of {hex(futures[future])} from angr success.")
-                    func_decompile_code_snippet.update(call_site_dict)
+                addr, status, call_site_dict = future.result()
+                if status == 'success':
+                    logger.info(f"[{idx}/{total}] Decompilation of {hex(addr)} from angr success.")
+                    if call_site_dict:
+                        func_decompile_code_snippet.update(call_site_dict)
+                elif status == 'timeout':
+                    logger.error(f"[{idx}/{total}] Timeout during decompilation of {hex(addr)}")
                 else:
-                    logger.error(f"[{idx}/{total}] Decompilation of {hex(futures[future])} from angr fail.")
-            except TimeoutError:
-                logger.error(f"[{idx}/{total}] Timeout during decompilation of {hex(futures[future])}")
-            except Exception:
-                logger.exception(f"[{idx}/{total}] Exception during decompilation of {hex(futures[future])}")
+                    logger.error(f"[{idx}/{total}] Decompilation of {hex(addr)} error: {call_site_dict}")
+            except Exception as e:
+                logger.exception(f"[{idx}/{total}] Exception during decompilation of {hex(addr)}: {e}")
     duration = time.time() - start_time
     logger.info(f"Completed parallel decompilation of {total} functions in {duration:.2f} seconds")
     return func_decompile_code_snippet
