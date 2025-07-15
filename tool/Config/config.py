@@ -115,17 +115,17 @@ SOURCES = [
     "json_tokener_parse", "OM_ValFind", "get_parameter", "get_wlan_setting", "av_dict_get", "cgi_value", "stringOut",
     "cJSON_GetObjectItem", "sw_getValueByName", "querystr", "find_val", "log_query", "value_parser_by_index_D7000",
     "getoption", "WEB_GetVar", "av_opt_get", "paramValueFromObjGet", "help_getObjPtr", "NCONF_get_string",
-    "av_metadata_get", "httpGetEnv", "gets", "fgets", "recvfrom", "recvmsg", "nvram_get_ex2", "nvram_bufget", "apmib_get"
+    "av_metadata_get", "httpGetEnv", "gets", "fgets", "recvfrom", "recvmsg", "nvram_get_ex2", "nvram_bufget", "apmib_get", "apcli_nvram_get"
 ]
 transitive_get = [
-    "config_get", "GetValue", "getenv", "nvram_get", "nvram_safe_get", "nvram_pf_get", "acosNvramConfig_get", "nvram_bufget",
+    "config_get", "GetValue", "getenv", "nvram_get", "nvram_safe_get", "nvram_pf_get", "acosNvramConfig_get", "nvram_bufget", "apcli_nvram_get"
     "uciGet", "wpa_config_get", "device_get_string_value", "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "nvram_get_ex2", "apmib_get"
 ]
 transitive_set = [
     "config_set", "SetValue", "setenv", "nvram_set", "nvram_safe_set", "nvram_pf_set", "artblock_set",
     "acos_nvram_set", "acosNvramConfig_set", "acosNvramConfig_write", "envz_add", "uciSet",
     "device_set_string_value", "wpa_config_set", "scfgmgr_set_by_index_D7000", "acosUciConfig_set",
-    "OM_ValSet", "CAL_abstract_set", "nvram_bufset", "apmib_set"
+    "OM_ValSet", "CAL_abstract_set", "nvram_bufset", "apmib_set", "apcli_nvram_set"
 ]
 SINKS = [
     "strcpy", "strcat", "sprintf", "system", "___system", "_system", "bstar_system", "popen", "doSystemCmd", "doShell",
@@ -149,5 +149,6 @@ SET_GET_INFO = {
     ("acosUciConfig_set", "acosUciConfig_get"): ["acosUciConfig_set", "acosUciConfig_get", 0, 0, 1, None],
     ("CAL_abstract_set", "CAL_abstract_get"): ["CAL_abstract_set", "CAL_abstract_get", 0, 0, 1, None],
     ("nvram_bufset", "nvram_bufget"): ["nvram_bufset", "nvram_bufget", 1, 1, 2, None],
-    ("apmib_set", "apmib_get"): ["apmib_set", "apmib_get", 0, 0, 1, 1]
+    ("apmib_set", "apmib_get"): ["apmib_set", "apmib_get", 0, 0, 1, 1],
+    ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None]
 }

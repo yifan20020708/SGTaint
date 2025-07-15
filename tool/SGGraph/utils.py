@@ -501,6 +501,15 @@ def get_extern_func_name(project: Project):
     return extern_func
 
 
+# 获取完整函数的名称列表
+def get_complete_func_name(project: Project):
+    complete_func = set()
+    for func in project.kb.functions.values():
+        if not func.name.startswith("sub_"): # 过滤掉以sub_开头的函数
+            complete_func.add((func.name, func.addr))
+    return complete_func
+
+
 # 解析函数调用内容
 def parse_function_call(project, call_site_code, complete_line, file_path):
     has_const = False

@@ -10,7 +10,7 @@ from tool.SGGraph.utils import (
     get_decompiled_code_by_call_site, get_parameters_by_code, is_const,
     parse_set_get_string, get_extern_func_name, parse_function_call,
     get_prompt_for_phase_two, coarse_grained_binary_filter, execute,
-    get_call_site_func_name
+    get_call_site_func_name, get_complete_func_name
 )
 from tool.SGGraph.border_binary import get_border_binaries_by_cluster_max_mean_gap
 from tool.SGGraph.base import (
@@ -191,12 +191,16 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         return func_name
     # 获取边界二进制文件列表
     binary_path_list = analysis_binary_dict.get_border_binary_path_list()
-    func_name_list = []
+    func_name_list = [] # 获取外部函数，专门用于从SET_GET_INFO中获取函数信息
+    func_name_list_complete = [] # 存放完整的函数名称列表
     for binary_path in binary_path_list:
         analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(binary_path)
         for func_name, _ in get_extern_func_name(analysis_binary.get_angr_project()):
             if func_name not in func_name_list:
                 func_name_list.append(func_name)
+        for func_name, _ in get_complete_func_name(analysis_binary.get_angr_project()):
+            if func_name not in func_name_list_complete:
+                func_name_list_complete.append(func_name)
     # 直接从SET_GET_INFO中获取的函数信息
     func_name_previous_known = [] # 存放从SET_GET_INFO中获取的函数信息
     func_name_previous_use = set()
@@ -207,9 +211,10 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
             func_name_previous_use.add(set_get_pair[1])
     # 从func_name_list中删除
     for func_name in func_name_previous_use:
-        func_name_list.remove(func_name)
+        if func_name in func_name_list_complete:
+            func_name_list_complete.remove(func_name)
     # 进行LLM的第一步分析
-    func_name_list_str = "[" + ", ".join(func_name_list) + "]"
+    func_name_list_str = "[" + ", ".join(func_name_list_complete) + "]"
     LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
     LLM_chat.system_role(SYSTEM_SET_GET)
     logger.info("Initiating the first phase of the LLM-based analysis.")
