@@ -17,7 +17,7 @@ def find_html_files(directory):
     for root, _, files in os.walk(directory):
         for file in files:
             # 使用 lower() 统一处理大小写问题
-            if file.lower().endswith(('.html', '.htm', '.shtml')):
+            if file.lower().endswith(('.html', '.htm', '.shtml', 'asp', 'aspx')):
                 html_files.append(os.path.join(root, file))
     return html_files
 
@@ -159,7 +159,7 @@ class HtmlParser():
             logger.warning(f"No HTML files found under {self.directory}; skipping parallel parse.")
             return self.keyword_set, self.function_set
         start_time = time.time()
-        logger.info(f"Starting parallel parsing: {total_files} files")
+        logger.info(f"Starting parsing: {total_files} files")
         for idx, path in enumerate(self.html_file_list, start=1):
             try:
                 self._get_keyword_function(path)
@@ -168,7 +168,7 @@ class HtmlParser():
                 # 只记录异常，不中断后续文件处理
                 logger.exception(f"Failed to parse HTML [{idx}/{total_files}]: {path}")
         total_time = time.time() - start_time
-        logger.info(f"Completed parallel parsing of {total_files} files in {total_time:.2f}s")
+        logger.info(f"Completed parsing of {total_files} files in {total_time:.2f}s")
         return self.keyword_set, self.function_set
     
     def run_parallel(self):

@@ -7,6 +7,7 @@ import logging
 import tool.Config.config as config_sgtaint
 from tool.Keyword.base.Base import KeywordSet, FunctionSet
 from tool.Keyword.html_keyword import HtmlParser
+from tool.Keyword.php_keyword import PhpParser
 from tool.Keyword.js_keyword import JsParser
 from tool.Keyword.xml_keyword import XmlParser
 
@@ -45,6 +46,16 @@ def get_keyword_function_from_front(directory):
             for path in fn.get_file_path():
                 function_set.add_function(fn.get_value(), path)
         logger.info("HTML parsing completed: %d keywords, %d functions", html_kw.length(), html_fn.length())
+        # 获取php文件关键字信息
+        php_parser = PhpParser(directory)
+        php_kw, php_fn = php_parser.run()
+        for kw in php_kw.get_keyword_set():
+            for path in kw.get_file_path():
+                keyword_set.add_keyword(kw.get_value(), path)
+        for fn in php_fn.get_function_set():
+            for path in fn.get_file_path():
+                function_set.add_function(fn.get_value(), path)
+        logger.info("PHP parsing completed: %d keywords, %d functions", php_kw.length(), php_fn.length())
         # 获取js文件关键字信息
         js_parser = JsParser(directory)
         js_kw, js_fn = js_parser.run_parallel()
