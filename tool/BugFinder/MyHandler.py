@@ -2298,7 +2298,9 @@ class MyHandler(FunctionHandler):
     def handle_nvram_set(self, state, codeloc):
         function_name = "nvram_set"
         function = self._analysis.project.kb.functions.function(name=function_name)
-        return self.handle_nvram_set_xx(function, state, codeloc, function_name, key_position=1, value_position=2)
+        if len(function.arguments) == 2:
+            return self.handle_nvram_set_xx(function, state, codeloc, function_name, key_position=1, value_position=2)
+        return self.handle_nvram_set_xx(function, state, codeloc, function_name)
 
     def handle_SetValue(self, state, codeloc):
         function_name = "SetValue"

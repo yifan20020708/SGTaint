@@ -4,7 +4,7 @@ import logging
 import os
 import time
 import tool.Config.config as config_sgtaint
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from bs4 import BeautifulSoup
 from tool.Keyword.base.Base import KeywordSet, FunctionSet, is_filter
 from tool.Keyword.js_keyword import JsParser
@@ -186,7 +186,7 @@ class HtmlParser():
         all_keywords = []
         all_functions = []
         # 提交任务
-        with ThreadPoolExecutor() as executor:
+        with ProcessPoolExecutor() as executor:
             futures = {
                 executor.submit(self._get_keyword_function_single, path): path
                 for path in self.html_file_list

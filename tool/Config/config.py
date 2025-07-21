@@ -137,7 +137,6 @@ SET_GET_INFO = {
     ("config_set", "config_get"): ["config_set", "config_get", 0, 0, 1, None],
     ("SetValue", "GetValue"): ["SetValue", "GetValue", 0, 0, 1, 1],
     ("setenv", "getenv"): ["setenv", "getenv", 0, 0, 1, None],
-    ("nvram_set", "nvram_get"): ["nvram_set", "nvram_get", 1, 1, 2, None],
     ("nvram_safe_set", "nvram_safe_get"): ["nvram_safe_set", "nvram_safe_get", 0, 0, 1, None],
     ("nvram_pf_set", "nvram_pf_get"): ["nvram_pf_set", "nvram_pf_get", 0, 0, 1, None],
     ("acosNvramConfig_set", "acosNvramConfig_get"): ["acosNvramConfig_set", "acosNvramConfig_get", 0, 0, 1, None],
