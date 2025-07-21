@@ -125,7 +125,7 @@ transitive_set = [
     "config_set", "SetValue", "setenv", "nvram_set", "nvram_safe_set", "nvram_pf_set", "artblock_set",
     "acos_nvram_set", "acosNvramConfig_set", "acosNvramConfig_write", "envz_add", "uciSet",
     "device_set_string_value", "wpa_config_set", "scfgmgr_set_by_index_D7000", "acosUciConfig_set",
-    "OM_ValSet", "CAL_abstract_set", "nvram_bufset", "apmib_set", "apcli_nvram_set"
+    "OM_ValSet", "CAL_abstract_set", "nvram_bufset", "apmib_set", "apcli_nvram_set", "nvram_set_value"
 ]
 SINKS = [
     "strcpy", "strcat", "sprintf", "system", "___system", "_system", "bstar_system", "popen", "doSystemCmd", "doShell",
@@ -150,5 +150,6 @@ SET_GET_INFO = {
     ("CAL_abstract_set", "CAL_abstract_get"): ["CAL_abstract_set", "CAL_abstract_get", 0, 0, 1, None],
     ("nvram_bufset", "nvram_bufget"): ["nvram_bufset", "nvram_bufget", 1, 1, 2, None],
     ("apmib_set", "apmib_get"): ["apmib_set", "apmib_get", 0, 0, 1, 1],
-    ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None]
+    ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None],
+    ("nvram_set_value", "nvram_safe_get"): ["nvram_set_value", "nvram_safe_get", 0, 0, 1, None]
 }
