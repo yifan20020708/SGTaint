@@ -32,8 +32,12 @@ class HtmlParser():
     
     # 提取出html文件中的js代码（仅处理单个文件）
     def _get_js_code_snippet(self, file_path): # file_path为对应html文件的路径
-        with open(file_path, "r", encoding="utf-8") as file:
-            html_content = file.read()
+        with open(file_path, "rb") as f:
+            content = f.read()
+        if not content:
+            return
+        encoding = chardet.detect(content)['encoding']
+        html_content = content.decode(encoding, "ignore")
         soup = BeautifulSoup(html_content, 'html.parser')
         # 查找所有<script>标签
         script_tags = soup.find_all('script')
