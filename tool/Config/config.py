@@ -110,7 +110,7 @@ SOURCES = [
     "sub_1d170", "config_get", "NK_query_entry_get", "webGetVarString", "bcm_nvram_get", "GetValue", "acosNvramConfig_read",
     "sub_42af24", "sub_42a978", "get_cgi", "websGetVar", "nvram_get", "nvram_safe_get", "nvram_default_get", "getenv",
     "nvram_pf_get", "acosNvramConfig_get", "uciGet", "entry", "wpa_config_get", "httpGenListDataGet", "cJSON_GetArrayItem",
-    "vici_find_str", "DoHardwareComponent", "device_get_string_value", "cJSON_Parse", 
+    "vici_find_str", "DoHardwareComponent", "device_get_string_value", "cJSON_Parse", "websGetVarSafe", "websGetVar_secure",
     "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "json_object_object_get", "json_object_object_get_ex",
     "json_tokener_parse", "OM_ValFind", "get_parameter", "get_wlan_setting", "av_dict_get", "cgi_value", "stringOut",
     "cJSON_GetObjectItem", "sw_getValueByName", "querystr", "find_val", "log_query", "value_parser_by_index_D7000",
@@ -118,8 +118,9 @@ SOURCES = [
     "av_metadata_get", "httpGetEnv", "gets", "fgets", "recvfrom", "recvmsg", "nvram_get_ex2", "nvram_bufget", "apmib_get", "apcli_nvram_get"
 ]
 transitive_get = [
-    "config_get", "GetValue", "getenv", "nvram_get", "nvram_safe_get", "nvram_pf_get", "acosNvramConfig_get", "nvram_bufget", "apcli_nvram_get"
-    "uciGet", "wpa_config_get", "device_get_string_value", "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "nvram_get_ex2", "apmib_get"
+    "config_get", "GetValue", "getenv", "nvram_get", "nvram_safe_get", "nvram_pf_get", "acosNvramConfig_get", "nvram_bufget", "apcli_nvram_get",
+    "uciGet", "wpa_config_get", "device_get_string_value", "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "nvram_get_ex2", "apmib_get",
+    "acosNvramConfig_read"
 ]
 transitive_set = [
     "config_set", "SetValue", "setenv", "nvram_set", "nvram_safe_set", "nvram_pf_set", "artblock_set",
@@ -140,7 +141,7 @@ SET_GET_INFO = {
     ("nvram_safe_set", "nvram_safe_get"): ["nvram_safe_set", "nvram_safe_get", 0, 0, 1, None],
     ("nvram_pf_set", "nvram_pf_get"): ["nvram_pf_set", "nvram_pf_get", 0, 0, 1, None],
     ("acosNvramConfig_set", "acosNvramConfig_get"): ["acosNvramConfig_set", "acosNvramConfig_get", 0, 0, 1, None],
-    ("acosNvramConfig_read", "acosNvramConfig_get"): ["acosNvramConfig_read", "acosNvramConfig_get", 0, 0, 1, 1],
+    ("acosNvramConfig_set", "acosNvramConfig_read"): ["acosNvramConfig_set", "acosNvramConfig_read", 0, 0, 1, 1],
     ("uciSet", "uciGet"): ["uciSet", "uciGet", 0, 0, 1, None],
     ("wpa_config_set", "wpa_config_get"): ["wpa_config_set", "wpa_config_get", 0, 0, 1, None],
     ("device_set_string_value", "device_get_string_value"): ["device_set_string_value", "device_get_string_value", 0, 0, 1, None],
