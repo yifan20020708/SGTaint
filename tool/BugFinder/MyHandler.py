@@ -2052,6 +2052,10 @@ class MyHandler(FunctionHandler):
         function = self._analysis.project.kb.functions.function(name="stringOut")
         return self.handle_get_cgi_xx(function, state, codeloc)
     
+    def handle_getString(self, state, codeloc):
+        function = self._analysis.project.kb.functions.function(name="getString")
+        return self.handle_get_cgi_xx(function, state, codeloc)
+    
     def handle_cJSON_GetObjectItem(self, state, codeloc):
         function = self._analysis.project.kb.functions.function(name="cJSON_GetObjectItem")
         return self.handle_get_cgi_xx(function, state, codeloc)
