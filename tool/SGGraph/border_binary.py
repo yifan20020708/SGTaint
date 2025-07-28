@@ -44,7 +44,7 @@ def binary_keyword_function(directory):
             binary_string = binary.binary_only_string
             binary.keyword_function_file() # 将相关信息写入文件之中
             universal_string_list.append(binary_string) # 收集所有的关键字信息
-            if os.path.basename(path) in config_sgtaint.BOUNDARY_BINARIES_WHITE_LIST or ".so" in os.path.basename(path): # 初始过滤
+            if os.path.basename(path) in config_sgtaint.BOUNDARY_BINARIES_WHITE_LIST or any(ext in os.path.basename(path) for ext in [".so", ".ko", "lib"]): # 初始过滤
                 continue
             binary_keyword_function_list_unfilter.append((path, binary_string))
             logger.debug(f"[{idx}/{len(valid_paths)}] Analyze Finished: {path}.")
@@ -112,7 +112,7 @@ def binary_keyword_function_parallel(directory):
                 if result:
                     path, binary_string = result
                     universal_string_list.append(binary_string) # 收集所有的关键字信息
-                    if os.path.basename(path) not in config_sgtaint.BOUNDARY_BINARIES_WHITE_LIST and ".so" not in os.path.basename(path): # 初始过滤
+                    if os.path.basename(path) not in config_sgtaint.BOUNDARY_BINARIES_WHITE_LIST and all(ext not in os.path.basename(path) for ext in [".so", ".ko", "lib"]): # 初始过滤
                         binary_keyword_function_list_unfilter.append((path, binary_string))
                     logger.debug(f"[{idx}/{len(valid_paths)}] Analyze Finished: {futures[future]}.")
             except TimeoutError:
