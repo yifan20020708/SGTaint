@@ -94,7 +94,7 @@ class PhpParser():
             return self.keyword_set, self.function_set
         start_time = time.time()
         logger.info(f"Starting parsing: {total_files} files")
-        for idx, path in enumerate(self.html_file_list, start=1):
+        for idx, path in enumerate(self.php_file_list, start=1):
             try:
                 self._get_keyword_function(path)
                 logger.debug(f"[{idx}/{total_files}] Parsed successfully: {path}")
