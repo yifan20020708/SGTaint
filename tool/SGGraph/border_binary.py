@@ -179,9 +179,16 @@ def get_border_binaries_by_cluster_max_mean_gap(directory):
     # 找最大均值差确定边界簇
     sorted_clusters = sorted(enumerate(means), key=lambda x: -x[1])
     gaps = [(sorted_clusters[i][1] - sorted_clusters[i+1][1], i) for i in range(len(sorted_clusters)-1)]
-    _, gap_idx = max(gaps, key=lambda x: x[0]) if gaps else (0, 0)
-    boundary_cluster_indices = {idx for idx, _ in sorted_clusters[: gap_idx+1]}
-    boundary_files = [files[i] for i, lbl in enumerate(labels) if lbl in boundary_cluster_indices]
+    if gaps:
+        _, gap_idx = max(gaps, key=lambda x: x[0])
+        # 至少取前三个最大均值簇（如存在）
+        min_clusters = min(3, len(sorted_clusters))
+        cluster_cut = max(gap_idx + 1, min_clusters)
+        boundary_cluster_indices = {idx for idx, _ in sorted_clusters[:cluster_cut]}
+    else: # 只有一个簇
+        boundary_cluster_indices = {sorted_clusters[0][0]}
+    boundary_files_unlimited = [files[i] for i, lbl in enumerate(labels) if lbl in boundary_cluster_indices]
+    boundary_files = boundary_files_unlimited[:config_sgtaint.MAX_BOUNDARY_BINARIES_LIMIT]
     # 过滤重复文件
     unique_boundary = []
     for f in boundary_files:
