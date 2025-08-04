@@ -10,7 +10,8 @@ logger = logging.getLogger("sgtaint.llmcheck")
 # 加入超时时间
 def llm_worker(path, timeout=60):
     code_snippet_list = path.get("decompile_list")
-    if not code_snippet_list or any("Fail to Decompile" in snippet for snippet in code_snippet_list): # 处理不存在反编译代码的情况
+    keywords = ("Fail to Decompile", "Invalid code snippet")
+    if not code_snippet_list or any(any(k in snippet for k in keywords) for snippet in code_snippet_list): # 处理不存在反编译代码的情况
         path["LLM_judge"] = None
         path["LLM_response"] = None
         return path
