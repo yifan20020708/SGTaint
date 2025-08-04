@@ -2,7 +2,7 @@
 import logging
 import tool.Config.config as config_sgtaint
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from tool.LLM.prompt_template import SYSTM_LLM_PATH_CHECK, SYSTM_LLM_PATH_OUTPUT, get_start_prompt, get_middle_prompt, get_end_prompt
+from tool.LLM.prompt_template import SYSTEM_LLM_PATH_CHECK, SYSTM_LLM_PATH_OUTPUT, get_start_prompt, get_middle_prompt, get_end_prompt
 from tool.LLM.LLM_chat import LLM
 
 logger = logging.getLogger("sgtaint.llmcheck")
@@ -20,7 +20,7 @@ def llm_worker(path, timeout=60):
     taint_sink = path.get("taint_sink")
     try:
         LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
-        LLM_chat.system_role(SYSTM_LLM_PATH_CHECK)
+        LLM_chat.system_role(SYSTEM_LLM_PATH_CHECK)
         first_snippet = code_snippet_list[0]
         resp = LLM_chat.chat(get_start_prompt(taint_source, first_snippet), timeout=timeout)
         if resp.startswith("[ERROR]"):
