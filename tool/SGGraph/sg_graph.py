@@ -209,10 +209,6 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
             func_name_previous_known.append(config_sgtaint.SET_GET_INFO[set_get_pair])
             func_name_previous_use.add(set_get_pair[0])
             func_name_previous_use.add(set_get_pair[1])
-    # 从func_name_list中删除
-    for func_name in func_name_previous_use:
-        if func_name in func_name_list_complete:
-            func_name_list_complete.remove(func_name)
     # 进行LLM的第一步分析
     func_name_list_str = "[" + ", ".join(func_name_list_complete) + "]"
     LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
@@ -221,24 +217,24 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
     llm_phase_one_start = time.time()
     response = LLM_chat.chat(get_user_set_get_en_prompt_phase_one(func_name_list_str), timeout=timeout)
     error_count = 0
-    while not response.startswith("[(") and response != "None": # 其中可能存在[ERROR]超时情况
+    while not config_sgtaint.pattern_llm_one_parse.match(response) and response != "None": # 其中可能存在[ERROR]超时情况
         if response.startswith("[ERROR]"):
             error_count += 1
             if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                 logger.warning("Exceeded maximum consecutive errors during LLM chat")
-                return []
+                return func_name_previous_known
         else:
             error_count = 0
         response = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_ONE, timeout=timeout)
     # 进行第二次检查
     response_twice = LLM_chat.chat(DOUBLE_CHECK, timeout=timeout)
     error_count = 0
-    while not response_twice.startswith("[(") and response_twice != "None":
+    while not config_sgtaint.pattern_llm_one_parse.match(response_twice) and response_twice != "None":
         if response_twice.startswith("[ERROR]"):
             error_count += 1
             if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                 logger.warning("Exceeded maximum consecutive errors during LLM chat")
-                return []
+                return func_name_previous_known
         else:
             error_count = 0
         response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_ONE, timeout=timeout)
@@ -248,24 +244,28 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         response = response_twice
         response_twice = LLM_chat.chat(DOUBLE_CHECK, timeout=timeout)
         error_count = 0
-        while not response_twice.startswith("[(") and response_twice != "None":
+        while not config_sgtaint.pattern_llm_one_parse.match(response_twice) and response_twice != "None":
             if response_twice.startswith("[ERROR]"):
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
-                    return []
+                    return func_name_previous_known
             else:
                 error_count = 0
             response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_ONE, timeout=timeout)
         cycle_number += 1
-    llm_phase_one_end = time.time()
-    logger.info(f"The output of the first phase of the LLM analysis is {response_twice}, with a duration of {(llm_phase_one_end - llm_phase_one_start):.2f} seconds.")
     # 判断是否存在LLM分析出的内容
-    if response_twice == "None":
+    func_name_phase_one = [] if response_twice == "None" else parse_set_get_string(response_twice)
+    # 从配置中补充转移函数对名称
+    for set_get_pair in config_sgtaint.SET_GET_INFO:
+        if set_get_pair[0] in func_name_list_complete and set_get_pair[1] in func_name_list_complete and [set_get_pair[0], set_get_pair[1]] not in func_name_phase_one:
+            func_name_phase_one.append([set_get_pair[0], set_get_pair[1]])
+    llm_phase_one_end = time.time()
+    logger.info(f"The output of the first phase of the LLM analysis is {func_name_phase_one}, with a duration of {(llm_phase_one_end - llm_phase_one_start):.2f} seconds.")
+    if not func_name_phase_one: # 若没有获取到函数对，则直接返回
         logger.info("Retrieve Set-Get function information directly from the configuration.")
         logger.info(f"Function names from configuration: {func_name_previous_known}")
         return func_name_previous_known
-    func_name_phase_one = parse_set_get_string(response_twice)
     # 进行LLM的第二步分析，首先需要获取对应到的调用语句
     logger.info("Extracting call information from the first phase to facilitate the second phase of LLM-based analysis.")
     func_name_phase_list = []
@@ -383,24 +383,24 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         logger.info(f"Prompt for phase two: {prompt_phase_two}")
         response = LLM_chat.chat(get_user_set_get_en_prompt_phase_two(prompt_phase_two))
         error_count = 0
-        if not response.startswith("[(") and response != "None":
+        while not config_sgtaint.pattern_llm_two_parse.match(response) and response != "None":
             if response.startswith("[ERROR]"):
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
-                    return []
+                    return func_name_previous_known
             else:
                 error_count = 0
             response = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_TWO)
         # 进行第二次检查
         response_twice = LLM_chat.chat(double_check_phase_two(get_prompt_for_phase_two(func_name_eventually)))
         error_count = 0
-        while not response_twice.startswith("[(") and response_twice != "None":
+        while not config_sgtaint.pattern_llm_two_parse.match(response_twice) and response_twice != "None":
             if response_twice.startswith("[ERROR]"):
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
-                    return []
+                    return func_name_previous_known
             else:
                 error_count = 0
             response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_TWO)
@@ -410,12 +410,12 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
             response = response_twice
             response_twice = LLM_chat.chat(double_check_phase_two(get_prompt_for_phase_two(func_name_eventually)))
             error_count = 0
-            while not response_twice.startswith("[(") and response_twice != "None":
+            while not config_sgtaint.pattern_llm_two_parse.match(response_twice) and response_twice != "None":
                 if response_twice.startswith("[ERROR]"):
                     error_count += 1
                     if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                         logger.warning("Exceeded maximum consecutive errors during LLM chat")
-                        return []
+                        return func_name_previous_known
                 else:
                     error_count = 0
                 response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_TWO)
@@ -425,7 +425,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         logger.info(f"The output of the second phase of the LLM analysis is {response_twice}, with a duration of {(llm_phase_two_end - llm_phase_two_start):.2f} seconds.")
     else:
         response_twice_list = []
-    func_name = response_twice_list + func_name_previous_known
+    func_name = response_twice_list
     for set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get in func_name:
         # 更新对应的函数集
         if set_func_name not in config_sgtaint.transitive_set:

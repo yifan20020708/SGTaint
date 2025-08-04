@@ -89,6 +89,8 @@ PREFIXES = [
 pattern = re.compile(
     r'^&?(?:' + '|'.join(map(re.escape, PREFIXES)) + r')_([0-9A-Fa-f]+)$'
 )
+pattern_llm_two_parse = re.compile(r'^\s*\[\s*(\(\s*([^,()]+?\s*,\s*){5}[^,()]+?\s*\)\s*,?\s*)+\]$')
+pattern_llm_one_parse = re.compile(r'^\s*\[\s*(\(\s*[^,()]+?\s*,\s*[^,()]+?\s*\)\s*,?\s*)+\]$')
 
 # 大模型最大重复次数
 MAX_REPEATED_TIMES = 3

@@ -509,7 +509,7 @@ def parse_set_get_string(set_get_string):
     parsed_list = []
     for item in raw_list:
         if len(item) == 2:
-            parsed_list.append(item)
+            parsed_list.append(list(item))
         elif len(item) == 6:
             parsed_item = [
                 item[0],  # set_name
