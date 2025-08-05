@@ -133,7 +133,7 @@ transitive_set = [
 ]
 SINKS = [
     "strcpy", "strcat", "sprintf", "system", "___system", "_system", "bstar_system", "popen", "doSystemCmd", "doShell",
-    "twsystem", "CsteSystem", "cgi_deal_popen", "ExecShell", "exec_shell_popen", "exec_shell_popen_str",
+    "twsystem", "CsteSystem", "cgi_deal_popen", "ExecShell", "exec_shell_popen", "exec_shell_popen_str", "doSystem",
     "wl_exec_cmd", "execve", "execl", "_eval", "eval", "sh", "send", "execlp", "doSystem", "sprintf"
 ]
 # 已知的set-get函数info
