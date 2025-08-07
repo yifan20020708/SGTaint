@@ -125,7 +125,6 @@ def get_path(desired_blocks, def_explorer):
             final_blocks_list.append(addr)
     connected_blocks = []
     i = 0
-    not_equal = False
     while i + 1 < len(final_blocks_list):
         tmp_fun_0 = RDA_handler.cfg.functions.floor_func(final_blocks_list[i])
         tmp_fun_1 = RDA_handler.cfg.functions.floor_func(final_blocks_list[i + 1])
@@ -188,7 +187,7 @@ def connectDefination_with_sinks(function, project: Project, def_explorer=None,
             if  branch_type not in [ailment.statement.Call, ailment.statement.Store, ailment.statement.Assignment]:
                 intresting_blks.append((blk,branch_type))
                 try:
-                    if type(blk.statements[-1]) == ailment.statement.Jump :                        
+                    if type(blk.statements[-1]) == ailment.statement.Jump:                        
                         continue
                     false_block_address = blk.statements[-1].false_target.value if blk.statements[-1].true_target.value in connected_blocks else blk.statements[-1].true_target.value
                     false_blk = get_clinic_block(project, tmp_clinic, false_block_address)
@@ -238,7 +237,7 @@ def connectDefination_with_sinks(function, project: Project, def_explorer=None,
     print(type_list)   
     print("***")
     print("Extracted conditional Blocks")
-    for itm in intresting_blks:
+    for itm in intresting_blks: # 其中可能存在过滤内容的block
         if itm[1] == ailment.statement.ConditionalJump:
             print(itm[0].statements[-1].condition.verbose_op, " -> ", itm[0].statements[-1].condition)
     print("########")
@@ -247,7 +246,7 @@ def connectDefination_with_sinks(function, project: Project, def_explorer=None,
     for item in intresting_blks:
         try:
             cnd_statement = item[0].statements[-1]
-            if type(cnd_statement) != ailment.statement.ConditionalJump:
+            if type(cnd_statement) != ailment.statement.ConditionalJump: # 仅仅对分支块进行相应的处理
                 continue
             blk_addr = cnd_statement.tags['vex_block_addr']
             tmp_fun = RDA_handler.cfg.functions.floor_func(blk_addr)
@@ -268,7 +267,7 @@ def connectDefination_with_sinks(function, project: Project, def_explorer=None,
         for oprand in operands:
             try:
                 if type(oprand) == ailment.expression.BinaryOp:
-                    operands_list.extend( extract_operands(oprand.operands,tmp_state))
+                    operands_list.extend(extract_operands(oprand.operands,tmp_state))
                 elif type(oprand) == ailment.expression.Const:
                     continue
                 elif type(oprand) == ailment.expression.Register:
@@ -288,7 +287,6 @@ def connectDefination_with_sinks(function, project: Project, def_explorer=None,
                 continue
         for oprand in operands_list:
             try:
-                defination_checked_flag = False 
                 if type(oprand) == ailment.expression.Register:
                     atom_1 = Register(oprand.reg_offset,oprand.size)
                     df1 = next(iter(tmp_state.get_definitions(atom_1)))
@@ -352,7 +350,6 @@ def connectDefination_with_sinks(function, project: Project, def_explorer=None,
                             continue
                         else:
                             reg_def = tmp_def
-                            reg_seen_defs = set()
                             defs_to_check = set()
                             defs_to_check.add(reg_def)
                             seen_defs = set()
@@ -408,6 +405,7 @@ def backtrack_definations(def_explorer, reg_defs, result_file,
                 tmp_path = [i.codeloc.block_addr for i in path]
                 str_path = "#".join(str(hex(i)) for i in tmp_path)
                 connected_path = get_path(desired_blocks=tmp_path, def_explorer=def_explorer)
+                str_path = "#".join(str(hex(i)) for i in connected_path)
                 print("visited_function ->", visited_function)
                 tmp_visited_function = []
                 length_visited_function = []
@@ -483,6 +481,7 @@ def backtrack_definations(def_explorer, reg_defs, result_file,
                     tmp_path = [i.codeloc.block_addr for i in path]
                     str_path = "#".join(str(hex(i)) for i in tmp_path)
                     connected_path = get_path(desired_blocks=tmp_path, def_explorer=def_explorer)
+                    str_path = "#".join(str(hex(i)) for i in connected_path)
                     print("connected_path ->", connected_path)
                     print("visited_function ->", visited_function)
                     tmp_visited_function = []
@@ -737,6 +736,13 @@ def parse_result_line_auto(line):
             fail2captureConditionsTime, error_messges_str, str_length_visited_function,
             path, source_keyword, set_keyword
         ) = m.groups()
+        if '#' in set_keyword:
+            set_keyword_set = set(set_keyword.split('#'))
+            if len(set_keyword_set) == 1:
+                set_keyword = set_keyword_set.pop()
+            else:
+                xx = set_keyword_set.pop()
+                set_keyword = set_keyword_set.pop() if '/' in xx else xx
         return {
             "target_addr": target_addr.strip(),
             "target_name": target_name.strip(),
@@ -762,22 +768,263 @@ def parse_result_line_auto(line):
     return None
 
 
-# 解析结果文件到path路径之中
-def parse_result_file_auto(filepath):
-    results = []
-    seen = set()
+# path列表进行去重
+def deduplicate_paths_by_substring(paths):
+    group_dict = defaultdict(list)
+    for idx, item in enumerate(paths):
+        key = (item['source_insr_addr'], item['sink_insr_addr'])
+        group_dict[key].append((item['path'], idx))  # 记录原始索引，便于还原
+    dedup_indices = set()
+    for (source, sink), path_with_indices in group_dict.items():
+        # 按path长度降序，便于先判长串再判子串
+        sorted_paths = sorted(path_with_indices, key=lambda x: len(x[0]), reverse=True)
+        representatives = []
+        rep_indices = []
+        for cur_path, cur_idx in sorted_paths:
+            already_in_cluster = False
+            to_remove = []
+            for ridx, (rep_path, rep_idx) in enumerate(representatives):
+                if cur_path in rep_path:
+                    # cur_path被已有代表包含
+                    already_in_cluster = True
+                    break
+                elif rep_path in cur_path:
+                    # 旧代表被当前更长的包含
+                    to_remove.append(ridx)
+            if already_in_cluster:
+                continue
+            for ridx in reversed(to_remove):
+                representatives.pop(ridx)
+                rep_indices.pop(ridx)
+            representatives.append((cur_path, cur_idx))
+            rep_indices.append(cur_idx)
+        # 本组保留的所有代表索引
+        dedup_indices.update(rep_indices)
+    # 汇总所有保留的path
+    dedup_paths = [paths[idx] for idx in sorted(dedup_indices)]
+    return dedup_paths
+
+
+# 解析source2sink文件到source2sink_path路径之中
+def parse_source2sink_file_auto(filepath):
+    source2sink_results = []
+    source2sink_seen = set()
+    source2sink_complete_results = []
+    source2sink_complete_seen = set()
     with open(filepath, 'r', encoding='utf-8') as f:
-        for line in f:
+        for line in f: # 逐行读取文件内容
             line = line.strip()
             result_dict = parse_result_line_auto(line)
             if result_dict is None:
-                continue # 一般情况下不会进入到此条路径
-            tuple_repr = tuple(result_dict.items())
-            if tuple_repr not in seen:
-                seen.add(tuple_repr)
-                results.append(result_dict)
-    return results
+                continue
+            checking_time_flag = False
+            maybe_sanitized_flag = False
+            sanitization_verified_flag = False
+            sanitization_by_function_flag = False
+            length_flag = False
+            # 读取对应的字典字段
+            taint_source = result_dict.get("taint_source", "")
+            checking_time = int(result_dict.get("checking_time", -1))
+            source_keyword = result_dict.get("source_keyword", "")
+            conditions_str = result_dict.get("conditions_str", "")
+            visited_functions = result_dict.get("visited_functions", "").split("#")
+            fail2captureConditionsTime = int(result_dict.get("fail2captureConditionsTime", -1))
+            error_messges_str = result_dict.get("error_messges_str", "")
+            str_length_visited_function = result_dict.get("str_length_visited_function", "")
+            path = result_dict.get("path", "")
+            # 收集未过滤的信息
+            if path not in source2sink_complete_seen:
+                source2sink_complete_results.append(result_dict)
+                source2sink_complete_seen.add(path)
+            if taint_source in config_sgtaint.taint_sources_remove or taint_source not in config_sgtaint.SOURCES + config_sgtaint.New_input_getters:
+                continue
+            # 进行分支过滤
+            if checking_time > 0: # 存在对应的过滤分支
+                checking_time_flag = True
+                continue
+            # 进行长度限制的过滤
+            if len(str_length_visited_function) > 0:
+                str_length_visited_function_list = str_length_visited_function.split('#')
+                for str_length in str_length_visited_function_list:
+                    tmp_length = int(str_length.split('*')[1].strip())
+                    if tmp_length < config_sgtaint.STRING_LENGTH_RESTRICTION:
+                        length_flag = True
+                        break
+            # 针对关键字进行过滤
+            if source_keyword in ["not_static_string", "empty_function_parameter", "empty_global"]:
+                continue
+            error_messages = error_messges_str.split("#") if len(error_messges_str) > 0 else ""
+            if len(conditions_str) > 0:
+                conditions = conditions_str.split("#")
+                operands = []
+                integers_list = []
+                for con in conditions:
+                    math = ""
+                    if "!=" in con:
+                        math = "!="
+                    elif "==" in con:
+                        math = "=="
+                    elif "<=" in con:
+                        math = "<="
+                    elif "!=" in con:
+                        math = "!4"
+                    elif ">=" in con:
+                        math = ">="
+                    elif " <" in con:
+                        math = " <"
+                    elif " >" in con:
+                        math = " >"
+                    if "<s" in con:
+                        math = "<s"
+                    if "<=s" in con:
+                        math = "<=s"
+                    parts = con.split(math)
+                    if '<32>' in parts[1] or '<63>' in parts[1]:
+                        int_value = parts[1][:-5]
+                        try:
+                            integers_list.append(int(int_value, 16))
+                        except Exception as e:
+                            if "?" in int_value:
+                                parts = int_value.split("?")
+                                if '<32>' in parts[1] or '<63>' in parts[1]:
+                                    int_value = parts[1][:-5]
+                                    integers_list.append(int(int_value, 16))
+                    else:
+                        operand = parts[1][:-4]
+                        operands.append(operand)
+                sum_integers = sum(integers_list)
+                if (len(integers_list) > 0 and sum_integers > 0) or len(operands) > 0:
+                    sanitization_verified_flag = True
+                elif sum_integers == 0:
+                    if len(error_messages) > 0:
+                        sanitization_verified_flag = True
+                        sanitization_by_function_flag = True
+            # 进行函数过滤
+            for sanitization_function in config_sgtaint.sanitization_functions:
+                if sanitization_function in visited_functions:
+                    sanitization_by_function_flag = True
+                    break
+            if len(error_messages) > 0:
+                sanitization_verified_flag = True
+            if checking_time == -1 or fail2captureConditionsTime > 0:
+                maybe_sanitized_flag = True
+            if sanitization_by_function_flag or sanitization_verified_flag or checking_time_flag or maybe_sanitized_flag or length_flag:
+                continue
+            # 将过滤之后的结果加入到候选集合之中
+            if path not in source2sink_seen:
+                source2sink_results.append(result_dict)
+                source2sink_seen.add(path)
+    # 对集合进行去重
+    source2sink_results = deduplicate_paths_by_substring(source2sink_results)
+    source2sink_complete_results = deduplicate_paths_by_substring(source2sink_complete_results)
+    return source2sink_results, source2sink_complete_results
+                
 
+# 解析get2set文件到get2set_path路径之中
+def parse_get2set_file_auto(filepath):
+    get2set_results = []
+    get2set_seen = set()
+    get2set_complete_results = []
+    get2set_complete_seen = set()
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line in f: # 逐行读取文件内容
+            line = line.strip()
+            result_dict = parse_result_line_auto(line)
+            if result_dict is None:
+                continue
+            checking_time_flag = False
+            maybe_sanitized_flag = False
+            sanitization_verified_flag = False
+            sanitization_by_function_flag = False
+            # 读取对应的字典字段
+            taint_source = result_dict.get("taint_source", "")
+            checking_time = int(result_dict.get("checking_time", -1))
+            source_keyword = result_dict.get("source_keyword", "")
+            set_keyword = result_dict.get("set_keyword", "")
+            conditions_str = result_dict.get("conditions_str", "")
+            visited_functions = result_dict.get("visited_functions", "").split("#")
+            fail2captureConditionsTime = int(result_dict.get("fail2captureConditionsTime", -1))
+            error_messges_str = result_dict.get("error_messges_str", "")
+            path = result_dict.get("path", "")
+            # 收集未过滤的信息
+            if path not in get2set_complete_seen:
+                get2set_complete_results.append(result_dict)
+                get2set_complete_seen.add(path)
+            if taint_source in config_sgtaint.taint_sources_remove or taint_source not in config_sgtaint.SOURCES + config_sgtaint.New_input_getters:
+                continue
+            # 进行分支过滤
+            if checking_time > 0: # 存在对应的过滤分支
+                checking_time_flag = True
+                continue
+            error_messages = error_messges_str.split("#") if len(error_messges_str) > 0 else ""
+            if len(conditions_str) > 0:
+                conditions = conditions_str.split("#")
+                operands = []
+                integers_list = []
+                for con in conditions:
+                    math = ""
+                    if "!=" in con:
+                        math = "!="
+                    elif "==" in con:
+                        math = "=="
+                    elif "<=" in con:
+                        math = "<="
+                    elif "!=" in con:
+                        math = "!4"
+                    elif ">=" in con:
+                        math = ">="
+                    elif " <" in con:
+                        math = " <"
+                    elif " >" in con:
+                        math = " >"
+                    if "<s" in con:
+                        math = "<s"
+                    if "<=s" in con:
+                        math = "<=s"
+                    parts = con.split(math)
+                    if '<32>' in parts[1] or '<63>' in parts[1]:
+                        int_value = parts[1][:-5]
+                        try:
+                            integers_list.append(int(int_value, 16))
+                        except Exception as e:
+                            if "?" in int_value:
+                                parts = int_value.split("?")
+                                if '<32>' in parts[1] or '<63>' in parts[1]:
+                                    int_value = parts[1][:-5]
+                                    integers_list.append(int(int_value, 16))
+                    else:
+                        operand = parts[1][:-4]
+                        operands.append(operand)
+                sum_integers = sum(integers_list)
+                if (len(integers_list) > 0 and sum_integers > 0) or len(operands) > 0:
+                    sanitization_verified_flag = True
+                elif sum_integers == 0:
+                    if len(error_messages) > 0:
+                        sanitization_verified_flag = True
+                        sanitization_by_function_flag = True
+            # 进行函数过滤
+            for sanitization_function in config_sgtaint.sanitization_functions:
+                if sanitization_function in visited_functions:
+                    sanitization_by_function_flag = True
+                    break
+            if len(error_messages) > 0:
+                sanitization_verified_flag = True
+            if checking_time == -1 or fail2captureConditionsTime > 0:
+                maybe_sanitized_flag = True
+            if sanitization_by_function_flag or sanitization_verified_flag or checking_time_flag or maybe_sanitized_flag:
+                continue
+            # 配置键解析
+            if source_keyword == "not_static_string" or set_keyword == "not_static_string":
+                continue
+            # 将过滤之后的结果加入到候选集合之中
+            if path not in get2set_seen:
+                get2set_results.append(result_dict)
+                get2set_seen.add(path)
+    # 对集合进行去重
+    get2set_results = deduplicate_paths_by_substring(get2set_results)
+    get2set_complete_results = deduplicate_paths_by_substring(get2set_complete_results)
+    return get2set_results, get2set_complete_results
+            
 
 # 单个二进制文件的路径拼接（直接通过内容匹配进行）
 def construct_cross_binary_data_flow_single(file_path, potential_path_dict):

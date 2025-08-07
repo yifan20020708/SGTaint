@@ -97,6 +97,7 @@ MAX_REPEATED_TIMES = 3
 CODE_NUMBER = 3
 
 # RDA分析配置
+STRING_LENGTH_RESTRICTION = 200
 defination_dictionary = []
 OVERWRITTEN_STACK_VARIABLES = {}
 strcpy_counter = [0]
@@ -156,3 +157,5 @@ SET_GET_INFO = {
     ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None],
     ("nvram_set_value", "nvram_safe_get"): ["nvram_set_value", "nvram_safe_get", 0, 0, 1, None]
 }
+taint_sources_remove = ["strtok", "strchr", "atoi", "strspn", "strtol", "fork", "rand", "malloc", "strlen"]
+sanitization_functions = ["atoi", "strcmp", "strncmp", "acosNvramConfig_match"]

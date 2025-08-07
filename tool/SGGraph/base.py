@@ -9,7 +9,7 @@ from typing import Any, Callable, Iterable
 import angr
 import angr.analyses.reaching_definitions.dep_graph as dep_graph
 import tool.Config.config as config_sgtaint
-from tool.BugFinder.utils import get_functions_to_analyse, run_function_with_timeout, parse_result_file_auto, transfer_path_to_ghidra, get_function_decompile_list_by_path
+from tool.BugFinder.utils import get_functions_to_analyse, run_function_with_timeout, parse_get2set_file_auto, parse_source2sink_file_auto, transfer_path_to_ghidra, get_function_decompile_list_by_path
 from tool.SGGraph.utils import execute, get_call_site_func_name
 from tool.BugFinder.MyHandler import MyHandler
 
@@ -53,6 +53,8 @@ class AnalysisBinary():
         # 存储二进制文件的敏感路径信息
         self.source2sink_path = [] # 对应的文件为result.txt
         self.get2set_path = [] # 对应的文件为get2set.txt
+        self.source2sink_complete_path = []
+        self.get2set_complete_path = []
         self.visited_function_list = []
         self.angr_dec_cache = {} # angr的反编译工具缓存
     
@@ -327,8 +329,12 @@ class AnalysisBinary():
                     continue
         self.visited_file.write("\n Done"+" \n")
         # 解析结果文件到path路径之中
-        self.source2sink_path = parse_result_file_auto(self.result_file.name)[:]
-        self.get2set_path = parse_result_file_auto(self.get2set_file.name)[:]
+        source2sink_path, source2sink_complete_path = parse_source2sink_file_auto(self.result_file.name)
+        self.source2sink_path = source2sink_path
+        self.source2sink_complete_path = source2sink_complete_path
+        get2set_path, get2set_complete_path = parse_get2set_file_auto(self.get2set_file.name)
+        self.get2set_path = get2set_path
+        self.get2set_complete_path = get2set_complete_path
         if config_sgtaint.GHIDRA_ASSIST:
             self.get_decompile_code_by_ghidra() # 通过ghidra获取反编译片段
         else:

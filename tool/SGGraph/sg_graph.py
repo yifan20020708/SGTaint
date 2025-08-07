@@ -203,12 +203,9 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 func_name_list_complete.append(func_name)
     # 直接从SET_GET_INFO中获取的函数信息
     func_name_previous_known = [] # 存放从SET_GET_INFO中获取的函数信息
-    func_name_previous_use = set()
     for set_get_pair in config_sgtaint.SET_GET_INFO:
         if set_get_pair[0] in func_name_list and set_get_pair[1] in func_name_list: # setter函数名称与getter函数名称均存在
             func_name_previous_known.append(config_sgtaint.SET_GET_INFO[set_get_pair])
-            func_name_previous_use.add(set_get_pair[0])
-            func_name_previous_use.add(set_get_pair[1])
     # 进行LLM的第一步分析
     func_name_list_str = "[" + ", ".join(func_name_list_complete) + "]"
     LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
@@ -425,7 +422,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
         logger.info(f"The output of the second phase of the LLM analysis is {response_twice}, with a duration of {(llm_phase_two_end - llm_phase_two_start):.2f} seconds.")
     else:
         response_twice_list = []
-    func_name = response_twice_list
+    func_name = response_twice_list # 其中包含所有可能的set-get函数对信息
     for set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get in func_name:
         # 更新对应的函数集
         if set_func_name not in config_sgtaint.transitive_set:
