@@ -2212,17 +2212,22 @@ class MyHandler(FunctionHandler):
     def handle_websGetVar(self, state, codeloc):
         function = self._analysis.project.kb.functions.function(name="websGetVar")
         d1 = self.get_def_from_parameter(function, parameter_position=1, state=state)
-        return  self.process_sub_42a978(function, state, codeloc, d1)
+        return self.process_sub_42a978(function, state, codeloc, d1)
+    
+    def handle_web_get(self, state, codeloc):
+        function = self._analysis.project.kb.functions.function(name="web_get")
+        d0 = self.get_def_from_parameter(function, parameter_position=0, state=state)
+        return self.process_sub_42a978(function, state, codeloc, d0)
     
     def handle_websGetVarSafe(self, state, codeloc):
         function = self._analysis.project.kb.functions.function(name="websGetVarSafe")
         d1 = self.get_def_from_parameter(function, parameter_position=1, state=state)
-        return  self.process_sub_42a978(function, state, codeloc, d1)
+        return self.process_sub_42a978(function, state, codeloc, d1)
     
     def handle_websGetVar_secure(self, state, codeloc):
         function = self._analysis.project.kb.functions.function(name="websGetVar_secure")
         d1 = self.get_def_from_parameter(function, parameter_position=1, state=state)
-        return  self.process_sub_42a978(function, state, codeloc, d1)
+        return self.process_sub_42a978(function, state, codeloc, d1)
 
     def handle_nvram_set_xx(self, function, state, codeloc, function_name, key_position=0, value_position=1):
         blk = self.get_clinic_block(self.clinic, state.current_codeloc.block_addr)

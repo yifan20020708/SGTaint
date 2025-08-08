@@ -57,6 +57,8 @@ class AnalysisBinary():
         self.get2set_complete_path = []
         self.visited_function_list = []
         self.angr_dec_cache = {} # angr的反编译工具缓存
+        # 统计二进制文件分析时间
+        self.binary_analysis_info = {}
     
     # 保存全局属性
     def save_config(self):
@@ -342,6 +344,8 @@ class AnalysisBinary():
         self.save_path2json()
         end_time = datetime.datetime.now()
         elapsed = (end_time - start_time).seconds
+        self.binary_analysis_info["time"] = elapsed
+        self.binary_analysis_info["function_number"] = visited_function_counter + new_index
         self.visited_file.write(f"Total time: {elapsed}s \n")
         self.visited_file.flush()
         logger.info(f"Finished RDA analysis for {self.binary_path} in {elapsed}s")

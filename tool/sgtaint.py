@@ -12,8 +12,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError
 from tool.SGGraph.base import AnalysisBinaryDict, SetGetGraph, AnalysisBinary
 from tool.SGGraph.sg_graph import set_get_graph_create
 from tool.SGGraph.utils import dedupe_paths, generate_binary_processing_order_robust
-from tool.BugFinder.utils import construct_cross_binary_data_flow_single
-from tool.LLM.LLM_check import llm_assist_parallel
+from tool.BugFinder.utils import construct_cross_binary_data_flow_single, get_sorted_potential_path_sanitization
+from tool.LLM.LLM_check import llm_assist_parallel, llm_prompt_generate
 
 __version__ = "1.1.0"
 
@@ -166,25 +166,32 @@ class SGTaintRunner:
         self.clear_project()
         if not os.path.isdir(self.firmware):
             raise FileNotFoundError(f"Firmware path not found: {self.firmware}")
+        # 需要生成对应的固件挖掘md信息
+        firmware_info_markdown_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{self.name}_INFO.md") # 统计重要信息
+        self.info_file = open(firmware_info_markdown_file_path, 'a+')
+        self.info_file.write(f"# Firmware information of {self.name}\n\n")
+        self.info_file.write(f"1. File system folder: `{self.firmware}`;\n") # 写入文件系统名称
+        self.info_file.flush()
         if self.parallel:
-            potential, get2sink = start_sgtaint_parallel()
+            merged_path, sorted_potential_path_sanitization = start_sgtaint_parallel(self.info_file)
         else:
-            potential, get2sink = start_sgtaint_serial()
+            merged_path, sorted_potential_path_sanitization = start_sgtaint_serial(self.info_file)
         # 合并路径
-        merged = potential + get2sink
-        if self.llm:
-            merged = llm_assist_parallel(merged)
         os.makedirs(config_sgtaint.OUTPUT_DIR, exist_ok=True)
-        out_file = os.path.join(config_sgtaint.OUTPUT_DIR, f"{self.name}_potential_path_final.json")
-        with open(out_file, "w") as f:
-            json.dump(merged, f, indent=4)
-        self.logger.info(f"Final merged results saved to {out_file}")
+        llm_prompt_path = llm_prompt_generate(merged_path)
+        llm_prompt_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{self.name}_path_sanitization_llm_prompt.json")
+        with open(llm_prompt_file_path, "w") as f:
+            json.dump(llm_prompt_path, f, indent=4)
+        if self.llm: # 开启llm检查
+            llm_check_path = llm_assist_parallel(sorted_potential_path_sanitization)
+            llm_check_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{self.name}_path_sanitization_llm_check.json")
+            with open(llm_check_file_path, "w") as f: # 写入到文件之中
+                json.dump(llm_check_path, f, indent=4)
         self.copy_results()
-        return merged
         
 
 # 使用串行方法启动SGTaint分析
-def start_sgtaint_serial():
+def start_sgtaint_serial(info_file):
     logger = logging.getLogger("sgtaint")
     total_start = time.time()
     logger.info("[STEP 1] Initializing AnalysisBinaryDict and SetGetGraph ...")
@@ -199,12 +206,23 @@ def start_sgtaint_serial():
     processing_order = generate_binary_processing_order_robust(analysis_binary_dict)
     sg_end = time.time()
     logger.info(f"[STEP 2] finished in {sg_end - sg_start:.2f} seconds\n")
+    
+    # 将相关信息写入info_file
+    info_file.write("2. Boundary binaries: \n")
+    for file_path in analysis_binary_dict.get_border_binary_path_list():
+        info_file.write(f"   - `{file_path}`;\n")
+    info_file.write(f"3. Transfer function information: `{analysis_binary_dict.get_set_func_name}`;\n")
+    info_file.write(f"4. Set-get graph generation time: {sg_end - sg_start:.2f} s\n")
+    info_file.write("5. Analyzing binary file list: \n")
+    info_file.flush()
 
     logger.info("[STEP 3] Serial analysis of all binaries ...")
     serial_start = time.time()
+    keyword_binary_dict = {}
     binary_index = 0
     for file_path in analysis_binary_dict.analysis_binary_dict:
         analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
+        keyword_binary_dict[file_path] = analysis_binary.binary_function_keyword # 存储为set集合的形式
         try:
             logger.info(f"[SERIAL] Starting analysis for: {file_path} ({binary_index + 1}/{len(analysis_binary_dict.analysis_binary_dict)})")
             t1 = time.time()
@@ -223,6 +241,7 @@ def start_sgtaint_serial():
     merge_start = time.time()
     logger.info("[STEP 4] Merging cross-binary data flow ...")
     potential_path_dict = {}
+    complete_path_dict = {} # 完整的路径字典
     for file_path in analysis_binary_dict.analysis_binary_dict:
         analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
         potential_path_dict[file_path] = {
@@ -233,13 +252,32 @@ def start_sgtaint_serial():
             "complete_get2sink_path": [],
             "complete_get2sink_path_dict": {}
         }
+        complete_path_dict[file_path] = {
+            "get2set_path": analysis_binary.get2set_complete_path,
+            "source2sink_path": analysis_binary.source2sink_complete_path,
+            "diffusion_file": list(analysis_binary.diffusion_file),
+            "complete_source2sink_path": [],
+            "complete_get2sink_path": [],
+            "complete_get2sink_path_dict": {}
+        }
     for file_path in processing_order:
         logger.info(f"[MERGE] Processing file: {file_path}")
+        if file_path not in potential_path_dict:
+            logger.error(f"RDA Analysis failed for {file_path}")
+            continue
+        analysis_time = potential_path_dict[file_path]["binary_analysis_info"]["time"]
+        function_number = potential_path_dict[file_path]["binary_analysis_info"]["function_number"]
+        info_file.write(
+            f"   - `{file_path}` [analysis_time: {analysis_time:.2f}, function_number: {function_number}];\n"
+        )
         construct_cross_binary_data_flow_single(file_path, potential_path_dict)
+        construct_cross_binary_data_flow_single(file_path, complete_path_dict)
+    info_file.flush()
     merge_end = time.time()
     logger.info(f"[STEP 4] Merge finished in {merge_end - merge_start:.2f} seconds\n")
 
     collect_start = time.time()
+    # 合并去重路径
     potential_path = []
     get2sink_path = []
     for file_path, potential_path_info in potential_path_dict.items():
@@ -247,26 +285,64 @@ def start_sgtaint_serial():
         get2sink_path.extend(potential_path_info["complete_get2sink_path"])
     potential_path = dedupe_paths(potential_path)  # 去重
     get2sink_path = dedupe_paths(get2sink_path)
+    # 合并完整路径
+    potential_complete_path = []
+    get2sink_complete_path = []
+    for file_path, complete_path_info in complete_path_dict.items():
+        potential_complete_path.extend(complete_path_info["complete_source2sink_path"])
+        get2sink_complete_path.extend(complete_path_info["complete_get2sink_path"])
+    potential_complete_path = dedupe_paths(potential_complete_path)
+    get2sink_complete_path = dedupe_paths(get2sink_complete_path)
     collect_end = time.time()
     logger.info(f"[COLLECT] Path aggregation and dedupe finished in {collect_end - collect_start:.2f} seconds\n")
 
+   # 写入文件
     write_start = time.time()
     os.makedirs(config_sgtaint.OUTPUT_DIR, exist_ok=True)
-    file_name = config_sgtaint.FILE_SYSTEM.replace("/", "_")
-    potential_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path.json")
+    file_name = config_sgtaint.FIRMWARE_NAME
+    # 过滤之后的路径
+    potential_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path_sanitization.json")
     with open(potential_path_file_path, "w") as f:
         json.dump(potential_path, f, indent=4)
-    get2sink_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_get2sink_path.json")
+    get2sink_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_get2sink_path_sanitization.json")
     with open(get2sink_path_file_path, "w") as f:
         json.dump(get2sink_path, f, indent=4)
+    # 完整路径
+    potential_complete_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path_complete.json")
+    with open(potential_complete_path_file_path, "w") as f:
+        json.dump(potential_complete_path, f, indent=4)
+    get2sink_complete_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_get2sink_path_complete.json")
+    with open(get2sink_complete_path_file_path, "w") as f:
+        json.dump(get2sink_complete_path, f, indent=4)
+    merged_path = potential_path + get2sink_path
+    sorted_potential_verify, sorted_potential_maybe = get_sorted_potential_path_sanitization(keyword_binary_dict, potential_path)
+    # 记录排序后的文件
+    sorted_potential_path_sanitization_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path_sanitization_sorted.json")
+    with open(sorted_potential_path_sanitization_file_path, "w") as f:
+        json.dump(sorted_potential_verify, f, indent=4)
+    sorted_potential_path_maybe_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path_maybe_sorted.json")
+    with open(sorted_potential_path_maybe_file_path, "w") as f:
+        json.dump(sorted_potential_maybe, f, indent=4)
     write_end = time.time()
     logger.info(f"[SAVE] Results written to files in {write_end - write_start:.2f} seconds")
-    logger.info(f"[MERGE] length of get2sink_path: {len(get2sink_path)}")
-    logger.info(f"[MERGE] length of potential_path: {len(potential_path)}")
-
+    logger.info(f"[MERGE] length of get2sink_path_sanitization: {len(get2sink_path)}")
+    logger.info(f"[MERGE] length of potential_path_sanitization: {len(potential_path)}") # 需要进行严重性排序
+    logger.info(f"[MERGE] length of get2sink_path_complete: {len(get2sink_complete_path)}")
+    logger.info(f"[MERGE] length of potential_path_complete: {len(potential_complete_path)}")
+    logger.info(f"[MERGE] length of sorted_potential_verify_path: {len(sorted_potential_verify)}")
+    logger.info(f"[MERGE] length of sorted_potential_maybe_path: {len(sorted_potential_maybe)}")
     total_time = time.time() - total_start
     logger.info(f"SGTaint serial pipeline completed in {total_time:.2f} seconds.")
-    return potential_path, get2sink_path
+    # 记录总体信息
+    info_file.write(f"6. Analysis time: {total_time:.2f} s\n")
+    info_file.write(f"7. Length of get2sink_path_sanitization: {len(get2sink_path)}\n")
+    info_file.write(f"8. Length of potential_path_sanitization: {len(potential_path)}\n")
+    info_file.write(f"9. Length of get2sink_path_complete: {len(get2sink_complete_path)}\n")
+    info_file.write(f"10. Length of potential_path_complete: {len(potential_complete_path)}\n")
+    info_file.write(f"11. Length of sorted_potential_verify_path: {len(sorted_potential_verify)}\n")
+    info_file.write(f"12. Length of sorted_potential_maybe_path: {len(sorted_potential_maybe)}\n")
+    info_file.flush()
+    return merged_path, sorted_potential_verify
     
     
 # 进程池子任务
@@ -282,12 +358,22 @@ def run_rda_worker(file_path):
         "diffusion_file": list(analysis_binary.diffusion_file),
         "complete_source2sink_path": [],
         "complete_get2sink_path": [],
-        "complete_get2sink_path_dict": {}
+        "complete_get2sink_path_dict": {},
+        "binary_analysis_info": analysis_binary.binary_analysis_info
     }
-    return file_path, potential_info_dict
+    complete_info_dict = {
+        "get2set_path": analysis_binary.get2set_complete_path,
+        "source2sink_path": analysis_binary.source2sink_complete_path,
+        "diffusion_file": list(analysis_binary.diffusion_file),
+        "complete_source2sink_path": [],
+        "complete_get2sink_path": [],
+        "complete_get2sink_path_dict": {},
+        "binary_analysis_info": analysis_binary.binary_analysis_info
+    }
+    return file_path, potential_info_dict, complete_info_dict
     
     
-def start_sgtaint_parallel():
+def start_sgtaint_parallel(info_file):
     logger = logging.getLogger("sgtaint")
     step_start = time.time()
     logger.info("[STEP 1] Initializing AnalysisBinaryDict and SetGetGraph ...")
@@ -302,11 +388,22 @@ def start_sgtaint_parallel():
     processing_order = generate_binary_processing_order_robust(analysis_binary_dict)
     sg_end = time.time()
     logger.info(f"[STEP 2] finished in {sg_end - sg_start:.2f} seconds\n")
-
+    
+    # 将相关信息写入info_file
+    info_file.write("2. Boundary binaries: \n")
+    for file_path in analysis_binary_dict.get_border_binary_path_list():
+        info_file.write(f"   - `{file_path}`;\n")
+    info_file.write(f"3. Transfer function information: `{analysis_binary_dict.get_set_func_name}`;\n")
+    info_file.write(f"4. Set-get graph generation time: {sg_end - sg_start:.2f} s\n")
+    info_file.write("5. Analyzing binary file list: \n")
+    info_file.flush()
+    
     # 保存每个二进制文件的配置
     config_start = time.time()
+    keyword_binary_dict = {}
     for file_path in analysis_binary_dict.analysis_binary_dict:
         analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
+        keyword_binary_dict[file_path] = analysis_binary.binary_function_keyword # 存储为set集合的形式
         logger.debug(f"Saving config for: {file_path}")
         analysis_binary.save_config()
     config_end = time.time()
@@ -315,8 +412,8 @@ def start_sgtaint_parallel():
     file_path_list = list(analysis_binary_dict.analysis_binary_dict.keys())
     logger.info(f"[STEP 3] Parallel analysis of {len(file_path_list)} binaries ...")
     pool_start = time.time()
-    potential_path_dict = {}
-
+    potential_path_dict = {} # 去重之后的路径字典
+    complete_path_dict = {} # 完整的路径字典
     with ProcessPoolExecutor() as executor:
         futures = {}
         for idx, file_path in enumerate(file_path_list):
@@ -325,8 +422,9 @@ def start_sgtaint_parallel():
         for future in as_completed(futures):
             file_path, idx = futures[future]
             try:
-                binary_path, potential_info_dict = future.result(timeout=config_sgtaint.BINARY_TIMEOUT)  # 单个分析最大3小时
+                binary_path, potential_info_dict, complete_info_dict = future.result(timeout=config_sgtaint.BINARY_TIMEOUT)  # 单个分析最大3小时
                 potential_path_dict[binary_path] = potential_info_dict
+                complete_path_dict[binary_path] = complete_info_dict
                 finished += 1
                 logger.info(f"[PARALLEL] Finished analysis for: {file_path} ({finished}/{len(file_path_list)})")
             except TimeoutError:
@@ -340,11 +438,22 @@ def start_sgtaint_parallel():
     merge_start = time.time()
     for file_path in processing_order:
         logger.info(f"[MERGE] Processing file: {file_path}")
+        if file_path not in potential_path_dict:
+            logger.error(f"RDA Analysis failed for {file_path}")
+            continue
+        analysis_time = potential_path_dict[file_path]["binary_analysis_info"]["time"]
+        function_number = potential_path_dict[file_path]["binary_analysis_info"]["function_number"]
+        info_file.write(
+            f"   - `{file_path}` [analysis_time: {analysis_time:.2f}, function_number: {function_number}];\n"
+        )
         construct_cross_binary_data_flow_single(file_path, potential_path_dict)
+        construct_cross_binary_data_flow_single(file_path, complete_path_dict)
+    info_file.flush()
     merge_end = time.time()
     logger.info(f"[MERGE] Cross-binary data flow merge finished in {merge_end - merge_start:.2f} seconds\n")
 
     collect_start = time.time()
+    # 合并去重路径
     potential_path = []
     get2sink_path = []
     for file_path, potential_path_info in potential_path_dict.items():
@@ -352,27 +461,64 @@ def start_sgtaint_parallel():
         get2sink_path.extend(potential_path_info["complete_get2sink_path"])
     potential_path = dedupe_paths(potential_path)  # 去重
     get2sink_path = dedupe_paths(get2sink_path)
+    # 合并完整路径
+    potential_complete_path = []
+    get2sink_complete_path = []
+    for file_path, complete_path_info in complete_path_dict.items():
+        potential_complete_path.extend(complete_path_info["complete_source2sink_path"])
+        get2sink_complete_path.extend(complete_path_info["complete_get2sink_path"])
+    potential_complete_path = dedupe_paths(potential_complete_path)
+    get2sink_complete_path = dedupe_paths(get2sink_complete_path)
     collect_end = time.time()
     logger.info(f"[COLLECT] Path aggregation and dedupe finished in {collect_end - collect_start:.2f} seconds\n")
 
     # 写入文件
     write_start = time.time()
     os.makedirs(config_sgtaint.OUTPUT_DIR, exist_ok=True)
-    file_name = config_sgtaint.FILE_SYSTEM.replace("/", "_")
-    potential_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path.json")
+    file_name = config_sgtaint.FIRMWARE_NAME
+    # 过滤之后的路径
+    potential_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path_sanitization.json")
     with open(potential_path_file_path, "w") as f:
         json.dump(potential_path, f, indent=4)
-    get2sink_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_get2sink_path.json")
+    get2sink_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_get2sink_path_sanitization.json")
     with open(get2sink_path_file_path, "w") as f:
         json.dump(get2sink_path, f, indent=4)
+    # 完整路径
+    potential_complete_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path_complete.json")
+    with open(potential_complete_path_file_path, "w") as f:
+        json.dump(potential_complete_path, f, indent=4)
+    get2sink_complete_path_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_get2sink_path_complete.json")
+    with open(get2sink_complete_path_file_path, "w") as f:
+        json.dump(get2sink_complete_path, f, indent=4)
+    merged_path = potential_path + get2sink_path
+    sorted_potential_verify, sorted_potential_maybe = get_sorted_potential_path_sanitization(keyword_binary_dict, potential_path)
+    # 记录排序后的文件
+    sorted_potential_path_sanitization_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path_sanitization_sorted.json")
+    with open(sorted_potential_path_sanitization_file_path, "w") as f:
+        json.dump(sorted_potential_verify, f, indent=4)
+    sorted_potential_path_maybe_file_path = os.path.join(config_sgtaint.OUTPUT_DIR, f"{file_name}_potential_path_maybe_sorted.json")
+    with open(sorted_potential_path_maybe_file_path, "w") as f:
+        json.dump(sorted_potential_maybe, f, indent=4)
     write_end = time.time()
     logger.info(f"[SAVE] Results written to files in {write_end - write_start:.2f} seconds")
-    logger.info(f"[MERGE] length of get2sink_path: {len(get2sink_path)}")
-    logger.info(f"[MERGE] length of potential_path: {len(potential_path)}")
-
+    logger.info(f"[MERGE] length of get2sink_path_sanitization: {len(get2sink_path)}")
+    logger.info(f"[MERGE] length of potential_path_sanitization: {len(potential_path)}") # 需要进行严重性排序
+    logger.info(f"[MERGE] length of get2sink_path_complete: {len(get2sink_complete_path)}")
+    logger.info(f"[MERGE] length of potential_path_complete: {len(potential_complete_path)}")
+    logger.info(f"[MERGE] length of sorted_potential_verify_path: {len(sorted_potential_verify)}")
+    logger.info(f"[MERGE] length of sorted_potential_maybe_path: {len(sorted_potential_maybe)}")
     total_time = time.time() - step_start
     logger.info(f"SGTaint parallel pipeline completed in {total_time:.2f} seconds.")
-    return potential_path, get2sink_path
+    # 记录总体信息
+    info_file.write(f"6. Analysis time: {total_time:.2f} s\n")
+    info_file.write(f"7. Length of get2sink_path_sanitization: {len(get2sink_path)}\n")
+    info_file.write(f"8. Length of potential_path_sanitization: {len(potential_path)}\n")
+    info_file.write(f"9. Length of get2sink_path_complete: {len(get2sink_complete_path)}\n")
+    info_file.write(f"10. Length of potential_path_complete: {len(potential_complete_path)}\n")
+    info_file.write(f"11. Length of sorted_potential_verify_path: {len(sorted_potential_verify)}\n")
+    info_file.write(f"12. Length of sorted_potential_maybe_path: {len(sorted_potential_maybe)}\n")
+    info_file.flush()
+    return merged_path, sorted_potential_verify
         
         
 # 参数配置

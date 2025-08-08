@@ -1,4 +1,6 @@
 import re
+import os
+import json
 import queue
 import multiprocessing
 import ailment
@@ -10,6 +12,7 @@ from angr.knowledge_plugins.key_definitions.atoms import Register, SpOffset, Mem
 from angr.knowledge_plugins.key_definitions.tag import ReturnValueTag
 import tool.Config.config as config_sgtaint
 from tool.SGGraph.utils import dedupe_paths, get_call_site_func_name, get_ins_addr_from_range
+from tool.BugFinder.DefExplorer import DefinitionExplorer
 
 logger = logging.getLogger("sgtaint.merge")
 
@@ -381,7 +384,7 @@ def connectDefination_with_sinks(function, project: Project, def_explorer=None,
     return checking_time, fail2captureConditionsTime, conditions_str, error_messges_str
     
     
-def backtrack_definations(def_explorer, reg_defs, result_file,
+def backtrack_definations(def_explorer: DefinitionExplorer, reg_defs, result_file,
                           memcpy_func_pred, FUNCS, sink, memcpy_addr, result_path,
                           check_is_tainted_def=False):
     for reg_def in reg_defs:
@@ -403,9 +406,10 @@ def backtrack_definations(def_explorer, reg_defs, result_file,
 
             if overall_def[0] == "get2set":
                 tmp_path = [i.codeloc.block_addr for i in path]
-                str_path = "#".join(str(hex(i)) for i in tmp_path)
                 connected_path = get_path(desired_blocks=tmp_path, def_explorer=def_explorer)
-                str_path = "#".join(str(hex(i)) for i in connected_path)
+                # 需要进行路径的补全
+                str_path_flag = "#".join(str(hex(i)) for i in connected_path)
+                str_path = complete_decomplie_path(def_explorer.cfg, connected_path, overall_def[3], overall_def[4])
                 print("visited_function ->", visited_function)
                 tmp_visited_function = []
                 length_visited_function = []
@@ -451,6 +455,7 @@ def backtrack_definations(def_explorer, reg_defs, result_file,
                     "fail2captureConditionsTime": fail2captureConditionsTime,
                     "error_messges_str": error_messges_str,
                     "str_length_visited_function": str_length_visited_function,
+                    "path_flag": str_path_flag,
                     "path": str_path,
                     "source_keyword": overall_def[6],
                     "set_keyword": overall_def[7]
@@ -471,6 +476,7 @@ def backtrack_definations(def_explorer, reg_defs, result_file,
                     f"fail2captureConditionsTime: {fail2captureConditionsTime},  "
                     f"error_messges_str: {error_messges_str},  "
                     f"str_length_visited_function: {str_length_visited_function} ,  "
+                    f"path_flag: {str_path_flag} ,  "
                     f"path: {str_path} ,  {overall_def[6]} ,  {overall_def[7]}\n"
                 )
                 result_path.append(result_dict)
@@ -479,9 +485,9 @@ def backtrack_definations(def_explorer, reg_defs, result_file,
             if overall_def[0] == "retval":
                 if overall_def[1] is not None:
                     tmp_path = [i.codeloc.block_addr for i in path]
-                    str_path = "#".join(str(hex(i)) for i in tmp_path)
                     connected_path = get_path(desired_blocks=tmp_path, def_explorer=def_explorer)
-                    str_path = "#".join(str(hex(i)) for i in connected_path)
+                    str_path_flag = "#".join(str(hex(i)) for i in connected_path)
+                    str_path = complete_decomplie_path(def_explorer.cfg, connected_path, overall_def[3], overall_def[4])
                     print("connected_path ->", connected_path)
                     print("visited_function ->", visited_function)
                     tmp_visited_function = []
@@ -528,6 +534,7 @@ def backtrack_definations(def_explorer, reg_defs, result_file,
                         "fail2captureConditionsTime": fail2captureConditionsTime,
                         "error_messges_str": error_messges_str,
                         "str_length_visited_function": str_length_visited_function,
+                        "path_flag": str_path_flag,
                         "path": str_path,
                         "source_keyword": overall_def[6]
                     }
@@ -547,12 +554,52 @@ def backtrack_definations(def_explorer, reg_defs, result_file,
                         f"fail2captureConditionsTime: {fail2captureConditionsTime},  "
                         f"error_messges_str: {error_messges_str} ,  "
                         f"str_length_visited_function: {str_length_visited_function} ,  "
+                        f"path_flag: {str_path_flag} ,  "
                         f"path: {str_path} ,  keyword: {overall_def[6]}\n"
                     )
                     result_path.append(result_dict)
                     result_file.flush()
                     
 
+# 给定任意地址获取所在基本块的起始地址
+def get_block_start_from_addr(target_addr, cfg: CFGFast):
+    for node in cfg.nodes():
+        if node.addr <= target_addr < node.addr + node.size:
+            return node.addr
+    return None
+
+    
+# 进行反编译路径的补充                
+def complete_decomplie_path(cfg: CFGFast, connected_path, source_insr_addr, sink_insr_addr):
+    decomplie_connected_path = []
+    try:
+        source_block_start = get_block_start_from_addr(source_insr_addr, cfg)
+        sink_block_start = get_block_start_from_addr(sink_insr_addr, cfg)
+        if source_block_start and sink_block_start:
+            # 获取source的位置
+            if source_block_start in connected_path:
+                end_index = connected_path.index(source_block_start)
+            else:
+                for index in range(len(connected_path) - 1, -1, -1):
+                    if connected_path[index] > source_block_start:
+                        end_index = index + 1
+                        break
+            # 获取sink的位置
+            if sink_block_start in connected_path:
+                start_index = connected_path.index(sink_block_start)
+            else:
+                for index in range(len(connected_path)):
+                    if connected_path[index] < sink_block_start:
+                        start_index = index - 1
+                        break
+            decomplie_connected_path = [sink_block_start] + connected_path[start_index + 1 : end_index] + [source_block_start]
+            return "#".join(str(hex(i)) for i in decomplie_connected_path)
+        return "#".join(str(hex(i)) for i in connected_path)
+    except Exception as e:
+        print(f"ERROR: {e}")
+        return "#".join(str(hex(i)) for i in connected_path)
+                
+                    
 # 获取分析对象
 def get_functions_to_analyse(sources, project, cfg):
     observation_points_map = {}         # Maps observation points (instruction) to function name
@@ -670,6 +717,7 @@ pattern_source2sink = re.compile(
     r"fail2captureConditionsTime:\s*([^,]+)\s*,\s*"
     r"error_messges_str:\s*(.*?)\s*,\s*"
     r"str_length_visited_function:\s*(.*?)\s*,\s*"
+    r"path_flag:\s*(.*?)\s*,\s*"
     r"path:\s*(.*?)\s*,\s*"
     r"keyword:\s*(.*?)\s*$"
 )
@@ -691,6 +739,7 @@ pattern_get2set = re.compile(
     r"fail2captureConditionsTime:\s*([^,]+)\s*,\s*"
     r"error_messges_str:\s*(.*?)\s*,\s*"
     r"str_length_visited_function:\s*(.*?)\s*,\s*"
+    r"path_flag:\s*(.*?)\s*,\s*"
     r"path: ([^,]*?) ,\s*"
     r"([^,]*?) ,\s*([^,]*?)\s*$"
 )
@@ -703,7 +752,7 @@ def parse_result_line_auto(line):
             target_addr, target_name, source_name, source_insr_addr,
             source_addr, taint_source, sink_insr_addr, sink_addr,
             taint_sink, checking_time, conditions_str, visited_functions,
-            fail2captureConditionsTime, error_messges_str, str_length_visited_function,
+            fail2captureConditionsTime, error_messges_str, str_length_visited_function, path_flag,
             path, source_keyword
         ) = m.groups()
         return {
@@ -722,6 +771,7 @@ def parse_result_line_auto(line):
             "fail2captureConditionsTime": fail2captureConditionsTime.strip(),
             "error_messges_str": error_messges_str.strip(),
             "str_length_visited_function": str_length_visited_function.strip(),
+            "path_flag": path_flag.strip(),
             "path": path.strip(),
             "source_keyword": source_keyword.strip(),
             "start_block": int(path.strip().split('#')[0], 16) if path.strip() else None,
@@ -733,7 +783,7 @@ def parse_result_line_auto(line):
             target_addr, target_name, source_name, source_insr_addr,
             source_addr, taint_source, sink_insr_addr, sink_addr,
             sink_name, checking_time, conditions_str, visited_functions,
-            fail2captureConditionsTime, error_messges_str, str_length_visited_function,
+            fail2captureConditionsTime, error_messges_str, str_length_visited_function, path_flag,
             path, source_keyword, set_keyword
         ) = m.groups()
         if '#' in set_keyword:
@@ -759,6 +809,7 @@ def parse_result_line_auto(line):
             "fail2captureConditionsTime": fail2captureConditionsTime.strip(),
             "error_messges_str": error_messges_str.strip(),
             "str_length_visited_function": str_length_visited_function.strip(),
+            "path_flag": path_flag.strip(),
             "path": path.strip(),
             "source_keyword": source_keyword.strip(),
             "set_keyword": set_keyword.strip(),
@@ -773,7 +824,7 @@ def deduplicate_paths_by_substring(paths):
     group_dict = defaultdict(list)
     for idx, item in enumerate(paths):
         key = (item['source_insr_addr'], item['sink_insr_addr'])
-        group_dict[key].append((item['path'], idx))  # 记录原始索引，便于还原
+        group_dict[key].append((item['path_flag'], idx))  # 记录原始索引，便于还原
     dedup_indices = set()
     for (source, sink), path_with_indices in group_dict.items():
         # 按path长度降序，便于先判长串再判子串
@@ -831,7 +882,7 @@ def parse_source2sink_file_auto(filepath):
             fail2captureConditionsTime = int(result_dict.get("fail2captureConditionsTime", -1))
             error_messges_str = result_dict.get("error_messges_str", "")
             str_length_visited_function = result_dict.get("str_length_visited_function", "")
-            path = result_dict.get("path", "")
+            path = result_dict.get("path_flag", "")
             # 收集未过滤的信息
             if path not in source2sink_complete_seen:
                 source2sink_complete_results.append(result_dict)
@@ -851,7 +902,7 @@ def parse_source2sink_file_auto(filepath):
                         length_flag = True
                         break
             # 针对关键字进行过滤
-            if source_keyword in ["not_static_string", "empty_function_parameter", "empty_global"]:
+            if source_keyword in ["not_static_string", "empty_function_parameter", "empty_global"] and taint_source != "fgets":
                 continue
             error_messages = error_messges_str.split("#") if len(error_messges_str) > 0 else ""
             if len(conditions_str) > 0:
@@ -906,7 +957,7 @@ def parse_source2sink_file_auto(filepath):
                     break
             if len(error_messages) > 0:
                 sanitization_verified_flag = True
-            if checking_time == -1 or fail2captureConditionsTime > 0:
+            if fail2captureConditionsTime > 0: # checking_time == -1
                 maybe_sanitized_flag = True
             if sanitization_by_function_flag or sanitization_verified_flag or checking_time_flag or maybe_sanitized_flag or length_flag:
                 continue
@@ -945,7 +996,7 @@ def parse_get2set_file_auto(filepath):
             visited_functions = result_dict.get("visited_functions", "").split("#")
             fail2captureConditionsTime = int(result_dict.get("fail2captureConditionsTime", -1))
             error_messges_str = result_dict.get("error_messges_str", "")
-            path = result_dict.get("path", "")
+            path = result_dict.get("path_flag", "")
             # 收集未过滤的信息
             if path not in get2set_complete_seen:
                 get2set_complete_results.append(result_dict)
@@ -1009,12 +1060,12 @@ def parse_get2set_file_auto(filepath):
                     break
             if len(error_messages) > 0:
                 sanitization_verified_flag = True
-            if checking_time == -1 or fail2captureConditionsTime > 0:
+            if fail2captureConditionsTime > 0: # checking_time == -1
                 maybe_sanitized_flag = True
             if sanitization_by_function_flag or sanitization_verified_flag or checking_time_flag or maybe_sanitized_flag:
                 continue
             # 配置键解析
-            if source_keyword == "not_static_string" or set_keyword == "not_static_string":
+            if (source_keyword == "not_static_string" and taint_source != "fgets") or set_keyword == "not_static_string":
                 continue
             # 将过滤之后的结果加入到候选集合之中
             if path not in get2set_seen:
@@ -1039,8 +1090,11 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
     for source2sink_single_path in source2sink_path:
         if source2sink_single_path["taint_source"] in config_sgtaint.transitive_get:
             path_dict = {file_path: [source2sink_single_path["path"]]} # 键为二进制文件路径，值为对应的路径列表
+            vulnerability_type = "command injection" if source2sink_single_path["taint_sink"] in config_sgtaint.CI_SINKS else "buffer overflow"
             potential_path_dict[file_path]["complete_get2sink_path"].append({
                 "kind": "intra-single", # 标记为原始的source2sink的路径
+                "vulnerability_type": vulnerability_type,
+                "checking_time": source2sink_single_path["checking_time"],
                 "source_function_name": source2sink_single_path["source_name"], # source调用点所在的函数
                 "taint_source": source2sink_single_path["taint_source"], # get函数的名称
                 "source_insr_addr": source2sink_single_path["source_insr_addr"], # get函数调用点地址
@@ -1053,13 +1107,16 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
                 "end_block": source2sink_single_path["end_block"], # sink函数调用点所在block的起始地址
                 "path": path_dict, # 存储路径信息
                 "visited_functions": source2sink_single_path["visited_functions"], # 存储访问过的函数名称的集合
-                "decompile_list": source2sink_single_path["decompile_list"], # 存储对应的反汇编片段
-                "complete_list": source2sink_single_path["complete_list"], # 存储对应的完整路径片段 
+                "decompile_list": source2sink_single_path.get("decompile_list", []), # 存储对应的反汇编片段
+                "complete_list": source2sink_single_path.get("complete_list", []), # 存储对应的完整路径片段 
             })
         else: # 直接的潜在路径
             path_dict = {file_path: [source2sink_single_path["path"]]}
+            vulnerability_type = "command injection" if source2sink_single_path["taint_sink"] in config_sgtaint.CI_SINKS else "buffer overflow"
             potential_path_dict[file_path]["complete_source2sink_path"].append({
                 "kind": "intra-single", # 单个二进制文件内的潜在路径
+                "vulnerability_type": vulnerability_type,
+                "checking_time": source2sink_single_path["checking_time"],
                 "source_function_name": source2sink_single_path["source_name"], # source调用点所在的函数
                 "taint_source": source2sink_single_path["taint_source"], # source函数的名称
                 "source_insr_addr": source2sink_single_path["source_insr_addr"], # source函数调用点地址
@@ -1072,8 +1129,8 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
                 "end_block": source2sink_single_path["end_block"], # sink函数调用点所在block的起始地址
                 "path": path_dict, # 存储路径信息
                 "visited_functions": source2sink_single_path["visited_functions"], # 存储访问过的函数名称的集合
-                "decompile_list": source2sink_single_path["decompile_list"], # 存储对应的反汇编片段
-                "complete_list": source2sink_single_path["complete_list"], # 存储对应的完整路径片段
+                "decompile_list": source2sink_single_path.get("decompile_list", []), # 存储对应的反汇编片段
+                "complete_list": source2sink_single_path.get("complete_list", []), # 存储对应的完整路径片段
             })
     # 进行去重
     potential_path_dict[file_path]["complete_get2sink_path"] = dedupe_paths(potential_path_dict[file_path]["complete_get2sink_path"])
@@ -1097,9 +1154,22 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
                 logger.error(f"RDA Analysis failed for {file_path}")
                 continue
             binary_get2sink_path_dict = potential_path_dict[binary_path]["complete_get2sink_path_dict"]
-            target_path_list = binary_get2sink_path_dict.get(set_keyword, [])[:]
+            target_path_list = binary_get2sink_path_dict.get(set_keyword, [])[:] # 可以改进成模糊匹配，防止其中包含动态字符串
             if not target_path_list: # 如果没有对应的路径，则跳过
-                continue
+                # 首先进行动态字符串的对比
+                dynamic_target_path_list = []
+                if '%' not in set_keyword: # 不是动态字符串，和binary_get2sink_path_dict中的动态字符串进行匹配
+                    for get_keyword in binary_get2sink_path_dict:
+                        if '%' in get_keyword and match_dynamic(get_keyword, set_keyword)[0]:
+                            dynamic_target_path_list.extend(binary_get2sink_path_dict[get_keyword])
+                else: # 进行模糊匹配
+                    for get_keyword in binary_get2sink_path_dict:
+                        if '%' not in get_keyword and match_dynamic(set_keyword, get_keyword)[0]:
+                            dynamic_target_path_list.extend(binary_get2sink_path_dict[get_keyword]) # 可能存在多个示例
+                if not dynamic_target_path_list: # 不存在动态字符串匹配
+                    continue
+                else:
+                    target_path_list = dynamic_target_path_list[:]
             # 遍历所有目标路径进行拼接
             for target_path in target_path_list:
                 if (get2set_single_path['taint_sink'], target_path['taint_source']) not in config_sgtaint.SET_GET_INFO: # API不匹配
@@ -1114,9 +1184,15 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
                     target_path_path_dict[file_path].append(get2set_single_path["path"])
                 else:
                     target_path_path_dict[file_path] = [get2set_single_path["path"]]
+                vulnerability_type = "command injection" if target_path["taint_sink"] in config_sgtaint.CI_SINKS else "buffer overflow"
+                get2set_checking_time = int(get2set_single_path["checking_time"])
+                target_checking_time = int(target_path["checking_time"])
+                checking_time = '0' if get2set_checking_time + target_checking_time == 0 else '-1'
                 # 构建新的路径字典
                 new_path_dict = {
                     "kind": "cross", # 标记为跨二进制文件的路径
+                    "vulnerability_type": vulnerability_type,
+                    "checking_time": checking_time,
                     "source_function_name": get2set_single_path["source_name"], # source调用点所在的函数
                     "taint_source": get2set_single_path["taint_source"], # get函数的名称
                     "source_insr_addr": get2set_single_path["source_insr_addr"], # get函数调用点地址
@@ -1129,8 +1205,8 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
                     "end_block": target_path["end_block"], # sink函数调用点所在block的起始地址
                     "path": target_path_path_dict, # 存储路径信息
                     "visited_functions": f"{get2set_single_path['visited_functions']} --> {target_path['visited_functions']}", # 存储访问过的函数名称的集合
-                    "decompile_list": get2set_single_path["decompile_list"] + target_path["decompile_list"], # 存储对应的反汇编片段
-                    "complete_list": get2set_single_path["complete_list"] + target_path["complete_list"], # 存储对应的完整路径片段
+                    "decompile_list": get2set_single_path.get("decompile_list", []) + target_path.get("decompile_list", []), # 存储对应的反汇编片段
+                    "complete_list": get2set_single_path.get("complete_list", []) + target_path.get("complete_list", []), # 存储对应的完整路径片段
                 }
                 if new_path_dict["taint_source"] in config_sgtaint.transitive_get:
                     # 如果是跨二进制的get2sink路径，则添加到complete_get2sink_path中
@@ -1170,6 +1246,20 @@ def find_nearest_call_site(call_site_dict, start_addr, end_addr):
     # 若不存在，寻找距离边界最近的调用
     nearest_addr = min(call_addrs, key=lambda x: min(abs(x - start_addr), abs(x - end_addr)))
     return call_site_dict[nearest_addr]
+
+
+def template_to_regex(fmt: str) -> re.Pattern:
+    regex = re.escape(fmt)            
+    for spec, pat in config_sgtaint.spec_map.items():
+        regex = regex.replace(re.escape(spec), pat)
+    return re.compile(rf"^{regex}$")  
+
+
+# 进行动态字符串的匹配
+def match_dynamic(fmt: str, candidate: str):
+    rex = template_to_regex(fmt)
+    m = rex.fullmatch(candidate)
+    return (bool(m), m.groupdict() if m else {})
 
 
 # 根据函数调用名称获取函数调用点地址
@@ -1269,3 +1359,111 @@ def get_function_decompile_list_by_path(project, cfg, function_angr_format, tain
         function_decompile_list.append(code_snippet)
         function_complete_list.append("\n".join(pseudo_code_lines))
     return function_decompile_list, function_complete_list
+
+
+# 按照路径涉及的基本块长度进行排序
+def sort_by_block_number(path_list):
+    def count_blocks(path):
+        block_path_dict = path["path"]
+        block_number = 0
+        for file_path, block_path in block_path_dict.items():
+            for block_single_path in block_path:
+                block_number += len(block_single_path.split('#'))
+        return block_number
+    # 排序并返回结果
+    sorted_path_list = sorted(path_list, key=count_blocks)
+    return sorted_path_list
+
+
+# 进行潜在路径重要性排序
+def get_sorted_potential_path_sanitization(keyword_binary_dict, potential_path):
+    sorted_potential_path = [] # 重要性排序后的列表
+    sorted_potential_verify = []
+    sorted_potential_maybe = []
+    ci_keyword_find_path = [] # 前端关键字命中的command injection
+    bof_keyword_find_strcpy_xx_path = [] # 前端关键字命中的buffer overflow
+    bof_keyword_find_else_xx_path = []
+    ci_keyword_miss_webgetvar_xx_path = []
+    bof_keyword_miss_webgetvar_strcpy_xx_path = []
+    bof_keyword_miss_webgetvar_else_xx_path = []
+    ci_keyword_miss_else_xx_path = []
+    bof_keyword_miss_else_strcpy_xx_path = []
+    bof_keyword_miss_else_else_xx_path = []
+    # 对潜在路径进行遍历分类
+    for path in potential_path:
+        vulnerability_type = path["vulnerability_type"]
+        source_keyword = path["source_keyword"]
+        source_file = path["binary"][-1] # 最后一个元素为源文件
+        taint_sink = path["taint_sink"]
+        taint_source = path["taint_source"]
+        if vulnerability_type == "command injection":
+            if taint_source in config_sgtaint.KEYWORD_SOURCES and source_file in keyword_binary_dict and source_keyword in keyword_binary_dict[source_file]: # 前端关键字命中的command injection
+                # 自动关联前端文件
+                file_name = "{}_keyword_function.json".format(source_file.replace("/", "_"))
+                keyword_file_path = os.path.join(config_sgtaint.TMP_KEYWORD, file_name)
+                if os.path.exists(keyword_file_path): # 一定存在
+                    with open(keyword_file_path, "r") as file:
+                        keyword_function_list = json.load(file)
+                    for keyword_function in keyword_function_list: # 一定存在命中项
+                        if source_keyword == keyword_function["string"]: # 找到对应的关键字
+                            path["front_end_keyword"] = keyword_function["keyword_function"]
+                            path["front_end_file_path"] = keyword_function["path"]
+                            break
+                ci_keyword_find_path.append(path)
+            elif taint_source in config_sgtaint.KEYWORD_SOURCES:
+                path["front_end_keyword"] = "miss"
+                path["front_end_file_path"] = "miss"
+                ci_keyword_miss_webgetvar_xx_path.append(path)
+            else:
+                path["front_end_keyword"] = "miss"
+                path["front_end_file_path"] = "miss"
+                ci_keyword_miss_else_xx_path.append(path)
+        else:
+            if taint_source in config_sgtaint.KEYWORD_SOURCES and source_file in keyword_binary_dict and source_keyword in keyword_binary_dict[source_file]:
+                # 自动关联前端文件
+                file_name = "{}_keyword_function.json".format(source_file.replace("/", "_"))
+                keyword_file_path = os.path.join(config_sgtaint.TMP_KEYWORD, file_name)
+                if os.path.exists(keyword_file_path): # 一定存在
+                    with open(keyword_file_path, "r") as file:
+                        keyword_function_list = json.load(file)
+                    for keyword_function in keyword_function_list: # 一定存在命中项
+                        if source_keyword == keyword_function["string"]: # 找到对应的关键字
+                            path["front_end_keyword"] = keyword_function["keyword_function"]
+                            path["front_end_file_path"] = keyword_function["path"]
+                            break
+                if taint_sink in config_sgtaint.STRCPY_SINKS:
+                    bof_keyword_find_strcpy_xx_path.append(path)
+                else:
+                    bof_keyword_find_else_xx_path.append(path)
+            elif taint_source in config_sgtaint.KEYWORD_SOURCES:
+                path["front_end_keyword"] = "miss"
+                path["front_end_file_path"] = "miss"
+                if taint_sink in config_sgtaint.STRCPY_SINKS:
+                    bof_keyword_miss_webgetvar_strcpy_xx_path.append(path)
+                else:
+                    bof_keyword_miss_webgetvar_else_xx_path.append(path)
+            else:
+                path["front_end_keyword"] = "miss"
+                path["front_end_file_path"] = "miss"
+                if taint_sink in config_sgtaint.STRCPY_SINKS:
+                    bof_keyword_miss_else_strcpy_xx_path.append(path)
+                else:
+                    bof_keyword_miss_else_else_xx_path.append(path)
+    # 同一个列表中，按照涉及的基本块长度进行排序
+    ci_keyword_find_path = sort_by_block_number(ci_keyword_find_path)
+    bof_keyword_find_strcpy_xx_path = sort_by_block_number(bof_keyword_find_strcpy_xx_path)
+    bof_keyword_find_else_xx_path = sort_by_block_number(bof_keyword_find_else_xx_path)
+    ci_keyword_miss_webgetvar_xx_path = sort_by_block_number(ci_keyword_miss_webgetvar_xx_path)
+    bof_keyword_miss_webgetvar_strcpy_xx_path = sort_by_block_number(bof_keyword_miss_webgetvar_strcpy_xx_path)
+    bof_keyword_miss_webgetvar_else_xx_path = sort_by_block_number(bof_keyword_miss_webgetvar_else_xx_path)
+    ci_keyword_miss_else_xx_path = sort_by_block_number(ci_keyword_miss_else_xx_path)
+    bof_keyword_miss_else_strcpy_xx_path = sort_by_block_number(bof_keyword_miss_else_strcpy_xx_path)
+    bof_keyword_miss_else_else_xx_path = sort_by_block_number(bof_keyword_miss_else_else_xx_path)
+    sorted_potential_path = ci_keyword_find_path + bof_keyword_find_strcpy_xx_path + bof_keyword_find_else_xx_path + ci_keyword_miss_webgetvar_xx_path + bof_keyword_miss_webgetvar_strcpy_xx_path + bof_keyword_miss_webgetvar_else_xx_path + ci_keyword_miss_else_xx_path + bof_keyword_miss_else_strcpy_xx_path + bof_keyword_miss_else_else_xx_path
+    for path in sorted_potential_path:
+        checking_time = int(path["checking_time"])
+        if checking_time == 0:
+            sorted_potential_verify.append(path)
+        else:
+            sorted_potential_maybe.append(path)
+    return sorted_potential_verify, sorted_potential_maybe

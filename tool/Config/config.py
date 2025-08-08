@@ -91,6 +91,26 @@ pattern = re.compile(
 )
 pattern_llm_two_parse = re.compile(r'^\s*\[\s*(\(\s*([^,()]+?\s*,\s*){5}[^,()]+?\s*\)\s*,?\s*)+\]$')
 pattern_llm_one_parse = re.compile(r'^\s*\[\s*(\(\s*[^,()]+?\s*,\s*[^,()]+?\s*\)\s*,?\s*)+\]$')
+spec_map = {
+    r"%s" : r"(?P<str>[^#\s]+)",
+    r"%c" : r"(?P<char>.{1})",
+    r"%d" : r"(?P<int>[+-]?\d+)",
+    r"%i" : r"(?P<int>[+-]?\d+)",
+    r"%u" : r"(?P<uint>\d+)",
+    r"%o" : r"(?P<oct>[0-7]+)",
+    r"%x" : r"(?P<hex>[0-9a-f]+)",
+    r"%X" : r"(?P<HEX>[0-9A-F]+)",
+    r"%p" : r"(?P<ptr>0x[0-9a-fA-F]+)",
+    r"%f" : r"(?P<float>[+-]?\d+\.\d+)",
+    r"%F" : r"(?P<float>[+-]?\d+\.\d+)",
+    r"%e" : r"(?P<exp>[+-]?\d+\.\d+[eE][+-]?\d+)",
+    r"%E" : r"(?P<EXP>[+-]?\d+\.\d+[eE][+-]?\d+)",
+    r"%g" : r"(?P<float>[+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)",
+    r"%G" : r"(?P<float>[+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)",
+    r"%a" : r"(?P<a>0x[0-9a-f]+\.[0-9a-f]+p[+-]?\d+)",
+    r"%A" : r"(?P<A>0x[0-9A-F]+\.[0-9A-F]+P[+-]?\d+)",
+    r"%%" : r"%"
+}
 
 # 大模型最大重复次数
 MAX_REPEATED_TIMES = 3
@@ -118,13 +138,20 @@ SOURCES = [
     "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "json_object_object_get", "json_object_object_get_ex",
     "json_tokener_parse", "OM_ValFind", "get_parameter", "get_wlan_setting", "av_dict_get", "cgi_value", "stringOut",
     "cJSON_GetObjectItem", "sw_getValueByName", "querystr", "find_val", "log_query", "value_parser_by_index_D7000",
-    "getoption", "WEB_GetVar", "av_opt_get", "paramValueFromObjGet", "help_getObjPtr", "NCONF_get_string", "getString",
+    "getoption", "WEB_GetVar", "av_opt_get", "paramValueFromObjGet", "help_getObjPtr", "NCONF_get_string", "getString", "web_get"
     "av_metadata_get", "httpGetEnv", "gets", "fgets", "recvfrom", "recvmsg", "nvram_get_ex2", "nvram_bufget", "apmib_get", "apcli_nvram_get"
+]
+KEYWORD_SOURCES = [
+    "webGetVarString", "websGetVar", "websGetVarSafe", "websGetVar_secure", "WEB_GetVar", "httpGetEnv", "cJSON_GetObjectItem",
+    "sub_42af24", "sub_42a978", "get_cgi", "web_get"
+]
+STRCPY_SINKS = [
+    "strcpy", "strcat"
 ]
 transitive_get = [
     "config_get", "GetValue", "getenv", "nvram_get", "nvram_safe_get", "nvram_pf_get", "acosNvramConfig_get", "nvram_bufget", "apcli_nvram_get",
     "uciGet", "wpa_config_get", "device_get_string_value", "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "nvram_get_ex2", "apmib_get",
-    "acosNvramConfig_read"
+    "acosNvramConfig_read", "stringOut"
 ]
 transitive_set = [
     "config_set", "SetValue", "setenv", "nvram_set", "nvram_safe_set", "nvram_pf_set", "artblock_set",
@@ -136,6 +163,11 @@ SINKS = [
     "strcpy", "strcat", "sprintf", "system", "___system", "_system", "bstar_system", "popen", "doSystemCmd", "doShell",
     "twsystem", "CsteSystem", "cgi_deal_popen", "ExecShell", "exec_shell_popen", "exec_shell_popen_str", "doSystem",
     "wl_exec_cmd", "execve", "execl", "_eval", "eval", "sh", "send", "execlp", "doSystem", "sprintf"
+]
+CI_SINKS = [
+    "system", "___system", "_system", "bstar_system", "popen", "doSystemCmd", "doShell",
+    "twsystem", "CsteSystem", "cgi_deal_popen", "ExecShell", "exec_shell_popen", "exec_shell_popen_str", "doSystem",
+    "wl_exec_cmd", "execve", "execl", "_eval", "eval", "sh", "send", "execlp", "doSystem"
 ]
 # 已知的set-get函数info
 SET_GET_INFO = {

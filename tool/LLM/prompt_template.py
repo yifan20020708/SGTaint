@@ -56,4 +56,4 @@ def get_end_prompt(function_name):
         Your explanation should be formal, precise, and suitable for professional program analysis."
     return end_prompt
 
-SYSTM_LLM_PATH_OUTPUT = "Your answer must begin with either “Yes” or “No” to indicate whether an exploitable vulnerability exists."
+SYSTEM_LLM_PATH_OUTPUT = "Your answer must begin with either “Yes” or “No” to indicate whether an exploitable vulnerability exists."
