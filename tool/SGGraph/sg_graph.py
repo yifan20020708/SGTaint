@@ -336,6 +336,9 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
             set_func_fail = func_name_result["set_func_fail"]
             analysis_binary.set_get_code_snippet[set_func_name] = set_code_dict
             analysis_binary.ghidra_func_identify_failed[set_func_name] = set_func_fail
+            if not set_code_dict:
+                logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+                continue
             set_code_list = list(set(tuple(v) for v in set_code_dict.values()))
             set_code_filter_list = []
             set_parameter_list = []
@@ -344,12 +347,19 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 parameter_list = parse_function_call(analysis_binary.get_angr_project(), set_code, complete_line ,file_path)
                 if parameter_list:
                     set_parameter_list += parameter_list
-                    set_code_filter_list.append(complete_line)
+                    if complete_line not in set_code_filter_list: # 去重
+                        set_code_filter_list.append(complete_line)
+            if not set_code_filter_list or not set_parameter_list: # 若解析失败则跳过
+                logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+                continue
             get_func_name = func_name_result["get_func_name"]
             get_code_dict = func_name_result["get_code_dict"]
             get_func_fail = func_name_result["get_func_fail"]
             analysis_binary.set_get_code_snippet[get_func_name] = get_code_dict
             analysis_binary.ghidra_func_identify_failed[get_func_name] = get_func_fail
+            if not get_code_dict:
+                logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+                continue
             get_code_list = list(set(tuple(v) for v in get_code_dict.values())) 
             get_code_filter_list = []
             get_parameter_list = []
@@ -358,8 +368,9 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 parameter_list = parse_function_call(analysis_binary.get_angr_project(), get_code, complete_line ,file_path)
                 if parameter_list:
                     get_parameter_list += parameter_list
-                    get_code_filter_list.append(complete_line)
-            if not set_code_dict or not get_code_dict: # 若解析失败则跳过
+                    if complete_line not in get_code_filter_list:
+                        get_code_filter_list.append(complete_line)
+            if not get_code_filter_list or not get_parameter_list: # 若解析失败则跳过
                 logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
                 continue
             if not set(set_parameter_list) & set(get_parameter_list):
@@ -423,6 +434,301 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
     else:
         response_twice_list = []
     func_name = response_twice_list # 其中包含所有可能的set-get函数对信息
+    for set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get in func_name:
+        # 更新对应的函数集
+        if set_func_name not in config_sgtaint.transitive_set:
+            config_sgtaint.transitive_set.append(set_func_name)
+        if get_func_name not in config_sgtaint.SOURCES:
+            config_sgtaint.SOURCES.append(get_func_name)
+        if get_func_name not in config_sgtaint.transitive_get:
+            config_sgtaint.transitive_get.append(get_func_name)
+        if (set_func_name, get_func_name) not in config_sgtaint.SET_GET_INFO: # 更新初始的列表名称
+            config_sgtaint.SET_GET_INFO[(set_func_name, get_func_name)] = [set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get]
+    analysis_binary_dict.get_set_func_name = func_name[:] # 更新分析二进制字典中的函数名称
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    logger.info(f"LLM analysis completed in {elapsed_time:.2f} seconds.")
+    logger.info(f"Identified functions: {func_name}")
+    return func_name
+
+
+def get_func_name_from_llm_precise_update(analysis_binary_dict: AnalysisBinaryDict, timeout=60):
+    start_time = time.time()
+    # func_name可以在配置文件中进行配置，若配置，则不使用LLM进行分析 
+    if config_sgtaint.SG_FUNCTION_INFO and config_sgtaint.SG_FUNCTION_INFO.startswith("[("):
+        logger.info("Set and Get function information received successfully!")
+        func_name = parse_set_get_string(config_sgtaint.SG_FUNCTION_INFO)
+        for set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get in func_name:
+            # 更新对应的函数集
+            if set_func_name not in config_sgtaint.transitive_set:
+                config_sgtaint.transitive_set.append(set_func_name)
+            if get_func_name not in config_sgtaint.SOURCES:
+                config_sgtaint.SOURCES.append(get_func_name)
+            if get_func_name not in config_sgtaint.transitive_get:
+                config_sgtaint.transitive_get.append(get_func_name)
+            if (set_func_name, get_func_name) not in config_sgtaint.SET_GET_INFO: # 更新初始的列表名称
+                config_sgtaint.SET_GET_INFO[(set_func_name, get_func_name)] = [set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get]
+        logger.info(f"Function names from configuration: {func_name}")
+        analysis_binary_dict.get_set_func_name = func_name[:] # 更新分析二进制字典中的函数名称
+        return func_name
+    # 获取边界二进制文件列表
+    binary_path_list = analysis_binary_dict.get_border_binary_path_list()
+    func_name_list = [] # 获取外部函数，专门用于从SET_GET_INFO中获取函数信息
+    func_name_list_complete = [] # 存放完整的函数名称列表
+    for binary_path in binary_path_list:
+        analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(binary_path)
+        for func_name, _ in get_extern_func_name(analysis_binary.get_angr_project()):
+            if func_name not in func_name_list:
+                func_name_list.append(func_name)
+        for func_name, _ in get_complete_func_name(analysis_binary.get_angr_project()):
+            if func_name not in func_name_list_complete:
+                func_name_list_complete.append(func_name)
+    # 直接从SET_GET_INFO中获取的函数信息
+    func_name_previous_known = [] # 应对大语言模型失败的情况
+    for set_get_pair in config_sgtaint.SET_GET_INFO:
+        if set_get_pair[0] in func_name_list and set_get_pair[1] in func_name_list: # setter函数名称与getter函数名称均存在
+            func_name_previous_known.append(config_sgtaint.SET_GET_INFO[set_get_pair])
+    # 进行LLM的第一步分析
+    func_name_list_str = "[" + ", ".join(func_name_list_complete) + "]"
+    LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
+    LLM_chat.system_role(SYSTEM_SET_GET)
+    logger.info("Initiating the first phase of the LLM-based analysis.")
+    llm_phase_one_start = time.time()
+    response = LLM_chat.chat(get_user_set_get_en_prompt_phase_one(func_name_list_str), timeout=timeout)
+    error_count = 0
+    while not config_sgtaint.pattern_llm_one_parse.match(response) and response != "None": # 其中可能存在[ERROR]超时情况
+        if response.startswith("[ERROR]"):
+            error_count += 1
+            if error_count >= config_sgtaint.MAX_ERROR_COUNT:
+                logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                return func_name_previous_known
+        else:
+            error_count = 0
+        response = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_ONE, timeout=timeout)
+    # 进行第二次检查
+    response_twice = LLM_chat.chat(DOUBLE_CHECK, timeout=timeout)
+    error_count = 0
+    while not config_sgtaint.pattern_llm_one_parse.match(response_twice) and response_twice != "None":
+        if response_twice.startswith("[ERROR]"):
+            error_count += 1
+            if error_count >= config_sgtaint.MAX_ERROR_COUNT:
+                logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                return func_name_previous_known
+        else:
+            error_count = 0
+        response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_ONE, timeout=timeout)
+    # 增强LLM回答的健壮性（需要增加次数防止无限循环）
+    cycle_number = 0
+    while cycle_number < config_sgtaint.MAX_REPEATED_TIMES and response_twice != response:
+        response = response_twice
+        response_twice = LLM_chat.chat(DOUBLE_CHECK, timeout=timeout)
+        error_count = 0
+        while not config_sgtaint.pattern_llm_one_parse.match(response_twice) and response_twice != "None":
+            if response_twice.startswith("[ERROR]"):
+                error_count += 1
+                if error_count >= config_sgtaint.MAX_ERROR_COUNT:
+                    logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    return func_name_previous_known
+            else:
+                error_count = 0
+            response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_ONE, timeout=timeout)
+        cycle_number += 1
+    # 判断是否存在LLM分析出的内容
+    func_name_phase_one = [] if response_twice == "None" else parse_set_get_string(response_twice)
+    # 从配置中补充转移函数对名称
+    for set_get_pair in config_sgtaint.SET_GET_INFO:
+        if set_get_pair[0] in func_name_list_complete and set_get_pair[1] in func_name_list_complete and [set_get_pair[0], set_get_pair[1]] not in func_name_phase_one:
+            func_name_phase_one.append([set_get_pair[0], set_get_pair[1]])
+    llm_phase_one_end = time.time()
+    logger.info(f"The output of the first phase of the LLM analysis is {func_name_phase_one}, with a duration of {(llm_phase_one_end - llm_phase_one_start):.2f} seconds.")
+    if not func_name_phase_one: # 若没有获取到函数对，则直接返回
+        logger.info("Retrieve Set-Get function information directly from the configuration.")
+        logger.info(f"Function names from configuration: {func_name_previous_known}")
+        return func_name_previous_known
+    # 进行LLM的第二步分析，首先需要获取对应到的调用语句
+    logger.info("Extracting call information from the first phase to facilitate the second phase of LLM-based analysis.")
+    # 进行文件组的分类
+    func_name_phase_list = []
+    call_site_code = {} # 以转移函数对名称为键值
+    for set_func_name, get_func_name in func_name_phase_one:
+        # 确保边界二进制文件之中，存在set_func_name以及get_func_name的引用，但是不需要同时存在于一个边界二进制文件
+        is_find_set_call = False
+        is_find_get_call = False
+        pair_bucket = []
+        for binary_path in binary_path_list:
+            analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(binary_path)
+            # 首先判断是否存在set函数
+            if analysis_binary.has_func(set_func_name):
+                set_func_call_sites = analysis_binary.has_call_site(set_func_name)
+                if set_func_call_sites:
+                    is_find_set_call = True
+                    set_func_list = list(set([func_addr for _, func_addr, _ in set_func_call_sites]))
+                    pair_bucket.append({
+                        "func_name": set_func_name,
+                        "func_addr": set_func_list,
+                        "file_path": binary_path,
+                    })
+            # 然后判断是否存在get函数
+            if analysis_binary.has_func(get_func_name):
+                get_func_call_sites = analysis_binary.has_call_site(get_func_name)
+                if get_func_call_sites:
+                    is_find_get_call = True
+                    get_func_list = list(set([func_addr for _, func_addr, _ in get_func_call_sites]))
+                    pair_bucket.append({
+                        "func_name": get_func_name,
+                        "func_addr": get_func_list,
+                        "file_path": binary_path,
+                    })
+        # 过滤没有有效函数调用的转移函数对
+        if is_find_set_call and is_find_get_call: # 进行成对的筛选
+            func_name_phase_list.extend(pair_bucket)
+            call_site_code[(set_func_name, get_func_name)] = {
+                "set_func_name": set_func_name,
+                "set_code_filter_list" : [],
+                "set_parameter_list": [],
+                "get_func_name": get_func_name,
+                "get_code_filter_list": [],
+                "get_parameter_list": [],
+            }
+        else:
+            logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+    # 按照file_path进行分组
+    binary_ghidra_process = {}
+    for item in func_name_phase_list:
+        file_path = item["file_path"]
+        if file_path not in binary_ghidra_process:
+            binary_ghidra_process[file_path] = []
+        binary_ghidra_process[file_path].append([item["func_name"], item["func_addr"]])
+    # 按照file_path进行Ghidra脚本执行
+    for file_path, items in binary_ghidra_process.items(): # items是一个列表，包含了函数名称和函数地址
+        analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
+        file_path_process = file_path.replace("/", "_")
+        func_name_phase_file_name = f"{file_path_process}_func_name_phase.json"
+        func_name_phase_file_path = os.path.join(config_sgtaint.TMP_DIR, func_name_phase_file_name)
+        with open(func_name_phase_file_path, "w") as file:
+            json.dump(items, file, indent=4)
+        # 执行Ghidra脚本进行分析
+        analysis_binary.load_ghidra()
+        angr_base_addr = hex(analysis_binary.get_angr_base_addr())
+        binary_mark = os.path.basename(file_path)
+        ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH
+        ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}" "*-precise"'
+        logger.info(f"Executing Ghidra command: {ghidra_command}.")
+        ghidra_start = time.time()
+        execute(ghidra_command)
+        ghidra_end = time.time()
+        logger.info(f"The execution time of the Ghidra command is {(ghidra_end - ghidra_start):.2f} seconds.")
+        # 读取对应的结果文件
+        func_name_phase_result_file_name = f"{file_path_process}_func_name_phase_result.json"
+        func_name_phase_result_file_path = os.path.join(config_sgtaint.TMP_DIR, func_name_phase_result_file_name)
+        try:
+            with open(func_name_phase_result_file_path, "r") as file:
+                func_name_phase_result = json.load(file)
+        except FileNotFoundError:
+            logger.error(f"Error: File not found — {func_name_phase_result_file_path}")
+            return func_name_previous_known
+        except Exception as e:
+            logger.error(f"Unexpected error: {e}")
+            return func_name_previous_known
+        # 删除对应的中间文件
+        rm_command = f"rm {func_name_phase_result_file_path}"
+        execute(rm_command)
+        for func_name_result in func_name_phase_result:
+            func_name = func_name_result["func_name"]
+            code_dict = func_name_result["code_dict"]
+            angr_assist = func_name_result["angr_assist"]
+            # 将结果存储到分析二进制对象中
+            analysis_binary.set_get_code_snippet[func_name] = code_dict
+            analysis_binary.ghidra_func_identify_failed[func_name] = angr_assist
+            code_dict = list(set(tuple(v) for v in code_dict.values())) # 去重
+            code_filter_list = [] # 需要进行不同文件的合并
+            parameter_list = []
+            for complete_line, code in code_dict:
+                # 对函数调用进行解析，找到符合标准的函数调用
+                parameters = parse_function_call(analysis_binary.get_angr_project(), code, complete_line, file_path)
+                if parameters:
+                    parameter_list.extend(parameters)
+                    if complete_line not in code_filter_list: # 避免重复添加
+                        code_filter_list.append(complete_line)
+            for set_func_name, get_func_name in call_site_code:
+                if func_name == set_func_name:
+                    call_site_code[(set_func_name, get_func_name)]["set_code_filter_list"].extend(code_filter_list)
+                    call_site_code[(set_func_name, get_func_name)]["set_parameter_list"].extend(parameter_list)
+                    break
+                if func_name == get_func_name:
+                    call_site_code[(set_func_name, get_func_name)]["get_code_filter_list"].extend(code_filter_list)
+                    call_site_code[(set_func_name, get_func_name)]["get_parameter_list"].extend(parameter_list)
+                    break
+    # 进行有效性过滤
+    func_name_eventually = []
+    for set_func_name, get_func_name in call_site_code:
+        set_code_filter_list = call_site_code[(set_func_name, get_func_name)]["set_code_filter_list"]
+        get_code_filter_list = call_site_code[(set_func_name, get_func_name)]["get_code_filter_list"]
+        set_parameter_list = call_site_code[(set_func_name, get_func_name)]["set_parameter_list"]
+        get_parameter_list = call_site_code[(set_func_name, get_func_name)]["get_parameter_list"]
+        if not set_code_filter_list or not get_code_filter_list:
+            logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+            continue
+        if not set(set_parameter_list) & set(get_parameter_list):
+            logger.warning(f"[-] The function pair ({set_func_name}, {get_func_name}) is not valid!")
+            continue
+        func_name_eventually.append({
+            "set_func_name": set_func_name,
+            "set_code_list": set_code_filter_list,
+            "get_func_name": get_func_name,
+            "get_code_list": get_code_filter_list,
+        })
+    # 开启第二阶段的LLM分析
+    if func_name_eventually:
+        logger.info("Initiating the second phase of the LLM-based analysis.")
+        llm_phase_two_start = time.time()
+        prompt_phase_two = get_prompt_for_phase_two(func_name_eventually)
+        logger.info(f"Prompt for phase two: {prompt_phase_two}")
+        response = LLM_chat.chat(get_user_set_get_en_prompt_phase_two(prompt_phase_two))
+        error_count = 0
+        while not config_sgtaint.pattern_llm_two_parse.match(response) and response != "None":
+            if response.startswith("[ERROR]"):
+                error_count += 1
+                if error_count >= config_sgtaint.MAX_ERROR_COUNT:
+                    logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    return func_name_previous_known
+            else:
+                error_count = 0
+            response = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_TWO)
+        # 进行第二次检查
+        response_twice = LLM_chat.chat(double_check_phase_two(get_prompt_for_phase_two(func_name_eventually)))
+        error_count = 0
+        while not config_sgtaint.pattern_llm_two_parse.match(response_twice) and response_twice != "None":
+            if response_twice.startswith("[ERROR]"):
+                error_count += 1
+                if error_count >= config_sgtaint.MAX_ERROR_COUNT:
+                    logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    return func_name_previous_known
+            else:
+                error_count = 0
+            response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_TWO)
+        # 增强LLM回答的健壮性（需要增加次数防止无限循环）
+        cycle_number = 0
+        while cycle_number < config_sgtaint.MAX_REPEATED_TIMES and response_twice != response:
+            response = response_twice
+            response_twice = LLM_chat.chat(double_check_phase_two(get_prompt_for_phase_two(func_name_eventually)))
+            error_count = 0
+            while not config_sgtaint.pattern_llm_two_parse.match(response_twice) and response_twice != "None":
+                if response_twice.startswith("[ERROR]"):
+                    error_count += 1
+                    if error_count >= config_sgtaint.MAX_ERROR_COUNT:
+                        logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                        return func_name_previous_known
+                else:
+                    error_count = 0
+                response_twice = LLM_chat.chat(SYSTEM_SET_GET_OUTPUT_PHASE_TWO)
+            cycle_number += 1
+        response_twice_list = parse_set_get_string(response_twice) if response_twice != "None" else []
+        llm_phase_two_end = time.time()
+        logger.info(f"The output of the second phase of the LLM analysis is {response_twice}, with a duration of {(llm_phase_two_end - llm_phase_two_start):.2f} seconds.")
+    else:
+        response_twice_list = []
+    func_name = response_twice_list
     for set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get in func_name:
         # 更新对应的函数集
         if set_func_name not in config_sgtaint.transitive_set:

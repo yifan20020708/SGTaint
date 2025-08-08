@@ -208,6 +208,40 @@ def get_decompile_code_by_func_name(program, call_site_name, angr_base_addr):
     command = "rm {}".format(caller_file_path)
     execute(command)
     
+
+# SG函数信息精确识别
+def get_all_decompile_code_precise(program, angr_base_addr):
+    # 获取对应的函数列表信息
+    file_path = program.getExecutablePath()
+    file_path_process = file_path.replace("/", "_")
+    func_name_phase_file_name = "{}_func_name_phase.json".format(file_path_process)
+    func_name_phase_file_path = os.path.join(config_sgtaint.TMP_DIR, func_name_phase_file_name)
+    with open(func_name_phase_file_path, "r") as file:
+        func_name_phase_result_json = json.load(file)
+    # 存储解析结果
+    func_name_phase_result = []
+    for func_name, func_addr in func_name_phase_result_json:
+        try:
+            call_site_dict, callers_ghidra = get_call_site_by_identifier(program, func_name, angr_base_addr)
+        except Exception as e:
+            print("Failed during call site decompilation {}".format(e))
+            call_site_dict = {}
+            callers_ghidra = []
+        angr_assist_callers = [addr for addr in func_addr if addr not in callers_ghidra]
+        func_name_phase_result.append({
+            "func_name": func_name,
+            "code_dict": call_site_dict,
+            "angr_assist": angr_assist_callers
+        })
+    # 存储对应的文件名称
+    func_name_phase_file_result_name = "{}_func_name_phase_result.json".format(file_path_process)
+    func_name_phase_file_result_path = os.path.join(config_sgtaint.TMP_DIR, func_name_phase_file_result_name)
+    with open(func_name_phase_file_result_path, "w") as file:
+        json.dump(func_name_phase_result, file, indent=4)
+    # 删除第一个存储的中间文件
+    command = "rm {}".format(func_name_phase_file_path)
+    execute(command)
+    
     
 # SG函数信息识别
 def get_all_decompile_code(program, angr_base_addr):
@@ -267,5 +301,7 @@ if __name__ == "__main__":
     program = getCurrentProgram() # type: ignore
     if call_site_name == "*": # 进行SG函数信息的识别
         get_all_decompile_code(program, angr_base_addr)
+    elif call_site_name == "*-precise": # 进行SG函数信息的精确识别
+        get_all_decompile_code_precise(program, angr_base_addr)
     else: # 进行函数调用的解析
         get_decompile_code_by_func_name(program, call_site_name, angr_base_addr)
