@@ -88,9 +88,12 @@ def get_function_decompile(program, identifier):
         
 
 # 给定反汇编后的代码行提取对应的函数调用内容
-def get_call_site_func_name_from_line(line, call_site_name):
+def get_call_site_func_name_from_line(idx, lines, call_site_name):
     stack_line = [] # 用于处理嵌套的括号问题
     offset_start = 0
+    line = re.sub(r'^\s*\d+:\s*', '', lines[idx].toString())
+    call_site_code = ""
+    clean_line = ""
     # 找到起始的偏移位置
     tmp_line = line[offset_start:]
     while offset_start < len(line):
@@ -105,7 +108,7 @@ def get_call_site_func_name_from_line(line, call_site_name):
     while offset_finish < len(line) and line[offset_finish] != '(':
         offset_finish += 1
     offset_finish += 1
-    stack_line.append('(')
+    stack_line.append('(') # 一定出现在函数调用的起始位置，并且不会截断表示
     while offset_finish < len(line):
         if line[offset_finish] == '(':
             stack_line.append('(')
@@ -115,7 +118,24 @@ def get_call_site_func_name_from_line(line, call_site_name):
                 offset_finish += 1
                 break
         offset_finish += 1
-    return offset_start, offset_finish
+    call_site_code += line[offset_start:offset_finish]
+    clean_line += line
+    while idx < len(lines) - 1 and stack_line: # 出现表示截断
+        idx += 1 # 处理下一行内容
+        line = re.sub(r'^\s*\d+:\s*', '', lines[idx].toString())
+        offset_finish = 0
+        while offset_finish < len(line):
+            if line[offset_finish] == '(':
+                stack_line.append('(')
+            elif line[offset_finish] == ')':
+                stack_line.pop()
+                if not stack_line:
+                    offset_finish += 1
+                    break
+            offset_finish += 1
+        call_site_code += line[:offset_finish]
+        clean_line += line
+    return call_site_code, clean_line   
 
     
 # 根据反编译代码获取函数调用参数信息辅助函数
@@ -124,17 +144,19 @@ def get_args_string_call_sites(program, identifier, call_site_name, angr_base_ad
     if not lines:
         return None
     call_site_dict = {} # 将调用站点存储在字典中，键值为函数调用的地址
-    for clang_line in lines:
+    for idx, clang_line in enumerate(lines):
         line_text = clang_line.toString()
-        clean_line = re.sub(r'^\s*\d+:\s*', '', line_text)
         if call_site_name in line_text:
-            offset_start, offset_finish = get_call_site_func_name_from_line(line_text, call_site_name)
-            call_site_code = line_text[offset_start:offset_finish]
-            for clang_token in clang_line.getAllTokens():
-                if clang_token.getText() == call_site_name:
-                    # 仅仅使用call_site点的地址
-                    min_addr = base_addr_transform_ghidra2angr(program, angr_base_addr, clang_token.getMinAddress().getOffset())
-                    call_site_dict[hex(min_addr)[:-1]] = [clean_line, call_site_code]          
+            try:
+                call_site_code, clean_line = get_call_site_func_name_from_line(idx, lines, call_site_name)
+                for clang_token in clang_line.getAllTokens(): # 获取函数调用的地址
+                    if clang_token.getText() == call_site_name:
+                        # 仅仅使用call_site点的地址
+                        min_addr = base_addr_transform_ghidra2angr(program, angr_base_addr, clang_token.getMinAddress().getOffset())
+                        call_site_dict[hex(min_addr)[:-1]] = [clean_line, call_site_code]  
+            except Exception as e:
+                print("Failed to parse call site in line {}: {}".format(idx, e))
+                continue
     return call_site_dict
 
 

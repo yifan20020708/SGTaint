@@ -1322,9 +1322,6 @@ def get_function_decompile_list_by_path(project, cfg, function_angr_format, tain
     for idx, function_format in enumerate(function_angr_format):
         dec, func_addr, start_block_start, start_block_end, end_block_start, end_block_end = function_format
         pseudo_code_lines = dec.codegen.text.splitlines()
-        if end_block_start < start_block_start:
-            logger.error(f"The start block at {hex(start_block_start)} precedes the end block at {hex(end_block_start)}, resulting in an invalid code segment.")
-            return ["Invaild code snippet"], ["Invaild code snippet"]
         # 获取start_index
         if idx == 0: # 处理第一个含有source的片段
             call_site_dict = get_call_site_decompile_code_from_function(project, cfg, taint_source, func_addr, dec)
@@ -1354,6 +1351,9 @@ def get_function_decompile_list_by_path(project, cfg, function_angr_format, tain
             return ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"]
         end_index = find_nearest_call_site(call_site_dict, end_block_start, end_block_end)
         # 使用start_index以及end_index截取片段
+        if end_index < start_index: # 如果end_index小于start_index，说明没有有效的代码片段
+            logger.error(f"The end index {end_index} is less than the start index {start_index}, resulting in an invalid code segment.")
+            return ["Invaild code snippet"], ["Invaild code snippet"]
         code_snippet_list = pseudo_code_lines[start_index:end_index + 1]
         code_snippet = "\n".join(code_snippet_list)
         function_decompile_list.append(code_snippet)

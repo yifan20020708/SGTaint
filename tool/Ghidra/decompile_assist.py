@@ -178,8 +178,6 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
     function_complete_list = []
     for idx, function_format in enumerate(function_ghidra_format):
         func_addr, start_block_start, start_block_end, end_block_start, end_block_end = function_format
-        if end_block_start < start_block_start: # 无效的代码片段
-            return ["Invaild code snippet"], ["Invaild code snippet"]
         # 进行angr到ghidra的地址转换
         func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, func_addr)
         start_block_start = base_addr_transform_angr2ghidra(program, angr_base_addr, start_block_start)
@@ -221,10 +219,12 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
                 return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
             end_index = find_nearest_call_site(call_site_dict, end_block_start, end_block_end)
         # end_index向下补充完整
-        if not is_complete_call_site(pseudo_code_lines[end_index]):
+        if not is_complete_call_site(pseudo_code_lines[end_index]): # 防止截断表示
             while end_index < len(pseudo_code_lines) and pseudo_code_lines[end_index][-1] not in (";", ")", "{"):
                 end_index += 1
         # 使用start_index以及end_index截取片段
+        if end_index < start_index: # 无效的代码片段
+            return ["Invaild code snippet"], ["Invaild code snippet"]
         code_snippet_list = pseudo_code_lines[start_index:end_index + 1]
         code_snippet = "\n".join(code_snippet_list)
         function_decompile_list.append(code_snippet)
@@ -242,22 +242,27 @@ def get_decompile_result_binary(program, angr_base_addr):
         source2sink_ghidra_list = json.load(file)
     source2sink_result = []
     for source2sink_single_path in source2sink_ghidra_list:
-        function_ghidra_format = source2sink_single_path["ghidra_path"]
-        taint_source = source2sink_single_path["taint_source"]
-        if taint_source.startswith("sub_"):
-            taint_source_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, source2sink_single_path["taint_source_addr"])
-            taint_source_func = get_function(program, taint_source_addr)
-            taint_source = taint_source_func.getName() if taint_source_func else None
-        taint_sink = source2sink_single_path["taint_sink"]   
-        if taint_sink.startswith("sub_"):
-            taint_sink_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, source2sink_single_path["taint_sink_addr"])
-            taint_sink_func = get_function(program, taint_sink_addr)
-            taint_source = taint_sink_func.getName() if taint_sink_func else None
-        if taint_source and taint_sink:
-            function_decompile_list, function_complete_list = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
-            source2sink_single_path["decompile_list"] = function_decompile_list
-            source2sink_single_path["complete_list"] = function_complete_list
-        else:
+        try:
+            function_ghidra_format = source2sink_single_path["ghidra_path"]
+            taint_source = source2sink_single_path["taint_source"]
+            if taint_source.startswith("sub_"):
+                taint_source_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, source2sink_single_path["taint_source_addr"])
+                taint_source_func = get_function(program, taint_source_addr)
+                taint_source = taint_source_func.getName() if taint_source_func else None
+            taint_sink = source2sink_single_path["taint_sink"]   
+            if taint_sink.startswith("sub_"):
+                taint_sink_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, source2sink_single_path["taint_sink_addr"])
+                taint_sink_func = get_function(program, taint_sink_addr)
+                taint_source = taint_sink_func.getName() if taint_sink_func else None
+            if taint_source and taint_sink:
+                function_decompile_list, function_complete_list = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
+                source2sink_single_path["decompile_list"] = function_decompile_list
+                source2sink_single_path["complete_list"] = function_complete_list
+            else:
+                source2sink_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
+                source2sink_single_path["complete_list"] = ["Fail to Decompile by Ghidra"]
+        except Exception as e:
+            print("[-] An exception occurred during decompilation: ", e)
             source2sink_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
             source2sink_single_path["complete_list"] = ["Fail to Decompile by Ghidra"]
         source2sink_result.append(source2sink_single_path)
@@ -276,22 +281,27 @@ def get_decompile_result_binary(program, angr_base_addr):
         get2set_ghidra_list = json.load(file)
     get2set_result = []
     for get2set_single_path in get2set_ghidra_list:
-        function_ghidra_format = get2set_single_path["ghidra_path"]
-        taint_source = get2set_single_path["taint_source"]
-        if taint_source.startswith("sub_"):
-            taint_source_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, get2set_single_path["taint_source_addr"])
-            taint_source_func = get_function(program, taint_source_addr)
-            taint_source = taint_source_func.getName() if taint_source_func else None
-        taint_sink = get2set_single_path["taint_sink"]   
-        if taint_sink.startswith("sub_"):
-            taint_sink_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, get2set_single_path["taint_sink_addr"])
-            taint_sink_func = get_function(program, taint_sink_addr)
-            taint_source = taint_sink_func.getName() if taint_sink_func else None
-        if taint_source and taint_sink:
-            function_decompile_list, function_complete_list = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
-            get2set_single_path["decompile_list"] = function_decompile_list
-            get2set_single_path["complete_list"] = function_complete_list
-        else:
+        try:
+            function_ghidra_format = get2set_single_path["ghidra_path"]
+            taint_source = get2set_single_path["taint_source"]
+            if taint_source.startswith("sub_"):
+                taint_source_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, get2set_single_path["taint_source_addr"])
+                taint_source_func = get_function(program, taint_source_addr)
+                taint_source = taint_source_func.getName() if taint_source_func else None
+            taint_sink = get2set_single_path["taint_sink"]   
+            if taint_sink.startswith("sub_"):
+                taint_sink_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, get2set_single_path["taint_sink_addr"])
+                taint_sink_func = get_function(program, taint_sink_addr)
+                taint_source = taint_sink_func.getName() if taint_sink_func else None
+            if taint_source and taint_sink:
+                function_decompile_list, function_complete_list = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
+                get2set_single_path["decompile_list"] = function_decompile_list
+                get2set_single_path["complete_list"] = function_complete_list
+            else:
+                get2set_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
+                get2set_single_path["complete_list"] = ["Fail to Decompile by Ghidra"]
+        except Exception as e:
+            print("[-] An exception occurred during decompilation: ", e)
             get2set_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
             get2set_single_path["complete_list"] = ["Fail to Decompile by Ghidra"]
         get2set_result.append(get2set_single_path)
