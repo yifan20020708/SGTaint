@@ -5,6 +5,7 @@ import datetime
 import logging
 import json
 import filecmp
+from collections import defaultdict
 from typing import Any, Callable, Iterable
 import angr
 import angr.analyses.reaching_definitions.dep_graph as dep_graph
@@ -39,11 +40,11 @@ class AnalysisBinary():
         self.binary_function_keyword = set() # 存储边界二进制文件中的关键字
         # 用于加快SG图构建的速度
         self.set_get_call_sites_dict = {} # 字典的键为对应的set函数
-        self.relate_file_path = set() # 其中存储存在数据依赖关系的文件
+        self.relate_file_path = defaultdict(set) # 其中存储存在数据依赖关系的文件，其中键值为转移函数对
         self.is_board_binary = False
         self.is_set_role = False # 需要进行对应的更新
         self.construct_intra_graph_tag = False # 是否需要单独构建文件内的SG图
-        self.diffusion_file = set() # 存储向外扩散的文件
+        self.diffusion_file = defaultdict(set) # 存储向外扩散的文件，其中键值为转移函数对
         # 将SG函数信息识别过程与相关的反编译函数结合在一起
         self.set_get_code_snippet = {} # 字典的键为set或get函数，用于辅助ghidra生成parse
         self.ghidra_func_identify_failed = {} # 存储ghidra无法识别的函数，字典的键值为set或get函数
@@ -62,15 +63,17 @@ class AnalysisBinary():
     
     # 保存全局属性
     def save_config(self):
+        relate_file_path_serializable = {func: sorted(list(paths)) for func, paths in self.relate_file_path.items()}
+        diffusion_file_serializable = {func: sorted(list(files)) for func, files in self.diffusion_file.items()}
         config = {
             "binary_path": self.binary_path,
             "binary_function_keyword": list(self.binary_function_keyword),
             "set_get_call_sites_dict": self.set_get_call_sites_dict,
-            "relate_file_path": list(self.relate_file_path),
+            "relate_file_path": relate_file_path_serializable,
             "is_board_binary": self.is_board_binary,
             "is_set_role": self.is_set_role,
             "construct_intra_graph_tag": self.construct_intra_graph_tag,
-            "diffusion_file": list(self.diffusion_file),
+            "diffusion_file": diffusion_file_serializable,
             "set_get_code_snippet": self.set_get_code_snippet,
             "ghidra_func_identify_failed": self.ghidra_func_identify_failed,
             "ghidra_project": self.ghidra_project,
@@ -98,11 +101,11 @@ class AnalysisBinary():
                 config = json.load(file)
             self.binary_function_keyword = set(config["binary_function_keyword"])
             self.set_get_call_sites_dict = config["set_get_call_sites_dict"]
-            self.relate_file_path = set(config["relate_file_path"])
+            self.relate_file_path = {func: set(paths) for func, paths in config["relate_file_path"].items()}
             self.is_board_binary = config["is_board_binary"]
             self.is_set_role = config["is_set_role"]
             self.construct_intra_graph_tag = config["construct_intra_graph_tag"]
-            self.diffusion_file = set(config["diffusion_file"])
+            self.diffusion_file = {func: set(paths) for func, paths in config["diffusion_file"].items()}
             self.set_get_code_snippet = config["set_get_code_snippet"]
             self.ghidra_func_identify_failed = config["ghidra_func_identify_failed"]
             self.ghidra_project = config["ghidra_project"]
@@ -153,16 +156,22 @@ class AnalysisBinary():
             # Related File Paths
             write_section(
                 title="========== Related File Paths ==========",
-                data=list(self.relate_file_path),
+                data=sorted(self.relate_file_path.items(), key=lambda x: x[0]),
                 empty_msg="No related file paths found.",
-                formatter=lambda path, i: [f"[{i}] {path}"]
+                formatter=lambda pair, _: (
+                    [f"{pair[0]}:"] +
+                    [f"  [{i}] {path}" for i, path in enumerate(sorted(pair[1]), start=1)]
+                )
             )
             # Diffusion File Paths
             write_section(
                 title="========== Diffusion File Paths ==========",
-                data=list(self.diffusion_file),
+                data=sorted(self.diffusion_file.items(), key=lambda x: x[0]),
                 empty_msg="No diffusion file paths found.",
-                formatter=lambda path, i: [f"[{i}] {path}"]
+                formatter=lambda pair, _: (
+                    [f"{pair[0]}:"] +
+                    [f"  [{i}] {path}" for i, path in enumerate(sorted(pair[1]), start=1)]
+                )
             )
             # Set-Get Function Info
             write_section(
@@ -645,8 +654,8 @@ class AnalysisBinary():
         self.is_board_binary = True
     
     # 添加相关文件
-    def add_relate_file(self, file_path):
-        self.relate_file_path.add(file_path)
+    def add_relate_file(self, file_path, func_name):
+        self.relate_file_path[func_name].add(file_path)
         
     # 判断二进制文件是否已经作为set对象
     def has_set_role_binary(self):

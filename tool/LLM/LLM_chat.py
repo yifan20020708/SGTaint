@@ -69,6 +69,36 @@ class LLM():
         self.chat_record.append((content, response.choices[0].message.content))
         return response.choices[0].message.content
     
+    # 异步调用LLM API
+    async def chat_async(self, content, timeout=60):
+        if not content:
+            logger.warning("Empty user content for chat; skipping.")
+            return ""
+        message = {"role": "user", "content": content}
+        self.messages.append(message)
+        try:
+            response = await self.client.chat.completions.create(
+                model=self.model, 
+                messages=self.messages,
+                temperature=self.temperature,
+                timeout=timeout
+            )
+        except (TimeoutError, httpx.TimeoutException) as e:
+            logger.error(f"Network timeout during LLM chat: {e}")
+            return "[ERROR] Network timeout, please try again later."
+        except (APIConnectionError, APIError, RateLimitError) as e:
+            logger.error(f"OpenAI API error during LLM chat: {e}")
+            return f"[ERROR] LLM API error: {e}"
+        except Exception as e:
+            logger.error(f"Unexpected error during LLM chat: {e}")
+            return f"[ERROR] Unexpected error: {e}"
+        if self.model == config_sgtaint.LLM_MODEL:
+            self.messages.append(response.choices[0].message)
+        else:
+            self.messages.append({'role': 'assistant', 'content': response.choices[0].message.content})
+        self.chat_record.append((content, response.choices[0].message.content))
+        return response.choices[0].message.content
+    
     # 打印出当前轮所有的对话
     def print_chat(self):
         for chat in self.chat_record:

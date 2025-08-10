@@ -5,6 +5,7 @@ import logging
 import time
 import shutil
 import json
+from collections import defaultdict
 import tool.Config.config as config_sgtaint
 from pathlib import Path
 from logging.handlers import RotatingFileHandler
@@ -203,7 +204,7 @@ def start_sgtaint_serial(info_file):
     logger.info("[STEP 2] Building SGGraph and collecting binaries to analyze ...")
     sg_start = time.time()
     set_get_graph_create(config_sgtaint.FILE_SYSTEM, analysis_binary_dict, set_get_graph)
-    processing_order = generate_binary_processing_order_robust(analysis_binary_dict)
+    processing_order_dict = generate_binary_processing_order_robust(analysis_binary_dict)
     sg_end = time.time()
     logger.info(f"[STEP 2] finished in {sg_end - sg_start:.2f} seconds\n")
     
@@ -229,6 +230,10 @@ def start_sgtaint_serial(info_file):
             analysis_binary.create_binary_file() # 加载对应的文件
             analysis_binary.rda_analyze()
             analysis_binary.write_to_file()
+            analysis_time = analysis_binary.binary_analysis_info["time"]
+            function_number = analysis_binary.binary_analysis_info["function_number"]
+            info_file.write(f"   - `{file_path}` [analysis_time: {analysis_time:.2f}, function_number: {function_number}];\n")
+            info_file.flush()
             t2 = time.time()
             logger.info(f"[SERIAL] Finished analysis for: {file_path} in {t2-t1:.2f}s")
         except Exception as e:
@@ -240,57 +245,55 @@ def start_sgtaint_serial(info_file):
     # 合并跨二进制文件数据流
     merge_start = time.time()
     logger.info("[STEP 4] Merging cross-binary data flow ...")
-    potential_path_dict = {}
-    complete_path_dict = {} # 完整的路径字典
-    for file_path in analysis_binary_dict.analysis_binary_dict:
-        analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
-        potential_path_dict[file_path] = {
-            "get2set_path": analysis_binary.get2set_path,
-            "source2sink_path": analysis_binary.source2sink_path,
-            "diffusion_file": list(analysis_binary.diffusion_file),
-            "complete_source2sink_path": [],
-            "complete_get2sink_path": [],
-            "complete_get2sink_path_dict": {}
-        }
-        complete_path_dict[file_path] = {
-            "get2set_path": analysis_binary.get2set_complete_path,
-            "source2sink_path": analysis_binary.source2sink_complete_path,
-            "diffusion_file": list(analysis_binary.diffusion_file),
-            "complete_source2sink_path": [],
-            "complete_get2sink_path": [],
-            "complete_get2sink_path_dict": {}
-        }
-    for file_path in processing_order:
-        logger.info(f"[MERGE] Processing file: {file_path}")
-        if file_path not in potential_path_dict:
-            logger.error(f"RDA Analysis failed for {file_path}")
-            continue
-        analysis_time = potential_path_dict[file_path]["binary_analysis_info"]["time"]
-        function_number = potential_path_dict[file_path]["binary_analysis_info"]["function_number"]
-        info_file.write(
-            f"   - `{file_path}` [analysis_time: {analysis_time:.2f}, function_number: {function_number}];\n"
-        )
-        construct_cross_binary_data_flow_single(file_path, potential_path_dict)
-        construct_cross_binary_data_flow_single(file_path, complete_path_dict)
-    info_file.flush()
+    potential_path_dict = defaultdict(dict) # 去重之后的路径字典
+    complete_path_dict = defaultdict(dict) # 完整的路径字典
+    for set_func_name, _, _, _, _, _ in analysis_binary_dict.get_set_func_name:
+        for file_path in analysis_binary_dict.analysis_binary_dict:
+            analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
+            potential_path_dict[set_func_name][file_path] = {
+                "get2set_path": analysis_binary.get2set_path,
+                "source2sink_path": analysis_binary.source2sink_path,
+                "diffusion_file": sorted(list(analysis_binary.diffusion_file[set_func_name])),
+                "complete_source2sink_path": [],
+                "complete_get2sink_path": [],
+                "complete_get2sink_path_dict": {}
+            }
+            complete_path_dict[set_func_name][file_path] = {
+                "get2set_path": analysis_binary.get2set_complete_path,
+                "source2sink_path": analysis_binary.source2sink_complete_path,
+                "diffusion_file": sorted(list(analysis_binary.diffusion_file[set_func_name])),
+                "complete_source2sink_path": [],
+                "complete_get2sink_path": [],
+                "complete_get2sink_path_dict": {}
+            }
+    # 合并跨二进制文件数据流
+    merge_start = time.time()
+    for func_name, processing_order in processing_order_dict.items():
+        logger.info(f"[MERGE] Processing function: {func_name}")
+        for file_path in processing_order:
+            logger.info(f"[MERGE] Processing file: {file_path}")
+            construct_cross_binary_data_flow_single(file_path, potential_path_dict[func_name])
+            construct_cross_binary_data_flow_single(file_path, complete_path_dict[func_name])
     merge_end = time.time()
-    logger.info(f"[STEP 4] Merge finished in {merge_end - merge_start:.2f} seconds\n")
+    logger.info(f"[MERGE] Cross-binary data flow merge finished in {merge_end - merge_start:.2f} seconds\n")
 
     collect_start = time.time()
     # 合并去重路径
     potential_path = []
     get2sink_path = []
-    for file_path, potential_path_info in potential_path_dict.items():
-        potential_path.extend(potential_path_info["complete_source2sink_path"])
-        get2sink_path.extend(potential_path_info["complete_get2sink_path"])
+    for func_name in potential_path_dict:
+        for file_path in potential_path_dict[func_name]:
+            potential_path.extend(potential_path_dict[func_name][file_path]["complete_source2sink_path"])
+            get2sink_path.extend(potential_path_dict[func_name][file_path]["complete_get2sink_path"])
     potential_path = dedupe_paths(potential_path)  # 去重
     get2sink_path = dedupe_paths(get2sink_path)
     # 合并完整路径
     potential_complete_path = []
     get2sink_complete_path = []
-    for file_path, complete_path_info in complete_path_dict.items():
-        potential_complete_path.extend(complete_path_info["complete_source2sink_path"])
-        get2sink_complete_path.extend(complete_path_info["complete_get2sink_path"])
+    for func_name in complete_path_dict:
+        for file_path in complete_path_dict[func_name]:
+            potential_complete_path.extend(complete_path_dict[func_name][file_path]["complete_source2sink_path"])
+            get2sink_complete_path.extend(complete_path_dict[func_name][file_path]["complete_get2sink_path"])
     potential_complete_path = dedupe_paths(potential_complete_path)
     get2sink_complete_path = dedupe_paths(get2sink_complete_path)
     collect_end = time.time()
@@ -352,25 +355,26 @@ def run_rda_worker(file_path):
     analysis_binary.load_config() # 加载配置文件
     analysis_binary.rda_analyze()
     analysis_binary.write_to_file()
-    potential_info_dict = {
-        "get2set_path": analysis_binary.get2set_path,
-        "source2sink_path": analysis_binary.source2sink_path,
-        "diffusion_file": list(analysis_binary.diffusion_file),
-        "complete_source2sink_path": [],
-        "complete_get2sink_path": [],
-        "complete_get2sink_path_dict": {},
-        "binary_analysis_info": analysis_binary.binary_analysis_info
-    }
-    complete_info_dict = {
-        "get2set_path": analysis_binary.get2set_complete_path,
-        "source2sink_path": analysis_binary.source2sink_complete_path,
-        "diffusion_file": list(analysis_binary.diffusion_file),
-        "complete_source2sink_path": [],
-        "complete_get2sink_path": [],
-        "complete_get2sink_path_dict": {},
-        "binary_analysis_info": analysis_binary.binary_analysis_info
-    }
-    return file_path, potential_info_dict, complete_info_dict
+    potential_info_dict = {} # 以set_func_name为键
+    complete_info_dict = {}
+    for func, files in analysis_binary.diffusion_file.items():
+        potential_info_dict[func] = {
+            "get2set_path": analysis_binary.get2set_path,
+            "source2sink_path": analysis_binary.source2sink_path,
+            "diffusion_file": sorted(list(files)),
+            "complete_source2sink_path": [],
+            "complete_get2sink_path": [],
+            "complete_get2sink_path_dict": {},
+        }
+        complete_info_dict[func] = {
+            "get2set_path": analysis_binary.get2set_complete_path,
+            "source2sink_path": analysis_binary.source2sink_complete_path,
+            "diffusion_file": sorted(list(files)),
+            "complete_source2sink_path": [],
+            "complete_get2sink_path": [],
+            "complete_get2sink_path_dict": {},
+        }
+    return file_path, potential_info_dict, complete_info_dict, analysis_binary.binary_analysis_info
     
     
 def start_sgtaint_parallel(info_file):
@@ -385,7 +389,7 @@ def start_sgtaint_parallel(info_file):
     logger.info("[STEP 2] Building SGGraph and collecting binaries to analyze ...")
     sg_start = time.time()
     set_get_graph_create(config_sgtaint.FILE_SYSTEM, analysis_binary_dict, set_get_graph)
-    processing_order = generate_binary_processing_order_robust(analysis_binary_dict)
+    processing_order_dict = generate_binary_processing_order_robust(analysis_binary_dict)
     sg_end = time.time()
     logger.info(f"[STEP 2] finished in {sg_end - sg_start:.2f} seconds\n")
     
@@ -412,8 +416,8 @@ def start_sgtaint_parallel(info_file):
     file_path_list = list(analysis_binary_dict.analysis_binary_dict.keys())
     logger.info(f"[STEP 3] Parallel analysis of {len(file_path_list)} binaries ...")
     pool_start = time.time()
-    potential_path_dict = {} # 去重之后的路径字典
-    complete_path_dict = {} # 完整的路径字典
+    potential_path_dict = defaultdict(dict) # 去重之后的路径字典
+    complete_path_dict = defaultdict(dict) # 完整的路径字典
     with ProcessPoolExecutor() as executor:
         futures = {}
         for idx, file_path in enumerate(file_path_list):
@@ -422,9 +426,17 @@ def start_sgtaint_parallel(info_file):
         for future in as_completed(futures):
             file_path, idx = futures[future]
             try:
-                binary_path, potential_info_dict, complete_info_dict = future.result(timeout=config_sgtaint.BINARY_TIMEOUT)  # 单个分析最大3小时
-                potential_path_dict[binary_path] = potential_info_dict
-                complete_path_dict[binary_path] = complete_info_dict
+                binary_path, potential_info_dict, complete_info_dict, binary_analysis_info = future.result(timeout=config_sgtaint.BINARY_TIMEOUT)  # 单个分析最大3小时
+                # 统计二进制文件分析信息
+                analysis_time = binary_analysis_info["time"]
+                function_number = binary_analysis_info["function_number"]
+                info_file.write(f"   - `{binary_path}` [analysis_time: {analysis_time:.2f}, function_number: {function_number}];\n")
+                info_file.flush()
+                # 构建以set_func_name为键的分析列表
+                for func_name, potential_info in potential_info_dict.items():
+                    potential_path_dict[func_name][binary_path] = potential_info
+                for func_name, complete_info in complete_info_dict.items():
+                    complete_path_dict[func_name][binary_path] = complete_info
                 finished += 1
                 logger.info(f"[PARALLEL] Finished analysis for: {file_path} ({finished}/{len(file_path_list)})")
             except TimeoutError:
@@ -436,19 +448,12 @@ def start_sgtaint_parallel(info_file):
 
     # 合并跨二进制文件数据流
     merge_start = time.time()
-    for file_path in processing_order:
-        logger.info(f"[MERGE] Processing file: {file_path}")
-        if file_path not in potential_path_dict:
-            logger.error(f"RDA Analysis failed for {file_path}")
-            continue
-        analysis_time = potential_path_dict[file_path]["binary_analysis_info"]["time"]
-        function_number = potential_path_dict[file_path]["binary_analysis_info"]["function_number"]
-        info_file.write(
-            f"   - `{file_path}` [analysis_time: {analysis_time:.2f}, function_number: {function_number}];\n"
-        )
-        construct_cross_binary_data_flow_single(file_path, potential_path_dict)
-        construct_cross_binary_data_flow_single(file_path, complete_path_dict)
-    info_file.flush()
+    for func_name, processing_order in processing_order_dict.items():
+        logger.info(f"[MERGE] Processing function: {func_name}")
+        for file_path in processing_order:
+            logger.info(f"[MERGE] Processing file: {file_path}")
+            construct_cross_binary_data_flow_single(file_path, potential_path_dict[func_name])
+            construct_cross_binary_data_flow_single(file_path, complete_path_dict[func_name])
     merge_end = time.time()
     logger.info(f"[MERGE] Cross-binary data flow merge finished in {merge_end - merge_start:.2f} seconds\n")
 
@@ -456,17 +461,19 @@ def start_sgtaint_parallel(info_file):
     # 合并去重路径
     potential_path = []
     get2sink_path = []
-    for file_path, potential_path_info in potential_path_dict.items():
-        potential_path.extend(potential_path_info["complete_source2sink_path"])
-        get2sink_path.extend(potential_path_info["complete_get2sink_path"])
+    for func_name in potential_path_dict:
+        for file_path in potential_path_dict[func_name]:
+            potential_path.extend(potential_path_dict[func_name][file_path]["complete_source2sink_path"])
+            get2sink_path.extend(potential_path_dict[func_name][file_path]["complete_get2sink_path"])
     potential_path = dedupe_paths(potential_path)  # 去重
     get2sink_path = dedupe_paths(get2sink_path)
     # 合并完整路径
     potential_complete_path = []
     get2sink_complete_path = []
-    for file_path, complete_path_info in complete_path_dict.items():
-        potential_complete_path.extend(complete_path_info["complete_source2sink_path"])
-        get2sink_complete_path.extend(complete_path_info["complete_get2sink_path"])
+    for func_name in complete_path_dict:
+        for file_path in complete_path_dict[func_name]:
+            potential_complete_path.extend(complete_path_dict[func_name][file_path]["complete_source2sink_path"])
+            get2sink_complete_path.extend(complete_path_dict[func_name][file_path]["complete_get2sink_path"])
     potential_complete_path = dedupe_paths(potential_complete_path)
     get2sink_complete_path = dedupe_paths(get2sink_complete_path)
     collect_end = time.time()

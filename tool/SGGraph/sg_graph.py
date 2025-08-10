@@ -813,15 +813,15 @@ def set_get_graph_create_single(analysis_binary_initial: AnalysisBinary, func_na
             if analysis_binary.should_set_role_binary() and analysis_binary.has_call_site(set_func_name) and filtered_file_path not in analysis_binary_dict.set_dict[set_func_name] and not analysis_binary.has_set_role_binary():
                 analysis_binary_dict.set_dict[set_func_name].append(filtered_file_path)
             # 更新相关文件（防止逆向回溯）
-            if filtered_file_path not in analysis_binary_initial.relate_file_path:
+            if filtered_file_path not in analysis_binary_initial.relate_file_path[set_func_name]:
                 if filtered_file_path != file_path:
-                    analysis_binary_initial.add_relate_file(filtered_file_path)
+                    analysis_binary_initial.add_relate_file(filtered_file_path, set_func_name)
             else:
                 continue
             # get类型文件更新相关文件（防止逆向回溯）
-            if file_path not in analysis_binary.relate_file_path:
+            if file_path not in analysis_binary.relate_file_path[set_func_name]:
                 if file_path != filtered_file_path:
-                    analysis_binary.add_relate_file(file_path)
+                    analysis_binary.add_relate_file(file_path, set_func_name)
             else:
                 continue
             # 直接进行set_get_graph的补充
@@ -855,7 +855,7 @@ def set_get_graph_create_single(analysis_binary_initial: AnalysisBinary, func_na
             # 更新对应的二进制文件字典
             analysis_binary_dict.update_analysis_binary_by_path(filtered_file_path, analysis_binary)
             if filtered_file_path != file_path: # 若是不同的文件则需要更新初始二进制文件
-                analysis_binary_initial.diffusion_file.add(filtered_file_path) # 构建对应的分析图结构
+                analysis_binary_initial.diffusion_file[set_func_name].add(filtered_file_path) # 构建对应的分析图结构
     # 更新分析字典中的原始二进制文件
     analysis_binary_dict.update_analysis_binary_by_path(file_path, analysis_binary_initial)     
     end_time = time.time()
@@ -939,6 +939,12 @@ def set_get_graph_create(directory, analysis_binary_dict: AnalysisBinaryDict, se
     # 更新二进制文件的set_get函数信息
     for file_path in analysis_binary_dict.analysis_binary_dict:
         analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
+        # 进行相关文件的补充，确保每一个函数对均存在
+        for set_func_name, _, _, _, _, _ in func_name:
+            if set_func_name not in analysis_binary.relate_file_path:
+                analysis_binary.relate_file_path[set_func_name] = set()
+            if set_func_name not in analysis_binary.diffusion_file:
+                analysis_binary.diffusion_file[set_func_name] = set()
         analysis_binary.get_set_function_info = analysis_binary_dict.get_set_func_name[:] # 更新之后进行Myhandle的构建
         # 若存在对应的keyword文件，设置对应的keywordset以及functionset
         file_name = "{}_keyword_function.json".format(file_path.replace("/", "_"))

@@ -599,48 +599,51 @@ def get_prompt_for_phase_two(func_name_eventually):
 # 依靠依赖关系生成二进制文件处理顺序
 def generate_binary_processing_order_robust(analysis_binary_dict):
     # 生成依赖关系
-    binary_path_list = list(analysis_binary_dict.analysis_binary_dict.keys())
-    dependency_graph = defaultdict(set)
-    reverse_graph = defaultdict(set)
-    # 构建双向的依赖关系
-    for binary_path in binary_path_list:
-        analysis_binary = analysis_binary_dict.analysis_binary_dict[binary_path]
-        for dep in analysis_binary.diffusion_file:
-            if dep in binary_path_list:
-                dependency_graph[binary_path].add(dep)
-                reverse_graph[dep].add(binary_path)
-    processing_order = []
-    visited_binary_path = set()
-    # 初始化0-依赖序列
-    zero_dep_queue = deque([b for b in binary_path_list if not dependency_graph[b]])
-    while len(visited_binary_path) < len(binary_path_list):
-        while zero_dep_queue:
-            current = zero_dep_queue.popleft()
-            if current in visited_binary_path:
-                continue
-            processing_order.append(current)
-            visited_binary_path.add(current)
-            # 移除所有的依赖关系
-            for dependent in reverse_graph[current]:
-                dependency_graph[dependent].discard(current)
-                if not dependency_graph[dependent]:
-                    zero_dep_queue.append(dependent)
-        # 若存在循环依赖关系（一般不会存在）
-        if len(visited_binary_path) < len(binary_path_list):
-            # 找到最少依赖的节点
-            remaining_nodes = [b for b in binary_path_list if b not in visited_binary_path]
-            min_dep_node = min(remaining_nodes, key=lambda b: len(dependency_graph[b]))
-            processing_order.append(min_dep_node)
-            visited_binary_path.add(min_dep_node)
-            # 移除所有的依赖关系
-            for dependent in reverse_graph[min_dep_node]:
-                dependency_graph[dependent].discard(min_dep_node)
-                if not dependency_graph[dependent]:
-                    zero_dep_queue.append(dependent)
-    logger.info(f"Binary processing order generated. Total binaries: {len(processing_order)}")
-    for idx, binary_path in enumerate(processing_order):
-        logger.debug(f"[{idx}] {binary_path}")
-    return processing_order
+    binary_path_list = sorted(list(analysis_binary_dict.analysis_binary_dict.keys()))
+    get_set_func_name = sorted(analysis_binary_dict.get_set_func_name, key=lambda t: t[0])
+    processing_order_dict = {}
+    for set_func_name, _, _, _, _, _ in get_set_func_name:
+        dependency_graph = defaultdict(set)
+        reverse_graph = defaultdict(set)
+        # 构建双向的依赖关系
+        for binary_path in binary_path_list:
+            analysis_binary = analysis_binary_dict.analysis_binary_dict[binary_path]
+            for dep in sorted(analysis_binary.diffusion_file[set_func_name]):
+                if dep in binary_path_list:
+                    dependency_graph[binary_path].add(dep)
+                    reverse_graph[dep].add(binary_path)
+        processing_order = []
+        visited_binary_path = set()
+        # 初始化0-依赖序列
+        zero_dep_queue = deque(sorted([b for b in binary_path_list if not dependency_graph[b]]))
+        while len(visited_binary_path) < len(binary_path_list):
+            while zero_dep_queue:
+                current = zero_dep_queue.popleft()
+                if current in visited_binary_path:
+                    continue
+                processing_order.append(current)
+                visited_binary_path.add(current)
+                # 移除所有的依赖关系
+                for dependent in sorted(reverse_graph[current]):
+                    dependency_graph[dependent].discard(current)
+                    if not dependency_graph[dependent]:
+                        zero_dep_queue.append(dependent)
+            # 若存在循环依赖关系（一般不会存在）
+            if len(visited_binary_path) < len(binary_path_list):
+                # 找到最少依赖的节点
+                remaining_nodes = [b for b in binary_path_list if b not in visited_binary_path]
+                min_dep_node = min(remaining_nodes, key=lambda b: len(dependency_graph[b]))
+                processing_order.append(min_dep_node)
+                visited_binary_path.add(min_dep_node)
+                # 移除所有的依赖关系
+                for dependent in sorted(reverse_graph[min_dep_node]):
+                    dependency_graph[dependent].discard(min_dep_node)
+                    if not dependency_graph[dependent]:
+                        zero_dep_queue.append(dependent)
+        for idx, binary_path in enumerate(processing_order):
+            logger.debug(f"[{idx}/{set_func_name}] {binary_path}")
+        processing_order_dict[set_func_name] = processing_order
+    return processing_order_dict
 
 
 # 判断函数中是否包含对应字符串
