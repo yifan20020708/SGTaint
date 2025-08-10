@@ -206,6 +206,9 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
     for set_get_pair in config_sgtaint.SET_GET_INFO:
         if set_get_pair[0] in func_name_list and set_get_pair[1] in func_name_list: # setter函数名称与getter函数名称均存在
             func_name_previous_known.append(config_sgtaint.SET_GET_INFO[set_get_pair])
+    # 直接从配置中获取转移函数对，可以避免使用大语言模型
+    if config_sgtaint.SG_FUNCTION_INFO and config_sgtaint.SG_FUNCTION_INFO == "config":
+        return func_name_previous_known
     # 进行LLM的第一步分析
     func_name_list_str = "[" + ", ".join(func_name_list_complete) + "]"
     LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
@@ -452,7 +455,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
     return func_name
 
 
-def get_func_name_from_llm_precise_update(analysis_binary_dict: AnalysisBinaryDict, timeout=60):
+def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, timeout=60):
     start_time = time.time()
     # func_name可以在配置文件中进行配置，若配置，则不使用LLM进行分析 
     if config_sgtaint.SG_FUNCTION_INFO and config_sgtaint.SG_FUNCTION_INFO.startswith("[("):
@@ -488,6 +491,9 @@ def get_func_name_from_llm_precise_update(analysis_binary_dict: AnalysisBinaryDi
     for set_get_pair in config_sgtaint.SET_GET_INFO:
         if set_get_pair[0] in func_name_list and set_get_pair[1] in func_name_list: # setter函数名称与getter函数名称均存在
             func_name_previous_known.append(config_sgtaint.SET_GET_INFO[set_get_pair])
+    # 直接从配置中获取转移函数对，可以避免使用大语言模型
+    if config_sgtaint.SG_FUNCTION_INFO and config_sgtaint.SG_FUNCTION_INFO == "config":
+        return func_name_previous_known
     # 进行LLM的第一步分析
     func_name_list_str = "[" + ", ".join(func_name_list_complete) + "]"
     LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
@@ -881,7 +887,10 @@ def set_get_graph_create(directory, analysis_binary_dict: AnalysisBinaryDict, se
         return
     # 使用LLM获取边界二进制文件的func_name
     try:
-        func_name = get_func_name_from_llm(analysis_binary_dict)
+        if config_sgtaint.SG_FUNCTION_INFO and config_sgtaint.SG_FUNCTION_INFO == "precise":
+            func_name = get_func_name_from_llm_precise(analysis_binary_dict)
+        else: # 当没有任何-s参数时
+            func_name = get_func_name_from_llm(analysis_binary_dict)
     except Exception as e:
         logger.error(f"Error retrieving function names from LLM: {e}")
         func_name = []  # 将其设置为[]

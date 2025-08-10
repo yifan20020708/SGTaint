@@ -16,8 +16,8 @@ class LLM():
     def __init__(self, temperature = 1.0, model = None): # 温度默认为1.0
         # 配置灵活获取
         self.model = model or config_sgtaint.LLM_MODEL # 通过用户参数进行配置
-        self.api_key = os.getenv("DEEPSEEK_API_KEY") if "deepseek" in self.model else os.getenv("OPENAI_API_KEY")
-        self.base_url = config_sgtaint.LLM_URL_DEEPSEEK if "deepseek" in self.model else config_sgtaint.LLM_URL_CHATGPT
+        self.api_key = os.getenv(config_sgtaint.LLM_MODEL_INFO[self.model][0])
+        self.base_url = config_sgtaint.LLM_MODEL_INFO[self.model][1]
         self.temperature = temperature
         # 参数检查
         if not self.api_key or not self.base_url:

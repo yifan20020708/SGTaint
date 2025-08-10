@@ -25,11 +25,23 @@ AGGRESSIVE_GHIDRA_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "enable_aggres
 # LLM配置
 LLM_URL_DEEPSEEK = "https://api.deepseek.com"
 LLM_URL_CHATGPT = "https://api.openai.com/v1"
+LLM_URL_QIANWEN = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 LLM_MODEL_DEEPSEEK = "deepseek-chat"
 LLM_MODEL_CHATGPT = "gpt-4.1"
+LLM_MODEL_QIANWEN = "qwen3-coder-plus"
 LLM_MODEL = ""
 SG_TEMPERATURE = 0.3 # 进行代码分析
 MAX_ERROR_COUNT = 3
+LLM_MODEL_INFO = {
+    LLM_MODEL_DEEPSEEK: ["DEEPSEEK_API_KEY", LLM_URL_DEEPSEEK],
+    LLM_MODEL_QIANWEN: ["QIANWEN_API_KEY", LLM_URL_QIANWEN],
+    LLM_MODEL_CHATGPT: ["OPENAI_API_KEY", LLM_MODEL_CHATGPT]
+}
+MODEL_MAP = {
+    "deepseek": LLM_MODEL_DEEPSEEK,
+    "qwen": LLM_MODEL_QIANWEN,
+    "gpt": LLM_MODEL_CHATGPT
+}
 
 # 读取config文件之后进行配置
 SG_FUNCTION_INFO = None  # 格式为[(set_1, get_1, set_key_pos, get_key_pos, set_value_pos, get_value_pos), ...]或None
