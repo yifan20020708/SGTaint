@@ -1109,6 +1109,7 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
                 "visited_functions": source2sink_single_path["visited_functions"], # 存储访问过的函数名称的集合
                 "decompile_list": source2sink_single_path.get("decompile_list", []), # 存储对应的反汇编片段
                 "complete_list": source2sink_single_path.get("complete_list", []), # 存储对应的完整路径片段 
+                "range_list": source2sink_single_path.get("range_list", [])
             })
         else: # 直接的潜在路径
             path_dict = {file_path: [source2sink_single_path["path"]]}
@@ -1131,6 +1132,7 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
                 "visited_functions": source2sink_single_path["visited_functions"], # 存储访问过的函数名称的集合
                 "decompile_list": source2sink_single_path.get("decompile_list", []), # 存储对应的反汇编片段
                 "complete_list": source2sink_single_path.get("complete_list", []), # 存储对应的完整路径片段
+                "range_list": source2sink_single_path.get("range_list", [])
             })
     # 进行去重
     potential_path_dict[file_path]["complete_get2sink_path"] = dedupe_paths(potential_path_dict[file_path]["complete_get2sink_path"])
@@ -1207,6 +1209,7 @@ def construct_cross_binary_data_flow_single(file_path, potential_path_dict):
                     "visited_functions": f"{get2set_single_path['visited_functions']} --> {target_path['visited_functions']}", # 存储访问过的函数名称的集合
                     "decompile_list": get2set_single_path.get("decompile_list", []) + target_path.get("decompile_list", []), # 存储对应的反汇编片段
                     "complete_list": get2set_single_path.get("complete_list", []) + target_path.get("complete_list", []), # 存储对应的完整路径片段
+                    "range_list": get2set_single_path.get("range_list", []) + target_path.get("range_list", [])
                 }
                 if new_path_dict["taint_source"] in config_sgtaint.transitive_get:
                     # 如果是跨二进制的get2sink路径，则添加到complete_get2sink_path中
@@ -1319,6 +1322,7 @@ def get_call_site_decompile_code_from_function(project: Project, cfg: CFGFast, c
 def get_function_decompile_list_by_path(project, cfg, function_angr_format, taint_source, taint_sink):
     function_decompile_list = []
     function_complete_list = []
+    range_list = []
     for idx, function_format in enumerate(function_angr_format):
         dec, func_addr, start_block_start, start_block_end, end_block_start, end_block_end = function_format
         pseudo_code_lines = dec.codegen.text.splitlines()
@@ -1327,7 +1331,7 @@ def get_function_decompile_list_by_path(project, cfg, function_angr_format, tain
             call_site_dict = get_call_site_decompile_code_from_function(project, cfg, taint_source, func_addr, dec)
             if not call_site_dict: # 反编译函数中不包含taint_source
                 logger.error(f"The decompiled function does not contain the {taint_source} or the address resolution failed.")
-                return ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"]
+                return ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"]
             start_index = find_nearest_call_site(call_site_dict, start_block_start, start_block_end)
         else:
             for i, line in enumerate(pseudo_code_lines):
@@ -1342,23 +1346,24 @@ def get_function_decompile_list_by_path(project, cfg, function_angr_format, tain
             next_func = project.kb.functions.get(next_func_addr)
             if not next_func: # 不能识别此函数
                 logger.error(f"The decompiled function does not contain the {next_func.name}")
-                return ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"]
+                return ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"]
             target_func_name = next_func.name
         call_site_dict_unfilter = get_call_site_decompile_code_from_function(project, cfg, target_func_name, func_addr, dec)
         call_site_dict = {addr: idx for addr, idx in call_site_dict_unfilter.items() if idx >= start_index}
         if not call_site_dict:
             logger.error(f"No valid call instruction to {target_func_name} was identified within the analyzed code.")
-            return ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"]
+            return ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"], ["Fail to Decompile by Angr"]
         end_index = find_nearest_call_site(call_site_dict, end_block_start, end_block_end)
         # 使用start_index以及end_index截取片段
         if end_index < start_index: # 如果end_index小于start_index，说明没有有效的代码片段
             logger.error(f"The end index {end_index} is less than the start index {start_index}, resulting in an invalid code segment.")
-            return ["Invaild code snippet"], ["Invaild code snippet"]
+            return ["Invaild code snippet"], ["Invaild code snippet"], ["Invaild code snippet"]
         code_snippet_list = pseudo_code_lines[start_index:end_index + 1]
         code_snippet = "\n".join(code_snippet_list)
         function_decompile_list.append(code_snippet)
         function_complete_list.append("\n".join(pseudo_code_lines))
-    return function_decompile_list, function_complete_list
+        range_list.append([start_index + 1, end_index + 1])
+    return function_decompile_list, function_complete_list, range_list
 
 
 # 按照路径涉及的基本块长度进行排序

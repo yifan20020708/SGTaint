@@ -895,7 +895,7 @@ def set_get_graph_create(directory, analysis_binary_dict: AnalysisBinaryDict, se
         logger.error(f"Error retrieving function names from LLM: {e}")
         func_name = []  # 将其设置为[]
     exceed_flag = False
-    for set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get in func_name:
+    for set_func_name, get_func_name, index_key_set, index_key_get, index_value_set, index_value_get in func_name: # 针对不同的转移函数对，存在不同的扩散文件
         analysis_binary_dict.set_dict[set_func_name] = [] # 字典元素为对应的列表
         func_name_list = [set_func_name, get_func_name]
         # 判断边界二进制文件中是否存在对应的set_get函数

@@ -176,6 +176,7 @@ def get_function_decompile_block2block_cached(program, identifier, start_block_s
 def get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink):
     function_decompile_list = []
     function_complete_list = []
+    range_list = [] # 存储对应的行号
     for idx, function_format in enumerate(function_ghidra_format):
         func_addr, start_block_start, start_block_end, end_block_start, end_block_end = function_format
         # 进行angr到ghidra的地址转换
@@ -187,7 +188,7 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
         # 首先根据行号进行地址匹配
         result = get_function_decompile_block2block_cached(program, func_addr, start_block_start, start_block_end, end_block_start, end_block_end)
         if not result: # ghidra反编译失败或函数识别失败
-            return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
+            return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
         pseudo_code_lines, lines, start_index_list, finish_index_list = result
         # 获取start_index
         if idx == 0: # 处理第一个含有source的片段
@@ -195,7 +196,7 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
             if start_index is None: # 使用函数名称包含处理异常情况
                 call_site_dict = get_call_site_addr_by_func_name(lines, taint_source)
                 if not call_site_dict: # 反编译函数中不包含taint_source
-                    return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
+                    return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
                 start_index = find_nearest_call_site(call_site_dict, start_block_start, start_block_end)
         else: # 其他片段均从函数开始处理
             for i, line in enumerate(pseudo_code_lines):
@@ -209,14 +210,14 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
             next_func_addr = base_addr_transform_angr2ghidra(program, angr_base_addr, function_ghidra_format[idx + 1][0])
             next_func = get_function(program, next_func_addr)
             if not next_func: # 不能识别此函数
-                return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
+                return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
             target_func_name = next_func.getName()
         end_index = next((i for i in finish_index_list if target_func_name in pseudo_code_lines[i]), None) # end_index需要向下补充完整
         if end_index is None: # 使用函数名称包含处理异常情况
             call_site_dict_unfilter = get_call_site_addr_by_func_name(lines, target_func_name)
             call_site_dict = {addr: idx for addr, idx in call_site_dict_unfilter.items() if idx >= start_index}
             if not call_site_dict:
-                return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
+                return ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"], ["Fail to Decompile by Ghidra"]
             end_index = find_nearest_call_site(call_site_dict, end_block_start, end_block_end)
         # end_index向下补充完整
         if not is_complete_call_site(pseudo_code_lines[end_index]): # 防止截断表示
@@ -224,12 +225,13 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
                 end_index += 1
         # 使用start_index以及end_index截取片段
         if end_index < start_index: # 无效的代码片段
-            return ["Invaild code snippet"], ["Invaild code snippet"]
+            return ["Invaild code snippet"], ["Invaild code snippet"], ["Invaild code snippet"]
         code_snippet_list = pseudo_code_lines[start_index:end_index + 1]
         code_snippet = "\n".join(code_snippet_list)
         function_decompile_list.append(code_snippet)
         function_complete_list.append("\n".join(pseudo_code_lines))
-    return function_decompile_list, function_complete_list
+        range_list.append([start_index + 1, end_index + 1])
+    return function_decompile_list, function_complete_list, range_list
 
 
 # 反汇编二进制文件获取的source2sink路径以及get2set路径
@@ -255,16 +257,19 @@ def get_decompile_result_binary(program, angr_base_addr):
                 taint_sink_func = get_function(program, taint_sink_addr)
                 taint_source = taint_sink_func.getName() if taint_sink_func else None
             if taint_source and taint_sink:
-                function_decompile_list, function_complete_list = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
+                function_decompile_list, function_complete_list, range_list = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
                 source2sink_single_path["decompile_list"] = function_decompile_list
                 source2sink_single_path["complete_list"] = function_complete_list
+                source2sink_single_path["range_list"] = range_list
             else:
                 source2sink_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
                 source2sink_single_path["complete_list"] = ["Fail to Decompile by Ghidra"]
+                source2sink_single_path["range_list"] = ["Fail to Decompile by Ghidra"]
         except Exception as e:
             print("[-] An exception occurred during decompilation: ", e)
             source2sink_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
             source2sink_single_path["complete_list"] = ["Fail to Decompile by Ghidra"]
+            source2sink_single_path["range_list"] = ["Fail to Decompile by Ghidra"]
         source2sink_result.append(source2sink_single_path)
     # 写回文件
     source2sink_result_file_name = "{}_source2sink_path_result.json".format(file_path_process)
@@ -294,16 +299,19 @@ def get_decompile_result_binary(program, angr_base_addr):
                 taint_sink_func = get_function(program, taint_sink_addr)
                 taint_source = taint_sink_func.getName() if taint_sink_func else None
             if taint_source and taint_sink:
-                function_decompile_list, function_complete_list = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
+                function_decompile_list, function_complete_list, range_list = get_function_decompile_list_by_path(program, function_ghidra_format, angr_base_addr, taint_source, taint_sink)
                 get2set_single_path["decompile_list"] = function_decompile_list
                 get2set_single_path["complete_list"] = function_complete_list
+                get2set_single_path["range_list"] = range_list
             else:
                 get2set_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
                 get2set_single_path["complete_list"] = ["Fail to Decompile by Ghidra"]
+                get2set_single_path["range_list"] = ["Fail to Decompile by Ghidra"]
         except Exception as e:
             print("[-] An exception occurred during decompilation: ", e)
             get2set_single_path["decompile_list"] = ["Fail to Decompile by Ghidra"]
             get2set_single_path["complete_list"] = ["Fail to Decompile by Ghidra"]
+            get2set_single_path["range_list"] = ["Fail to Decompile by Ghidra"]
         get2set_result.append(get2set_single_path)
     # 写回文件
     get2set_result_file_name = "{}_get2set_path_result.json".format(file_path_process)
