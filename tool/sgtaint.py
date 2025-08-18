@@ -248,20 +248,38 @@ def start_sgtaint_serial(info_file):
     potential_path_dict = defaultdict(dict) # 去重之后的路径字典
     complete_path_dict = defaultdict(dict) # 完整的路径字典
     for set_func_name, _, _, _, _, _ in analysis_binary_dict.get_set_func_name:
-        for file_path in analysis_binary_dict.analysis_binary_dict:
-            analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
-            potential_path_dict[set_func_name][file_path] = {
+        analysis_binary: AnalysisBinary = analysis_binary_dict.get_analysis_binary_by_path(file_path)
+        if analysis_binary_dict.analysis_binary_dict:
+            for file_path in analysis_binary_dict.analysis_binary_dict:
+                potential_path_dict[set_func_name][file_path] = {
+                    "get2set_path": analysis_binary.get2set_path,
+                    "source2sink_path": analysis_binary.source2sink_path,
+                    "diffusion_file": sorted(list(analysis_binary.diffusion_file[set_func_name])),
+                    "complete_source2sink_path": [],
+                    "complete_get2sink_path": [],
+                    "complete_get2sink_path_dict": {}
+                }
+                complete_path_dict[set_func_name][file_path] = {
+                    "get2set_path": analysis_binary.get2set_complete_path,
+                    "source2sink_path": analysis_binary.source2sink_complete_path,
+                    "diffusion_file": sorted(list(analysis_binary.diffusion_file[set_func_name])),
+                    "complete_source2sink_path": [],
+                    "complete_get2sink_path": [],
+                    "complete_get2sink_path_dict": {}
+                }
+        else:
+            potential_path_dict["None"][file_path] = {
                 "get2set_path": analysis_binary.get2set_path,
                 "source2sink_path": analysis_binary.source2sink_path,
-                "diffusion_file": sorted(list(analysis_binary.diffusion_file[set_func_name])),
+                "diffusion_file": [],
                 "complete_source2sink_path": [],
                 "complete_get2sink_path": [],
                 "complete_get2sink_path_dict": {}
             }
-            complete_path_dict[set_func_name][file_path] = {
+            complete_path_dict["None"][file_path] = {
                 "get2set_path": analysis_binary.get2set_complete_path,
                 "source2sink_path": analysis_binary.source2sink_complete_path,
-                "diffusion_file": sorted(list(analysis_binary.diffusion_file[set_func_name])),
+                "diffusion_file": [],
                 "complete_source2sink_path": [],
                 "complete_get2sink_path": [],
                 "complete_get2sink_path_dict": {}
@@ -357,22 +375,40 @@ def run_rda_worker(file_path):
     analysis_binary.write_to_file()
     potential_info_dict = {} # 以set_func_name为键
     complete_info_dict = {}
-    for func, files in analysis_binary.diffusion_file.items():
-        potential_info_dict[func] = {
+    if analysis_binary.diffusion_file: # 存在对应的分散
+        for func, files in analysis_binary.diffusion_file.items():
+            potential_info_dict[func] = {
+                "get2set_path": analysis_binary.get2set_path,
+                "source2sink_path": analysis_binary.source2sink_path,
+                "diffusion_file": sorted(list(files)),
+                "complete_source2sink_path": [],
+                "complete_get2sink_path": [],
+                "complete_get2sink_path_dict": {}
+            }
+            complete_info_dict[func] = {
+                "get2set_path": analysis_binary.get2set_complete_path,
+                "source2sink_path": analysis_binary.source2sink_complete_path,
+                "diffusion_file": sorted(list(files)),
+                "complete_source2sink_path": [],
+                "complete_get2sink_path": [],
+                "complete_get2sink_path_dict": {}
+            }
+    else:
+        potential_info_dict["None"] = {
             "get2set_path": analysis_binary.get2set_path,
             "source2sink_path": analysis_binary.source2sink_path,
-            "diffusion_file": sorted(list(files)),
+            "diffusion_file": [],
             "complete_source2sink_path": [],
             "complete_get2sink_path": [],
-            "complete_get2sink_path_dict": {},
+            "complete_get2sink_path_dict": {}
         }
-        complete_info_dict[func] = {
+        complete_info_dict["None"] = {
             "get2set_path": analysis_binary.get2set_complete_path,
             "source2sink_path": analysis_binary.source2sink_complete_path,
-            "diffusion_file": sorted(list(files)),
+            "diffusion_file": [],
             "complete_source2sink_path": [],
             "complete_get2sink_path": [],
-            "complete_get2sink_path_dict": {},
+            "complete_get2sink_path_dict": {}
         }
     return file_path, potential_info_dict, complete_info_dict, analysis_binary.binary_analysis_info
     

@@ -225,7 +225,7 @@ def get_function_decompile_list_by_path(program, function_ghidra_format, angr_ba
                 end_index += 1
         # 使用start_index以及end_index截取片段
         if end_index < start_index: # 无效的代码片段
-            return ["Invaild code snippet"], ["Invaild code snippet"], ["Invaild code snippet"]
+            return ["Invalid code snippet"], ["Invalid code snippet"], ["Invalid code snippet"]
         code_snippet_list = pseudo_code_lines[start_index:end_index + 1]
         code_snippet = "\n".join(code_snippet_list)
         function_decompile_list.append(code_snippet)

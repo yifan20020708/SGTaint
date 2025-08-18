@@ -643,6 +643,8 @@ def generate_binary_processing_order_robust(analysis_binary_dict):
         for idx, binary_path in enumerate(processing_order):
             logger.debug(f"[{idx}/{set_func_name}] {binary_path}")
         processing_order_dict[set_func_name] = processing_order
+    if not processing_order_dict: # 不存在对应的get_set_func_name
+        processing_order_dict["None"] = binary_path_list
     return processing_order_dict
 
 
