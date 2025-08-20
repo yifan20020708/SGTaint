@@ -1251,18 +1251,29 @@ def find_nearest_call_site(call_site_dict, start_addr, end_addr):
     return call_site_dict[nearest_addr]
 
 
+# 将模板字符串转换为正则表达式
 def template_to_regex(fmt: str) -> re.Pattern:
-    regex = re.escape(fmt)            
+    regex = re.escape(fmt)  # 先转义
+    counter = {}  # 用于给组名加索引
     for spec, pat in config_sgtaint.spec_map.items():
-        regex = regex.replace(re.escape(spec), pat)
-    return re.compile(rf"^{regex}$")  
+        # 如果模板里有这个占位符
+        while spec in regex:
+            count = counter.get(spec, 0)
+            group_name = f"{spec[1]}_{count}" if spec != "%%" else ""  # %% 不需要命名组
+            counter[spec] = count + 1
+            regex = regex.replace(re.escape(spec), pat.format(name=group_name), 1)
+    return re.compile(rf"^{regex}$")
 
 
 # 进行动态字符串的匹配
 def match_dynamic(fmt: str, candidate: str):
-    rex = template_to_regex(fmt)
-    m = rex.fullmatch(candidate)
-    return (bool(m), m.groupdict() if m else {})
+    try:
+        rex = template_to_regex(fmt)
+        m = rex.fullmatch(candidate)
+        return (bool(m), m.groupdict() if m else {})
+    except Exception as e:
+        logger.error(f"Error matching dynamic string: {e}")
+        return (False, {})
 
 
 # 根据函数调用名称获取函数调用点地址

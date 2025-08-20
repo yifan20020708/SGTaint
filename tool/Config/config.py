@@ -104,24 +104,24 @@ pattern = re.compile(
 pattern_llm_two_parse = re.compile(r'^\s*\[\s*(\(\s*([^,()]+?\s*,\s*){5}[^,()]+?\s*\)\s*,?\s*)+\]$')
 pattern_llm_one_parse = re.compile(r'^\s*\[\s*(\(\s*[^,()]+?\s*,\s*[^,()]+?\s*\)\s*,?\s*)+\]$')
 spec_map = {
-    r"%s" : r"(?P<str>[^#\s]+)",
-    r"%c" : r"(?P<char>.{1})",
-    r"%d" : r"(?P<int>[+-]?\d+)",
-    r"%i" : r"(?P<int>[+-]?\d+)",
-    r"%u" : r"(?P<uint>\d+)",
-    r"%o" : r"(?P<oct>[0-7]+)",
-    r"%x" : r"(?P<hex>[0-9a-f]+)",
-    r"%X" : r"(?P<HEX>[0-9A-F]+)",
-    r"%p" : r"(?P<ptr>0x[0-9a-fA-F]+)",
-    r"%f" : r"(?P<float>[+-]?\d+\.\d+)",
-    r"%F" : r"(?P<float>[+-]?\d+\.\d+)",
-    r"%e" : r"(?P<exp>[+-]?\d+\.\d+[eE][+-]?\d+)",
-    r"%E" : r"(?P<EXP>[+-]?\d+\.\d+[eE][+-]?\d+)",
-    r"%g" : r"(?P<float>[+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)",
-    r"%G" : r"(?P<float>[+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)",
-    r"%a" : r"(?P<a>0x[0-9a-f]+\.[0-9a-f]+p[+-]?\d+)",
-    r"%A" : r"(?P<A>0x[0-9A-F]+\.[0-9A-F]+P[+-]?\d+)",
-    r"%%" : r"%"
+    r"%s": r"(?P<{name}>[^#\s]+)",
+    r"%c": r"(?P<{name}>.{1})",
+    r"%d": r"(?P<{name}>[+-]?\d+)",
+    r"%i": r"(?P<{name}>[+-]?\d+)",
+    r"%u": r"(?P<{name}>\d+)",
+    r"%o": r"(?P<{name}>[0-7]+)",
+    r"%x": r"(?P<{name}>[0-9a-f]+)",
+    r"%X": r"(?P<{name}>[0-9A-F]+)",
+    r"%p": r"(?P<{name}>0x[0-9a-fA-F]+)",
+    r"%f": r"(?P<{name}>[+-]?\d+\.\d+)",
+    r"%F": r"(?P<{name}>[+-]?\d+\.\d+)",
+    r"%e": r"(?P<{name}>[+-]?\d+\.\d+[eE][+-]?\d+)",
+    r"%E": r"(?P<{name}>[+-]?\d+\.\d+[eE][+-]?\d+)",
+    r"%g": r"(?P<{name}>[+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)",
+    r"%G": r"(?P<{name}>[+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)",
+    r"%a": r"(?P<{name}>0x[0-9a-f]+\.[0-9a-f]+p[+-]?\d+)",
+    r"%A": r"(?P<{name}>0x[0-9A-F]+\.[0-9A-F]+P[+-]?\d+)",
+    r"%%": r"%"
 }
 
 # 大模型最大重复次数
@@ -199,7 +199,8 @@ SET_GET_INFO = {
     ("nvram_bufset", "nvram_bufget"): ["nvram_bufset", "nvram_bufget", 1, 1, 2, None],
     ("apmib_set", "apmib_get"): ["apmib_set", "apmib_get", 0, 0, 1, 1],
     ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None],
-    ("nvram_set_value", "nvram_safe_get"): ["nvram_set_value", "nvram_safe_get", 0, 0, 1, None]
+    ("nvram_set_value", "nvram_safe_get"): ["nvram_set_value", "nvram_safe_get", 0, 0, 1, None],
+    ("acosNvramConfig_set_bak", "acosNvramConfig_get_bak"): ["acosNvramConfig_set_bak", "acosNvramConfig_get_bak", 0, 0, 1, None]
 }
 taint_sources_remove = ["strtok", "strchr", "atoi", "strspn", "strtol", "fork", "rand", "malloc", "strlen"]
 sanitization_functions = ["atoi", "strcmp", "strncmp", "acosNvramConfig_match"]
