@@ -200,7 +200,8 @@ SET_GET_INFO = {
     ("apmib_set", "apmib_get"): ["apmib_set", "apmib_get", 0, 0, 1, 1],
     ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None],
     ("nvram_set_value", "nvram_safe_get"): ["nvram_set_value", "nvram_safe_get", 0, 0, 1, None],
-    ("acosNvramConfig_set_bak", "acosNvramConfig_get_bak"): ["acosNvramConfig_set_bak", "acosNvramConfig_get_bak", 0, 0, 1, None]
+    ("acosNvramConfig_set_bak", "acosNvramConfig_get_bak"): ["acosNvramConfig_set_bak", "acosNvramConfig_get_bak", 0, 0, 1, None],
+    ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None]
 }
 taint_sources_remove = ["strtok", "strchr", "atoi", "strspn", "strtol", "fork", "rand", "malloc", "strlen"]
 sanitization_functions = ["atoi", "strcmp", "strncmp", "acosNvramConfig_match"]

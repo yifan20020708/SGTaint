@@ -587,7 +587,9 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
                     })
         # 过滤没有有效函数调用的转移函数对
         if is_find_set_call and is_find_get_call: # 进行成对的筛选
-            func_name_phase_list.extend(pair_bucket)
+            for pair_bucket_single in pair_bucket: # 防止重复加入
+                if pair_bucket_single not in func_name_phase_list:
+                    func_name_phase_list.append(pair_bucket_single)
             call_site_code[(set_func_name, get_func_name)] = {
                 "set_func_name": set_func_name,
                 "set_code_filter_list" : [],
@@ -657,14 +659,12 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
                     if complete_line not in code_filter_list: # 避免重复添加
                         code_filter_list.append(complete_line)
             for set_func_name, get_func_name in call_site_code:
-                if func_name == set_func_name:
+                if func_name == set_func_name: # 可能存在多次的匹配
                     call_site_code[(set_func_name, get_func_name)]["set_code_filter_list"].extend(code_filter_list)
                     call_site_code[(set_func_name, get_func_name)]["set_parameter_list"].extend(parameter_list)
-                    break
                 if func_name == get_func_name:
                     call_site_code[(set_func_name, get_func_name)]["get_code_filter_list"].extend(code_filter_list)
                     call_site_code[(set_func_name, get_func_name)]["get_parameter_list"].extend(parameter_list)
-                    break
     # 进行有效性过滤
     func_name_eventually = []
     for set_func_name, get_func_name in call_site_code:
