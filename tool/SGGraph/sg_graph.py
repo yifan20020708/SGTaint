@@ -208,6 +208,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
             func_name_previous_known.append(config_sgtaint.SET_GET_INFO[set_get_pair])
     # 直接从配置中获取转移函数对，可以避免使用大语言模型
     if config_sgtaint.SG_FUNCTION_INFO and config_sgtaint.SG_FUNCTION_INFO == "config":
+        analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
         return func_name_previous_known
     # 进行LLM的第一步分析
     func_name_list_str = "[" + ", ".join(func_name_list_complete) + "]"
@@ -222,6 +223,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
             error_count += 1
             if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                 logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                 return func_name_previous_known
         else:
             error_count = 0
@@ -234,6 +236,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
             error_count += 1
             if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                 logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                 return func_name_previous_known
         else:
             error_count = 0
@@ -249,6 +252,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                     return func_name_previous_known
             else:
                 error_count = 0
@@ -265,6 +269,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
     if not func_name_phase_one: # 若没有获取到函数对，则直接返回
         logger.info("Retrieve Set-Get function information directly from the configuration.")
         logger.info(f"Function names from configuration: {func_name_previous_known}")
+        analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
         return func_name_previous_known
     # 进行LLM的第二步分析，首先需要获取对应到的调用语句
     logger.info("Extracting call information from the first phase to facilitate the second phase of LLM-based analysis.")
@@ -326,9 +331,11 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 func_name_phase_result = json.load(file)
         except FileNotFoundError:
             logger.error(f"Error: File not found — {func_name_phase_result_file_path}")
+            analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
             return func_name_previous_known
         except Exception as e:
             logger.error(f"Unexpected error: {e}")
+            analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
             return func_name_previous_known
         # 删除对应的中间文件
         rm_command = f"rm {func_name_phase_result_file_path}"
@@ -399,6 +406,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                     return func_name_previous_known
             else:
                 error_count = 0
@@ -411,6 +419,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                     return func_name_previous_known
             else:
                 error_count = 0
@@ -426,6 +435,7 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
                     error_count += 1
                     if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                         logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                        analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                         return func_name_previous_known
                 else:
                     error_count = 0
@@ -493,6 +503,7 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
             func_name_previous_known.append(config_sgtaint.SET_GET_INFO[set_get_pair])
     # 直接从配置中获取转移函数对，可以避免使用大语言模型
     if config_sgtaint.SG_FUNCTION_INFO and config_sgtaint.SG_FUNCTION_INFO == "config":
+        analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
         return func_name_previous_known
     # 进行LLM的第一步分析
     func_name_list_str = "[" + ", ".join(func_name_list_complete) + "]"
@@ -507,6 +518,7 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
             error_count += 1
             if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                 logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                 return func_name_previous_known
         else:
             error_count = 0
@@ -519,6 +531,7 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
             error_count += 1
             if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                 logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                 return func_name_previous_known
         else:
             error_count = 0
@@ -534,6 +547,7 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                     return func_name_previous_known
             else:
                 error_count = 0
@@ -550,6 +564,7 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
     if not func_name_phase_one: # 若没有获取到函数对，则直接返回
         logger.info("Retrieve Set-Get function information directly from the configuration.")
         logger.info(f"Function names from configuration: {func_name_previous_known}")
+        analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
         return func_name_previous_known
     # 进行LLM的第二步分析，首先需要获取对应到的调用语句
     logger.info("Extracting call information from the first phase to facilitate the second phase of LLM-based analysis.")
@@ -634,9 +649,11 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
                 func_name_phase_result = json.load(file)
         except FileNotFoundError:
             logger.error(f"Error: File not found — {func_name_phase_result_file_path}")
+            analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
             return func_name_previous_known
         except Exception as e:
             logger.error(f"Unexpected error: {e}")
+            analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
             return func_name_previous_known
         # 删除对应的中间文件
         rm_command = f"rm {func_name_phase_result_file_path}"
@@ -697,6 +714,7 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                     return func_name_previous_known
             else:
                 error_count = 0
@@ -709,6 +727,7 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
                 error_count += 1
                 if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                     logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                     return func_name_previous_known
             else:
                 error_count = 0
@@ -724,6 +743,7 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
                     error_count += 1
                     if error_count >= config_sgtaint.MAX_ERROR_COUNT:
                         logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                        analysis_binary_dict.get_set_func_name = func_name_previous_known[:]
                         return func_name_previous_known
                 else:
                     error_count = 0

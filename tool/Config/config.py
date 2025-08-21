@@ -163,13 +163,14 @@ STRCPY_SINKS = [
 transitive_get = [
     "config_get", "GetValue", "getenv", "nvram_get", "nvram_safe_get", "nvram_pf_get", "acosNvramConfig_get", "nvram_bufget", "apcli_nvram_get",
     "uciGet", "wpa_config_get", "device_get_string_value", "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "nvram_get_ex2", "apmib_get",
-    "acosNvramConfig_read", "stringOut"
+    "acosNvramConfig_read", "stringOut", "acosNvramConfig_get_bak"
 ]
 transitive_set = [
     "config_set", "SetValue", "setenv", "nvram_set", "nvram_safe_set", "nvram_pf_set", "artblock_set",
     "acos_nvram_set", "acosNvramConfig_set", "acosNvramConfig_write", "envz_add", "uciSet",
     "device_set_string_value", "wpa_config_set", "scfgmgr_set_by_index_D7000", "acosUciConfig_set",
-    "OM_ValSet", "CAL_abstract_set", "nvram_bufset", "apmib_set", "apcli_nvram_set", "nvram_set_value"
+    "OM_ValSet", "CAL_abstract_set", "nvram_bufset", "apmib_set", "apcli_nvram_set", "nvram_set_value",
+    "acosNvramConfig_set_bak"
 ]
 SINKS = [
     "strcpy", "strcat", "sprintf", "system", "___system", "_system", "bstar_system", "popen", "doSystemCmd", "doShell",
@@ -200,8 +201,7 @@ SET_GET_INFO = {
     ("apmib_set", "apmib_get"): ["apmib_set", "apmib_get", 0, 0, 1, 1],
     ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None],
     ("nvram_set_value", "nvram_safe_get"): ["nvram_set_value", "nvram_safe_get", 0, 0, 1, None],
-    ("acosNvramConfig_set_bak", "acosNvramConfig_get_bak"): ["acosNvramConfig_set_bak", "acosNvramConfig_get_bak", 0, 0, 1, None],
-    ("apcli_nvram_set", "apcli_nvram_get"): ["apcli_nvram_set", "apcli_nvram_get", 1, 1, 2, None]
+    ("acosNvramConfig_set_bak", "acosNvramConfig_get_bak"): ["acosNvramConfig_set_bak", "acosNvramConfig_get_bak", 0, 0, 1, None]
 }
 taint_sources_remove = ["strtok", "strchr", "atoi", "strspn", "strtol", "fork", "rand", "malloc", "strlen"]
 sanitization_functions = ["atoi", "strcmp", "strncmp", "acosNvramConfig_match"]
