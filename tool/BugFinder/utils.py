@@ -1253,15 +1253,15 @@ def find_nearest_call_site(call_site_dict, start_addr, end_addr):
 
 # 将模板字符串转换为正则表达式
 def template_to_regex(fmt: str) -> re.Pattern:
-    regex = re.escape(fmt)  # 先转义
-    counter = {}  # 用于给组名加索引
+    regex = re.escape(fmt)  # 先整体转义，保证安全
+    counter = {}
     for spec, pat in config_sgtaint.spec_map.items():
-        # 如果模板里有这个占位符
         while spec in regex:
             count = counter.get(spec, 0)
-            group_name = f"{spec[1]}_{count}" if spec != "%%" else ""  # %% 不需要命名组
+            group_name = f"{spec[1]}_{count}" if spec != "%%" else ""
             counter[spec] = count + 1
-            regex = regex.replace(re.escape(spec), pat.format(name=group_name), 1)
+            replacement = pat.replace("{name}", group_name)
+            regex = regex.replace(re.escape(spec), replacement, 1)
     return re.compile(rf"^{regex}$")
 
 
