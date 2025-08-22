@@ -76,7 +76,7 @@ BOUNDARY_BINARIES_WHITE_LIST = [
     "modprobe", "insmod", "lsmod", "poweroff", "reboot", "rmmod", "route", "ifconfig", "sysctl", "vconfig", "tunctl", "arp",
     "arping", "basename", "bzcat", "bunzip2", "bzip2", "cut", "free", "killall", "killall5", "top", "uptime", "yes", "[[", "awk", 
     "expr", "test", "tr", "wc", "xargs", "brctl", "genuuid", "getbootver", "gethostip", "logger", "logd", "klogd", "syslog_msg", 
-    "gpioc", "gpiod", "pidmon", "trigger", "fonts", "ethreg", "vconfig", "seama"
+    "gpioc", "gpiod", "pidmon", "trigger", "fonts", "ethreg", "vconfig", "seama", "openssl"
 ]
 
 # 模糊匹配相关配置
