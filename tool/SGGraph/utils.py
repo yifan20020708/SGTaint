@@ -35,10 +35,14 @@ def arg_reg_names(project, n = -1):
     return _ordered_argument_regs_names[project.arch.name][:n]
 
 # 执行任意命令
-def execute(command):
-    from subprocess import check_output, STDOUT
+def execute(command, timeout=None):
+    from subprocess import check_output, STDOUT, TimeoutExpired
     command = "{}; exit 0".format(command)
-    return check_output(command, stderr=STDOUT, shell=True).decode("utf-8")
+    try:
+        output = check_output(command, stderr=STDOUT, shell=True, timeout=timeout).decode("utf-8")
+        return output
+    except TimeoutExpired:
+        return f"[!] Command timed out after {timeout} seconds"
 
 # 找到文件系统中所有的二进制文件
 def find_binary_path(directory):
@@ -653,3 +657,15 @@ def file_contains_function(filepath, func_name):
     command = f"grep -q {shlex.quote(func_name)} {shlex.quote(filepath)}"
     result = subprocess.run(command, shell=True)
     return result.returncode == 0
+
+
+# 处理 New_input_getters
+def get_new_input_getter(new_input_getters, project, cfg):
+    process_input_getters = []
+    new_input_getters = list(set(new_input_getters))
+    for input_getter in new_input_getters:
+        call_sites = get_call_site_func_name(project, cfg, input_getter)
+        if len(call_sites) > config_sgtaint.MIN_CALL_SITE_NUMBER:
+            process_input_getters.append((input_getter, len(call_sites)))
+    process_input_getters.sort(key=lambda x: x[1], reverse=True) # 按照调用数量进行排序
+    config_sgtaint.New_input_getters = [item[0] for item in process_input_getters[:config_sgtaint.MAX_NEW_GETTER_NUMBER]]

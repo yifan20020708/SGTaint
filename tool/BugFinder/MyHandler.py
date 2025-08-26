@@ -51,6 +51,12 @@ class MyHandler(FunctionHandler):
     def get_get2set_path(self):
         return self.get2set_path
     
+    def set_new_getter_file(self, new_getter_file):
+        self.new_getter_file = new_getter_file
+        
+    def get_new_getter_file(self):
+        return self.new_getter_file
+    
     def set_start_function(self, start_function) :
         self.start_function = start_function
         
@@ -2757,6 +2763,8 @@ class MyHandler(FunctionHandler):
                         state.dep_graph.add_edge(ff, new_rax)
                         if function.name not in config_sgtaint.New_input_getters:
                             config_sgtaint.New_input_getters.append(function.name)
+                            self.get_new_getter_file().write(f"{function.name}\n")
+                            self.get_new_getter_file().flush()
                     except Exception as e:
                         print(e)
                     return True, state
@@ -2915,6 +2923,8 @@ class MyHandler(FunctionHandler):
                         state.dep_graph.add_edge(ff, new_rax)
                         if function.name not in config_sgtaint.New_input_getters:
                             config_sgtaint.New_input_getters.append(function.name)
+                            self.get_new_getter_file().write(f"{function.name}\n")
+                            self.get_new_getter_file().flush()
                     except Exception as e:
                         print(e)
                     return True, state
@@ -3034,6 +3044,8 @@ class MyHandler(FunctionHandler):
                         state.dep_graph.add_edge(ff, new_rax)
                         if function.name not in config_sgtaint.New_input_getters:
                             config_sgtaint.New_input_getters.append(function.name)
+                            self.get_new_getter_file().write(f"{function.name}\n")
+                            self.get_new_getter_file().flush()
                     except Exception as e:
                         print(e)
                     return True, state
@@ -3085,6 +3097,8 @@ class MyHandler(FunctionHandler):
                             state.dep_graph.add_edge(d1, new_rax)
                             if function.name not in config_sgtaint.New_input_getters:
                                 config_sgtaint.New_input_getters.append(function.name)
+                                self.get_new_getter_file().write(f"{function.name}\n")
+                                self.get_new_getter_file().flush()
                             return True, state
 
                     for stmt in blk.statements:
@@ -3135,6 +3149,8 @@ class MyHandler(FunctionHandler):
                             state.dep_graph.add_edge(ff, new_rax)
                             if function.name not in config_sgtaint.New_input_getters:
                                 config_sgtaint.New_input_getters.append(function.name)
+                                self.get_new_getter_file().write(f"{function.name}\n")
+                                self.get_new_getter_file().flush()
                             return True, state
 
     def xxx_handle_external_function_name(self, state: "ReachingDefinitionsState", ext_func_name: str, src_codeloc: Optional["CodeLocation"] = None) -> Tuple[bool, "ReachingDefinitionsState"]:
@@ -3448,6 +3464,8 @@ class MyHandler(FunctionHandler):
                                     state.dep_graph.add_edge(d1, ff)
                                     if function.name not in config_sgtaint.New_input_getters:
                                         config_sgtaint.New_input_getters.append(function.name)
+                                        self.get_new_getter_file().write(f"{function.name}\n")
+                                        self.get_new_getter_file().flush()
                                     return True, state, visited_blocks, dependency_graph
 
                 elif hasattr(arg0, 'reg_offset'):
@@ -3504,6 +3522,8 @@ class MyHandler(FunctionHandler):
                             state.dep_graph.add_edge(ff, new_rax)
                             if function.name not in config_sgtaint.New_input_getters:
                                 config_sgtaint.New_input_getters.append(function.name)
+                                self.get_new_getter_file().write(f"{function.name}\n")
+                                self.get_new_getter_file().flush()
                             return True, state, visited_blocks, dependency_graph
 
                     node = None
@@ -3542,6 +3562,8 @@ class MyHandler(FunctionHandler):
                             state.dep_graph.add_edge(ff, new_rax)
                             if function.name not in config_sgtaint.New_input_getters:
                                 config_sgtaint.New_input_getters.append(function.name)
+                                self.get_new_getter_file().write(f"{function.name}\n")
+                                self.get_new_getter_file().flush()
                             return True, state, visited_blocks, dependency_graph
         except Exception as e:
             dddddddddd = 0
@@ -3594,6 +3616,8 @@ class MyHandler(FunctionHandler):
                         state.dep_graph.add_edge(d0, new_rax)
                     if function.name not in config_sgtaint.New_input_getters:
                         config_sgtaint.New_input_getters.append(function.name)
+                        self.get_new_getter_file().write(f"{function.name}\n")
+                        self.get_new_getter_file().flush()
                     return True, state, visited_blocks, dependency_graph
 
                 elif not d0.codeloc.ins_addr in self.cfg.insn_addr_to_memory_data:
@@ -3606,6 +3630,8 @@ class MyHandler(FunctionHandler):
                         state.dep_graph.add_edge(d1, new_rax)
                         if function.name not in config_sgtaint.New_input_getters:
                             config_sgtaint.New_input_getters.append(function.name)
+                            self.get_new_getter_file().write(f"{function.name}\n")
+                            self.get_new_getter_file().flush()
                         return True, state, visited_blocks, dependency_graph
 
             elif d0.codeloc.ins_addr in self.cfg.insn_addr_to_memory_data:
@@ -3632,6 +3658,8 @@ class MyHandler(FunctionHandler):
                     state.dep_graph.add_edge(d0, new_rax)
                 if function.name not in config_sgtaint.New_input_getters:
                     config_sgtaint.New_input_getters.append(function.name)
+                    self.get_new_getter_file().write(f"{function.name}\n")
+                    self.get_new_getter_file().flush()
                 return True, state, visited_blocks, dependency_graph
 
         if hasattr(blk, "statements"):
@@ -3698,6 +3726,8 @@ class MyHandler(FunctionHandler):
 
                     if function.name not in config_sgtaint.New_input_getters:
                         config_sgtaint.New_input_getters.append(function.name)
+                        self.get_new_getter_file().write(f"{function.name}\n")
+                        self.get_new_getter_file().flush()
 
                     return True, state, visited_blocks, dependency_graph
 

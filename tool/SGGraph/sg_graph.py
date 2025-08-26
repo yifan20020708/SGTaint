@@ -68,30 +68,37 @@ def get_keyword_by_decompiled_func_ghidra(project, cfg, func_name, file_path, an
         with open(caller_file_path, "w") as file:
             json.dump(unique_callers, file, indent=4)
         # 构造执行Ghidra脚本的命令
+        ghidra_timeout_flag = False
         angr_base_addr = hex(project.loader.main_object.min_addr)
         binary_mark = os.path.basename(file_path)
         if not os.path.exists(os.path.join(config_sgtaint.GHIDRA_DIR, f"{binary_mark}.gpr")):
             ghidra_python_path = config_sgtaint.AGGRESSIVE_GHIDRA_PATH
             ghidra_load_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -import {file_path} -preScript {ghidra_python_path}"
-            execute(ghidra_load_command)
-        ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH  
-        ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}" "{func_name}"'
-        execute(ghidra_command)
-        # 读取对应的结果文件
-        caller_file_result_name = f"{func_name}_caller_parse_result.json"
-        caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
-        try:
-            with open(caller_file_result_path, "r") as file:
-                caller_parse_result = json.load(file) # 反编译字典
-                func_decompile_code_snippet = caller_parse_result.get("code_dict")
-                ghidra_func_identify_failed = caller_parse_result.get("angr_assist")
-        except Exception as e: # 识别失败
-            logger.error(f"Unexpected error: {e}")
+            ghidra_output = execute(ghidra_load_command, timeout=config_sgtaint.GHIDRA_COMMAND_TIMEOUT)
+            if ghidra_output.startswith("[!]"):
+                ghidra_timeout_flag = True
+        if not ghidra_timeout_flag:
+            ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH  
+            ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}" "{func_name}"'
+            execute(ghidra_command)
+            # 读取对应的结果文件
+            caller_file_result_name = f"{func_name}_caller_parse_result.json"
+            caller_file_result_path = os.path.join(config_sgtaint.TMP_DIR, caller_file_result_name)
+            try:
+                with open(caller_file_result_path, "r") as file:
+                    caller_parse_result = json.load(file) # 反编译字典
+                    func_decompile_code_snippet = caller_parse_result.get("code_dict")
+                    ghidra_func_identify_failed = caller_parse_result.get("angr_assist")
+            except Exception as e: # 识别失败
+                logger.error(f"Unexpected error: {e}")
+                func_decompile_code_snippet = {}
+                ghidra_func_identify_failed = unique_callers[:]
+            if os.path.exists(caller_file_result_path): # 删除对应的中间文件
+                rm_command = f"rm {caller_file_result_path}"
+                execute(rm_command)
+        else: # 创建Ghidra项目超时
             func_decompile_code_snippet = {}
             ghidra_func_identify_failed = unique_callers[:]
-        if os.path.exists(caller_file_result_path): # 删除对应的中间文件
-            rm_command = f"rm {caller_file_result_path}"
-            execute(rm_command)
     # 若存在Ghidra不可识别的函数，使用angr进行处理
     logger.info(f"A total of {len(ghidra_func_identify_failed)} functions necessitate supplementary decompilation support through the use of angr.")
     # 并行执行angr的反编译操作
@@ -314,6 +321,10 @@ def get_func_name_from_llm(analysis_binary_dict: AnalysisBinaryDict, timeout=60)
             json.dump(items, file, indent=4)
         # 执行Ghidra脚本进行分析
         analysis_binary.load_ghidra()
+        if analysis_binary.ghidra_fail_flag:
+            rm_command = f"rm {func_name_phase_file_path}"
+            execute(rm_command)
+            continue
         angr_base_addr = hex(analysis_binary.get_angr_base_addr())
         binary_mark = os.path.basename(file_path)
         ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH
@@ -632,6 +643,10 @@ def get_func_name_from_llm_precise(analysis_binary_dict: AnalysisBinaryDict, tim
             json.dump(items, file, indent=4)
         # 执行Ghidra脚本进行分析
         analysis_binary.load_ghidra()
+        if analysis_binary.ghidra_fail_flag:
+            rm_command = f"rm {func_name_phase_file_path}"
+            execute(rm_command)
+            continue
         angr_base_addr = hex(analysis_binary.get_angr_base_addr())
         binary_mark = os.path.basename(file_path)
         ghidra_python_path = config_sgtaint.GHIDRA_ASSIST_PATH

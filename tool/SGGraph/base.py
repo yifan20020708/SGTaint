@@ -11,7 +11,7 @@ import angr
 import angr.analyses.reaching_definitions.dep_graph as dep_graph
 import tool.Config.config as config_sgtaint
 from tool.BugFinder.utils import get_functions_to_analyse, run_function_with_timeout, parse_get2set_file_auto, parse_source2sink_file_auto, transfer_path_to_ghidra, get_function_decompile_list_by_path
-from tool.SGGraph.utils import execute, get_call_site_func_name
+from tool.SGGraph.utils import execute, get_call_site_func_name, get_new_input_getter
 from tool.BugFinder.MyHandler import MyHandler
 
 logger = logging.getLogger("sgtaint.sggraph")
@@ -239,6 +239,9 @@ class AnalysisBinary():
             self.get2set_file = open(get2set_file_name, 'a+')
             self.error_file = open(error_file_name, 'a+')
             logger.info(f"Created/Opened result files for binary at {binary_dir}")
+            # 创建New_getter文件，存储新识别出的getter函数
+            new_getter_file_name = os.path.join(config_sgtaint.NEW_GETTER_DIR, f"{self.binary_path.replace('/', '_')}_new_getter.txt")
+            self.new_getter_file = open(new_getter_file_name, 'a+')
         except Exception as e:
             logger.error(f"Failed to create/open result files for binary '{self.binary_path}': {e}")
             raise
@@ -250,6 +253,7 @@ class AnalysisBinary():
         self.handler.set_result_file(self.result_file)
         self.handler.set_get2set_file(self.get2set_file)
         self.handler.set_visited_file(self.visited_file)
+        self.handler.set_new_getter_file(self.new_getter_file)
         self.handler.set_call_graph(self.cfg.functions.callgraph)
         self.handler.set_call_sites_dict(self.set_get_call_sites_dict.copy()) # 不改变原始结构
         self.handler.set_source2sink_path(self.source2sink_path) # 改变原始结构
@@ -306,6 +310,10 @@ class AnalysisBinary():
                 continue
         # 额外处理New_input_getters
         if visited_function_counter == len(function_callers_map):
+            new_getter_file_path = self.new_getter_file.name
+            with open(new_getter_file_path, 'r', encoding='utf-8') as f:
+                New_input_getters = [line.strip() for line in f if line.strip()]
+            get_new_input_getter(New_input_getters, self.project, self.cfg) # 进行 New_input_getters的处理
             logger.info(f"New_input_getters functions: {', '.join(config_sgtaint.New_input_getters)}")
             self.visited_file.write("\n" + f"New_input_getters functions: {', '.join(config_sgtaint.New_input_getters)}")
             self.visited_file.flush()
@@ -489,6 +497,9 @@ class AnalysisBinary():
             angr_base_addr = hex(self.get_angr_base_addr())
             binary_mark = os.path.basename(self.binary_path)
             self.load_ghidra() # 加载ghidra程序
+            if self.ghidra_fail_flag: # 发生超时现象
+                self.get_decompile_code_by_angr() # 使用回退机制
+                return
             ghidra_python_path = config_sgtaint.DECOMPILE_ASSIST_PATH
             ghidra_command = f'{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {binary_mark} -process {binary_mark} -noanalysis -postScript {ghidra_python_path} "{angr_base_addr}"'
             execute(ghidra_command)
@@ -584,18 +595,25 @@ class AnalysisBinary():
         
     # 将二进制文件加载到Ghidra中
     def load_ghidra(self):
+        self.ghidra_fail_flag = False # 设置超时标志
         if not self.ghidra_project:
             file_mark = os.path.basename(self.binary_path)
             ghidra_python_path = config_sgtaint.AGGRESSIVE_GHIDRA_PATH
             ghidra_command = f"{config_sgtaint.ANALYZEHEADLESS} {config_sgtaint.GHIDRA_DIR} {file_mark} -import {self.binary_path} -preScript {ghidra_python_path}"
             try:
                 logger.info(f"Importing {self.binary_path} into Ghidra project with command: {ghidra_command}")
-                execute(ghidra_command)
-                self.ghidra_project = True
-                logger.info(f"Successfully imported {self.binary_path} into Ghidra project.")
+                ghidra_output = execute(ghidra_command, timeout=config_sgtaint.GHIDRA_COMMAND_TIMEOUT)
+                if ghidra_output.startswith("[!]"): # 发送超时
+                    self.ghidra_project = False
+                    self.ghidra_fail_flag = True
+                    logger.info(f"Failed to import {self.binary_path} into Ghidra project: {ghidra_output}")
+                else:
+                    self.ghidra_project = True
+                    logger.info(f"Successfully imported {self.binary_path} into Ghidra project.")
             except Exception as e:
                 logger.error(f"Failed to import {self.binary_path} into Ghidra project: {e}")
                 self.ghidra_project = False
+                self.ghidra_fail_flag = True
         else:
             logger.info(f"Ghidra project already exists for {self.binary_path}, skipping import.")
             

@@ -16,6 +16,7 @@ VULN_OUT_DIR = os.path.join(OUT_DIR, "vulnerable")
 TMP_KEYWORD = os.path.join(TMP_DIR, "BinaryKeyword")
 BINARY_INFO_DIR = os.path.join(TMP_DIR, "BinaryInfo")
 BINARY_CONFIG_DIR = os.path.join(TMP_DIR, "BinaryConfig")
+NEW_GETTER_DIR = os.path.join(TMP_DIR, "NewGetter")
 BINARY_TMP = os.path.join(TMP_DIR, "BinaryTmp")
 NPM_DIR = os.path.join(BASE_DIR, "tool", "Keyword", "JS_Parse")
 GHIDRA_ASSIST_PATH = os.path.join(BASE_DIR, "tool", "Ghidra", "ghidra_assist.py")
@@ -84,11 +85,14 @@ MIN_SIMILARITY = 90
 MAX_DISTANCE = 2
 MIN_KEYWORD_NUMBER = 30
 WORKER_TIMEOUT_SECONDS = 20
+MIN_CALL_SITE_NUMBER = 20
+MAX_NEW_GETTER_NUMBER = 3
 
 # 超时时间设置
 DECOMPILE_TIMEOUT = 120
 BINARY_TIMEOUT = 3 * 60 * 60
 FUNC_TIMEOUT = 1000
+GHIDRA_COMMAND_TIMEOUT = 10 * 60
 
 # angr中常见的前缀
 PREFIXES = [
