@@ -47,7 +47,7 @@ class ColorFormatter(logging.Formatter):
 
 # SGTaint运行类
 class SGTaintRunner:
-    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, ghidra=True, llm=True, model="qwen", boundary_binaries=None):
+    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, ghidra=True, llm=True, config=True, model="qwen", boundary_binaries=None):
         self.firmware = firmware
         self.name = name
         self.output_dir = output_dir
@@ -59,6 +59,7 @@ class SGTaintRunner:
         config_sgtaint.FILE_SYSTEM = firmware
         config_sgtaint.FIRMWARE_NAME = name
         config_sgtaint.SG_FUNCTION_INFO = sggraph
+        config_sgtaint.CONFIG_NEW_GETTER = config
         config_sgtaint.LLM_MODEL = config_sgtaint.MODEL_MAP.get(model, config_sgtaint.LLM_MODEL_QIANWEN)
         config_sgtaint.GHIDRA_ASSIST = ghidra
         config_sgtaint.BOUNDARY_BINARIES = boundary_binaries
@@ -136,6 +137,7 @@ class SGTaintRunner:
             config_sgtaint.TMP_KEYWORD,
             config_sgtaint.BINARY_TMP,
             config_sgtaint.GHIDRA_DIR,
+            config_sgtaint.NEW_GETTER_DIR
         ]
         for d in dirs:
             self.clear_dir(d)
@@ -573,6 +575,7 @@ def parse_args():
     parser.add_argument("-p", "--parallel", action="store_true", help="Enable parallel mode")
     parser.add_argument("-g", "--ghidra", action="store_true", help="Enable Ghidra-assisted analysis during the decompilation process")
     parser.add_argument("-l", "--llm", action="store_true", help="Enable final LLM check")
+    parser.add_argument("-c", "--config", action="store_true", help="Enable retrieving newly identified data reception functions from the configuration")
     parser.add_argument("-s", "--sggraph", 
                         help=(
                             "Optional SGGraph info path or mode. "
@@ -599,6 +602,7 @@ def main():
         parallel=args.parallel,
         ghidra=args.ghidra,
         llm=args.llm,
+        config=args.config,
         model=args.model,
         boundary_binaries=args.boundary
     )

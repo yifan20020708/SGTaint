@@ -14,6 +14,8 @@ from collections import defaultdict, deque
 from archinfo import Endness
 from angr.project import Project
 from angr.analyses.cfg.cfg_fast import CFGFast
+from tool.LLM.LLM_chat import LLM
+from tool.LLM.prompt_template import SYSTEM_NEW_GETTER, SYSTEM_NEW_GETTER_OUTPUT, get_new_getter_prompt
 
 logger = logging.getLogger("sgtaint.sggraph")
 
@@ -658,14 +660,54 @@ def file_contains_function(filepath, func_name):
     result = subprocess.run(command, shell=True)
     return result.returncode == 0
 
+# 判断字符串是否为列表格式
+def is_valid_func_list(response):
+    pattern = r'^\s*\[\s*(?:[^\[\],]+(?:\s*,\s*[^\[\],]+)*)?\s*\]\s*$'
+    return bool(re.match(pattern, response))
+
+# 将列表字符串转换为列表
+def parse_list_str(s):
+    pattern = r'^\s*\[\s*(.*?)\s*\]\s*$'
+    match = re.match(pattern, s)
+    if not match:
+        return None
+    inner = match.group(1) # 提取中间内容
+    if not inner.strip(): # 处理空列表 []
+        return []
+    return [item.strip() for item in inner.split(",")]
 
 # 处理 New_input_getters
 def get_new_input_getter(new_input_getters, project, cfg):
     process_input_getters = []
     new_input_getters = list(set(new_input_getters))
-    for input_getter in new_input_getters:
-        call_sites = get_call_site_func_name(project, cfg, input_getter)
-        if len(call_sites) > config_sgtaint.MIN_CALL_SITE_NUMBER:
-            process_input_getters.append((input_getter, len(call_sites)))
-    process_input_getters.sort(key=lambda x: x[1], reverse=True) # 按照调用数量进行排序
-    config_sgtaint.New_input_getters = [item[0] for item in process_input_getters[:config_sgtaint.MAX_NEW_GETTER_NUMBER]]
+    logger.info(f"Original new input getters: {new_input_getters}")
+    if config_sgtaint.CONFIG_NEW_GETTER: # 直接根据调用数量从配置中获取
+        for input_getter in new_input_getters:
+            call_sites = get_call_site_func_name(project, cfg, input_getter)
+            if len(call_sites) > config_sgtaint.MIN_CALL_SITE_NUMBER:
+                process_input_getters.append((input_getter, len(call_sites)))
+        process_input_getters.sort(key=lambda x: x[1], reverse=True) # 按照调用数量进行排序
+        config_sgtaint.New_input_getters = [item[0] for item in process_input_getters[:config_sgtaint.MAX_NEW_GETTER_NUMBER]]
+    else: # 根据LLM提示工程获取
+        func_name_list_str = "[" + ", ".join(new_input_getters) + "]"
+        LLM_chat = LLM(config_sgtaint.SG_TEMPERATURE)
+        LLM_chat.system_role(SYSTEM_NEW_GETTER)
+        response = LLM_chat.chat(get_new_getter_prompt(func_name_list_str))
+        error_count = 0
+        while not is_valid_func_list(response):
+            if response.startswith("[ERROR]"):
+                error_count += 1
+                if error_count >= config_sgtaint.MAX_ERROR_COUNT:
+                    logger.warning("Exceeded maximum consecutive errors during LLM chat")
+                    for input_getter in new_input_getters:
+                        call_sites = get_call_site_func_name(project, cfg, input_getter)
+                        if len(call_sites) > config_sgtaint.MIN_CALL_SITE_NUMBER:
+                            process_input_getters.append((input_getter, len(call_sites)))
+                    process_input_getters.sort(key=lambda x: x[1], reverse=True) # 按照调用数量进行排序
+                    config_sgtaint.New_input_getters = [item[0] for item in process_input_getters[:config_sgtaint.MAX_NEW_GETTER_NUMBER]]
+                    return
+            else:
+                error_count = 0
+            response = LLM_chat.chat(SYSTEM_NEW_GETTER_OUTPUT)
+        logger.info(f"New input getters from llm: {response}")
+        config_sgtaint.New_input_getters = parse_list_str(response)

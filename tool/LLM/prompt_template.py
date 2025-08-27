@@ -77,3 +77,22 @@ def get_end_prompt(function_name, start_index=None, end_index=None):
     return end_prompt
 
 SYSTEM_LLM_PATH_OUTPUT = "Your answer must begin with either “Yes” or “No” to indicate whether an exploitable vulnerability exists."
+
+# 获取New_Getter函数
+SYSTEM_NEW_GETTER = "You are a firmware security analysis expert. I will provide you with a list of function names, and your task is to filter out only the functions that are related to external data reception.\n \
+    Selection criteria:\n \
+        - 'External data reception functions' are defined as functions that actively receive and parse data from external sources such as user input, network requests, REST APIs, HTTP, cloud services, configuration files, or JSON data.\n \
+        - The following categories of functions must be excluded:\n \
+            - Sink functions (e.g., exec, system call wrappers)\n \
+            - Output functions (e.g., printf, puts, fprintf, perror)\n \
+            - Functions used only for internal construction, printing, or logging (e.g., cJSON_Print, cw_log_eventlog)\n \
+    Output requirements:\n \
+        - Only output the filtered function names.\n \
+        - The output must be in Python list format, for example: [func_name1, func_name2, ...]\n \
+        - If no such functions exist, output an empty list [] instead.\n \
+        - Do not provide any additional explanation or description."
+        
+SYSTEM_NEW_GETTER_OUTPUT = "Please strictly output in Python list format [func_name1, func_name2, ...] or []"
+
+def get_new_getter_prompt(name_list):
+    return f"Input for the task: {name_list}, please strictly output in Python list format [func_name1, func_name2, ...] or []"
