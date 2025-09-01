@@ -714,3 +714,10 @@ def get_new_input_getter(new_input_getters, project, cfg):
             response = LLM_chat.chat(SYSTEM_NEW_GETTER_OUTPUT)
         logger.info(f"New input getters from llm: {response}")
         config_sgtaint.New_input_getters = parse_list_str(response)
+        # 补充不存在函数名称的潜在输入源头
+        getter_no_name = [func for func in new_input_getters if func.startswith("sub_")]
+        for input_getter in getter_no_name:
+            if input_getter not in config_sgtaint.New_input_getters:
+                call_sites = get_call_site_func_name(project, cfg, input_getter)
+                if len(call_sites) > config_sgtaint.MIN_CALL_SITE_NUMBER:
+                    config_sgtaint.New_input_getters.append(input_getter)
