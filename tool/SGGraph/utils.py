@@ -681,6 +681,9 @@ def get_new_input_getter(new_input_getters, project, cfg):
     process_input_getters = []
     new_input_getters = list(set(new_input_getters))
     logger.info(f"Original new input getters: {new_input_getters}")
+    if not new_input_getters:
+        logger.warning("No new input getters provided.")
+        return
     if config_sgtaint.CONFIG_NEW_GETTER: # 直接根据调用数量从配置中获取
         for input_getter in new_input_getters:
             call_sites = get_call_site_func_name(project, cfg, input_getter)

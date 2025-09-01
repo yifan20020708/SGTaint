@@ -47,7 +47,7 @@ class ColorFormatter(logging.Formatter):
 
 # SGTaint运行类
 class SGTaintRunner:
-    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, ghidra=True, llm=True, config=True, model="qwen", boundary_binaries=None):
+    def __init__(self, firmware, name, output_dir, sggraph=None, parallel=True, ghidra=True, llm=True, config=True, model="deepseek", boundary_binaries=None):
         self.firmware = firmware
         self.name = name
         self.output_dir = output_dir
@@ -585,7 +585,7 @@ def parse_args():
                             "'config' to load transfer function pairs directly from the configuration, "
                             "'precise' to use a more accurate method for extracting transfer function pairs."
                         ))
-    parser.add_argument("-m", "--model", default="qwen", choices=["gpt", "deepseek", "qwen"], help="Choose LLM model to use (gpt, deepseek or qwen). Default is qwen.")
+    parser.add_argument("-m", "--model", default="deepseek", choices=["gpt", "deepseek", "qwen"], help="Choose LLM model to use (gpt, deepseek or qwen). Default is deepseek.")
     parser.add_argument("-b", "--boundary", type=str, help="Comma-separated list of boundary binary files (absolute paths). Use ',' to separate multiple files.")
     parser.add_argument("--version", action="version", version=__version__)
     return parser.parse_args()
