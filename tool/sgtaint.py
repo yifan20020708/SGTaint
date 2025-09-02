@@ -16,7 +16,7 @@ from tool.SGGraph.utils import dedupe_paths, generate_binary_processing_order_ro
 from tool.BugFinder.utils import construct_cross_binary_data_flow_single, get_sorted_potential_path_sanitization
 from tool.LLM.LLM_check import llm_assist_parallel, llm_prompt_generate
 
-__version__ = "1.1.0"
+__version__ = "2.1.0"
 
 # 日志输出颜色
 LEVEL_COLORS = {
