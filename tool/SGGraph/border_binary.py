@@ -199,6 +199,7 @@ def get_border_binaries_by_cluster_max_mean_gap(directory):
         for binary_name_re in config_sgtaint.BOUNDARY_BINARY_NAME:
             if binary_name_re in os.path.basename(file) and file not in unique_boundary:
                 unique_boundary.append(file)
+                break
     # 对unique文件进行功能性过滤      
     filtered_boundary = []
     for path in unique_boundary:
