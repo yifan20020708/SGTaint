@@ -1,0 +1,6 @@
+target_addr: 0x6d2180, target_name: findProgramPath, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x63fe8c, target_name: alloc_sub_basic, timed out
+target_addr: 0x61ea28, target_name: sys_recvfrom, errorMessage: 'NoneType' object has no attribute 'statements' 
+target_addr: 0x6d5ef0, target_name: sub_6d5ef0, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x6d393c, target_name: poptGetNextOpt, errorMessage: 'ConditionalJump' object has no attribute 'args' 
+target_addr: 0x6d27f0, target_name: sub_6d27f0, errorMessage: 'ConditionalJump' object has no attribute 'args' 

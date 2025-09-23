@@ -1,0 +1,182 @@
+[
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "decompile_list": [
+            "    pcVar2 = (char *)nvram_bufget(4,\"TR_CLIENT_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,\"nvram_get tr069cert TR069_CC > %s\",pcVar2);"
+        ],
+        "target_name": "sub_401978",
+        "taint_source_addr": 5242980,
+        "end_block": 4200960,
+        "start_block": 4201008,
+        "path": "0x401a30#0x401a20#0x401a0c#0x401a00",
+        "visited_functions": "sprintf#nvram_bufget",
+        "fail2captureConditionsTime": "0",
+        "source_insr_addr": "0x401a08",
+        "sink_addr": "sub_401978",
+        "sink_insr_addr": "0x401a48",
+        "checking_time": "0",
+        "source_name": "sub_401978",
+        "source_keyword": "TR_CLIENT_CERT_FILE",
+        "ghidra_path": [
+            [
+                4200824,
+                4200960,
+                4200968,
+                4201008,
+                4201032
+            ]
+        ],
+        "complete_list": [
+            "\nvoid FUN_00401978(char *param_1)\n\n{\n  int iVar1;\n  char *pcVar2;\n  char acStack_2038 [4120];\n  char acStack_1020 [4120];\n  \n  nvram_init(0);\n  iVar1 = strcmp(param_1,\"tr069_ca\");\n  if (iVar1 == 0) {\n    pcVar2 = (char *)nvram_bufget(4,\"TR_CA_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,\"nvram_get tr069cert TR069_CA > %s\",pcVar2);\n      system(acStack_2038);\n      return;\n    }\n  }\n  else {\n    pcVar2 = (char *)nvram_bufget(4,\"TR_CLIENT_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,\"nvram_get tr069cert TR069_CC > %s\",pcVar2);\n      system(acStack_1020);\n      return;\n    }\n  }\n  return;\n}\n"
+        ],
+        "target_addr": "0x401978",
+        "range_list": [
+            [
+                22,
+                25
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "nvram_bufget",
+        "taint_sink_addr": 5242920,
+        "taint_sink": "sprintf",
+        "source_addr": "0x500064",
+        "path_flag": "0x401a30#0x401a20#0x401a0c#0x401a00"
+    },
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "decompile_list": [
+            "    pcVar2 = (char *)nvram_bufget(4,\"TR_CA_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,\"nvram_get tr069cert TR069_CA > %s\",pcVar2);"
+        ],
+        "target_name": "sub_401978",
+        "taint_source_addr": 5242980,
+        "end_block": 4200912,
+        "start_block": 4201092,
+        "path": "0x401a84#0x401a74#0x4019dc#0x4019d0",
+        "visited_functions": "sprintf#nvram_bufget",
+        "fail2captureConditionsTime": "0",
+        "source_insr_addr": "0x4019d8",
+        "sink_addr": "sub_401978",
+        "sink_insr_addr": "0x401a9c",
+        "checking_time": "0",
+        "source_name": "sub_401978",
+        "source_keyword": "TR_CA_CERT_FILE",
+        "ghidra_path": [
+            [
+                4200824,
+                4200912,
+                4200920,
+                4201092,
+                4201116
+            ]
+        ],
+        "complete_list": [
+            "\nvoid FUN_00401978(char *param_1)\n\n{\n  int iVar1;\n  char *pcVar2;\n  char acStack_2038 [4120];\n  char acStack_1020 [4120];\n  \n  nvram_init(0);\n  iVar1 = strcmp(param_1,\"tr069_ca\");\n  if (iVar1 == 0) {\n    pcVar2 = (char *)nvram_bufget(4,\"TR_CA_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,\"nvram_get tr069cert TR069_CA > %s\",pcVar2);\n      system(acStack_2038);\n      return;\n    }\n  }\n  else {\n    pcVar2 = (char *)nvram_bufget(4,\"TR_CLIENT_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,\"nvram_get tr069cert TR069_CC > %s\",pcVar2);\n      system(acStack_1020);\n      return;\n    }\n  }\n  return;\n}\n"
+        ],
+        "target_addr": "0x401978",
+        "range_list": [
+            [
+                13,
+                16
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "nvram_bufget",
+        "taint_sink_addr": 5242920,
+        "taint_sink": "sprintf",
+        "source_addr": "0x500064",
+        "path_flag": "0x401a84#0x401a74#0x4019dc#0x4019d0"
+    },
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "decompile_list": [
+            "    pcVar2 = (char *)nvram_bufget(4,\"TR_CLIENT_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,\"nvram_get tr069cert TR069_CC > %s\",pcVar2);\n      system(acStack_1020);"
+        ],
+        "target_name": "sub_401978",
+        "taint_source_addr": 5242980,
+        "end_block": 4200960,
+        "start_block": 4201036,
+        "path": "0x401a4c#0x401a30#0x401a20#0x401a0c#0x401a00",
+        "visited_functions": "sprintf#nvram_bufget",
+        "fail2captureConditionsTime": "0",
+        "source_insr_addr": "0x401a08",
+        "sink_addr": "sub_401978",
+        "sink_insr_addr": "0x401a60",
+        "checking_time": "0",
+        "source_name": "sub_401978",
+        "source_keyword": "TR_CLIENT_CERT_FILE",
+        "ghidra_path": [
+            [
+                4200824,
+                4200960,
+                4200968,
+                4201036,
+                4201056
+            ]
+        ],
+        "complete_list": [
+            "\nvoid FUN_00401978(char *param_1)\n\n{\n  int iVar1;\n  char *pcVar2;\n  char acStack_2038 [4120];\n  char acStack_1020 [4120];\n  \n  nvram_init(0);\n  iVar1 = strcmp(param_1,\"tr069_ca\");\n  if (iVar1 == 0) {\n    pcVar2 = (char *)nvram_bufget(4,\"TR_CA_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,\"nvram_get tr069cert TR069_CA > %s\",pcVar2);\n      system(acStack_2038);\n      return;\n    }\n  }\n  else {\n    pcVar2 = (char *)nvram_bufget(4,\"TR_CLIENT_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,\"nvram_get tr069cert TR069_CC > %s\",pcVar2);\n      system(acStack_1020);\n      return;\n    }\n  }\n  return;\n}\n"
+        ],
+        "target_addr": "0x401978",
+        "range_list": [
+            [
+                22,
+                26
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "nvram_bufget",
+        "taint_sink_addr": 5242992,
+        "taint_sink": "system",
+        "source_addr": "0x500064",
+        "path_flag": "0x401a4c#0x401a30#0x401a20#0x401a0c#0x401a00"
+    },
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "decompile_list": [
+            "    pcVar2 = (char *)nvram_bufget(4,\"TR_CA_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,\"nvram_get tr069cert TR069_CA > %s\",pcVar2);\n      system(acStack_2038);"
+        ],
+        "target_name": "sub_401978",
+        "taint_source_addr": 5242980,
+        "end_block": 4200912,
+        "start_block": 4201120,
+        "path": "0x401aa0#0x401a84#0x401a74#0x4019dc#0x4019d0",
+        "visited_functions": "sprintf#nvram_bufget",
+        "fail2captureConditionsTime": "0",
+        "source_insr_addr": "0x4019d8",
+        "sink_addr": "sub_401978",
+        "sink_insr_addr": "0x401ab4",
+        "checking_time": "0",
+        "source_name": "sub_401978",
+        "source_keyword": "TR_CA_CERT_FILE",
+        "ghidra_path": [
+            [
+                4200824,
+                4200912,
+                4200920,
+                4201120,
+                4201140
+            ]
+        ],
+        "complete_list": [
+            "\nvoid FUN_00401978(char *param_1)\n\n{\n  int iVar1;\n  char *pcVar2;\n  char acStack_2038 [4120];\n  char acStack_1020 [4120];\n  \n  nvram_init(0);\n  iVar1 = strcmp(param_1,\"tr069_ca\");\n  if (iVar1 == 0) {\n    pcVar2 = (char *)nvram_bufget(4,\"TR_CA_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_2038,0,0x800);\n      sprintf(acStack_2038,\"nvram_get tr069cert TR069_CA > %s\",pcVar2);\n      system(acStack_2038);\n      return;\n    }\n  }\n  else {\n    pcVar2 = (char *)nvram_bufget(4,\"TR_CLIENT_CERT_FILE\");\n    if (*pcVar2 != '\\0') {\n      memset(acStack_1020,0,0x1000);\n      sprintf(acStack_1020,\"nvram_get tr069cert TR069_CC > %s\",pcVar2);\n      system(acStack_1020);\n      return;\n    }\n  }\n  return;\n}\n"
+        ],
+        "target_addr": "0x401978",
+        "range_list": [
+            [
+                13,
+                17
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "nvram_bufget",
+        "taint_sink_addr": 5242992,
+        "taint_sink": "system",
+        "source_addr": "0x500064",
+        "path_flag": "0x401aa0#0x401a84#0x401a74#0x4019dc#0x4019d0"
+    }
+]

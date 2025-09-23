@@ -1,0 +1,452 @@
+Binary Path: /home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/sbin/smbd
+
+========== Binary Function Keywords ==========
+[1] %unew
+[2] -0123456789abcdef
+[3] -valid
+[4] 0123456789ABCDEF
+[5] 0123456789abcdef
+[6] ALLOWED
+[7] Auto
+[8] Domain
+[9] FAIL
+[10] Guests
+[11] Host
+[12] Hostname
+[13] LANG
+[14] Ledger
+[15] NONE
+[16] NULL
+[17] Network
+[18] OSVersion
+[19] Protocol
+[20] Release
+[21] SMBlock
+[22] SUCCESS
+[23] Section
+[24] Security
+[25] Status
+[26] Success
+[27] Type
+[28] Unknown
+[29] Version
+[30] Version-0
+[31] Version-2
+[32] Version-3
+[33] Win2K
+[34] Win95
+[35] WinNT
+[36] WinXP
+[37] _edata
+[38] _fdata
+[39] _ftext
+[40] active
+[41] added
+[42] ahead
+[43] auto
+[44] autofs
+[45] bottom
+[46] color
+[47] country
+[48] data1
+[49] data2
+[50] data3
+[51] data4
+[52] data5
+[53] debuglevel
+[54] default
+[55] deleted
+[56] devicename
+[57] dhcpd
+[58] disable
+[59] dlclose
+[60] dmapi
+[61] done
+[62] fixed
+[63] force
+[64] fstring
+[65] fstype
+[66] getwd
+[67] gmtime
+[68] guest
+[69] help
+[70] high
+[71] hour
+[72] hours
+[73] idmap
+[74] info200
+[75] info4
+[76] interactive
+[77] lang_
+[78] lastip
+[79] left
+[80] listen
+[81] logout
+[82] luid
+[83] main
+[84] major
+[85] manual
+[86] minor
+[87] minute
+[88] mktime
+[89] month
+[90] mtime
+[91] named
+[92] nobody
+[93] null
+[94] offline
+[95] offset
+[96] online
+[97] open
+[98] output
+[99] padding
+[100] padding_0
+[101] padding_1
+[102] padding_2
+[103] padding_3
+[104] padding_4
+[105] padding_5
+[106] padding_6
+[107] padding_7
+[108] padding_8
+[109] padding_9
+[110] password3
+[111] password_ok
+[112] perror
+[113] pipe
+[114] position
+[115] queue
+[116] ready
+[117] rename
+[118] result
+[119] right
+[120] rights
+[121] size_s
+[122] size_x
+[123] size_y
+[124] specversion
+[125] squid
+[126] success
+[127] timegm
+[128] touch
+[129] ttoption
+[130] type1
+[131] type2
+[132] type3
+[133] uid_t
+[134] unknown
+[135] unknown0
+[136] unknown1
+[137] unknown11
+[138] unknown13
+[139] unknown14
+[140] unknown15
+[141] unknown16
+[142] unknown18
+[143] unknown20
+[144] unknown22
+[145] unknown23
+[146] unknown24
+[147] unknown25
+[148] unknown26
+[149] unknown27
+[150] unknown28
+[151] unknown29
+[152] unknown5
+[153] unknown6
+[154] unknown7
+[155] unknown8
+[156] unknown9
+[157] unknown_0
+[158] unknown_1
+[159] unknown_2
+[160] unknown_3
+[161] unknown_4
+[162] unknown_5
+[163] unlink
+[164] updated
+[165] utime
+[166] uuid
+[167] waiting
+[168] year
+
+========== Set-Get Call Sites ==========
+No set-get call sites found.
+
+========== Related File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+nvram_set:
+nvram_set_int:
+
+========== Diffusion File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+nvram_set:
+nvram_set_int:
+
+========== Set-Get Function Info ==========
+[1] Set: nvram_safe_set, Get: nvram_safe_get, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[2] Set: nvram_set, Get: nvram_get, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+[3] Set: nvram_set_int, Get: nvram_get_int, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[4] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+
+========== Source2Sink Paths ==========
+*** Path #1 ***
+error_messges_str   : 
+str_length_visited_function: 
+decompile_list      : ['    pcVar3 = getenv("LIBSMB_PROG");\n    iVar4 = sock_exec(pcVar3);', "int sock_exec(char *param_1)\n\n{\n  bool bVar1;\n  int iVar2;\n  int iVar3;\n  int *piVar4;\n  char *pcVar5;\n  int iVar6;\n  __pid_t _Var7;\n  char *pcVar8;\n  undefined4 uVar9;\n  int __fd;\n  socklen_t local_40;\n  sockaddr local_3c;\n  sockaddr local_2c;\n  \n  local_40 = 0x10;\n  local_2c.sa_family = 0;\n  local_2c.sa_data[0] = '\\0';\n  local_2c.sa_data[1] = '\\0';\n  local_2c.sa_data[2] = '\\0';\n  local_2c.sa_data[3] = '\\0';\n  local_2c.sa_data[4] = '\\0';\n  local_2c.sa_data[5] = '\\0';\n  local_2c.sa_data[6] = '\\0';\n  local_2c.sa_data[7] = '\\0';\n  local_2c.sa_data[8] = '\\0';\n  local_2c.sa_data[9] = '\\0';\n  local_2c.sa_data[10] = '\\0';\n  local_2c.sa_data[0xb] = '\\0';\n  local_2c.sa_data[0xc] = '\\0';\n  local_2c.sa_data[0xd] = '\\0';\n  iVar2 = socket(2,2,0);\n  if (iVar2 == -1) {\n    __fd = -1;\nLAB_0063cb10:\n    if (__fd == -1) goto LAB_0063cb30;\n  }\n  else {\n    local_3c.sa_data[2] = '\\0';\n    local_3c.sa_data[3] = '\\0';\n    local_3c.sa_data[4] = '\\0';\n    local_3c.sa_data[5] = '\\0';\n    local_3c.sa_data[6] = '\\0';\n    local_3c.sa_data[7] = '\\0';\n    local_3c.sa_data[8] = '\\0';\n    local_3c.sa_data[9] = '\\0';\n    local_3c.sa_data[10] = '\\0';\n    local_3c.sa_data[0xb] = '\\0';\n    local_3c.sa_data[0xc] = '\\0';\n    local_3c.sa_data[0xd] = '\\0';\n    local_3c.sa_family = 2;\n    local_3c.sa_data[0] = '\\0';\n    local_3c.sa_data[1] = '\\0';\n    bind(iVar2,&local_3c,0x10);\n    __fd = -1;\n    iVar3 = listen(iVar2,1);\n    if (((iVar3 != 0) || (iVar3 = getsockname(iVar2,&local_2c,&local_40), iVar3 != 0)) ||\n       (__fd = socket(2,2,0), __fd == -1)) goto LAB_0063cb10;\n    set_blocking(__fd,0);\n    local_2c.sa_data[2] = '\\x7f';\n    local_2c.sa_data[3] = '\\0';\n    local_2c.sa_data[4] = '\\0';\n    local_2c.sa_data[5] = '\\x01';\n    iVar3 = connect(__fd,&local_2c,0x10);\n    bVar1 = true;\n    if (iVar3 == -1) {\n      piVar4 = __errno_location();\n      if (*piVar4 != 0x96) goto LAB_0063cb10;\n      bVar1 = false;\n    }\n    iVar3 = accept(iVar2,&local_2c,&local_40);\n    if (iVar3 == -1) goto LAB_0063cb10;\n    close(iVar2);\n    if (((bVar1) || (iVar6 = connect(__fd,&local_2c,0x10), iVar6 == 0)) ||\n       (piVar4 = __errno_location(), *piVar4 == 0x85)) {\n      set_blocking(__fd,1);\n      _Var7 = fork();\n      if (_Var7 == 0) {\n        close(iVar3);\n        close(0);\n        close(1);\n        dup(__fd);\n        dup(__fd);\n        iVar2 = system(param_1);"]
+target_name         : sock_exec
+taint_source_addr   : 8389476
+end_block           : 5009120
+start_block         : 6540876
+path                : 0x63ce4c#0x63ce34#0x63ce1c#0x63ce04#0x63cdec#0x63cddc#0x63cd9c#0x63cd84#0x63cd74#0x63cd44#0x63cd34#0x63cd28#0x63cd18#0x63cd0c#0x63ccfc#0x63cce8#0x63ccd4#0x63ccd0#0x63ccbc#0x63ccac#0x63cca0#0x63cc7c#0x63cc6c#0x63cc60#0x63cc4c#0x63cc40#0x63cc30#0x63cb00#0x63cae4#0x63cab8#0x63caa8#0x63ca50#0x4c6ef0#0x4c6ee0
+visited_functions   : getenv
+fail2captureConditionsTime: -1
+source_insr_addr    : 0x4c6eec
+sink_addr           : sock_exec
+sink_insr_addr      : 0x63ce60
+checking_time       : -1
+source_name         : cli_connect
+source_keyword      : LIBSMB_PROG
+ghidra_path         : [[5008868, 5009120, 5009132, 5009136, 5009156], [6539856, 6539856, 6539940, 6540876, 6540896]]
+complete_list       : ['\nundefined4 cli_connect(int *param_1,char *param_2,in_addr_t *param_3)\n\n{\n  bool bVar1;\n  char *pcVar2;\n  undefined3 extraout_var;\n  char *pcVar3;\n  int iVar4;\n  int *piVar5;\n  char *pcVar6;\n  undefined4 uVar7;\n  in_addr_t *__s;\n  int iVar8;\n  \n  if (param_2 == (char *)0x0) {\n    param_2 = "*SMBSERVER";\n  }\n  __s = (in_addr_t *)(param_1 + 9);\n  pcVar3 = param_2;\n  safe_strcpy_fn("",0,(undefined1 *)__s,param_2,0xff);\n  pcVar2 = strchr((char *)__s,0x23);\n  pcVar6 = (char *)0x20;\n  if (pcVar2 != (char *)0x0) {\n    pcVar6 = (char *)strtol(pcVar2 + 1,(char **)0x0,0x10);\n    *pcVar2 = \'\\0\';\n  }\n  if ((param_3 == (in_addr_t *)0x0) ||\n     (bVar1 = is_zero_ip(*param_3), CONCAT31(extraout_var,bVar1) != 0)) {\n    iVar4 = resolve_name(__s,param_1 + 0x2b5,pcVar6,pcVar3);\n    if (iVar4 == 0) {\n      return 0;\n    }\n    if (param_3 == (in_addr_t *)0x0) goto LAB_004c6ec4;\n    *param_3 = param_1[0x2b5];\n    pcVar3 = getenv("LIBSMB_PROG");\n  }\n  else {\n    param_1[0x2b5] = *param_3;\nLAB_004c6ec4:\n    pcVar3 = getenv("LIBSMB_PROG");\n  }\n  if (pcVar3 == (char *)0x0) {\n    iVar8 = *param_1;\n    if (iVar8 == 0) {\n      iVar8 = 0x1bd;\n    }\n    iVar4 = open_socket_out(2,(in_addr_t *)(param_1 + 0x2b5),iVar8,param_1[0x2be]);\n    param_1[1] = iVar4;\n    if (iVar4 == -1) {\n      if (*param_1 == 0) {\n        iVar4 = open_socket_out(2,(in_addr_t *)(param_1 + 0x2b5),0x8b,param_1[0x2be]);\n        param_1[1] = iVar4;\n        if (iVar4 != -1) {\n          *param_1 = 0x8b;\n          goto LAB_004c7074;\n        }\n      }\nLAB_004c6f18:\n      if (0 < *(int *)DEBUGLEVEL_CLASS) {\n        uVar7 = 0x559;\n        iVar4 = dbghdr(1);\n        if (iVar4 != 0) {\n          if (param_3 != (in_addr_t *)0x0) {\n            param_2 = inet_ntoa((in_addr)*param_3);\n          }\n          piVar5 = __errno_location();\n          pcVar3 = strerror(*piVar5);\n          dbgtext("Error connecting to %s (%s)\\n",param_2,pcVar3,uVar7);\n        }\n      }\n      return 0;\n    }\n    *param_1 = iVar8;\n  }\n  else {\n    pcVar3 = getenv("LIBSMB_PROG");\n    iVar4 = sock_exec(pcVar3);\n    param_1[1] = iVar4;\n    if (iVar4 == -1) goto LAB_004c6f18;\n  }\nLAB_004c7074:\n  set_socket_options(iVar4,user_socket_options);\n  return 1;\n}\n', '\nint sock_exec(char *param_1)\n\n{\n  bool bVar1;\n  int iVar2;\n  int iVar3;\n  int *piVar4;\n  char *pcVar5;\n  int iVar6;\n  __pid_t _Var7;\n  char *pcVar8;\n  undefined4 uVar9;\n  int __fd;\n  socklen_t local_40;\n  sockaddr local_3c;\n  sockaddr local_2c;\n  \n  local_40 = 0x10;\n  local_2c.sa_family = 0;\n  local_2c.sa_data[0] = \'\\0\';\n  local_2c.sa_data[1] = \'\\0\';\n  local_2c.sa_data[2] = \'\\0\';\n  local_2c.sa_data[3] = \'\\0\';\n  local_2c.sa_data[4] = \'\\0\';\n  local_2c.sa_data[5] = \'\\0\';\n  local_2c.sa_data[6] = \'\\0\';\n  local_2c.sa_data[7] = \'\\0\';\n  local_2c.sa_data[8] = \'\\0\';\n  local_2c.sa_data[9] = \'\\0\';\n  local_2c.sa_data[10] = \'\\0\';\n  local_2c.sa_data[0xb] = \'\\0\';\n  local_2c.sa_data[0xc] = \'\\0\';\n  local_2c.sa_data[0xd] = \'\\0\';\n  iVar2 = socket(2,2,0);\n  if (iVar2 == -1) {\n    __fd = -1;\nLAB_0063cb10:\n    if (__fd == -1) goto LAB_0063cb30;\n  }\n  else {\n    local_3c.sa_data[2] = \'\\0\';\n    local_3c.sa_data[3] = \'\\0\';\n    local_3c.sa_data[4] = \'\\0\';\n    local_3c.sa_data[5] = \'\\0\';\n    local_3c.sa_data[6] = \'\\0\';\n    local_3c.sa_data[7] = \'\\0\';\n    local_3c.sa_data[8] = \'\\0\';\n    local_3c.sa_data[9] = \'\\0\';\n    local_3c.sa_data[10] = \'\\0\';\n    local_3c.sa_data[0xb] = \'\\0\';\n    local_3c.sa_data[0xc] = \'\\0\';\n    local_3c.sa_data[0xd] = \'\\0\';\n    local_3c.sa_family = 2;\n    local_3c.sa_data[0] = \'\\0\';\n    local_3c.sa_data[1] = \'\\0\';\n    bind(iVar2,&local_3c,0x10);\n    __fd = -1;\n    iVar3 = listen(iVar2,1);\n    if (((iVar3 != 0) || (iVar3 = getsockname(iVar2,&local_2c,&local_40), iVar3 != 0)) ||\n       (__fd = socket(2,2,0), __fd == -1)) goto LAB_0063cb10;\n    set_blocking(__fd,0);\n    local_2c.sa_data[2] = \'\\x7f\';\n    local_2c.sa_data[3] = \'\\0\';\n    local_2c.sa_data[4] = \'\\0\';\n    local_2c.sa_data[5] = \'\\x01\';\n    iVar3 = connect(__fd,&local_2c,0x10);\n    bVar1 = true;\n    if (iVar3 == -1) {\n      piVar4 = __errno_location();\n      if (*piVar4 != 0x96) goto LAB_0063cb10;\n      bVar1 = false;\n    }\n    iVar3 = accept(iVar2,&local_2c,&local_40);\n    if (iVar3 == -1) goto LAB_0063cb10;\n    close(iVar2);\n    if (((bVar1) || (iVar6 = connect(__fd,&local_2c,0x10), iVar6 == 0)) ||\n       (piVar4 = __errno_location(), *piVar4 == 0x85)) {\n      set_blocking(__fd,1);\n      _Var7 = fork();\n      if (_Var7 == 0) {\n        close(iVar3);\n        close(0);\n        close(1);\n        dup(__fd);\n        dup(__fd);\n        iVar2 = system(param_1);\n                    /* WARNING: Subroutine does not return */\n        exit(iVar2);\n      }\n      close(__fd);\n      return iVar3;\n    }\n    close(iVar3);\n  }\n  close(__fd);\nLAB_0063cb30:\n  if (iVar2 != -1) {\n    close(iVar2);\n  }\n  if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n    pcVar8 = "sock_exec";\n    uVar9 = 0x66;\n    iVar2 = dbghdr(0);\n    if (iVar2 != 0) {\n      piVar4 = __errno_location();\n      pcVar5 = strerror(*piVar4);\n      dbgtext("socketpair_tcp failed (%s)\\n",pcVar5,pcVar8,uVar9);\n      return -1;\n    }\n  }\n  return -1;\n}\n']
+target_addr         : 0x63ca50
+range_list          : [[77, 78], [2, 87]]
+conditions_str      : 
+taint_source        : getenv
+taint_sink_addr     : 8389456
+taint_sink          : system
+source_addr         : 0x800364
+path_flag           : 0x63ce4c#0x63ce34#0x63ce1c#0x63ce04#0x63cdec#0x63cddc#0x63cd9c#0x63cd84#0x63cd74#0x63cd44#0x63cd34#0x63cd28#0x63cd18#0x63cd0c#0x63ccfc#0x63cce8#0x63ccd4#0x63ccd0#0x63ccbc#0x63ccac#0x63cca0#0x63cc7c#0x63cc6c#0x63cc60#0x63cc4c#0x63cc40#0x63cc30#0x63cb00#0x63cae4#0x63cab8#0x63caa8#0x63ca50#0x4c6ef0#0x4c6ee0
+*** Path #2 ***
+error_messges_str   : 
+str_length_visited_function: 
+decompile_list      : ['  pcVar2 = getenv("PASSWD_FD");\n  if (pcVar2 == (char *)0x0) {\n    pcVar2 = getenv("PASSWD_FILE");\n    if (pcVar2 == (char *)0x0) {\n      bVar1 = false;\n    }\n    else {\n      local_20 = pcVar2;\n      local_4a8 = sys_open(pcVar2,0,0);\n      safe_strcpy_fn("",0,acStack_424,local_20,0x3ff);\n      __stream = _stderr;\n      bVar1 = true;\n      if (local_4a8 < 0) {\n        piVar4 = __errno_location();\n        pcVar2 = strerror(*piVar4);\n        __format = "Error opening PASSWD_FILE %s: %s\\n";\nLAB_006ce5fc:\n        fprintf(__stream,__format,acStack_424,pcVar2);\n                    /* WARNING: Subroutine does not return */\n        exit(1);\n      }\n    }\n  }\n  else {\n    safe_strcpy_fn("",0,acStack_424,"descriptor ",0x3ff);\n    safe_strcat_fn("",0,acStack_424,pcVar2,0x3ff);\n    sscanf(pcVar2,"%d",&local_4a8);']
+target_name         : sub_6ce4bc
+taint_source_addr   : 8389476
+end_block           : 7136444
+start_block         : 7136592
+path                : 0x6ce550#0x6ce530#0x6ce508#0x6ce4fc#0x6ce4bc
+visited_functions   : getenv
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x6ce4f8
+sink_addr           : sub_6ce4bc
+sink_insr_addr      : 0x6ce568
+checking_time       : 0
+source_name         : sub_6ce4bc
+source_keyword      : PASSWD_FD
+ghidra_path         : [[7136444, 7136444, 7136504, 7136592, 7136616]]
+complete_list       : ['\n/* WARNING: Globals starting with \'_\' overlap smaller symbols at the same address */\n\nvoid FUN_006ce4bc(void)\n\n{\n  bool bVar1;\n  char *pcVar2;\n  ssize_t sVar3;\n  int *piVar4;\n  FILE *__stream;\n  char *__format;\n  int local_4a8;\n  char local_4a4 [128];\n  char acStack_424 [1028];\n  char *local_20;\n  \n  local_4a8 = -1;\n  pcVar2 = getenv("PASSWD_FD");\n  if (pcVar2 == (char *)0x0) {\n    pcVar2 = getenv("PASSWD_FILE");\n    if (pcVar2 == (char *)0x0) {\n      bVar1 = false;\n    }\n    else {\n      local_20 = pcVar2;\n      local_4a8 = sys_open(pcVar2,0,0);\n      safe_strcpy_fn("",0,acStack_424,local_20,0x3ff);\n      __stream = _stderr;\n      bVar1 = true;\n      if (local_4a8 < 0) {\n        piVar4 = __errno_location();\n        pcVar2 = strerror(*piVar4);\n        __format = "Error opening PASSWD_FILE %s: %s\\n";\nLAB_006ce5fc:\n        fprintf(__stream,__format,acStack_424,pcVar2);\n                    /* WARNING: Subroutine does not return */\n        exit(1);\n      }\n    }\n  }\n  else {\n    safe_strcpy_fn("",0,acStack_424,"descriptor ",0x3ff);\n    safe_strcat_fn("",0,acStack_424,pcVar2,0x3ff);\n    sscanf(pcVar2,"%d",&local_4a8);\n    bVar1 = false;\n  }\n  local_4a4[0] = \'\\0\';\n  pcVar2 = local_4a4;\n  while (sVar3 = read(local_4a8,pcVar2,1), __stream = _stderr, sVar3 != 0) {\n    if (sVar3 != 1) {\n      piVar4 = __errno_location();\n      pcVar2 = strerror(*piVar4);\n      __format = "Error reading password from file %s: %s\\n";\n      goto LAB_006ce5fc;\n    }\n    if ((*pcVar2 == \'\\n\') || (*pcVar2 == \'\\0\')) break;\n    pcVar2 = pcVar2 + 1;\n    *pcVar2 = \'\\0\';\n    if ((pcVar2 == (char *)0x0) || (0x7f < (uint)((int)pcVar2 - (int)local_4a4))) goto LAB_006ce640;\n  }\n  if (local_4a4 == pcVar2) {\n    __format = "Error reading password from file %s: %s\\n";\n    pcVar2 = "empty password\\n";\n    goto LAB_006ce5fc;\n  }\n  *pcVar2 = \'\\0\';\nLAB_006ce640:\n  safe_strcpy_fn("",0,cmdline_auth_info + 0x400,local_4a4,0x3ff);\n  if (bVar1) {\n    close(local_4a8);\n  }\n  return;\n}\n']
+target_addr         : 0x6ce4bc
+range_list          : [[19, 45]]
+conditions_str      : 
+taint_source        : getenv
+taint_sink_addr     : 8389016
+taint_sink          : sscanf
+source_addr         : 0x800364
+path_flag           : 0x6ce550#0x6ce530#0x6ce508#0x6ce4fc#0x6ce4bc
+*** Path #3 ***
+error_messges_str   : 
+str_length_visited_function: 
+decompile_list      : ['                pcVar4 = getenv(pcVar9);\n                if (pcVar4 == (char *)0x0) {\n                  if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                    pcVar4 = "realloc_expand_env_var";\n                    uVar10 = 0xdb;\n                    iVar5 = dbghdr(0);\n                    if (iVar5 != 0) {\n                      dbgtext("expand_env_var: Environment variable [%s] not set\\n",pcVar9,pcVar4,\n                              uVar10);\n                    }\n                  }\n                  local_34 = __ptr;\n                  free(pcVar9);\n                  psVar3 = local_34;\n                }\n                else {\n                  local_30 = (int *)((int)local_30 + (1 - (int)__src));\n                  local_34 = (short *)pcVar4;\n                  strncpy(pcVar9,(char *)__src,(size_t)local_30);\n                  pcVar9[(int)local_30] = \'\\0\';\n                  local_34 = realloc_string_sub(__ptr,pcVar9,(char *)local_34);', 'short * realloc_string_sub(short *param_1,char *param_2,char *param_3)\n\n{\n  char cVar1;\n  char *pcVar2;\n  size_t sVar3;\n  size_t sVar4;\n  size_t __n;\n  short *psVar5;\n  char *pcVar6;\n  size_t sVar7;\n  char *pcVar8;\n  undefined4 uVar9;\n  int iVar10;\n  \n  if (((param_3 != (char *)0x0) && (param_2 != (char *)0x0)) && (*param_2 != \'\\0\')) {\n    if (param_1 == (short *)0x0) {\n      return (short *)0x0;\n    }\n    if ((char)*param_1 != \'\\0\') {\n      pcVar2 = strdup(param_3);\n      if (pcVar2 == (char *)0x0) {\n        if (*(int *)DEBUGLEVEL_CLASS < 0) {\n          return (short *)0x0;\n        }\n        pcVar2 = "lib/util_str.c";\n        pcVar6 = "realloc_string_sub";\n        uVar9 = 0x3fb;\n        iVar10 = dbghdr(0);\n        if (iVar10 == 0) {\n          return (short *)0x0;\n        }\n        dbgtext("realloc_string_sub: out of memory!\\n",pcVar2,pcVar6,uVar9);\n        return (short *)0x0;\n      }\n      sVar3 = strlen((char *)param_1);\n      sVar4 = strlen(param_2);\n      __n = strlen(param_3);\n      psVar5 = param_1;\n      if (0 < (int)__n) {\n        sVar7 = 0;\n        pcVar6 = pcVar2;\n        do {\n          while (cVar1 = *pcVar6, cVar1 < \'&\') {\n            if (((cVar1 < \'$\') && (cVar1 != \'\\r\')) && ((cVar1 != \'\\"\' && (cVar1 != \'\\n\'))))\n            goto LAB_0062b108;\nLAB_0062b140:\n            sVar7 = sVar7 + 1;\n            *pcVar6 = \'_\';\n            pcVar6 = pcVar6 + 1;\n            if (__n == sVar7) goto LAB_0062b1d4;\n          }\n          if (((cVar1 == \';\') || (cVar1 == \'`\')) || (cVar1 == \'\\\'\')) goto LAB_0062b140;\nLAB_0062b108:\n          sVar7 = sVar7 + 1;\n          pcVar6 = pcVar6 + 1;\n        } while (__n != sVar7);\n      }\nLAB_0062b1d4:\n      do {\n        sVar3 = sVar3 + (__n - sVar4);\n        psVar5 = strstr_m(psVar5,param_2);\n        if (psVar5 == (short *)0x0) {\n          free(pcVar2);\n          return param_1;\n        }\n        if (0 < (int)(__n - sVar4)) {\n          iVar10 = (int)psVar5 - (int)param_1;\n          param_1 = (short *)Realloc(param_1,sVar3 + 1,1);\n          psVar5 = (short *)((int)param_1 + iVar10);\n          if (param_1 == (short *)0x0) {\n            if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n              pcVar6 = "lib/util_str.c";\n              pcVar8 = "realloc_string_sub";\n              uVar9 = 0x418;\n              iVar10 = dbghdr(0);\n              if (iVar10 != 0) {\n                dbgtext("realloc_string_sub: out of memory!\\n",pcVar6,pcVar8,uVar9);\n              }\n            }\n            free(pcVar2);\n            return (short *)0x0;\n          }\n        }\n        if (__n != sVar4) {\n          sVar7 = strlen((char *)((int)psVar5 + sVar4));\n          memmove((short *)((int)psVar5 + __n),(char *)((int)psVar5 + sVar4),sVar7 + 1);\n        }\n        memcpy(psVar5,pcVar2,__n);']
+target_name         : realloc_string_sub
+taint_source_addr   : 8389476
+end_block           : 6555104
+start_block         : 6468028
+path                : 0x62b1bc#0x62b1b4#0x62b198#0x62b190#0x62b17c#0x62b178#0x62b16c#0x62b164#0x62b15c#0x62b1e0#0x62b1d4#0x62b150#0x62b108#0x62b100#0x62b0f8#0x62b0f0#0x62b0e4#0x62b114#0x62b0bc#0x62b0b0#0x62b094#0x62b07c#0x62b06c#0x62b05c#0x62b04c#0x64062c#0x64060c#0x6405fc#0x6405e0
+visited_functions   : memcpy#strdup#realloc_string_sub#getenv
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x6405f8
+sink_addr           : realloc_string_sub
+sink_insr_addr      : 0x62b1d0
+checking_time       : 0
+source_name         : alloc_sub_basic
+source_keyword      : x
+ghidra_path         : [[6553228, 6555104, 6555128, 6555180, 6555216], [6467544, 6467660, 6467672, 6468028, 6468048]]
+complete_list       : ['\nshort * alloc_sub_basic(char *param_1,char *param_2)\n\n{\n  bool bVar1;\n  char *pcVar2;\n  short *__ptr;\n  short *__src;\n  short *psVar3;\n  char *pcVar4;\n  undefined3 extraout_var;\n  int iVar5;\n  int iVar6;\n  int *piVar7;\n  short *psVar8;\n  char *pcVar9;\n  undefined4 uVar10;\n  size_t __n;\n  char acStack_238 [256];\n  char acStack_138 [256];\n  char *local_38;\n  short *local_34;\n  int *local_30;\n  char *local_2c;\n  \n  local_2c = param_2;\n  pcVar2 = get_local_machine_name();\n  if (local_2c == (char *)0x0) {\n    __ptr = (short *)0x0;\n    if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n      pcVar2 = "lib/substitute.c";\n      pcVar9 = "alloc_sub_basic";\n      uVar10 = 0x1cc;\n      iVar5 = dbghdr(0);\n      if (iVar5 != 0) {\n        dbgtext("alloc_sub_basic: NULL source string!  This should not happen\\n",pcVar2,pcVar9,\n                uVar10);\n      }\n    }\n  }\n  else {\n    __ptr = (short *)strdup(local_2c);\n    if (__ptr == (short *)0x0) {\n      if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n        pcVar2 = "lib/substitute.c";\n        pcVar9 = "alloc_sub_basic";\n        uVar10 = 0x1d2;\n        iVar5 = dbghdr(0);\n        if (iVar5 != 0) {\n          dbgtext("alloc_sub_specified: Out of memory!\\n",pcVar2,pcVar9,uVar10);\n        }\n      }\n    }\n    else {\n      __src = (short *)strchr_m(__ptr,\'%\');\n      while (__src != (short *)0x0) {\n        psVar3 = __ptr;\n        switch(*(char *)((int)__src + 1) + -0x24) {\n        case \'\\0\':\n          if (((char)*__src == \'%\') && ((char)__src[1] == \'(\')) {\n            piVar7 = (int *)strchr_m(__src,\')\');\n            if (piVar7 == (int *)0x0) {\n              if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                uVar10 = 199;\n                iVar5 = dbghdr(0);\n                if (iVar5 != 0) {\n                  dbgtext("expand_env_var: Unterminated environment variable [%s]\\n",__src,__ptr,\n                          uVar10);\n                }\n              }\n            }\n            else {\n              local_34 = (short *)((int)piVar7 - ((int)__src + 3));\n              local_30 = piVar7;\n              local_2c = (char *)((int)__src + 3);\n              pcVar9 = (char *)malloc((int)local_34 + 5);\n              psVar3 = (short *)0x0;\n              if (pcVar9 != (char *)0x0) {\n                strncpy(pcVar9,local_2c,(size_t)local_34);\n                pcVar9[(int)local_34] = \'\\0\';\n                pcVar4 = getenv(pcVar9);\n                if (pcVar4 == (char *)0x0) {\n                  if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                    pcVar4 = "realloc_expand_env_var";\n                    uVar10 = 0xdb;\n                    iVar5 = dbghdr(0);\n                    if (iVar5 != 0) {\n                      dbgtext("expand_env_var: Environment variable [%s] not set\\n",pcVar9,pcVar4,\n                              uVar10);\n                    }\n                  }\n                  local_34 = __ptr;\n                  free(pcVar9);\n                  psVar3 = local_34;\n                }\n                else {\n                  local_30 = (int *)((int)local_30 + (1 - (int)__src));\n                  local_34 = (short *)pcVar4;\n                  strncpy(pcVar9,(char *)__src,(size_t)local_30);\n                  pcVar9[(int)local_30] = \'\\0\';\n                  local_34 = realloc_string_sub(__ptr,pcVar9,(char *)local_34);\nLAB_00640664:\n                  free(pcVar9);\n                  psVar3 = local_34;\n                }\n              }\n            }\n          }\n          break;\n        default:\n          break;\n        case \'\\x04\':\n          if ((char)*__src == \'%\') {\n            iVar5 = strchr_m(__src,\')\');\n            if (iVar5 == 0) {\n              if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                uVar10 = 0x133;\n                iVar5 = dbghdr(0);\n                if (iVar5 != 0) {\n                  dbgtext("realloc_expand_longvar: Unterminated environment variable [%s]\\n",__src,\n                          __ptr,uVar10);\n                }\n              }\n            }\n            else {\n              local_30 = (int *)(iVar5 - (int)(__src + 1));\n              if ((int *)0xff < local_30) {\n                local_30 = (int *)0xff;\n              }\n              strncpy(acStack_238,(char *)(__src + 1),(size_t)local_30);\n              acStack_238[(int)local_30] = \'\\0\';\n              if (6 < *(int *)DEBUGLEVEL_CLASS) {\n                pcVar9 = "get_longvar_val";\n                uVar10 = 0x114;\n                iVar6 = dbghdr(7);\n                if (iVar6 != 0) {\n                  dbgtext("get_longvar_val: expanding variable [%s]\\n",acStack_238,pcVar9,uVar10);\n                }\n              }\n              if (PTR_s_DomainSID_00773d00 != (undefined *)0x0) {\n                piVar7 = &DAT_00773d08;\n                psVar8 = (short *)0x0;\n                pcVar9 = PTR_s_DomainSID_00773d00;\n                do {\n                  local_34 = psVar8;\n                  local_30 = piVar7;\n                  bVar1 = strequal(pcVar9,acStack_238);\n                  piVar7 = local_30 + 2;\n                  if (CONCAT31(extraout_var,bVar1) != 0) {\n                    local_38 = (char *)(*(code *)(&PTR_LAB_00773d04)[(int)local_34 * 2])();\n                    if (local_38 != (char *)0x0) {\n                      __n = (iVar5 + 1) - (int)__src;\n                      if (0xff < __n) {\n                        __n = 0xff;\n                      }\n                      strncpy(acStack_238,(char *)__src,__n);\n                      pcVar9 = local_38;\n                      acStack_238[__n] = \'\\0\';\n                      local_34 = realloc_string_sub(__ptr,acStack_238,pcVar9);\n                      pcVar9 = local_38;\n                      goto LAB_00640664;\n                    }\n                    break;\n                  }\n                  pcVar9 = (char *)*local_30;\n                  psVar8 = (short *)((int)local_34 + 1);\n                } while (pcVar9 != (char *)0x0);\n              }\n              if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                uVar10 = 0x13f;\n                iVar5 = dbghdr(0);\n                if (iVar5 != 0) {\n                  dbgtext("realloc_expand_longvar: Variable [%s] not set.  Skipping\\n",acStack_238,\n                          __ptr,uVar10);\n                }\n              }\n            }\n          }\n          break;\n        case \' \':\n          pcVar9 = strdup_upper(&DAT_0078e13c);\n          if (pcVar9 == (char *)0x0) {\nLAB_006407cc:\n            free(__ptr);\n            return (short *)0x0;\n          }\n          local_34 = realloc_string_sub(__ptr,"%D",pcVar9);\n          goto LAB_006401a0;\n        case \'#\':\n          pcVar9 = strdup(param_1);\n          if (pcVar9 == (char *)0x0) goto LAB_006407cc;\n          local_34 = __ptr;\n          iVar5 = Get_Pwnam(pcVar9);\n          if (iVar5 != 0) {\n            pcVar4 = gidtoname(*(__gid_t *)(iVar5 + 0xc));\n            local_34 = realloc_string_sub(__ptr,"%G",pcVar4);\n          }\n          goto LAB_006401a0;\n        case \'%\':\n          pcVar9 = (char *)client_addr();\n          psVar3 = realloc_string_sub(__ptr,"%I",pcVar9);\n          break;\n        case \'(\':\n          iVar5 = StrnCaseCmp((char *)__src,"%LOGONSERVER%",0xd);\n          if (iVar5 != 0) {\n            if ((pcVar2 == (char *)0x0) || (*pcVar2 == \'\\0\')) {\n              pcVar9 = (char *)global_myname();\n              psVar3 = realloc_string_sub(__ptr,"%L",pcVar9);\n            }\n            else {\n              psVar3 = realloc_string_sub(__ptr,"%L",pcVar2);\n            }\n          }\n          break;\n        case \')\':\n          pcVar9 = (char *)client_name();\n          psVar3 = realloc_string_sub(__ptr,"%M",pcVar9);\n          break;\n        case \'*\':\n          pcVar9 = FUN_0063fb48();\n          psVar3 = realloc_string_sub(__ptr,"%N",pcVar9);\n          break;\n        case \'.\':\n          psVar3 = realloc_string_sub(__ptr,"%R",remote_proto);\n          break;\n        case \'0\':\n          pcVar9 = timestring(0);\n          psVar3 = realloc_string_sub(__ptr,"%T",pcVar9);\n          break;\n        case \'1\':\n          pcVar9 = (char *)strdup_lower(param_1);\n          if (pcVar9 == (char *)0x0) goto LAB_006407cc;\n          local_34 = realloc_string_sub(__ptr,"%U",pcVar9);\nLAB_006401a0:\n          free(pcVar9);\n          psVar3 = local_34;\n          break;\n        case \'=\':\n          psVar3 = realloc_string_sub(__ptr,"%a",remote_arch);\n          break;\n        case \'@\':\n          uVar10 = sys_getpid();\n          smb_snprintf((uint)acStack_138,0xff,"%d",uVar10);\n          psVar3 = realloc_string_sub(__ptr,"%d",acStack_138);\n          break;\n        case \'D\':\n          pcVar9 = myhostname();\n          psVar3 = realloc_string_sub(__ptr,"%h",pcVar9);\n          break;\n        case \'E\':\n          pcVar9 = client_socket_addr();\n          psVar3 = realloc_string_sub(__ptr,"%i",pcVar9);\n          break;\n        case \'I\':\n          psVar3 = realloc_string_sub(__ptr,"%m",&DAT_00786d68);\n          break;\n        case \'R\':\n          pcVar9 = samba_version_string();\n          psVar3 = realloc_string_sub(__ptr,"%v",pcVar9);\n          break;\n        case \'S\':\n          pcVar9 = lp_winbind_separator();\n          psVar3 = realloc_string_sub(__ptr,"%w",pcVar9);\n        }\n        if (psVar3 == (short *)0x0) {\n          return (short *)0x0;\n        }\n        __src = (short *)strchr_m((short *)((int)psVar3 + (int)__src + (1 - (int)__ptr)),\'%\');\n        __ptr = psVar3;\n      }\n    }\n  }\n  return __ptr;\n}\n', '\nshort * realloc_string_sub(short *param_1,char *param_2,char *param_3)\n\n{\n  char cVar1;\n  char *pcVar2;\n  size_t sVar3;\n  size_t sVar4;\n  size_t __n;\n  short *psVar5;\n  char *pcVar6;\n  size_t sVar7;\n  char *pcVar8;\n  undefined4 uVar9;\n  int iVar10;\n  \n  if (((param_3 != (char *)0x0) && (param_2 != (char *)0x0)) && (*param_2 != \'\\0\')) {\n    if (param_1 == (short *)0x0) {\n      return (short *)0x0;\n    }\n    if ((char)*param_1 != \'\\0\') {\n      pcVar2 = strdup(param_3);\n      if (pcVar2 == (char *)0x0) {\n        if (*(int *)DEBUGLEVEL_CLASS < 0) {\n          return (short *)0x0;\n        }\n        pcVar2 = "lib/util_str.c";\n        pcVar6 = "realloc_string_sub";\n        uVar9 = 0x3fb;\n        iVar10 = dbghdr(0);\n        if (iVar10 == 0) {\n          return (short *)0x0;\n        }\n        dbgtext("realloc_string_sub: out of memory!\\n",pcVar2,pcVar6,uVar9);\n        return (short *)0x0;\n      }\n      sVar3 = strlen((char *)param_1);\n      sVar4 = strlen(param_2);\n      __n = strlen(param_3);\n      psVar5 = param_1;\n      if (0 < (int)__n) {\n        sVar7 = 0;\n        pcVar6 = pcVar2;\n        do {\n          while (cVar1 = *pcVar6, cVar1 < \'&\') {\n            if (((cVar1 < \'$\') && (cVar1 != \'\\r\')) && ((cVar1 != \'\\"\' && (cVar1 != \'\\n\'))))\n            goto LAB_0062b108;\nLAB_0062b140:\n            sVar7 = sVar7 + 1;\n            *pcVar6 = \'_\';\n            pcVar6 = pcVar6 + 1;\n            if (__n == sVar7) goto LAB_0062b1d4;\n          }\n          if (((cVar1 == \';\') || (cVar1 == \'`\')) || (cVar1 == \'\\\'\')) goto LAB_0062b140;\nLAB_0062b108:\n          sVar7 = sVar7 + 1;\n          pcVar6 = pcVar6 + 1;\n        } while (__n != sVar7);\n      }\nLAB_0062b1d4:\n      do {\n        sVar3 = sVar3 + (__n - sVar4);\n        psVar5 = strstr_m(psVar5,param_2);\n        if (psVar5 == (short *)0x0) {\n          free(pcVar2);\n          return param_1;\n        }\n        if (0 < (int)(__n - sVar4)) {\n          iVar10 = (int)psVar5 - (int)param_1;\n          param_1 = (short *)Realloc(param_1,sVar3 + 1,1);\n          psVar5 = (short *)((int)param_1 + iVar10);\n          if (param_1 == (short *)0x0) {\n            if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n              pcVar6 = "lib/util_str.c";\n              pcVar8 = "realloc_string_sub";\n              uVar9 = 0x418;\n              iVar10 = dbghdr(0);\n              if (iVar10 != 0) {\n                dbgtext("realloc_string_sub: out of memory!\\n",pcVar6,pcVar8,uVar9);\n              }\n            }\n            free(pcVar2);\n            return (short *)0x0;\n          }\n        }\n        if (__n != sVar4) {\n          sVar7 = strlen((char *)((int)psVar5 + sVar4));\n          memmove((short *)((int)psVar5 + __n),(char *)((int)psVar5 + sVar4),sVar7 + 1);\n        }\n        memcpy(psVar5,pcVar2,__n);\n        psVar5 = (short *)((int)psVar5 + __n);\n      } while( true );\n    }\n  }\n  return (short *)0x0;\n}\n']
+target_addr         : 0x62afd8
+range_list          : [[81, 101], [2, 90]]
+conditions_str      : 
+taint_source        : getenv
+taint_sink_addr     : 8389436
+taint_sink          : memcpy
+source_addr         : 0x800364
+path_flag           : 0x62b1bc#0x62b1b4#0x62b198#0x62b190#0x62b17c#0x62b178#0x62b16c#0x62b164#0x62b15c#0x62b1e0#0x62b1d4#0x62b150#0x62b108#0x62b100#0x62b0f8#0x62b0f0#0x62b0e4#0x62b114#0x62b0bc#0x62b0b0#0x62b094#0x62b07c#0x62b06c#0x62b05c#0x62b04c#0x64062c#0x64060c#0x6405fc#0x6405e0
+*** Path #4 ***
+error_messges_str   : 
+str_length_visited_function: 
+decompile_list      : ['                pcVar4 = getenv(pcVar9);\n                if (pcVar4 == (char *)0x0) {\n                  if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                    pcVar4 = "realloc_expand_env_var";\n                    uVar10 = 0xdb;\n                    iVar5 = dbghdr(0);\n                    if (iVar5 != 0) {\n                      dbgtext("expand_env_var: Environment variable [%s] not set\\n",pcVar9,pcVar4,\n                              uVar10);\n                    }\n                  }\n                  local_34 = __ptr;\n                  free(pcVar9);\n                  psVar3 = local_34;\n                }\n                else {\n                  local_30 = (int *)((int)local_30 + (1 - (int)__src));\n                  local_34 = (short *)pcVar4;\n                  strncpy(pcVar9,(char *)__src,(size_t)local_30);\n                  pcVar9[(int)local_30] = \'\\0\';\n                  local_34 = realloc_string_sub(__ptr,pcVar9,(char *)local_34);', 'short * realloc_string_sub(short *param_1,char *param_2,char *param_3)\n\n{\n  char cVar1;\n  char *pcVar2;\n  size_t sVar3;\n  size_t sVar4;\n  size_t __n;\n  short *psVar5;\n  char *pcVar6;\n  size_t sVar7;\n  char *pcVar8;\n  undefined4 uVar9;\n  int iVar10;\n  \n  if (((param_3 != (char *)0x0) && (param_2 != (char *)0x0)) && (*param_2 != \'\\0\')) {\n    if (param_1 == (short *)0x0) {\n      return (short *)0x0;\n    }\n    if ((char)*param_1 != \'\\0\') {\n      pcVar2 = strdup(param_3);\n      if (pcVar2 == (char *)0x0) {\n        if (*(int *)DEBUGLEVEL_CLASS < 0) {\n          return (short *)0x0;\n        }\n        pcVar2 = "lib/util_str.c";\n        pcVar6 = "realloc_string_sub";\n        uVar9 = 0x3fb;\n        iVar10 = dbghdr(0);\n        if (iVar10 == 0) {\n          return (short *)0x0;\n        }\n        dbgtext("realloc_string_sub: out of memory!\\n",pcVar2,pcVar6,uVar9);\n        return (short *)0x0;\n      }\n      sVar3 = strlen((char *)param_1);\n      sVar4 = strlen(param_2);\n      __n = strlen(param_3);\n      psVar5 = param_1;\n      if (0 < (int)__n) {\n        sVar7 = 0;\n        pcVar6 = pcVar2;\n        do {\n          while (cVar1 = *pcVar6, cVar1 < \'&\') {\n            if (((cVar1 < \'$\') && (cVar1 != \'\\r\')) && ((cVar1 != \'\\"\' && (cVar1 != \'\\n\'))))\n            goto LAB_0062b108;\nLAB_0062b140:\n            sVar7 = sVar7 + 1;\n            *pcVar6 = \'_\';\n            pcVar6 = pcVar6 + 1;\n            if (__n == sVar7) goto LAB_0062b1d4;\n          }\n          if (((cVar1 == \';\') || (cVar1 == \'`\')) || (cVar1 == \'\\\'\')) goto LAB_0062b140;\nLAB_0062b108:\n          sVar7 = sVar7 + 1;\n          pcVar6 = pcVar6 + 1;\n        } while (__n != sVar7);\n      }\nLAB_0062b1d4:\n      do {\n        sVar3 = sVar3 + (__n - sVar4);\n        psVar5 = strstr_m(psVar5,param_2);\n        if (psVar5 == (short *)0x0) {\n          free(pcVar2);\n          return param_1;\n        }\n        if (0 < (int)(__n - sVar4)) {\n          iVar10 = (int)psVar5 - (int)param_1;\n          param_1 = (short *)Realloc(param_1,sVar3 + 1,1);\n          psVar5 = (short *)((int)param_1 + iVar10);\n          if (param_1 == (short *)0x0) {\n            if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n              pcVar6 = "lib/util_str.c";\n              pcVar8 = "realloc_string_sub";\n              uVar9 = 0x418;\n              iVar10 = dbghdr(0);\n              if (iVar10 != 0) {\n                dbgtext("realloc_string_sub: out of memory!\\n",pcVar6,pcVar8,uVar9);\n              }\n            }\n            free(pcVar2);\n            return (short *)0x0;\n          }\n        }\n        if (__n != sVar4) {\n          sVar7 = strlen((char *)((int)psVar5 + sVar4));\n          memmove((short *)((int)psVar5 + __n),(char *)((int)psVar5 + sVar4),sVar7 + 1);\n        }\n        memcpy(psVar5,pcVar2,__n);']
+target_name         : realloc_string_sub
+taint_source_addr   : 8389476
+end_block           : 6555104
+start_block         : 6468028
+path                : 0x62b1bc#0x62b1b4#0x62b198#0x62b190#0x62b17c#0x62b178#0x62b16c#0x62b164#0x62b15c#0x62b1e0#0x62b1d4#0x62b150#0x62b108#0x62b100#0x62b0f8#0x62b0f0#0x62b0e4#0x62b114#0x62b140#0x62b100#0x62b0f8#0x62b0f0#0x62b0e4#0x62b114#0x62b0bc#0x62b0b0#0x62b094#0x62b07c#0x62b06c#0x62b05c#0x62b04c#0x64062c#0x64060c#0x6405fc#0x6405e0
+visited_functions   : memcpy#strdup#realloc_string_sub#getenv
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x6405f8
+sink_addr           : realloc_string_sub
+sink_insr_addr      : 0x62b1d0
+checking_time       : 0
+source_name         : alloc_sub_basic
+source_keyword      : x
+ghidra_path         : [[6553228, 6555104, 6555128, 6555180, 6555216], [6467544, 6467660, 6467672, 6468028, 6468048]]
+complete_list       : ['\nshort * alloc_sub_basic(char *param_1,char *param_2)\n\n{\n  bool bVar1;\n  char *pcVar2;\n  short *__ptr;\n  short *__src;\n  short *psVar3;\n  char *pcVar4;\n  undefined3 extraout_var;\n  int iVar5;\n  int iVar6;\n  int *piVar7;\n  short *psVar8;\n  char *pcVar9;\n  undefined4 uVar10;\n  size_t __n;\n  char acStack_238 [256];\n  char acStack_138 [256];\n  char *local_38;\n  short *local_34;\n  int *local_30;\n  char *local_2c;\n  \n  local_2c = param_2;\n  pcVar2 = get_local_machine_name();\n  if (local_2c == (char *)0x0) {\n    __ptr = (short *)0x0;\n    if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n      pcVar2 = "lib/substitute.c";\n      pcVar9 = "alloc_sub_basic";\n      uVar10 = 0x1cc;\n      iVar5 = dbghdr(0);\n      if (iVar5 != 0) {\n        dbgtext("alloc_sub_basic: NULL source string!  This should not happen\\n",pcVar2,pcVar9,\n                uVar10);\n      }\n    }\n  }\n  else {\n    __ptr = (short *)strdup(local_2c);\n    if (__ptr == (short *)0x0) {\n      if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n        pcVar2 = "lib/substitute.c";\n        pcVar9 = "alloc_sub_basic";\n        uVar10 = 0x1d2;\n        iVar5 = dbghdr(0);\n        if (iVar5 != 0) {\n          dbgtext("alloc_sub_specified: Out of memory!\\n",pcVar2,pcVar9,uVar10);\n        }\n      }\n    }\n    else {\n      __src = (short *)strchr_m(__ptr,\'%\');\n      while (__src != (short *)0x0) {\n        psVar3 = __ptr;\n        switch(*(char *)((int)__src + 1) + -0x24) {\n        case \'\\0\':\n          if (((char)*__src == \'%\') && ((char)__src[1] == \'(\')) {\n            piVar7 = (int *)strchr_m(__src,\')\');\n            if (piVar7 == (int *)0x0) {\n              if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                uVar10 = 199;\n                iVar5 = dbghdr(0);\n                if (iVar5 != 0) {\n                  dbgtext("expand_env_var: Unterminated environment variable [%s]\\n",__src,__ptr,\n                          uVar10);\n                }\n              }\n            }\n            else {\n              local_34 = (short *)((int)piVar7 - ((int)__src + 3));\n              local_30 = piVar7;\n              local_2c = (char *)((int)__src + 3);\n              pcVar9 = (char *)malloc((int)local_34 + 5);\n              psVar3 = (short *)0x0;\n              if (pcVar9 != (char *)0x0) {\n                strncpy(pcVar9,local_2c,(size_t)local_34);\n                pcVar9[(int)local_34] = \'\\0\';\n                pcVar4 = getenv(pcVar9);\n                if (pcVar4 == (char *)0x0) {\n                  if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                    pcVar4 = "realloc_expand_env_var";\n                    uVar10 = 0xdb;\n                    iVar5 = dbghdr(0);\n                    if (iVar5 != 0) {\n                      dbgtext("expand_env_var: Environment variable [%s] not set\\n",pcVar9,pcVar4,\n                              uVar10);\n                    }\n                  }\n                  local_34 = __ptr;\n                  free(pcVar9);\n                  psVar3 = local_34;\n                }\n                else {\n                  local_30 = (int *)((int)local_30 + (1 - (int)__src));\n                  local_34 = (short *)pcVar4;\n                  strncpy(pcVar9,(char *)__src,(size_t)local_30);\n                  pcVar9[(int)local_30] = \'\\0\';\n                  local_34 = realloc_string_sub(__ptr,pcVar9,(char *)local_34);\nLAB_00640664:\n                  free(pcVar9);\n                  psVar3 = local_34;\n                }\n              }\n            }\n          }\n          break;\n        default:\n          break;\n        case \'\\x04\':\n          if ((char)*__src == \'%\') {\n            iVar5 = strchr_m(__src,\')\');\n            if (iVar5 == 0) {\n              if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                uVar10 = 0x133;\n                iVar5 = dbghdr(0);\n                if (iVar5 != 0) {\n                  dbgtext("realloc_expand_longvar: Unterminated environment variable [%s]\\n",__src,\n                          __ptr,uVar10);\n                }\n              }\n            }\n            else {\n              local_30 = (int *)(iVar5 - (int)(__src + 1));\n              if ((int *)0xff < local_30) {\n                local_30 = (int *)0xff;\n              }\n              strncpy(acStack_238,(char *)(__src + 1),(size_t)local_30);\n              acStack_238[(int)local_30] = \'\\0\';\n              if (6 < *(int *)DEBUGLEVEL_CLASS) {\n                pcVar9 = "get_longvar_val";\n                uVar10 = 0x114;\n                iVar6 = dbghdr(7);\n                if (iVar6 != 0) {\n                  dbgtext("get_longvar_val: expanding variable [%s]\\n",acStack_238,pcVar9,uVar10);\n                }\n              }\n              if (PTR_s_DomainSID_00773d00 != (undefined *)0x0) {\n                piVar7 = &DAT_00773d08;\n                psVar8 = (short *)0x0;\n                pcVar9 = PTR_s_DomainSID_00773d00;\n                do {\n                  local_34 = psVar8;\n                  local_30 = piVar7;\n                  bVar1 = strequal(pcVar9,acStack_238);\n                  piVar7 = local_30 + 2;\n                  if (CONCAT31(extraout_var,bVar1) != 0) {\n                    local_38 = (char *)(*(code *)(&PTR_LAB_00773d04)[(int)local_34 * 2])();\n                    if (local_38 != (char *)0x0) {\n                      __n = (iVar5 + 1) - (int)__src;\n                      if (0xff < __n) {\n                        __n = 0xff;\n                      }\n                      strncpy(acStack_238,(char *)__src,__n);\n                      pcVar9 = local_38;\n                      acStack_238[__n] = \'\\0\';\n                      local_34 = realloc_string_sub(__ptr,acStack_238,pcVar9);\n                      pcVar9 = local_38;\n                      goto LAB_00640664;\n                    }\n                    break;\n                  }\n                  pcVar9 = (char *)*local_30;\n                  psVar8 = (short *)((int)local_34 + 1);\n                } while (pcVar9 != (char *)0x0);\n              }\n              if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n                uVar10 = 0x13f;\n                iVar5 = dbghdr(0);\n                if (iVar5 != 0) {\n                  dbgtext("realloc_expand_longvar: Variable [%s] not set.  Skipping\\n",acStack_238,\n                          __ptr,uVar10);\n                }\n              }\n            }\n          }\n          break;\n        case \' \':\n          pcVar9 = strdup_upper(&DAT_0078e13c);\n          if (pcVar9 == (char *)0x0) {\nLAB_006407cc:\n            free(__ptr);\n            return (short *)0x0;\n          }\n          local_34 = realloc_string_sub(__ptr,"%D",pcVar9);\n          goto LAB_006401a0;\n        case \'#\':\n          pcVar9 = strdup(param_1);\n          if (pcVar9 == (char *)0x0) goto LAB_006407cc;\n          local_34 = __ptr;\n          iVar5 = Get_Pwnam(pcVar9);\n          if (iVar5 != 0) {\n            pcVar4 = gidtoname(*(__gid_t *)(iVar5 + 0xc));\n            local_34 = realloc_string_sub(__ptr,"%G",pcVar4);\n          }\n          goto LAB_006401a0;\n        case \'%\':\n          pcVar9 = (char *)client_addr();\n          psVar3 = realloc_string_sub(__ptr,"%I",pcVar9);\n          break;\n        case \'(\':\n          iVar5 = StrnCaseCmp((char *)__src,"%LOGONSERVER%",0xd);\n          if (iVar5 != 0) {\n            if ((pcVar2 == (char *)0x0) || (*pcVar2 == \'\\0\')) {\n              pcVar9 = (char *)global_myname();\n              psVar3 = realloc_string_sub(__ptr,"%L",pcVar9);\n            }\n            else {\n              psVar3 = realloc_string_sub(__ptr,"%L",pcVar2);\n            }\n          }\n          break;\n        case \')\':\n          pcVar9 = (char *)client_name();\n          psVar3 = realloc_string_sub(__ptr,"%M",pcVar9);\n          break;\n        case \'*\':\n          pcVar9 = FUN_0063fb48();\n          psVar3 = realloc_string_sub(__ptr,"%N",pcVar9);\n          break;\n        case \'.\':\n          psVar3 = realloc_string_sub(__ptr,"%R",remote_proto);\n          break;\n        case \'0\':\n          pcVar9 = timestring(0);\n          psVar3 = realloc_string_sub(__ptr,"%T",pcVar9);\n          break;\n        case \'1\':\n          pcVar9 = (char *)strdup_lower(param_1);\n          if (pcVar9 == (char *)0x0) goto LAB_006407cc;\n          local_34 = realloc_string_sub(__ptr,"%U",pcVar9);\nLAB_006401a0:\n          free(pcVar9);\n          psVar3 = local_34;\n          break;\n        case \'=\':\n          psVar3 = realloc_string_sub(__ptr,"%a",remote_arch);\n          break;\n        case \'@\':\n          uVar10 = sys_getpid();\n          smb_snprintf((uint)acStack_138,0xff,"%d",uVar10);\n          psVar3 = realloc_string_sub(__ptr,"%d",acStack_138);\n          break;\n        case \'D\':\n          pcVar9 = myhostname();\n          psVar3 = realloc_string_sub(__ptr,"%h",pcVar9);\n          break;\n        case \'E\':\n          pcVar9 = client_socket_addr();\n          psVar3 = realloc_string_sub(__ptr,"%i",pcVar9);\n          break;\n        case \'I\':\n          psVar3 = realloc_string_sub(__ptr,"%m",&DAT_00786d68);\n          break;\n        case \'R\':\n          pcVar9 = samba_version_string();\n          psVar3 = realloc_string_sub(__ptr,"%v",pcVar9);\n          break;\n        case \'S\':\n          pcVar9 = lp_winbind_separator();\n          psVar3 = realloc_string_sub(__ptr,"%w",pcVar9);\n        }\n        if (psVar3 == (short *)0x0) {\n          return (short *)0x0;\n        }\n        __src = (short *)strchr_m((short *)((int)psVar3 + (int)__src + (1 - (int)__ptr)),\'%\');\n        __ptr = psVar3;\n      }\n    }\n  }\n  return __ptr;\n}\n', '\nshort * realloc_string_sub(short *param_1,char *param_2,char *param_3)\n\n{\n  char cVar1;\n  char *pcVar2;\n  size_t sVar3;\n  size_t sVar4;\n  size_t __n;\n  short *psVar5;\n  char *pcVar6;\n  size_t sVar7;\n  char *pcVar8;\n  undefined4 uVar9;\n  int iVar10;\n  \n  if (((param_3 != (char *)0x0) && (param_2 != (char *)0x0)) && (*param_2 != \'\\0\')) {\n    if (param_1 == (short *)0x0) {\n      return (short *)0x0;\n    }\n    if ((char)*param_1 != \'\\0\') {\n      pcVar2 = strdup(param_3);\n      if (pcVar2 == (char *)0x0) {\n        if (*(int *)DEBUGLEVEL_CLASS < 0) {\n          return (short *)0x0;\n        }\n        pcVar2 = "lib/util_str.c";\n        pcVar6 = "realloc_string_sub";\n        uVar9 = 0x3fb;\n        iVar10 = dbghdr(0);\n        if (iVar10 == 0) {\n          return (short *)0x0;\n        }\n        dbgtext("realloc_string_sub: out of memory!\\n",pcVar2,pcVar6,uVar9);\n        return (short *)0x0;\n      }\n      sVar3 = strlen((char *)param_1);\n      sVar4 = strlen(param_2);\n      __n = strlen(param_3);\n      psVar5 = param_1;\n      if (0 < (int)__n) {\n        sVar7 = 0;\n        pcVar6 = pcVar2;\n        do {\n          while (cVar1 = *pcVar6, cVar1 < \'&\') {\n            if (((cVar1 < \'$\') && (cVar1 != \'\\r\')) && ((cVar1 != \'\\"\' && (cVar1 != \'\\n\'))))\n            goto LAB_0062b108;\nLAB_0062b140:\n            sVar7 = sVar7 + 1;\n            *pcVar6 = \'_\';\n            pcVar6 = pcVar6 + 1;\n            if (__n == sVar7) goto LAB_0062b1d4;\n          }\n          if (((cVar1 == \';\') || (cVar1 == \'`\')) || (cVar1 == \'\\\'\')) goto LAB_0062b140;\nLAB_0062b108:\n          sVar7 = sVar7 + 1;\n          pcVar6 = pcVar6 + 1;\n        } while (__n != sVar7);\n      }\nLAB_0062b1d4:\n      do {\n        sVar3 = sVar3 + (__n - sVar4);\n        psVar5 = strstr_m(psVar5,param_2);\n        if (psVar5 == (short *)0x0) {\n          free(pcVar2);\n          return param_1;\n        }\n        if (0 < (int)(__n - sVar4)) {\n          iVar10 = (int)psVar5 - (int)param_1;\n          param_1 = (short *)Realloc(param_1,sVar3 + 1,1);\n          psVar5 = (short *)((int)param_1 + iVar10);\n          if (param_1 == (short *)0x0) {\n            if (-1 < *(int *)DEBUGLEVEL_CLASS) {\n              pcVar6 = "lib/util_str.c";\n              pcVar8 = "realloc_string_sub";\n              uVar9 = 0x418;\n              iVar10 = dbghdr(0);\n              if (iVar10 != 0) {\n                dbgtext("realloc_string_sub: out of memory!\\n",pcVar6,pcVar8,uVar9);\n              }\n            }\n            free(pcVar2);\n            return (short *)0x0;\n          }\n        }\n        if (__n != sVar4) {\n          sVar7 = strlen((char *)((int)psVar5 + sVar4));\n          memmove((short *)((int)psVar5 + __n),(char *)((int)psVar5 + sVar4),sVar7 + 1);\n        }\n        memcpy(psVar5,pcVar2,__n);\n        psVar5 = (short *)((int)psVar5 + __n);\n      } while( true );\n    }\n  }\n  return (short *)0x0;\n}\n']
+target_addr         : 0x62afd8
+range_list          : [[81, 101], [2, 90]]
+conditions_str      : 
+taint_source        : getenv
+taint_sink_addr     : 8389436
+taint_sink          : memcpy
+source_addr         : 0x800364
+path_flag           : 0x62b1bc#0x62b1b4#0x62b198#0x62b190#0x62b17c#0x62b178#0x62b16c#0x62b164#0x62b15c#0x62b1e0#0x62b1d4#0x62b150#0x62b108#0x62b100#0x62b0f8#0x62b0f0#0x62b0e4#0x62b114#0x62b140#0x62b100#0x62b0f8#0x62b0f0#0x62b0e4#0x62b114#0x62b0bc#0x62b0b0#0x62b094#0x62b07c#0x62b06c#0x62b05c#0x62b04c#0x64062c#0x64060c#0x6405fc#0x6405e0
+*** Path #5 ***
+error_messges_str   : 
+str_length_visited_function: 
+decompile_list      : ['Fail to Decompile by Angr']
+target_name         : sub_6d743c
+taint_source_addr   : 8389032
+end_block           : 7173312
+start_block         : 7174236
+path                : 0x6d785c#0x6d7848#0x6d7834#0x6d781c#0x6d7920#0x6d7814#0x6d77fc#0x6d77d0#0x6d77a8#0x6d7794#0x6d7780#0x6d7760#0x6d7750#0x6d7744#0x6d7740#0x6d772c#0x6d770c#0x6d76fc#0x6d75b4#0x6d75d0#0x6d75ac#0x6d75a4#0x6d7580#0x6d7570#0x6d7568#0x6d7560#0x6d7558#0x6d7540#0x6d752c#0x6d7528#0x6d7514#0x6d74f0#0x6d74e0#0x6d74d4#0x6d74c0
+visited_functions   : strcat#fgets
+fail2captureConditionsTime: -1
+source_insr_addr    : 0x6d74c4
+sink_addr           : sub_6d743c
+sink_insr_addr      : 0x6d7880
+checking_time       : -1
+source_name         : sub_6d743c
+source_keyword      : not_static_string
+ghidra_path         : [[7173180, 7173312, 7173328, 7174236, 7174272]]
+complete_list       : ['Fail to Decompile by Angr']
+target_addr         : 0x6d743c
+range_list          : ['Fail to Decompile by Angr']
+conditions_str      : 
+taint_source        : fgets
+taint_sink_addr     : 8389392
+taint_sink          : strcat
+source_addr         : 0x8001a8
+path_flag           : 0x6d785c#0x6d7848#0x6d7834#0x6d781c#0x6d7920#0x6d7814#0x6d77fc#0x6d77d0#0x6d77a8#0x6d7794#0x6d7780#0x6d7760#0x6d7750#0x6d7744#0x6d7740#0x6d772c#0x6d770c#0x6d76fc#0x6d75b4#0x6d75d0#0x6d75ac#0x6d75a4#0x6d7580#0x6d7570#0x6d7568#0x6d7560#0x6d7558#0x6d7540#0x6d752c#0x6d7528#0x6d7514#0x6d74f0#0x6d74e0#0x6d74d4#0x6d74c0
+*** Path #6 ***
+error_messges_str   : 
+str_length_visited_function: 
+decompile_list      : ['Fail to Decompile by Angr']
+target_name         : sub_6d743c
+taint_source_addr   : 8389032
+end_block           : 7173312
+start_block         : 7174300
+path                : 0x6d789c#0x6d7884#0x6d785c#0x6d7848#0x6d7834#0x6d781c#0x6d7920#0x6d7814#0x6d77fc#0x6d77d0#0x6d77a8#0x6d7794#0x6d7780#0x6d7760#0x6d7750#0x6d7744#0x6d7740#0x6d772c#0x6d770c#0x6d76fc#0x6d75b4#0x6d75d0#0x6d75ac#0x6d75a4#0x6d7580#0x6d7570#0x6d7568#0x6d7560#0x6d7558#0x6d7540#0x6d752c#0x6d7528#0x6d7514#0x6d74f0#0x6d74e0#0x6d74d4#0x6d74c0
+visited_functions   : strcat#fgets
+fail2captureConditionsTime: -1
+source_insr_addr    : 0x6d74c4
+sink_addr           : sub_6d743c
+sink_insr_addr      : 0x6d78d4
+checking_time       : -1
+source_name         : sub_6d743c
+source_keyword      : not_static_string
+ghidra_path         : [[7173180, 7173312, 7173328, 7174300, 7174356]]
+complete_list       : ['Fail to Decompile by Angr']
+target_addr         : 0x6d743c
+range_list          : ['Fail to Decompile by Angr']
+conditions_str      : 
+taint_source        : fgets
+taint_sink_addr     : 8389392
+taint_sink          : strcat
+source_addr         : 0x8001a8
+path_flag           : 0x6d789c#0x6d7884#0x6d785c#0x6d7848#0x6d7834#0x6d781c#0x6d7920#0x6d7814#0x6d77fc#0x6d77d0#0x6d77a8#0x6d7794#0x6d7780#0x6d7760#0x6d7750#0x6d7744#0x6d7740#0x6d772c#0x6d770c#0x6d76fc#0x6d75b4#0x6d75d0#0x6d75ac#0x6d75a4#0x6d7580#0x6d7570#0x6d7568#0x6d7560#0x6d7558#0x6d7540#0x6d752c#0x6d7528#0x6d7514#0x6d74f0#0x6d74e0#0x6d74d4#0x6d74c0
+
+========== Get2Set Paths ==========
+No paths paths found.
+
+========== SOURCE ==========
+[1] sub_1d170
+[2] config_get
+[3] NK_query_entry_get
+[4] webGetVarString
+[5] bcm_nvram_get
+[6] GetValue
+[7] acosNvramConfig_read
+[8] sub_42af24
+[9] sub_42a978
+[10] get_cgi
+[11] websGetVar
+[12] nvram_get
+[13] nvram_safe_get
+[14] nvram_default_get
+[15] getenv
+[16] nvram_pf_get
+[17] acosNvramConfig_get
+[18] uciGet
+[19] entry
+[20] wpa_config_get
+[21] httpGenListDataGet
+[22] cJSON_GetArrayItem
+[23] vici_find_str
+[24] DoHardwareComponent
+[25] device_get_string_value
+[26] cJSON_Parse
+[27] websGetVarSafe
+[28] websGetVar_secure
+[29] OM_ValGet
+[30] acosUciConfig_get
+[31] CAL_abstract_get
+[32] json_object_object_get
+[33] json_object_object_get_ex
+[34] json_tokener_parse
+[35] OM_ValFind
+[36] get_parameter
+[37] get_wlan_setting
+[38] av_dict_get
+[39] cgi_value
+[40] stringOut
+[41] cJSON_GetObjectItem
+[42] sw_getValueByName
+[43] querystr
+[44] find_val
+[45] log_query
+[46] value_parser_by_index_D7000
+[47] getoption
+[48] WEB_GetVar
+[49] av_opt_get
+[50] paramValueFromObjGet
+[51] help_getObjPtr
+[52] NCONF_get_string
+[53] getString
+[54] web_getav_metadata_get
+[55] httpGetEnv
+[56] gets
+[57] fgets
+[58] recvfrom
+[59] recvmsg
+[60] nvram_get_ex2
+[61] nvram_bufget
+[62] apmib_get
+[63] apcli_nvram_get
+[64] nvram_get_int
+
+========== TRANSITIVE SET ==========
+[1] config_set
+[2] SetValue
+[3] setenv
+[4] nvram_set
+[5] nvram_safe_set
+[6] nvram_pf_set
+[7] artblock_set
+[8] acos_nvram_set
+[9] acosNvramConfig_set
+[10] acosNvramConfig_write
+[11] envz_add
+[12] uciSet
+[13] device_set_string_value
+[14] wpa_config_set
+[15] scfgmgr_set_by_index_D7000
+[16] acosUciConfig_set
+[17] OM_ValSet
+[18] CAL_abstract_set
+[19] nvram_bufset
+[20] apmib_set
+[21] apcli_nvram_set
+[22] nvram_set_value
+[23] acosNvramConfig_set_bak
+[24] nvram_set_int
+

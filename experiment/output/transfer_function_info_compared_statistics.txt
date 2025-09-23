@@ -1,0 +1,115 @@
+Function Pair information Recognition Results:
+
+firmware: DIR-878
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 4  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 274.93
+  one_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 4  key_pos_acc: 0.500  value_pos_acc: 0.250 | time: 39.16
+
+firmware: DIR-882
+  two_shot   | Precision: 1.000  Recall: 0.750  F1: 0.857 | success_func_pair_count: 3  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 465.86
+  one_shot   | Precision: 1.000  Recall: 0.750  F1: 0.857 | success_func_pair_count: 3  key_pos_acc: 0.667  value_pos_acc: 0.333 | time: 105.22
+
+firmware: E1200
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 451.73
+  one_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 0.500 | time: 51.8
+
+firmware: R6200
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 362.71
+  one_shot   | Precision: 0.333  Recall: 0.500  F1: 0.400 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 0.500 | time: 44.48
+
+firmware: R6300
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 431.76
+  one_shot   | Precision: 0.500  Recall: 0.500  F1: 0.500 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 0.500 | time: 55.52
+
+firmware: R7000P
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 3  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 732.86
+  one_shot   | Precision: 0.167  Recall: 0.333  F1: 0.222 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 0.500 | time: 94.18
+
+firmware: A720R
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 3  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 102.04
+  one_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 3  key_pos_acc: 0.333  value_pos_acc: 0.333 | time: 23.14
+
+firmware: LR1200GB
+  two_shot   | Precision: 0.857  Recall: 1.000  F1: 0.923 | success_func_pair_count: 6  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 313.29
+  one_shot   | Precision: 1.000  Recall: 0.667  F1: 0.800 | success_func_pair_count: 4  key_pos_acc: 0.500  value_pos_acc: 0.250 | time: 44.38
+
+firmware: NR1800X
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 6  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 271.07
+  one_shot   | Precision: 1.000  Recall: 0.667  F1: 0.800 | success_func_pair_count: 4  key_pos_acc: 0.500  value_pos_acc: 0.250 | time: 43.86
+
+firmware: 4G-AC53U
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 4  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 600.19
+  one_shot   | Precision: 0.600  Recall: 0.750  F1: 0.667 | success_func_pair_count: 3  key_pos_acc: 0.667  value_pos_acc: 0.333 | time: 91.28
+
+firmware: 4G-AX56
+  two_shot   | Precision: 1.000  Recall: 0.750  F1: 0.857 | success_func_pair_count: 3  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 467.7
+  one_shot   | Precision: 0.750  Recall: 0.750  F1: 0.750 | success_func_pair_count: 3  key_pos_acc: 1.000  value_pos_acc: 0.667 | time: 64.13
+
+firmware: BE9300
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 254.32
+  one_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 0.500 | time: 38.08
+
+firmware: EX6100
+  two_shot   | Precision: 1.000  Recall: 0.667  F1: 0.800 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 369.39
+  one_shot   | Precision: 0.500  Recall: 0.667  F1: 0.571 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 0.750 | time: 52.74
+
+firmware: EX6120
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 415.28
+  one_shot   | Precision: 0.167  Recall: 0.500  F1: 0.250 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 0.500 | time: 96.17
+
+firmware: AX90
+  two_shot   | Precision: 1.000  Recall: 0.250  F1: 0.400 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 113.84
+  one_shot   | Precision: 0.000  Recall: 0.000  F1: 0.000 | success_func_pair_count: 0  key_pos_acc: 0.000  value_pos_acc: 0.000 | time: 33.25
+
+firmware: C20
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 185.02
+  one_shot   | Precision: 0.000  Recall: 0.000  F1: 0.000 | success_func_pair_count: 0  key_pos_acc: 0.000  value_pos_acc: 0.000 | time: 12.27
+
+firmware: WR902AC
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 3  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 497.03
+  one_shot   | Precision: 0.000  Recall: 0.000  F1: 0.000 | success_func_pair_count: 0  key_pos_acc: 0.000  value_pos_acc: 0.000 | time: 32.84
+
+firmware: DIR-823G
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 87.47
+  one_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 12.88
+
+firmware: R6350
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 6  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 863.44
+  one_shot   | Precision: 0.833  Recall: 0.833  F1: 0.833 | success_func_pair_count: 5  key_pos_acc: 0.400  value_pos_acc: 0.100 | time: 173.44
+
+firmware: AC12
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 795.74
+  one_shot   | Precision: 0.000  Recall: 0.000  F1: 0.000 | success_func_pair_count: 0  key_pos_acc: 0.000  value_pos_acc: 0.000 | time: 514.14
+
+firmware: AC15
+  two_shot   | Precision: 1.000  Recall: 0.667  F1: 0.800 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 385.51
+  one_shot   | Precision: 0.333  Recall: 0.667  F1: 0.444 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 38.71
+
+firmware: AC18
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 3  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 328.22
+  one_shot   | Precision: 1.000  Recall: 0.333  F1: 0.500 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 0.500 | time: 42.09
+
+firmware: G0
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 4  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 336.09
+  one_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 4  key_pos_acc: 1.000  value_pos_acc: 0.750 | time: 64.66
+
+firmware: G3
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 562.55
+  one_shot   | Precision: 0.667  Recall: 1.000  F1: 0.800 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 0.750 | time: 66.95
+
+firmware: W20E
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 333.41
+  one_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 0.750 | time: 24.19
+
+firmware: T10
+  two_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 74.34
+  one_shot   | Precision: 1.000  Recall: 1.000  F1: 1.000 | success_func_pair_count: 1  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 15.57
+
+firmware: DIR-816
+  two_shot   | Precision: 1.000  Recall: 0.500  F1: 0.667 | success_func_pair_count: 2  key_pos_acc: 1.000  value_pos_acc: 1.000 | time: 89.37
+  one_shot   | Precision: 1.000  Recall: 0.500  F1: 0.667 | success_func_pair_count: 2  key_pos_acc: 0.000  value_pos_acc: 0.500 | time: 22.45
+
+------------------------------------------------------------
+Aggregated across all firmware:
+
+  two_shot   | Correct_func_pair: 82  Precision: 0.986  Recall: 0.890  F1: 0.936 | total_success_func_pair: 73  overall_key_pos_acc: 1.000  overall_value_pos_acc: 1.000 | average time: 376.4874074074074
+  one_shot   | Correct_func_pair: 82  Precision: 0.684  Recall: 0.634  F1: 0.658 | total_success_func_pair: 52  overall_key_pos_acc: 0.712  overall_value_pos_acc: 0.471 | average time: 70.28074074074074

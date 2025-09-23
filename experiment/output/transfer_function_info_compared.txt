@@ -1,0 +1,163 @@
+Using LLM model: deepseek-chat
+Binary: DIR-878
+  Two-parse LLM: [['nvram_safe_set', 'nvram_safe_get', 0, 0, 1, None], ['nvram_set', 'nvram_get', 1, 1, 2, None], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, None], ['nvram_bufset', 'nvram_bufget', 1, 1, 2, None]]
+  Elapsed time for two-parse LLM: 274.930481672287
+  One-parse LLM: [['nvram_safe_set', 'nvram_safe_get', 0, 0, 1, 1], ['nvram_set', 'nvram_get', 0, 0, 1, 1], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, 1], ['nvram_bufset', 'nvram_bufget', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 39.16266131401062
+
+Binary: DIR-882
+  Two-parse LLM: [['nvram_safe_set', 'nvram_safe_get', 0, 0, 1, None], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, None], ['nvram_bufset', 'nvram_bufget', 1, 1, 2, None]]
+  Elapsed time for two-parse LLM: 465.8618621826172
+  One-parse LLM: [['nvram_safe_set', 'nvram_safe_get', 0, 0, 1, 1], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, 1], ['nvram_bufset', 'nvram_bufget', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 105.22452712059021
+
+Binary: E1200
+  Two-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 451.72840332984924
+  One-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 51.799410581588745
+
+Binary: R6200
+  Two-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, None], ['acosNvramConfig_set', 'acosNvramConfig_read', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 362.70715713500977
+  One-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, 1], ['acosNvramConfig_setPAParam', 'acosNvramConfig_readAsInt', 0, 0, 1, 1], ['agApi_feature_set', 'agApi_feature_get', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 44.484333753585815
+
+Binary: R6300
+  Two-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, None], ['acosNvramConfig_set', 'acosNvramConfig_read', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 431.76345777511597
+  One-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, 1], ['nvram_set', 'nvram_get', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 55.518590211868286
+
+Binary: R7000P
+  Two-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, None], ['setenv', 'getenv', 0, 0, 1, None], ['acosNvramConfig_set', 'acosNvramConfig_read', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 732.8609752655029
+  One-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, 1], ['nvram_set', 'nvram_get', 0, 0, 1, 1], ['setNvramDeviceValue', 'getNvramDevice', 0, 0, 1, 1], ['addSamainNvramDeviceValue', 'getNvramDevice', 0, 0, 1, 1], ['acosNvramConfig_setPAParam', 'acosNvramConfig_readAsInt', 0, 0, 1, 1], ['agApi_feature_set', 'agApi_feature_get', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 94.1796863079071
+
+Binary: A720R
+  Two-parse LLM: [['apmib_set', 'apmib_get', 0, 0, 1, 1], ['inifile_set_int', 'inifile_get_int', 2, 2, 3, None], ['inifile_set', 'inifile_get_string', 2, 2, 3, 3]]
+  Elapsed time for two-parse LLM: 102.04028367996216
+  One-parse LLM: [['apmib_set', 'apmib_get', 0, 0, 1, 1], ['inifile_set', 'inifile_get_string', 0, 0, 1, 1], ['inifile_set_int', 'inifile_get_int', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 23.139601707458496
+
+Binary: LR1200GB
+  Two-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, None], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, None], ['nvram_wlan_set', 'nvram_wlan_get', 1, 1, 2, None], ['nvram_wlan_set_int', 'nvram_wlan_get_int', 1, 1, 2, None], ['nvram_safe_get', 'nvram_safe_get_int', 0, 0, None, None], ['set_wan_unit_value', 'get_wan_unit_value', 1, 1, 2, None], ['set_wan_unit_value_int', 'get_wan_unit_value_int', 1, 1, 2, None]]
+  Elapsed time for two-parse LLM: 313.2947952747345
+  One-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, 1], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, 1], ['nvram_wlan_set', 'nvram_wlan_get', 0, 0, 1, 1], ['nvram_wlan_set_int', 'nvram_wlan_get_int', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 44.37698984146118
+
+Binary: NR1800X
+  Two-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, None], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, None], ['nvram_wlan_set', 'nvram_wlan_get', 1, 1, 2, None], ['nvram_wlan_set_int', 'nvram_wlan_get_int', 1, 1, 2, None], ['set_wan_unit_value', 'get_wan_unit_value', 1, 1, 2, None], ['set_wan_unit_value_int', 'get_wan_unit_value_int', 1, 1, 2, None]]
+  Elapsed time for two-parse LLM: 271.0743625164032
+  One-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, 1], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, 1], ['nvram_wlan_set', 'nvram_wlan_get', 0, 0, 1, 1], ['nvram_wlan_set_int', 'nvram_wlan_get_int', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 43.86310529708862
+
+Binary: 4G-AC53U
+  Two-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, None], ['nvram_pf_set', 'nvram_pf_get', 1, 1, 2, None], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, None], ['setenv', 'getenv', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 600.1896619796753
+  One-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, 1], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, 1], ['nvram_pf_set', 'nvram_pf_get', 0, 0, 1, 1], ['nvram_pf_set_int', 'nvram_pf_get_int', 0, 0, 1, 1], ['nvram_set_file', 'nvram_get_file', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 91.27702569961548
+
+Binary: 4G-AX56
+  Two-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, None], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, None], ['nvram_set_file', 'nvram_get_file', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 467.70106172561646
+  One-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, 1], ['nvram_set_int', 'nvram_get_int', 0, 0, 1, 1], ['nvram_pf_set', 'nvram_pf_get', 0, 0, 1, 1], ['nvram_set_file', 'nvram_get_file', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 64.13256239891052
+
+Binary: BE9300
+  Two-parse LLM: [['config_set', 'config_get', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 254.31587147712708
+  One-parse LLM: [['config_set', 'config_get', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 38.078351736068726
+
+Binary: EX6100
+  Two-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_read', 0, 0, 1, 1], ['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 369.3859853744507
+  One-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, 1], ['acosNvramConfig_set', 'acosNvramConfig_read', 0, 0, 1, 1], ['nvram_set', 'acosNvramConfig_get', 0, 0, 1, 1], ['nvram_set', 'acosNvramConfig_read', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 52.74078130722046
+
+Binary: EX6120
+  Two-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, None], ['acosNvramConfig_save', 'acosNvramConfig_read', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 415.2843339443207
+  One-parse LLM: [['acosNvramConfig_set', 'acosNvramConfig_get', 0, 0, 1, 1], ['acosNvramConfig_set', 'acosNvramConfig_read', 0, 0, 1, 1], ['acosNvramConfig_set', 'acosNvramConfig_readAsInt', 0, 0, 1, 1], ['nvram_set', 'acosNvramConfig_get', 0, 0, 1, 1], ['nvram_set', 'acosNvramConfig_read', 0, 0, 1, 1], ['nvram_set', 'acosNvramConfig_readAsInt', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 96.17206525802612
+
+Binary: AX90
+  Two-parse LLM: [['setenv', 'getenv', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 113.84090662002563
+  One-parse LLM: []
+  Elapsed time for one-parse LLM: 33.24624586105347
+
+Binary: C20
+  Two-parse LLM: [['rdp_setObj', 'rdp_getObj', 1, 1, 2, 2], ['rdp_setObjStruct', 'rdp_getObjStruct', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 185.02437043190002
+  One-parse LLM: []
+  Elapsed time for one-parse LLM: 12.265345096588135
+
+Binary: WR902AC
+  Two-parse LLM: [['rdp_setObj', 'rdp_getObj', 1, 1, 2, 2], ['rdp_setObjStruct', 'rdp_getObjStruct', 0, 0, 1, 1], ['setenv', 'getenv', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 497.0284650325775
+  One-parse LLM: []
+  Elapsed time for one-parse LLM: 32.83877372741699
+
+Binary: DIR-823G
+  Two-parse LLM: [['apmib_set', 'apmib_get', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 87.47198033332825
+  One-parse LLM: [['apmib_set', 'apmib_get', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 12.877049446105957
+
+Binary: R6350
+  Two-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, None], ['apcli_nvram_set', 'apcli_nvram_get', 1, 1, 2, None], ['nvram_set_idx_n', 'nvram_get_idx_n', 0, 0, 3, None], ['nv_set', 'nv_get', 1, 1, 2, None], ['nv_set_int', 'nv_get_int', 1, 1, 2, None], ['setenv', 'getenv', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 863.4391920566559
+  One-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, 1], ['apcli_nvram_set', 'apcli_nvram_get', 0, 0, 1, 1], ['nvram_set_n', 'nvram_get_n', 0, 0, 1, 1], ['nvram_set_idx_n', 'nvram_get_idx_n', 0, 0, 1, 1], ['nv_set', 'nv_get', 0, 0, 1, 1], ['nv_set_int', 'nv_get_int', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 173.4401776790619
+
+Binary: AC12
+  Two-parse LLM: [['SetValue', 'GetValue', 0, 0, 1, 1], ['SetUrlValue', 'GetUrlValue', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 795.7422380447388
+  One-parse LLM: []
+  Elapsed time for one-parse LLM: 514.1419451236725
+
+Binary: AC15
+  Two-parse LLM: [['SetValue', 'GetValue', 0, 0, 1, 1], ['SetUrlValue', 'GetUrlValue', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 385.5057780742645
+  One-parse LLM: [['bcm_nvram_set', 'bcm_nvram_get', 0, 0, 1, 1], ['envram_set_value', 'envram_get_value', 0, 0, 1, 1], ['SetValue', 'GetValue', 0, 0, 1, 1], ['UnSetValue', 'GetValue', 0, 0, None, 1], ['SetUrlValue', 'GetUrlValue', 0, 0, 1, 1], ['UnSetUrlValue', 'GetUrlValue', 0, 0, None, 1]]
+  Elapsed time for one-parse LLM: 38.71493744850159
+
+Binary: AC18
+  Two-parse LLM: [['bcm_nvram_set', 'bcm_nvram_get', 0, 0, 1, None], ['SetValue', 'GetValue', 0, 0, 1, 1], ['SetUrlValue', 'GetUrlValue', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 328.22265243530273
+  One-parse LLM: [['bcm_nvram_set', 'bcm_nvram_get', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 42.088659048080444
+
+Binary: G0
+  Two-parse LLM: [['prod_cfm_set_val', 'prod_cfm_get_val', 0, 0, 1, 1], ['prod_cfm_set_int_val', 'prod_cfm_get_int_val', 0, 0, 1, None], ['SetValue', 'GetValue', 0, 0, 1, 1], ['SetIntValue', 'GetIntValue', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 336.0917270183563
+  One-parse LLM: [['prod_cfm_set_val', 'prod_cfm_get_val', 0, 0, 1, 1], ['prod_cfm_set_int_val', 'prod_cfm_get_int_val', 0, 0, 1, 1], ['SetValue', 'GetValue', 0, 0, 1, 1], ['SetIntValue', 'GetIntValue', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 64.65518975257874
+
+Binary: G3
+  Two-parse LLM: [['bcm_nvram_set', 'bcm_nvram_get', 0, 0, 1, None], ['SetValue', 'GetValue', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 562.5490634441376
+  One-parse LLM: [['bcm_nvram_set', 'bcm_nvram_get', 0, 0, 1, 1], ['prod_cfm_set_val', 'GetValue', 0, 0, 1, 1], ['SetValue', 'GetValue', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 66.94571685791016
+
+Binary: W20E
+  Two-parse LLM: [['SetValue', 'GetValue', 0, 0, 1, 1], ['bcm_nvram_set', 'bcm_nvram_get', 0, 0, 1, None]]
+  Elapsed time for two-parse LLM: 333.4079370498657
+  One-parse LLM: [['bcm_nvram_set', 'bcm_nvram_get', 0, 0, 1, 1], ['SetValue', 'GetValue', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 24.192136764526367
+
+Binary: T10
+  Two-parse LLM: [['apmib_set', 'apmib_get', 0, 0, 1, 1]]
+  Elapsed time for two-parse LLM: 74.33745121955872
+  One-parse LLM: [['apmib_set', 'apmib_get', 0, 0, 1, 1]]
+  Elapsed time for one-parse LLM: 15.568955659866333
+
+Binary: DIR-816
+  Two-parse LLM: [['nvram_bufset', 'nvram_bufget', 1, 1, 2, None], ['nvram_set', 'nvram_get', 1, 1, 2, None]]
+  Elapsed time for two-parse LLM: 89.36619782447815
+  One-parse LLM: [['nvram_set', 'nvram_get', 0, 0, 1, None], ['nvram_bufset', 'nvram_bufget', 0, 0, 1, None]]
+  Elapsed time for one-parse LLM: 22.44940185546875
+

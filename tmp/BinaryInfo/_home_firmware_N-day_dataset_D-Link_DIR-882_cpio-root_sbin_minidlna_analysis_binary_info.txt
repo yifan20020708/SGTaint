@@ -1,0 +1,303 @@
+Binary Path: /home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/sbin/minidlna
+
+========== Binary Function Keywords ==========
+[1] --help
+[2] /depth
+[3] /height
+[4] /major
+[5] /manufacturer
+[6] /mimetype
+[7] /minor
+[8] /modelName
+[9] /url
+[10] /width
+[11] 0123456789ABCDEF
+[12] 0123456789abcdef
+[13] ?function?
+[14] @size
+[15] AFResult
+[16] Aprel
+[17] Auto
+[18] Automatic
+[19] BWMode
+[20] Bottom
+[21] BottomUp
+[22] Bright-
+[23] Browse
+[24] Clear
+[25] Connected
+[26] Connecting
+[27] Country
+[28] DIV1
+[29] DIV2
+[30] DIV3
+[31] DIV4
+[32] DIV5
+[33] DIV6
+[34] DIVX
+[35] DaylightSavings
+[36] Delete
+[37] DeviceID
+[38] Disconnected
+[39] Ebrel
+[40] Ethernet
+[41] F-Chrome
+[42] Firmware
+[43] Folders
+[44] Friday
+[45] Game
+[46] HEAD
+[47] High
+[48] Highest
+[49] Host
+[50] LANG
+[51] Left
+[52] MAC3
+[53] MAC6
+[54] Macro
+[55] Manual
+[56] Medium
+[57] Model
+[58] Monday
+[59] NONE
+[60] NONE	
+[61] NULL
+[62] Next
+[63] Opera
+[64] Other
+[65] POST
+[66] Pipi
+[67] Preset
+[68] Result
+[69] Right
+[70] SOAPAction
+[71] S_SSA
+[72] Saturday
+[73] Settings1
+[74] Settings2
+[75] Sport
+[76] Sports
+[77] Status
+[78] Success
+[79] Sunday
+[80] TLAN
+[81] Terror
+[82] Text
+[83] Thursday
+[84] TimeZone
+[85] Timeout
+[86] ToText
+[87] Tuesday
+[88] Unconfigured
+[89] Undefined
+[90] Unknown
+[91] VNext
+[92] VUpdate
+[93] WPAY
+[94] Wednesday
+[95] YTCP
+[96] _content
+[97] addr
+[98] aprel
+[99] auto
+[100] boolean
+[101] bytes=
+[102] cdata
+[103] changes
+[104] contains
+[105] content
+[106] copyright
+[107] covr
+[108] create
+[109] created
+[110] data
+[111] deblock
+[112] default
+[113] delete
+[114] deleted
+[115] divx
+[116] dlna
+[117] domain
+[118] edge
+[119] enda
+[120] error
+[121] file
+[122] float
+[123] gray
+[124] height
+[125] hidden
+[126] hour
+[127] icon
+[128] ifnull
+[129] image/
+[130] image2
+[131] info
+[132] inotify
+[133] invalid
+[134] language
+[135] left
+[136] lmin
+[137] ltrim
+[138] main
+[139] memory
+[140] minf
+[141] minute
+[142] mode
+[143] modelName
+[144] month
+[145] name
+[146] nokey
+[147] normal
+[148] null
+[149] nullif
+[150] offsets
+[151] overflow
+[152] pipe
+[153] plane
+[154] port
+[155] porter
+[156] pred
+[157] profile
+[158] qblur
+[159] qmin
+[160] redir
+[161] root
+[162] round
+[163] rtsp
+[164] seqno
+[165] sipr
+[166] skip
+[167] slice
+[168] sreda
+[169] tapu
+[170] text
+[171] text/html
+[172] text/plain
+[173] timeout
+[174] title
+[175] typeof
+[176] unknown
+[177] uuid
+[178] wpred
+[179] year
+[180] zh_TW
+
+========== Set-Get Call Sites ==========
+No set-get call sites found.
+
+========== Related File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+nvram_set:
+nvram_set_int:
+
+========== Diffusion File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+nvram_set:
+nvram_set_int:
+
+========== Set-Get Function Info ==========
+[1] Set: nvram_safe_set, Get: nvram_safe_get, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[2] Set: nvram_set, Get: nvram_get, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+[3] Set: nvram_set_int, Get: nvram_get_int, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[4] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+
+========== Source2Sink Paths ==========
+No paths paths found.
+
+========== Get2Set Paths ==========
+No paths paths found.
+
+========== SOURCE ==========
+[1] sub_1d170
+[2] config_get
+[3] NK_query_entry_get
+[4] webGetVarString
+[5] bcm_nvram_get
+[6] GetValue
+[7] acosNvramConfig_read
+[8] sub_42af24
+[9] sub_42a978
+[10] get_cgi
+[11] websGetVar
+[12] nvram_get
+[13] nvram_safe_get
+[14] nvram_default_get
+[15] getenv
+[16] nvram_pf_get
+[17] acosNvramConfig_get
+[18] uciGet
+[19] entry
+[20] wpa_config_get
+[21] httpGenListDataGet
+[22] cJSON_GetArrayItem
+[23] vici_find_str
+[24] DoHardwareComponent
+[25] device_get_string_value
+[26] cJSON_Parse
+[27] websGetVarSafe
+[28] websGetVar_secure
+[29] OM_ValGet
+[30] acosUciConfig_get
+[31] CAL_abstract_get
+[32] json_object_object_get
+[33] json_object_object_get_ex
+[34] json_tokener_parse
+[35] OM_ValFind
+[36] get_parameter
+[37] get_wlan_setting
+[38] av_dict_get
+[39] cgi_value
+[40] stringOut
+[41] cJSON_GetObjectItem
+[42] sw_getValueByName
+[43] querystr
+[44] find_val
+[45] log_query
+[46] value_parser_by_index_D7000
+[47] getoption
+[48] WEB_GetVar
+[49] av_opt_get
+[50] paramValueFromObjGet
+[51] help_getObjPtr
+[52] NCONF_get_string
+[53] getString
+[54] web_getav_metadata_get
+[55] httpGetEnv
+[56] gets
+[57] fgets
+[58] recvfrom
+[59] recvmsg
+[60] nvram_get_ex2
+[61] nvram_bufget
+[62] apmib_get
+[63] apcli_nvram_get
+[64] nvram_get_int
+
+========== TRANSITIVE SET ==========
+[1] config_set
+[2] SetValue
+[3] setenv
+[4] nvram_set
+[5] nvram_safe_set
+[6] nvram_pf_set
+[7] artblock_set
+[8] acos_nvram_set
+[9] acosNvramConfig_set
+[10] acosNvramConfig_write
+[11] envz_add
+[12] uciSet
+[13] device_set_string_value
+[14] wpa_config_set
+[15] scfgmgr_set_by_index_D7000
+[16] acosUciConfig_set
+[17] OM_ValSet
+[18] CAL_abstract_set
+[19] nvram_bufset
+[20] apmib_set
+[21] apcli_nvram_set
+[22] nvram_set_value
+[23] acosNvramConfig_set_bak
+[24] nvram_set_int
+

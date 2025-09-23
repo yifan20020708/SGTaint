@@ -1,0 +1,77 @@
+{
+    "binary_path": "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/ntpclient",
+    "binary_function_keyword": [],
+    "set_get_call_sites_dict": {
+        "nvram_safe_get": [
+            [
+                4201860,
+                4200156,
+                4201776,
+                "ntp_timezone"
+            ],
+            [
+                4201888,
+                4200156,
+                4201868,
+                "ntp_DaylightSavingsUsed"
+            ]
+        ]
+    },
+    "relate_file_path": {
+        "nvram_safe_set": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/prog.cgi"
+        ],
+        "nvram_set": [],
+        "nvram_set_int": [],
+        "nvram_bufset": []
+    },
+    "is_board_binary": false,
+    "is_set_role": false,
+    "construct_intra_graph_tag": false,
+    "diffusion_file": {
+        "nvram_safe_set": [],
+        "nvram_set": [],
+        "nvram_set_int": [],
+        "nvram_bufset": []
+    },
+    "set_get_code_snippet": {},
+    "ghidra_func_identify_failed": {},
+    "ghidra_project": false,
+    "get_set_function_info": [
+        [
+            "nvram_safe_set",
+            "nvram_safe_get",
+            0,
+            0,
+            1,
+            null
+        ],
+        [
+            "nvram_set",
+            "nvram_get",
+            1,
+            1,
+            2,
+            null
+        ],
+        [
+            "nvram_set_int",
+            "nvram_get_int",
+            0,
+            0,
+            1,
+            null
+        ],
+        [
+            "nvram_bufset",
+            "nvram_bufget",
+            1,
+            1,
+            2,
+            null
+        ]
+    ],
+    "source2sink_path": [],
+    "get2set_path": [],
+    "visited_function_list": []
+}

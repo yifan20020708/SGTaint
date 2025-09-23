@@ -1,0 +1,4 @@
+sub_401c80
+notify_rc
+fopen
+fopen

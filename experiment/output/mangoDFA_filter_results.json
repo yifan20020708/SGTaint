@@ -1,0 +1,3474 @@
+[
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>) @ 0x4014ac",
+                "ins_addr": "0x4014ac"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff10>)>, <MultiValues(<BV32 heap_base>)>) @ 0x4015d0",
+            "ins_addr": "0x4015d0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "statistics_domain"
+            ],
+            "possibly": [
+                "statistics_api"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4199732
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/statistics"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>) @ 0x4014ac",
+                "ins_addr": "0x4014ac"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff50>)>, <MultiValues(<BV32 heap_base + 0x1>)>) @ 0x401638",
+            "ins_addr": "0x401638"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "statistics_domain"
+            ],
+            "possibly": [
+                "statistics_api"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4199732
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/statistics"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>) @ 0x4014ac",
+                "ins_addr": "0x4014ac"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff90>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x4016a0",
+            "ins_addr": "0x4016a0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "statistics_api"
+            ],
+            "possibly": [
+                "statistics_domain"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4200076
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/statistics"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>) @ 0x4014ac",
+                "ins_addr": "0x4014ac"
+            },
+            {
+                "function": "sub_400b04",
+                "string": "sub_400b04(<MultiValues({0: {<BV32 stack_base + 0xffffff10>, <BV32 stack_base + 0xffffff10>}})>, <MultiValues(<BV32 stack_base + 0xffffff90>)>, <MultiValues(<BV32 TOP + TOP>)>, <MultiValues({0: {<BV32 0x0>, <BV32 0x1>}})>) @ 0x401788",
+                "ins_addr": "0x401788"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffeeb8>)>, <MultiValues(<BV32 stack_base + 0xffffe6b8>)>) @ 0x400f78",
+            "ins_addr": "0x400f78"
+        },
+        "depth": 2,
+        "inputs": {
+            "likely": [
+                "statistics_domain",
+                "statistics_api"
+            ],
+            "possibly": [
+                "csid_custom",
+                "statistics_model"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4200076,
+                4199732
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/statistics"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400930",
+                "string": "sub_400930() @ 0x400930",
+                "ins_addr": "0x400930"
+            }
+        ],
+        "sink": {
+            "function": "system",
+            "string": "system(<MultiValues(<BV32 stack_base + 0xfffffc90>)>) @ 0x400aa0",
+            "ins_addr": "0x400aa0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_url"
+            ],
+            "possibly": [
+                "cloudupg_magicid"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4196848
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "cmdi",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/forceupg"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main() @ 0x400d28",
+                "ins_addr": "0x400d28"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe60>)>, <MultiValues(<BV32 heap_base>)>) @ 0x400ff0",
+            "ins_addr": "0x400ff0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "csid_custom"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4198364
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/forceupg"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400930",
+                "string": "sub_400930() @ 0x400930",
+                "ins_addr": "0x400930"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe90>)>, <MultiValues(<BV32 heap_base>)>) @ 0x400a04",
+            "ins_addr": "0x400a04"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_url"
+            ],
+            "possibly": [
+                "cloudupg_magicid"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4196848
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/forceupg"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400930",
+                "string": "sub_400930() @ 0x400930",
+                "ins_addr": "0x400930"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff90>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x400a2c",
+            "ins_addr": "0x400a2c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_magicid"
+            ],
+            "possibly": [
+                "cloudupg_url"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4196888
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/forceupg"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_401cfc",
+                "string": "sub_401cfc(<MultiValues(<BV32 TOP>)>) @ 0x401cfc",
+                "ins_addr": "0x401cfc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffffd0>)>, <MultiValues(<BV32 heap_base>)>) @ 0x401d5c",
+            "ins_addr": "0x401d5c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_timestamp"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4201800
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400ca0",
+                "string": "sub_400ca0() @ 0x400ca0",
+                "ins_addr": "0x400ca0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffdf0>)>, <MultiValues(<BV32 heap_base>)>) @ 0x400d14",
+            "ins_addr": "0x400d14"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_domain"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4197632
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400ca0",
+                "string": "sub_400ca0() @ 0x400ca0",
+                "ins_addr": "0x400ca0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 0x413c90>)>, <MultiValues({0: {<BV32 stack_base + 0xfffffdf0>, <BV32 stack_base + 0xfffffdf8>, <BV32 stack_base + 0xfffffdf7>}})>) @ 0x400e00",
+            "ins_addr": "0x400e00"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_domain"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4197632
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_401fc4",
+                "string": "sub_401fc4(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>) @ 0x401fc4",
+                "ins_addr": "0x401fc4"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffeb8>)>, <MultiValues(<BV32 heap_base>)>) @ 0x40207c",
+            "ins_addr": "0x40207c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "csid_custom"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4202596
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_403668",
+                "string": "sub_403668() @ 0x403668",
+                "ins_addr": "0x403668"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffd58>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x403a04",
+            "ins_addr": "0x403a04"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_flow_up"
+            ],
+            "possibly": [
+                "iot_flow_down",
+                "lan_hwaddr"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4209136
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_403668",
+                "string": "sub_403668() @ 0x403668",
+                "ins_addr": "0x403668"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffd98>)>, <MultiValues(<BV32 heap_base + 0x40>)>) @ 0x403a2c",
+            "ins_addr": "0x403a2c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_flow_down"
+            ],
+            "possibly": [
+                "iot_flow_up",
+                "lan_hwaddr"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4209176
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4067b4",
+                "string": "sub_4067b4() @ 0x4067b4",
+                "ins_addr": "0x4067b4"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffdd0>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x4058fc",
+            "ins_addr": "0x4058fc"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_signal"
+            ],
+            "possibly": [
+                "iot_sinal_warning_finish",
+                "iot_sinr",
+                "iot_reboot_warning_finish",
+                "reboot_times",
+                "lan_hwaddr",
+                "iot_sinr_warning_finish",
+                "iot_startTimes"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4217064
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4067b4",
+                "string": "sub_4067b4() @ 0x4067b4",
+                "ins_addr": "0x4067b4"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe10>)>, <MultiValues(<BV32 heap_base + 0x40>)>) @ 0x405924",
+            "ins_addr": "0x405924"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_sinr"
+            ],
+            "possibly": [
+                "iot_sinal_warning_finish",
+                "iot_reboot_warning_finish",
+                "reboot_times",
+                "iot_signal",
+                "lan_hwaddr",
+                "iot_sinr_warning_finish",
+                "iot_startTimes"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4217104
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4067b4",
+                "string": "sub_4067b4() @ 0x4067b4",
+                "ins_addr": "0x4067b4"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffdb0>)>, <MultiValues(<BV32 heap_base + 0x60>)>) @ 0x40594c",
+            "ins_addr": "0x40594c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_startTimes"
+            ],
+            "possibly": [
+                "iot_sinal_warning_finish",
+                "iot_sinr",
+                "iot_reboot_warning_finish",
+                "reboot_times",
+                "iot_signal",
+                "lan_hwaddr",
+                "iot_sinr_warning_finish"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4217144
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4067b4",
+                "string": "sub_4067b4() @ 0x4067b4",
+                "ins_addr": "0x4067b4"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffdc0>)>, <MultiValues(<BV32 heap_base + 0x80>)>) @ 0x405974",
+            "ins_addr": "0x405974"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "reboot_times"
+            ],
+            "possibly": [
+                "iot_sinal_warning_finish",
+                "iot_sinr",
+                "iot_reboot_warning_finish",
+                "iot_signal",
+                "lan_hwaddr",
+                "iot_sinr_warning_finish",
+                "iot_startTimes"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4217184
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4067b4",
+                "string": "sub_4067b4() @ 0x4067b4",
+                "ins_addr": "0x4067b4"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffed0>)>, <MultiValues(<BV32 heap_base + 0xa0>)>) @ 0x40599c",
+            "ins_addr": "0x40599c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_sinal_warning_finish"
+            ],
+            "possibly": [
+                "iot_sinr",
+                "iot_reboot_warning_finish",
+                "reboot_times",
+                "iot_signal",
+                "lan_hwaddr",
+                "iot_sinr_warning_finish",
+                "iot_startTimes"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4217224
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4067b4",
+                "string": "sub_4067b4() @ 0x4067b4",
+                "ins_addr": "0x4067b4"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff10>)>, <MultiValues(<BV32 heap_base + 0xc0>)>) @ 0x4059c4",
+            "ins_addr": "0x4059c4"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_sinr",
+                "iot_sinr_warning_finish"
+            ],
+            "possibly": [
+                "iot_sinal_warning_finish",
+                "iot_reboot_warning_finish",
+                "reboot_times",
+                "iot_signal",
+                "lan_hwaddr",
+                "iot_startTimes"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4217104,
+                4217264
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4067b4",
+                "string": "sub_4067b4() @ 0x4067b4",
+                "ins_addr": "0x4067b4"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff50>)>, <MultiValues(<BV32 heap_base + 0xe0>)>) @ 0x4059ec",
+            "ins_addr": "0x4059ec"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_reboot_warning_finish"
+            ],
+            "possibly": [
+                "iot_sinal_warning_finish",
+                "iot_sinr",
+                "reboot_times",
+                "iot_signal",
+                "lan_hwaddr",
+                "iot_sinr_warning_finish",
+                "iot_startTimes"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4217304
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_404a70",
+                "string": "sub_404a70() @ 0x404a70",
+                "ins_addr": "0x404a70"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0x278>)>, <MultiValues(<BV32 heap_base>)>) @ 0x404e88",
+            "ins_addr": "0x404e88"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_flow_up"
+            ],
+            "possibly": [
+                "iot_flow_down",
+                "/tmp/iot/statistic_parameter"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4214388
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_404a70",
+                "string": "sub_404a70() @ 0x404a70",
+                "ins_addr": "0x404a70"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0x2b8>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x404eb0",
+            "ins_addr": "0x404eb0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_flow_down"
+            ],
+            "possibly": [
+                "iot_flow_up",
+                "/tmp/iot/statistic_parameter"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4214428
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4060cc",
+                "string": "sub_4060cc() @ 0x4060cc",
+                "ins_addr": "0x4060cc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe90>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x406338",
+            "ins_addr": "0x406338"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_signal"
+            ],
+            "possibly": [
+                "iot_startTimes",
+                "iot_signal_warning",
+                "lan_hwaddr",
+                "iot_sinr",
+                "iot_reboot_warning",
+                "iot_sinr_warning",
+                "reboot_times"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4219684
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4060cc",
+                "string": "sub_4060cc() @ 0x4060cc",
+                "ins_addr": "0x4060cc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffed0>)>, <MultiValues(<BV32 heap_base + 0x40>)>) @ 0x406360",
+            "ins_addr": "0x406360"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_sinr"
+            ],
+            "possibly": [
+                "iot_startTimes",
+                "iot_signal_warning",
+                "lan_hwaddr",
+                "iot_reboot_warning",
+                "iot_sinr_warning",
+                "iot_signal",
+                "reboot_times"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4219724
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4060cc",
+                "string": "sub_4060cc() @ 0x4060cc",
+                "ins_addr": "0x4060cc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe40>)>, <MultiValues(<BV32 heap_base + 0x60>)>) @ 0x406388",
+            "ins_addr": "0x406388"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_startTimes"
+            ],
+            "possibly": [
+                "iot_signal_warning",
+                "lan_hwaddr",
+                "iot_sinr",
+                "iot_reboot_warning",
+                "iot_sinr_warning",
+                "iot_signal",
+                "reboot_times"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4219764
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4060cc",
+                "string": "sub_4060cc() @ 0x4060cc",
+                "ins_addr": "0x4060cc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe50>)>, <MultiValues(<BV32 heap_base + 0x80>)>) @ 0x4063b0",
+            "ins_addr": "0x4063b0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "reboot_times"
+            ],
+            "possibly": [
+                "iot_startTimes",
+                "iot_signal_warning",
+                "lan_hwaddr",
+                "iot_sinr",
+                "iot_reboot_warning",
+                "iot_sinr_warning",
+                "iot_signal"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4219804
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4060cc",
+                "string": "sub_4060cc() @ 0x4060cc",
+                "ins_addr": "0x4060cc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe60>)>, <MultiValues(<BV32 heap_base + 0xa0>)>) @ 0x4063dc",
+            "ins_addr": "0x4063dc"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_signal_warning",
+                "iot_signal"
+            ],
+            "possibly": [
+                "iot_startTimes",
+                "lan_hwaddr",
+                "iot_sinr",
+                "iot_reboot_warning",
+                "iot_sinr_warning",
+                "reboot_times"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4219840,
+                4219684
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4060cc",
+                "string": "sub_4060cc() @ 0x4060cc",
+                "ins_addr": "0x4060cc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe70>)>, <MultiValues(<BV32 heap_base + 0xc0>)>) @ 0x406404",
+            "ins_addr": "0x406404"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_sinr",
+                "iot_sinr_warning"
+            ],
+            "possibly": [
+                "iot_startTimes",
+                "iot_signal_warning",
+                "lan_hwaddr",
+                "iot_reboot_warning",
+                "iot_signal",
+                "reboot_times"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4219888,
+                4219724
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4060cc",
+                "string": "sub_4060cc() @ 0x4060cc",
+                "ins_addr": "0x4060cc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe80>)>, <MultiValues(<BV32 heap_base + 0xe0>)>) @ 0x40642c",
+            "ins_addr": "0x40642c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_reboot_warning"
+            ],
+            "possibly": [
+                "iot_startTimes",
+                "iot_signal_warning",
+                "lan_hwaddr",
+                "iot_sinr",
+                "iot_sinr_warning",
+                "iot_signal",
+                "reboot_times"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4219928
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4014a0",
+                "string": "sub_4014a0(<MultiValues(<BV32 TOP>)>) @ 0x4014a0",
+                "ins_addr": "0x4014a0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffddc>)>, <MultiValues(<BV32 heap_base>)>) @ 0x401640",
+            "ins_addr": "0x401640"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_server"
+            ],
+            "possibly": [
+                "iot_actpath",
+                "iot_port"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4199976
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4014a0",
+                "string": "sub_4014a0(<MultiValues(<BV32 TOP>)>) @ 0x4014a0",
+                "ins_addr": "0x4014a0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffcf0>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x40166c",
+            "ins_addr": "0x40166c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_port"
+            ],
+            "possibly": [
+                "iot_actpath",
+                "iot_server"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4200020
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_4014a0",
+                "string": "sub_4014a0(<MultiValues(<BV32 TOP>)>) @ 0x4014a0",
+                "ins_addr": "0x4014a0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffd5c>)>, <MultiValues(<BV32 heap_base + 0x40>)>) @ 0x401698",
+            "ins_addr": "0x401698"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "iot_actpath"
+            ],
+            "possibly": [
+                "iot_server",
+                "iot_port"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4200064
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/iot"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_401d14",
+                "string": "sub_401d14(<MultiValues(<BV32 TOP>)>) @ 0x401d14",
+                "ins_addr": "0x401d14"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffffd0>)>, <MultiValues(<BV32 heap_base>)>) @ 0x401d74",
+            "ins_addr": "0x401d74"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_timestamp"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4201824
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_401fdc",
+                "string": "sub_401fdc(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>) @ 0x401fdc",
+                "ins_addr": "0x401fdc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffeb8>)>, <MultiValues(<BV32 heap_base>)>) @ 0x402094",
+            "ins_addr": "0x402094"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "csid_custom"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4202620
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400ca0",
+                "string": "sub_400ca0() @ 0x400ca0",
+                "ins_addr": "0x400ca0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffdf0>)>, <MultiValues(<BV32 heap_base>)>) @ 0x400d14",
+            "ins_addr": "0x400d14"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_domain"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4197632
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400ca0",
+                "string": "sub_400ca0() @ 0x400ca0",
+                "ins_addr": "0x400ca0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 0x413ca0>)>, <MultiValues({0: {<BV32 stack_base + 0xfffffdf0>, <BV32 stack_base + 0xfffffdf8>, <BV32 stack_base + 0xfffffdf7>}})>) @ 0x400e18",
+            "ins_addr": "0x400e18"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_domain"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4197632
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400ca0",
+                "string": "sub_400ca0() @ 0x400ca0",
+                "ins_addr": "0x400ca0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 0x413ba0>)>, <MultiValues(<BV32 stack_base + 0xfffffef0>)>) @ 0x400ea0",
+            "ins_addr": "0x400ea0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_domain"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4197632
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/cloudupdate_check"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400930",
+                "string": "sub_400930() @ 0x400930",
+                "ins_addr": "0x400930"
+            }
+        ],
+        "sink": {
+            "function": "system",
+            "string": "system(<MultiValues(<BV32 stack_base + 0xfffffc90>)>) @ 0x400aa0",
+            "ins_addr": "0x400aa0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_url"
+            ],
+            "possibly": [
+                "cloudupg_magicid"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4196848
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "cmdi",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/forceupg"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main() @ 0x400d28",
+                "ins_addr": "0x400d28"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe60>)>, <MultiValues(<BV32 heap_base>)>) @ 0x400ff0",
+            "ins_addr": "0x400ff0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "csid_custom"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4198364
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/forceupg"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400930",
+                "string": "sub_400930() @ 0x400930",
+                "ins_addr": "0x400930"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffe90>)>, <MultiValues(<BV32 heap_base>)>) @ 0x400a04",
+            "ins_addr": "0x400a04"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_url"
+            ],
+            "possibly": [
+                "cloudupg_magicid"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4196848
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/forceupg"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_400930",
+                "string": "sub_400930() @ 0x400930",
+                "ins_addr": "0x400930"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff90>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x400a2c",
+            "ins_addr": "0x400a2c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "cloudupg_magicid"
+            ],
+            "possibly": [
+                "cloudupg_url"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4196888
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/forceupg"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>) @ 0x4014ac",
+                "ins_addr": "0x4014ac"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff10>)>, <MultiValues(<BV32 heap_base>)>) @ 0x4015d0",
+            "ins_addr": "0x4015d0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "statistics_domain"
+            ],
+            "possibly": [
+                "statistics_api"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4199732
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/statistics"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>) @ 0x4014ac",
+                "ins_addr": "0x4014ac"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff50>)>, <MultiValues(<BV32 heap_base + 0x1>)>) @ 0x401638",
+            "ins_addr": "0x401638"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "statistics_domain"
+            ],
+            "possibly": [
+                "statistics_api"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4199732
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/statistics"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>) @ 0x4014ac",
+                "ins_addr": "0x4014ac"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff90>)>, <MultiValues(<BV32 heap_base + 0x20>)>) @ 0x4016a0",
+            "ins_addr": "0x4016a0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "statistics_api"
+            ],
+            "possibly": [
+                "statistics_domain"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4200076
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/statistics"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>) @ 0x4014ac",
+                "ins_addr": "0x4014ac"
+            },
+            {
+                "function": "sub_400b04",
+                "string": "sub_400b04(<MultiValues({0: {<BV32 stack_base + 0xffffff10>, <BV32 stack_base + 0xffffff10>}})>, <MultiValues(<BV32 stack_base + 0xffffff90>)>, <MultiValues(<BV32 TOP + TOP>)>, <MultiValues({0: {<BV32 0x0>, <BV32 0x1>}})>) @ 0x401788",
+                "ins_addr": "0x401788"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffeeb8>)>, <MultiValues(<BV32 stack_base + 0xffffe6b8>)>) @ 0x400f78",
+            "ins_addr": "0x400f78"
+        },
+        "depth": 2,
+        "inputs": {
+            "likely": [
+                "statistics_api",
+                "statistics_domain"
+            ],
+            "possibly": [
+                "csid_custom",
+                "statistics_model"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4200076,
+                4199732
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/statistics"
+    },
+    {
+        "trace": [
+            {
+                "function": "wpsenr_osl_restore_wsec",
+                "string": "wpsenr_osl_restore_wsec() @ 0x40e32c",
+                "ins_addr": "0x40e32c"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff30>)>, <MultiValues({0: {<BV32 0x43e1d8>, <BV32 heap_base>}})>) @ 0x40e69c",
+            "ins_addr": "0x40e69c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wlXXkey1"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4253032
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/bin/wps_monitor"
+    },
+    {
+        "trace": [
+            {
+                "function": "wpsenr_osl_restore_wsec",
+                "string": "wpsenr_osl_restore_wsec() @ 0x40e32c",
+                "ins_addr": "0x40e32c"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffee6>)>, <MultiValues(<BV32 stack_base + 0xfffffed8>)>) @ 0x40e6c0",
+            "ins_addr": "0x40e6c0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wlXXkey1"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4253032
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/bin/wps_monitor"
+    },
+    {
+        "trace": [
+            {
+                "function": "start_lan",
+                "string": "start_lan(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>) @ 0x411ad0",
+                "ins_addr": "0x411ad0"
+            }
+        ],
+        "sink": {
+            "function": "system",
+            "string": "system(<MultiValues(<BV32 stack_base + 0xfffffc68>)>) @ 0x413698",
+            "ins_addr": "0x413698"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "l",
+                "r",
+                "smb_host_name"
+            ],
+            "possibly": [
+                "TOP",
+                "lan_dhcp",
+                "enable_ap_mode",
+                "router_disable",
+                "dhcp_relay",
+                "dlna_auto_ip",
+                "tmp_lan_proto",
+                "tmp_rip_enable",
+                "0.0.0.0",
+                "wl1337_mode",
+                "rip_enable",
+                "ure_disable",
+                "ap_dyn_ip",
+                "lan_proto",
+                "p",
+                "wla_repeater",
+                "apmode_dns1",
+                "wl4294967295_mode",
+                "1.1.1.1",
+                "k",
+                "enable_sta_mode",
+                "lan1_netmas",
+                "lan1_dhc"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4259204,
+                4259304,
+                4273720,
+                4275064,
+                4269784
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "cmdi",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "start_lan",
+                "string": "start_lan(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>) @ 0x411ad0",
+                "ins_addr": "0x411ad0"
+            }
+        ],
+        "sink": {
+            "function": "system",
+            "string": "system(<MultiValues(<BV32 stack_base + 0xfffffbe8>)>) @ 0x413bb8",
+            "ins_addr": "0x413bb8"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "l",
+                "r",
+                "smb_host_name"
+            ],
+            "possibly": [
+                "TOP",
+                "lan_dhcp",
+                "enable_ap_mode",
+                "router_disable",
+                "dhcp_relay",
+                "dlna_auto_ip",
+                "tmp_lan_proto",
+                "tmp_rip_enable",
+                "0.0.0.0",
+                "wl1337_mode",
+                "rip_enable",
+                "ure_disable",
+                "ap_dyn_ip",
+                "lan_proto",
+                "p",
+                "wla_repeater",
+                "apmode_dns1",
+                "wl4294967295_mode",
+                "1.1.1.1",
+                "k",
+                "enable_sta_mode",
+                "lan1_netmas",
+                "lan1_dhc"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4259204,
+                4259304,
+                4273720,
+                4275064,
+                4269784
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "cmdi",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "start_vlan",
+                "string": "start_vlan() @ 0x40cac8",
+                "ins_addr": "0x40cac8"
+            }
+        ],
+        "sink": {
+            "function": "system",
+            "string": "system(<MultiValues(<BV32 stack_base + 0xfffffe94>)>) @ 0x40ce2c",
+            "ins_addr": "0x40ce2c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "lan_hwaddr"
+            ],
+            "possibly": [
+                "TOP",
+                "ipv6ready",
+                "vlan0hwname"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4247028
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "cmdi",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_408168",
+                "string": "sub_408168() @ 0x408168",
+                "ins_addr": "0x408168"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffd38>)>, <MultiValues(<BV32 heap_base + 0xfc>)>) @ 0x40839c",
+            "ins_addr": "0x40839c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "sku_name"
+            ],
+            "possibly": [
+                "wl0_ure",
+                "restore_defaults",
+                "wlg_repeater",
+                "vlan2hwname",
+                "wl0.1_net_reauth",
+                "gui_region",
+                "boardflags",
+                "wla_repeater",
+                "wl0.1_wpa_gtk_rekey",
+                "wsc_pin_disable",
+                "wl0.1_guest",
+                "ure_disable"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4227968
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_408168",
+                "string": "sub_408168() @ 0x408168",
+                "ins_addr": "0x408168"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffd70>)>, <MultiValues(<BV32 heap_base + 0x11c>)>) @ 0x40a900",
+            "ins_addr": "0x40a900"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "gui_region"
+            ],
+            "possibly": [
+                "wl0_ure",
+                "restore_defaults",
+                "wlg_repeater",
+                "vlan2hwname",
+                "wl0.1_net_reauth",
+                "sku_name",
+                "boardflags",
+                "wla_repeater",
+                "wl0.1_wpa_gtk_rekey",
+                "wsc_pin_disable",
+                "wl0.1_guest",
+                "ure_disable"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4237540
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_402590",
+                "string": "sub_402590() @ 0x402590",
+                "ins_addr": "0x402590"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff46>)>, <MultiValues({0: {<BV32 heap_base>, <BV32 0x41ef0c>}})>) @ 0x4025e8",
+            "ins_addr": "0x4025e8"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "et0macaddr"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4203976
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "start_lan",
+                "string": "start_lan(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>) @ 0x411ad0",
+                "ins_addr": "0x411ad0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffeab>)>, <MultiValues(<BV32 heap_base + 0x5da>)>) @ 0x413cd0",
+            "ins_addr": "0x413cd0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "apmode_dns1",
+                "l",
+                "r",
+                "p"
+            ],
+            "possibly": [
+                "k",
+                "lan1_dhc",
+                "tmp_rip_enable",
+                "wl4294967295_mode",
+                "ap_dyn_ip",
+                "lan_proto",
+                "dlna_auto_ip",
+                "rip_enable",
+                "dhcp_relay",
+                "wla_repeater",
+                "tmp_lan_proto",
+                "router_disable",
+                "enable_sta_mode",
+                "lan_dhcp",
+                "TOP",
+                "enable_ap_mode",
+                "smb_host_name",
+                "0.0.0.0",
+                "1.1.1.1",
+                "wl1337_mode",
+                "ure_disable"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4259204,
+                4274408,
+                4259304,
+                4269784,
+                4275384,
+                4273372
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "start_lan",
+                "string": "start_lan(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>) @ 0x411ad0",
+                "ins_addr": "0x411ad0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffeab>)>, <MultiValues(<BV32 heap_base + 0x612>)>) @ 0x413900",
+            "ins_addr": "0x413900"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "apmode_dns1",
+                "l",
+                "r",
+                "p"
+            ],
+            "possibly": [
+                "k",
+                "lan1_dhc",
+                "tmp_rip_enable",
+                "wl4294967295_mode",
+                "ap_dyn_ip",
+                "lan_proto",
+                "dlna_auto_ip",
+                "rip_enable",
+                "dhcp_relay",
+                "wla_repeater",
+                "tmp_lan_proto",
+                "router_disable",
+                "enable_sta_mode",
+                "lan_dhcp",
+                "TOP",
+                "enable_ap_mode",
+                "smb_host_name",
+                "0.0.0.0",
+                "1.1.1.1",
+                "wl1337_mode",
+                "ure_disable"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4259204,
+                4274408,
+                4259304,
+                4269784,
+                4275384,
+                4273372
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "hotplug_block",
+                "string": "hotplug_block() @ 0x41a190",
+                "ins_addr": "0x41a190"
+            },
+            {
+                "function": "usb_mount_block",
+                "string": "usb_mount_block(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 stack_base + 0xfffffe6a>)>) @ 0x41a7e8",
+                "ins_addr": "0x41a7e8"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffff661>)>, <MultiValues(<BV32 heap_base + 0xa0>)>) @ 0x41981c",
+            "ins_addr": "0x41981c"
+        },
+        "depth": 2,
+        "inputs": {
+            "likely": [
+                "approved_usb_1",
+                "approved_usb_0"
+            ],
+            "possibly": [
+                "PHYSDEVDRIVER",
+                "MAJOR",
+                "MINOR",
+                "ACTION",
+                "/proc/mounts",
+                "/sys/block/sd|/device/../../../../serial",
+                "/tmp/vol_id.out",
+                "/sys/block/sd|/device/vendor",
+                "/sys/block/sd|/device/model",
+                "/tmp/attached_usb_storage_info",
+                "<BV360 0x2f746d702f7573625f766f6c5f6e616d652f .. getenv(\"PHYSDEVDRIVER\")@0x41a28c_8086_256[255:40]>"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4298756
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "usb_mount",
+                "string": "usb_mount() @ 0x41cab0",
+                "ins_addr": "0x41cab0"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffff864>)>, <MultiValues({0: {<BV32 0x41ef0c>, <BV32 heap_base + 0x20>}})>) @ 0x41cf64",
+            "ins_addr": "0x41cf64"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "approved_usb_0"
+            ],
+            "possibly": [
+                "enable_any_usb_dev"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4312904
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_402afc",
+                "string": "sub_402afc() @ 0x402afc",
+                "ins_addr": "0x402afc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff52>)>, <MultiValues({0: {<BV32 heap_base>, <BV32 0x41ef0c>}})>) @ 0x402b6c",
+            "ins_addr": "0x402b6c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wl0_ssid"
+            ],
+            "possibly": [
+                "wl1_ssid",
+                "wps_randomkey",
+                "wl0_radio",
+                "wl1_key1",
+                "wps_randomssid",
+                "wps_pbc_conn_success",
+                "wl0_wep",
+                "wl0_key1",
+                "wl0_wpa_psk",
+                "wl1_wpa_psk",
+                "wps_currentRFband",
+                "wl1_auth",
+                "wl0_auth",
+                "wps_is_upnp",
+                "wl1_wep"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4205800,
+                4205864,
+                4205384
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_402afc",
+                "string": "sub_402afc() @ 0x402afc",
+                "ins_addr": "0x402afc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff92>)>, <MultiValues({0: {<BV32 0x41ef0c>, <BV32 heap_base + 0x20>}})>) @ 0x402bac",
+            "ins_addr": "0x402bac"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wl1_ssid"
+            ],
+            "possibly": [
+                "wps_randomkey",
+                "wl0_radio",
+                "wl1_key1",
+                "wps_randomssid",
+                "wps_pbc_conn_success",
+                "wl0_ssid",
+                "wl0_wep",
+                "wl0_key1",
+                "wl0_wpa_psk",
+                "wl1_wpa_psk",
+                "wps_currentRFband",
+                "wl1_auth",
+                "wl0_auth",
+                "wps_is_upnp",
+                "wl1_wep"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4206400,
+                4212304,
+                4205448,
+                4206464
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_402afc",
+                "string": "sub_402afc() @ 0x402afc",
+                "ins_addr": "0x402afc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff92>)>, <MultiValues(<BV32 stack_base + 0xffffff52>)>) @ 0x40507c",
+            "ins_addr": "0x40507c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wl0_ssid"
+            ],
+            "possibly": [
+                "wl1_ssid",
+                "wps_randomkey",
+                "wl0_radio",
+                "wl1_key1",
+                "wps_randomssid",
+                "wps_pbc_conn_success",
+                "wl0_wep",
+                "wl0_key1",
+                "wl0_wpa_psk",
+                "wl1_wpa_psk",
+                "wps_currentRFband",
+                "wl1_auth",
+                "wl0_auth",
+                "wps_is_upnp",
+                "wl1_wep"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4205800,
+                4205864,
+                4205384
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_402afc",
+                "string": "sub_402afc() @ 0x402afc",
+                "ins_addr": "0x402afc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff52>)>, <MultiValues(<BV32 stack_base + 0xffffff92>)>) @ 0x405160",
+            "ins_addr": "0x405160"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wl1_ssid"
+            ],
+            "possibly": [
+                "wps_randomkey",
+                "wl0_radio",
+                "wl1_key1",
+                "wps_randomssid",
+                "wps_pbc_conn_success",
+                "wl0_ssid",
+                "wl0_wep",
+                "wl0_key1",
+                "wl0_wpa_psk",
+                "wl1_wpa_psk",
+                "wps_currentRFband",
+                "wl1_auth",
+                "wl0_auth",
+                "wps_is_upnp",
+                "wl1_wep"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4206400,
+                4212304,
+                4205448,
+                4206464
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_402afc",
+                "string": "sub_402afc() @ 0x402afc",
+                "ins_addr": "0x402afc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff12>)>, <MultiValues({0: {<BV32 0x41ef0c>, <BV32 heap_base + 0x37f>}})>) @ 0x404bb8",
+            "ins_addr": "0x404bb8"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wl0_key1"
+            ],
+            "possibly": [
+                "wl1_ssid",
+                "wps_randomkey",
+                "wl0_radio",
+                "wl1_key1",
+                "wps_randomssid",
+                "wps_pbc_conn_success",
+                "wl0_ssid",
+                "wl0_wep",
+                "wl0_wpa_psk",
+                "wl1_wpa_psk",
+                "wps_currentRFband",
+                "wl1_auth",
+                "wl0_auth",
+                "wps_is_upnp",
+                "wl1_wep"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4211008,
+                4210948,
+                4211148,
+                4213656,
+                4211068
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_402afc",
+                "string": "sub_402afc() @ 0x402afc",
+                "ins_addr": "0x402afc"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff12>)>, <MultiValues({0: {<BV32 0x41ef0c>, <BV32 heap_base + 0x619>}})>) @ 0x4044f0",
+            "ins_addr": "0x4044f0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wl1_key1"
+            ],
+            "possibly": [
+                "wl1_ssid",
+                "wps_randomkey",
+                "wl0_radio",
+                "wps_randomssid",
+                "wps_pbc_conn_success",
+                "wl0_ssid",
+                "wl0_wep",
+                "wl0_key1",
+                "wl0_wpa_psk",
+                "wl1_wpa_psk",
+                "wps_currentRFband",
+                "wl1_auth",
+                "wl0_auth",
+                "wps_is_upnp",
+                "wl1_wep"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4211724,
+                4211664,
+                4211920,
+                4211604,
+                4211804
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>, <MultiValues(<BV32 stack_base + 0xdeadc0de>)>) @ 0x40c390",
+                "ins_addr": "0x40c390"
+            },
+            {
+                "function": "sub_401968",
+                "string": "sub_401968(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 0x41414169>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x41>)>, <MultiValues(<BV8 1>)>) @ 0x4087ac",
+                "ins_addr": "0x4087ac"
+            },
+            {
+                "function": "sub_401968",
+                "string": "sub_401968(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 TOP + 0x41414169>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x41>)>, <MultiValues(<BV8 1>)>) @ 0x4087ac",
+                "ins_addr": "0x4087ac"
+            },
+            {
+                "function": "sub_401968",
+                "string": "sub_401968(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 stack_base + 0xffffff60>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x0>)>, <MultiValues({0: {<BV8 0 .. TOP>, <BV8 1>}})>) @ 0x40c634",
+                "ins_addr": "0x40c634"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffd0a>)>, <MultiValues(<BV32 heap_base + 0x236e>)>) @ 0x402180",
+            "ins_addr": "0x402180"
+        },
+        "depth": 2,
+        "inputs": {
+            "likely": [
+                "wl1337_"
+            ],
+            "possibly": [
+                "acs_mode",
+                "wl1337_key2",
+                "TOP",
+                "wl1337_ampdu_rr_rtylimit_tid",
+                "wl1337_key1",
+                "wl1337.1_hwaddr",
+                "ure_disable",
+                "wl4294967295_vifs",
+                "wl1337.0_hwaddr",
+                "disable_WAR116021",
+                "wl1337_wm",
+                "coma_sleep",
+                "wl1337.2_hwaddr"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4200456,
+                4232716,
+                4205068,
+                4227596,
+                4225552,
+                4215832,
+                4225048,
+                4228120,
+                4243484,
+                4217892,
+                4236840,
+                4227120,
+                4213316,
+                4243016,
+                4239436,
+                4201036,
+                4218448,
+                4238940,
+                4226660,
+                4226152,
+                4233324,
+                4239984,
+                4242036,
+                4242564,
+                4211332,
+                4220044,
+                4202644,
+                4200596,
+                4201632,
+                4204708,
+                4238504,
+                4224688,
+                4205236,
+                4227768,
+                4203200,
+                4219072,
+                4228292,
+                4234948,
+                4232396,
+                4207312,
+                4243156,
+                4232920,
+                4241136,
+                4218096,
+                4238072,
+                4215036,
+                4212480,
+                4200196,
+                4234504,
+                4226316,
+                4209932,
+                4213008,
+                4201240,
+                4205344,
+                4217632,
+                4202280,
+                4235048,
+                4199208,
+                4203308,
+                4205872,
+                4200752,
+                4212016,
+                4218676,
+                4227392,
+                4206928,
+                4217692,
+                4220252,
+                4227936,
+                4236640,
+                4219240,
+                4226928,
+                4215156,
+                4215684,
+                4216716,
+                4233616,
+                4217752,
+                4235672,
+                4242844,
+                4218272,
+                4239776,
+                4207008,
+                4241312,
+                4207524,
+                4226468,
+                4242356,
+                4234692,
+                4208592,
+                4226000,
+                4241876,
+                4238292,
+                4231128,
+                4219868,
+                4244956,
+                4240872,
+                4212200,
+                4218856,
+                4232172
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/usr/sbin/wlconf"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>, <MultiValues(<BV32 stack_base + 0xdeadc0de>)>) @ 0x40c390",
+                "ins_addr": "0x40c390"
+            },
+            {
+                "function": "sub_401968",
+                "string": "sub_401968(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 0x41414169>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x41>)>, <MultiValues(<BV8 1>)>) @ 0x4087ac",
+                "ins_addr": "0x4087ac"
+            },
+            {
+                "function": "sub_401968",
+                "string": "sub_401968(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 TOP + 0x41414169>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x41>)>, <MultiValues(<BV8 1>)>) @ 0x4087ac",
+                "ins_addr": "0x4087ac"
+            },
+            {
+                "function": "sub_401968",
+                "string": "sub_401968(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 stack_base + 0xffffff60>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x0>)>, <MultiValues({0: {<BV8 0 .. TOP>, <BV8 1>}})>) @ 0x40c634",
+                "ins_addr": "0x40c634"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffdb8>)>, <MultiValues({0: {<BV32 0x40da7c>, <BV32 heap_base + 0x23ce>, <BV32 heap_base + 0x240e>}})>) @ 0x402034",
+            "ins_addr": "0x402034"
+        },
+        "depth": 2,
+        "inputs": {
+            "likely": [
+                "wl1337_",
+                "wl1337_key2",
+                "wl1337_key1"
+            ],
+            "possibly": [
+                "acs_mode",
+                "TOP",
+                "wl1337_ampdu_rr_rtylimit_tid",
+                "wl1337.1_hwaddr",
+                "ure_disable",
+                "wl4294967295_vifs",
+                "wl1337.0_hwaddr",
+                "disable_WAR116021",
+                "wl1337_wm",
+                "coma_sleep",
+                "wl1337.2_hwaddr"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4200456,
+                4232716,
+                4205068,
+                4227596,
+                4225552,
+                4215832,
+                4225048,
+                4228120,
+                4243484,
+                4217892,
+                4236840,
+                4227120,
+                4202052,
+                4213316,
+                4243016,
+                4239436,
+                4201036,
+                4218448,
+                4238940,
+                4226660,
+                4226152,
+                4233324,
+                4239984,
+                4242036,
+                4242564,
+                4211332,
+                4220044,
+                4202644,
+                4200596,
+                4201632,
+                4204708,
+                4238504,
+                4224688,
+                4205236,
+                4227768,
+                4203200,
+                4219072,
+                4228292,
+                4234948,
+                4232396,
+                4207312,
+                4243156,
+                4232920,
+                4241136,
+                4218096,
+                4238072,
+                4215036,
+                4212480,
+                4200196,
+                4234504,
+                4226316,
+                4209932,
+                4213008,
+                4201240,
+                4205344,
+                4217632,
+                4202280,
+                4235048,
+                4199208,
+                4203308,
+                4205872,
+                4200752,
+                4212016,
+                4218676,
+                4227392,
+                4206928,
+                4217692,
+                4220252,
+                4227936,
+                4236640,
+                4219240,
+                4226928,
+                4215156,
+                4215684,
+                4216716,
+                4233616,
+                4217752,
+                4235672,
+                4242844,
+                4218272,
+                4239776,
+                4207008,
+                4241312,
+                4207524,
+                4226468,
+                4242356,
+                4234692,
+                4208592,
+                4226000,
+                4241876,
+                4238292,
+                4231128,
+                4219868,
+                4244956,
+                4240872,
+                4212200,
+                4218856,
+                4232172
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6200/squashfs-root/usr/sbin/wlconf"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>, <MultiValues(<BV32 stack_base + 0xdeadc0de>)>) @ 0x40c690",
+                "ins_addr": "0x40c690"
+            },
+            {
+                "function": "sub_4019c8",
+                "string": "sub_4019c8(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 0x41414169>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x41>)>, <MultiValues(<BV8 1>)>) @ 0x408aa8",
+                "ins_addr": "0x408aa8"
+            },
+            {
+                "function": "sub_4019c8",
+                "string": "sub_4019c8(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 TOP + 0x41414169>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x41>)>, <MultiValues(<BV8 1>)>) @ 0x408aa8",
+                "ins_addr": "0x408aa8"
+            },
+            {
+                "function": "sub_4019c8",
+                "string": "sub_4019c8(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 stack_base + 0xffffff60>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x0>)>, <MultiValues({0: {<BV8 0 .. TOP>, <BV8 1>}})>) @ 0x40c934",
+                "ins_addr": "0x40c934"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffd0a>)>, <MultiValues(<BV32 heap_base + 0x2374>)>) @ 0x4021e0",
+            "ins_addr": "0x4021e0"
+        },
+        "depth": 2,
+        "inputs": {
+            "likely": [
+                "wl1337_"
+            ],
+            "possibly": [
+                "TOP",
+                "wl1337_wm",
+                "wl1337.1_hwaddr",
+                "wl1337.0_hwaddr",
+                "wl1337_ampdu_rtylimit_tid",
+                "wl1337_key2",
+                "wl1337_key1",
+                "wl1337.2_hwaddr",
+                "acs_mode",
+                "wl4294967295_vifs",
+                "disable_WAR116021",
+                "coma_sleep",
+                "ure_disable"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4215812,
+                4235268,
+                4213256,
+                4227080,
+                4210708,
+                4213784,
+                4235812,
+                4218408,
+                4212792,
+                4219452,
+                4228156,
+                4208212,
+                4207704,
+                4237404,
+                4228700,
+                4218468,
+                4221028,
+                4200552,
+                4227692,
+                4220016,
+                4205168,
+                4215932,
+                4216460,
+                4234380,
+                4217492,
+                4236436,
+                4243612,
+                4240544,
+                4218528,
+                4242080,
+                4227232,
+                4207784,
+                4219048,
+                4201132,
+                4243124,
+                4235456,
+                4226764,
+                4242644,
+                4231892,
+                4239060,
+                4209368,
+                4218872,
+                4245724,
+                4220644,
+                4232936,
+                4241640,
+                4212976,
+                4219632,
+                4200692,
+                4202740,
+                4204800,
+                4201728,
+                4228360,
+                4233480,
+                4226316,
+                4228884,
+                4225812,
+                4205336,
+                4244252,
+                4203296,
+                4216608,
+                4237604,
+                4227884,
+                4218668,
+                4243784,
+                4214092,
+                4240204,
+                4219224,
+                4239708,
+                4227424,
+                4200292,
+                4226916,
+                4234088,
+                4240752,
+                4242804,
+                4201336,
+                4208000,
+                4205952,
+                4243332,
+                4205444,
+                4199304,
+                4202376,
+                4203404,
+                4212108,
+                4200848,
+                4220820,
+                4239272,
+                4225452,
+                4228532,
+                4229056,
+                4235712,
+                4219848,
+                4233160,
+                4243924,
+                4233684,
+                4241904,
+                4238840
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6300/squashfs-root/usr/sbin/wlconf"
+    },
+    {
+        "trace": [
+            {
+                "function": "main",
+                "string": "main(<MultiValues(<BV32 TOP + ARGC>)>, <MultiValues(<BV32 stack_base + 0xdeadc0de>)>) @ 0x40c690",
+                "ins_addr": "0x40c690"
+            },
+            {
+                "function": "sub_4019c8",
+                "string": "sub_4019c8(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 0x41414169>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x41>)>, <MultiValues(<BV8 1>)>) @ 0x408aa8",
+                "ins_addr": "0x408aa8"
+            },
+            {
+                "function": "sub_4019c8",
+                "string": "sub_4019c8(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 TOP + 0x41414169>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x41>)>, <MultiValues(<BV8 1>)>) @ 0x408aa8",
+                "ins_addr": "0x408aa8"
+            },
+            {
+                "function": "sub_4019c8",
+                "string": "sub_4019c8(<MultiValues(<BV32 stack_base + 0xdeadc2de>)>, <MultiValues(<BV32 stack_base + 0xffffff60>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 0x0>)>, <MultiValues({0: {<BV8 0 .. TOP>, <BV8 1>}})>) @ 0x40c934",
+                "ins_addr": "0x40c934"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffdb8>)>, <MultiValues({0: {<BV32 heap_base + 0x23d4>, <BV32 0x40ddac>}})>) @ 0x402094",
+            "ins_addr": "0x402094"
+        },
+        "depth": 2,
+        "inputs": {
+            "likely": [
+                "wl1337_",
+                "wl1337_key1"
+            ],
+            "possibly": [
+                "TOP",
+                "wl1337_wm",
+                "wl1337.1_hwaddr",
+                "wl1337.0_hwaddr",
+                "wl1337_ampdu_rtylimit_tid",
+                "wl1337_key2",
+                "wl1337.2_hwaddr",
+                "acs_mode",
+                "wl4294967295_vifs",
+                "disable_WAR116021",
+                "coma_sleep",
+                "ure_disable"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4215812,
+                4235268,
+                4213256,
+                4227080,
+                4210708,
+                4213784,
+                4235812,
+                4218408,
+                4212792,
+                4219452,
+                4228156,
+                4208212,
+                4207704,
+                4237404,
+                4228700,
+                4218468,
+                4221028,
+                4200552,
+                4227692,
+                4220016,
+                4205168,
+                4215932,
+                4216460,
+                4234380,
+                4217492,
+                4236436,
+                4243612,
+                4240544,
+                4218528,
+                4242080,
+                4227232,
+                4202148,
+                4207784,
+                4219048,
+                4201132,
+                4243124,
+                4235456,
+                4226764,
+                4242644,
+                4231892,
+                4239060,
+                4218872,
+                4209368,
+                4245724,
+                4220644,
+                4232936,
+                4241640,
+                4212976,
+                4219632,
+                4200692,
+                4202740,
+                4204800,
+                4201728,
+                4228360,
+                4233480,
+                4226316,
+                4228884,
+                4225812,
+                4205336,
+                4244252,
+                4203296,
+                4216608,
+                4237604,
+                4227884,
+                4218668,
+                4243784,
+                4214092,
+                4240204,
+                4219224,
+                4239708,
+                4227424,
+                4200292,
+                4226916,
+                4234088,
+                4240752,
+                4242804,
+                4201336,
+                4208000,
+                4205952,
+                4243332,
+                4205444,
+                4199304,
+                4202376,
+                4203404,
+                4212108,
+                4200848,
+                4220820,
+                4239272,
+                4225452,
+                4228532,
+                4229056,
+                4235712,
+                4219848,
+                4233160,
+                4243924,
+                4233684,
+                4241904,
+                4238840
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6300/squashfs-root/usr/sbin/wlconf"
+    },
+    {
+        "trace": [
+            {
+                "function": "start_lan",
+                "string": "start_lan(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>) @ 0x411620",
+                "ins_addr": "0x411620"
+            }
+        ],
+        "sink": {
+            "function": "system",
+            "string": "system(<MultiValues(<BV32 stack_base + 0xfffffc68>)>) @ 0x4131e8",
+            "ins_addr": "0x4131e8"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "l",
+                "smb_host_name",
+                "r"
+            ],
+            "possibly": [
+                "0.0.0.0",
+                "tmp_rip_enable",
+                "TOP",
+                "wl4294967295_mode",
+                "enable_ap_mode",
+                "router_disable",
+                "lan_proto",
+                "wl1337_mode",
+                "dhcp_relay",
+                "lan_dhcp",
+                "dlna_auto_ip",
+                "rip_enable",
+                "tmp_lan_proto",
+                "p",
+                "wla_repeater",
+                "lan1_ipadd",
+                "lan1_dhc",
+                "ap_dyn_ip",
+                "ure_disable",
+                "enable_sta_mode",
+                "k",
+                "apmode_dns1",
+                "1.1.1.1"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4272520,
+                4268584,
+                4273864,
+                4259412,
+                4259512
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "cmdi",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6300/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "start_lan",
+                "string": "start_lan(<MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>, <MultiValues(<BV32 TOP>)>) @ 0x411620",
+                "ins_addr": "0x411620"
+            }
+        ],
+        "sink": {
+            "function": "system",
+            "string": "system(<MultiValues(<BV32 stack_base + 0xfffffbe8>)>) @ 0x413708",
+            "ins_addr": "0x413708"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "l",
+                "smb_host_name",
+                "r"
+            ],
+            "possibly": [
+                "0.0.0.0",
+                "tmp_rip_enable",
+                "TOP",
+                "wl4294967295_mode",
+                "enable_ap_mode",
+                "router_disable",
+                "lan_proto",
+                "wl1337_mode",
+                "dhcp_relay",
+                "lan_dhcp",
+                "dlna_auto_ip",
+                "rip_enable",
+                "tmp_lan_proto",
+                "p",
+                "wla_repeater",
+                "lan1_ipadd",
+                "lan1_dhc",
+                "ap_dyn_ip",
+                "ure_disable",
+                "enable_sta_mode",
+                "k",
+                "apmode_dns1",
+                "1.1.1.1"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4272520,
+                4268584,
+                4273864,
+                4259412,
+                4259512
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "cmdi",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6300/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "start_vlan",
+                "string": "start_vlan() @ 0x40cb98",
+                "ins_addr": "0x40cb98"
+            }
+        ],
+        "sink": {
+            "function": "system",
+            "string": "system(<MultiValues(<BV32 stack_base + 0xfffffe94>)>) @ 0x40cefc",
+            "ins_addr": "0x40cefc"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "lan_hwaddr"
+            ],
+            "possibly": [
+                "vlan0hwname",
+                "ipv6ready",
+                "TOP"
+            ],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4247236
+            ]
+        },
+        "rank": 7.7,
+        "reachable_from_main": true,
+        "sanitized": false,
+        "kind": "cmdi",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6300/squashfs-root/sbin/rc"
+    },
+    {
+        "trace": [
+            {
+                "function": "wpsenr_osl_restore_wsec",
+                "string": "wpsenr_osl_restore_wsec() @ 0x40e32c",
+                "ins_addr": "0x40e32c"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xffffff30>)>, <MultiValues({0: {<BV32 0x43e1d8>, <BV32 heap_base>}})>) @ 0x40e69c",
+            "ins_addr": "0x40e69c"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wlXXkey1"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4253032
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6300/squashfs-root/bin/wps_monitor"
+    },
+    {
+        "trace": [
+            {
+                "function": "wpsenr_osl_restore_wsec",
+                "string": "wpsenr_osl_restore_wsec() @ 0x40e32c",
+                "ins_addr": "0x40e32c"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base + 0xfffffee6>)>, <MultiValues(<BV32 stack_base + 0xfffffed8>)>) @ 0x40e6c0",
+            "ins_addr": "0x40e6c0"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wlXXkey1"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                4253032
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R6300/squashfs-root/bin/wps_monitor"
+    },
+    {
+        "trace": [
+            {
+                "function": "sub_f7d8",
+                "string": "sub_f7d8() @ 0xf7d8",
+                "ins_addr": "0xf7d8"
+            }
+        ],
+        "sink": {
+            "function": "strcpy",
+            "string": "strcpy(<MultiValues(<BV32 stack_base - 0x11c>)>, <MultiValues(<BV32 heap_base>)>) @ 0xfa74",
+            "ins_addr": "0xfa74"
+        },
+        "depth": 1,
+        "inputs": {
+            "likely": [
+                "wlXXkey1"
+            ],
+            "possibly": [],
+            "tags": [
+                "likely",
+                "possibly"
+            ],
+            "valid_funcs": [
+                63772
+            ]
+        },
+        "rank": 7.0,
+        "reachable_from_main": false,
+        "sanitized": false,
+        "kind": "overflow",
+        "binary_path": "/home/yangyifan/firmware_dataset/mangoDFA_dataset/Netgear/R7000P/squashfs-root/bin/wps_monitor"
+    }
+]

@@ -1,8 +1,8 @@
 
-[1/4] sub_4016dc, 20s
+[1/4] sub_4016dc, 45s
 [2/4] sub_4025f4, 5s
 [3/4] sub_402330, 5s
 [4/4] sub_401298, 1s
 New_input_getters functions: 
  Done 
-Total time: 56s 
+Total time: 85s 

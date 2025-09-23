@@ -1,0 +1,21 @@
+=== Vulnerability Detection Evaluation ===
+Metric     | Block-level  | Function-level
+--------------------------------------------
+Accuracy   | 0.923        | 0.703         
+Precision  | 0.978        | 0.662         
+Recall     | 0.882        | 0.961         
+F1         | 0.928        | 0.784         
+Tpr        | 0.882        | 0.961         
+Fpr        | 0.025        | 0.625         
+
+=== Confusion Matrix ===
+Type       | Block-level  | Function-level
+--------------------------------------------
+TP         | 45           | 49            
+FP         | 1            | 25            
+FN         | 6            | 2             
+TN         | 39           | 15            
+
+=== Average Time (s) ===
+Block-level: 76.271 s
+Function-level: 102.553 s

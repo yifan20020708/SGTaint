@@ -1,0 +1,509 @@
+# -*- coding: utf-8 -*-
+import json
+import time
+import httpx
+from openai import OpenAI, RateLimitError, APIConnectionError, APIError
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
+from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, confusion_matrix
+
+LLM_MODEL = ""
+LLM_URL_DEEPSEEK = "https://api.deepseek.com"
+DEEPSEEK_API_KEY = "sk-7f3abcde356349189aaeaa9d29250a07"
+LLM_MODEL_DEEPSEEK = "deepseek-chat"
+SG_TEMPERATURE = 0.3
+
+def print_color(content, color):
+    color_codes = {
+        "black": "30",
+        "red": "31",
+        "green": "32",
+        "yellow": "33",
+        "blue": "34",
+        "magenta": "35",
+        "cyan": "36",
+        "white": "37",
+        "reset": "0" 
+    }
+    color_code = color_codes.get(color.lower(), color_codes["reset"])
+    print(f"\033[{color_code}m{content}\033[0m")
+
+# 实现开启LLM对话的类，方便进行调用，每一个类对象可表示一轮对话
+class LLM():
+    # 其中model指LLM模型，目前支持deepseek以及gpt
+    def __init__(self, temperature = 1.0): # 温度默认为1.0
+        # 配置灵活获取
+        self.model = LLM_MODEL_DEEPSEEK
+        self.api_key = DEEPSEEK_API_KEY
+        self.base_url = LLM_URL_DEEPSEEK
+        self.temperature = temperature
+        # 参数检查
+        if not self.api_key or not self.base_url:
+            raise ValueError("API key and base URL must be provided for LLM initialization.")
+        try:
+            self.client = OpenAI(api_key=self.api_key, base_url=self.base_url)
+        except Exception as e:
+            print(f"Failed to initialize OpenAI client: {e}")
+            raise
+        self.messages = []
+        self.chat_record = []
+        
+    # 设置系统角色
+    def system_role(self, content):
+        if not content:
+            print("Empty system role content provided.")
+            return
+        message = {"role": "system", "content": content}
+        self.messages.append(message)
+        
+    # 开启对话模式（加入了超时对话特性）
+    def chat(self, content, timeout=60):
+        if not content:
+            print("Empty user content for chat; skipping.")
+            return ""
+        message = {"role": "user", "content": content}
+        self.messages.append(message)
+        try:
+            response = self.client.chat.completions.create(
+                model = self.model, 
+                messages = self.messages,
+                temperature = self.temperature,
+                timeout=timeout
+            )
+        except (TimeoutError, httpx.TimeoutException) as e:
+            print(f"Network timeout during LLM chat: {e}")
+            return "[ERROR] Network timeout, please try again later."
+        except (APIConnectionError, APIError, RateLimitError) as e:
+            print(f"OpenAI API error during LLM chat: {e}")
+            return f"[ERROR] LLM API error: {e}"
+        except Exception as e:
+            print(f"Unexpected error during LLM chat: {e}")
+            return f"[ERROR] Unexpected error: {e}"
+        # 加入此轮对话的回复，方便开启多轮对话
+        if self.model == LLM_MODEL_DEEPSEEK:
+            self.messages.append(response.choices[0].message)
+        else:
+            self.messages.append({'role': 'assistant', 'content': response.choices[0].message.content})
+        self.chat_record.append((content, response.choices[0].message.content))
+        return response.choices[0].message.content
+    
+    # 异步调用LLM API
+    async def chat_async(self, content, timeout=60):
+        if not content:
+            print("Empty user content for chat; skipping.")
+            return ""
+        message = {"role": "user", "content": content}
+        self.messages.append(message)
+        try:
+            response = await self.client.chat.completions.create(
+                model=self.model, 
+                messages=self.messages,
+                temperature=self.temperature,
+                timeout=timeout
+            )
+        except (TimeoutError, httpx.TimeoutException) as e:
+            print(f"Network timeout during LLM chat: {e}")
+            return "[ERROR] Network timeout, please try again later."
+        except (APIConnectionError, APIError, RateLimitError) as e:
+            print(f"OpenAI API error during LLM chat: {e}")
+            return f"[ERROR] LLM API error: {e}"
+        except Exception as e:
+            print(f"Unexpected error during LLM chat: {e}")
+            return f"[ERROR] Unexpected error: {e}"
+        if self.model == LLM_MODEL_DEEPSEEK:
+            self.messages.append(response.choices[0].message)
+        else:
+            self.messages.append({'role': 'assistant', 'content': response.choices[0].message.content})
+        self.chat_record.append((content, response.choices[0].message.content))
+        return response.choices[0].message.content
+    
+# 进行敏感路径的过滤（SGTaint block 级别过滤）
+SYSTEM_LLM_PATH_CHECK = "You are an expert program analyst specializing in binary vulnerability detection using taint analysis. Your task is to assist in analyzing C code generated by decompilation, focusing on tracking the propagation of tainted data from sources (such as external input functions) to sensitive sinks (such as memory operations or system calls). For each conversation, you will receive one or more code snippets and analysis instructions. \n \
+    Your objectives are:\n \
+        1. Taint Flow Analysis: Identify and trace the flow of tainted data from the specified source and parameter, carefully considering data dependencies, aliasing, and transformations, including any sanitization mechanisms such as length checks, string validation functions (e.g., isValidIpAddr, isLanSubnet), or other filtering functions.\n \
+        2. Vulnerability Assessment: Determine clearly whether the code snippet contains exploitable vulnerabilities arising from tainted data reaching sensitive sinks, explicitly considering whether implemented sanitization methods are effective.\n \
+        3. Vulnerability Classification: If a vulnerability is identified, classify it according to the Common Weakness Enumeration (CWE) standard, emphasizing vulnerabilities that could realistically be exploited in practice, and provide a concise explanation of the exploitability conditions.\n \
+    Output Requirements:\n \
+        - For each analysis step, provide a clear, step-by-step summary of the taint flow and data dependencies. \n \
+        - For the final vulnerability assessment, your answer must begin with either “Yes” or “No” to indicate whether an exploitable vulnerability exists. If “Yes”, specify the CWE type and provide a concise explanation.\n \
+        - Use formal, precise language suitable for professional program analysis. \n \
+        - Do not make assumptions beyond the provided code and instructions. If the information is insufficient to reach a conclusion, explicitly state the uncertainty.\n \
+    You will receive further analysis instructions and code snippets in subsequent messages." 
+    
+def get_start_prompt(function_name, code_snippet, start_index=None, end_index=None):
+    if start_index and end_index: # 主要判断缓冲区溢出漏洞
+        start_prompt = f"As a program analyst, you are provided with the full decompiled C function. Your analysis scope is lines {start_index} to {end_index} (inclusive). You may consult code outside this scope only to infer buffer sizes/capacities or related bounds needed to judge buffer-overflow preconditions. Please use the first {function_name} that appears within lines {start_index} to {end_index} as the taint source to extract the taint data flow. Pay close attention to data dependencies, aliasing, tainted data operations, and explicitly identify any sanitization mechanisms such as length checks, validation functions (e.g., isValidIpAddr, isLanSubnet), or other data filtering methods during your analysis. Present the taint flow step by step. \
+            For each step: Clearly indicate how the taint propagates, is sanitized, aliased, or transformed.\n \
+            At the end of your analysis, do not yet judge the presence of vulnerabilities. Simply provide a structured summary of the taint flow, explicitly noting any filtering or sanitization operations and any buffer-size facts derived from out-of-scope lines, and data propagation within the given code snippet.\n \
+            {code_snippet}"
+    else: # 主要判断命令注入漏洞
+        start_prompt = f"As a program analyst, you are provided with the following snippet of C code generated by decompilation. Please use the first {function_name} as the taint source to extract the taint data flow. Pay close attention to data dependencies, aliasing, tainted data operations, and explicitly identify any sanitization mechanisms such as length checks, validation functions (e.g., isValidIpAddr, isLanSubnet), or other data filtering methods during your analysis. Present the taint flow step by step. \
+            For each step: Clearly indicate how the taint propagates, is sanitized, aliased, or transformed.\n \
+            At the end of your analysis, do not yet judge the presence of vulnerabilities. Simply provide a structured summary of the taint flow, explicitly noting any filtering or sanitization operations, and data propagation within the given code snippet.\n \
+            {code_snippet}"
+    return start_prompt
+
+def get_middle_prompt(code_snippet, start_index=None, end_index=None):
+    if start_index and end_index: # 主要判断缓冲区溢出漏洞
+        middle_prompt = f"Continue the taint analysis for the following C code snippet, building on the previous taint flow analysis results. You are provided with the full decompiled function; your analysis scope is lines {start_index} to {end_index} (inclusive). You may consult code outside this scope only to infer buffer sizes/capacities or related bounds needed to judge buffer-overflow preconditions. Focus on tracking the propagation, sanitization, and aliasing of tainted data, considering any new taint sources that appear within lines {start_index} to {end_index} (if applicable). Clearly indicate each step of the taint flow, explicitly describing how tainted data moves, is transformed, validated, filtered (such as length checks), or sanitized through functions like isValidIpAddr or isLanSubnet. \
+            For each step: Explicitly describe how taint is propagated, aliased, sanitized, or otherwise modified, and note any updates to the taint label(s).\n \
+            At this stage, do not assess whether a vulnerability exists. Only provide a structured, step-by-step summary of the taint flow within this code snippet, explicitly highlighting any filtering or sanitization methods, and taking into account the taint analysis results from previous steps.\n \
+            {code_snippet}"
+    else: # 主要判断命令注入漏洞
+        middle_prompt = f"Continue the taint analysis for the following C code snippet, building on the previous taint flow analysis results. Focus on tracking the propagation, sanitization, and aliasing of tainted data, considering any new taint sources identified in this function (if applicable). Clearly indicate each step of the taint flow, explicitly describing how tainted data moves, is transformed, validated, filtered (such as length checks), or sanitized through functions like isValidIpAddr or isLanSubnet. \
+            For each step: Explicitly describe how taint is propagated, aliased, sanitized, or otherwise modified, and note any updates to the taint label(s).\n \
+            At this stage, do not assess whether a vulnerability exists. Only provide a structured, step-by-step summary of the taint flow within this code snippet, explicitly highlighting any filtering or sanitization methods, and taking into account the taint analysis results from previous steps.\n \
+            {code_snippet}"
+    return middle_prompt
+
+def get_end_prompt(function_name, start_index=None, end_index=None):
+    if start_index and end_index: # 主要判断缓冲区溢出漏洞
+        end_prompt = f"Based on the above taint analysis results, using the last {function_name} that appears within lines {start_index} to {end_index} in the final full decompiled function as the sink, determine whether the code snippet contains any exploitable vulnerabilities caused by tainted data reaching sensitive sinks. Explicitly consider any sanitization or filtering mechanisms present in the code, such as length checks or validation functions (e.g., isValidIpAddr, isLanSubnet). \n \
+            Only base your judgment on the information present in the provided code. Do not make assumptions or speculate about possible vulnerabilities beyond what is explicitly shown. Only confirm a vulnerability if it definitely exists in the code snippet; do not output results for potential or hypothetical cases.\n \
+            Your answer must begin with either “Yes” or “No” to indicate whether an exploitable vulnerability exists. \n \
+                - If “Yes”, specify the CWE type (according to the Common Weakness Enumeration) and provide a concise explanation for the vulnerability.\n \
+                - If “No”, briefly explain why no exploitable vulnerability is present.\n \
+            Your explanation should be formal, precise, and suitable for professional program analysis."
+    else: # 主要判断命令注入漏洞
+        end_prompt = f"Based on the above taint analysis results, using the last {function_name} in the final snippet as the sink, determine whether the code snippet contains any exploitable vulnerabilities caused by tainted data reaching sensitive sinks. Explicitly consider any sanitization or filtering mechanisms present in the code, such as length checks or validation functions (e.g., isValidIpAddr, isLanSubnet). \n \
+            Only base your judgment on the information present in the provided code. Do not make assumptions or speculate about possible vulnerabilities beyond what is explicitly shown. Only confirm a vulnerability if it definitely exists in the code snippet; do not output results for potential or hypothetical cases.\n \
+            Your answer must begin with either “Yes” or “No” to indicate whether an exploitable vulnerability exists. \n \
+                - If “Yes”, specify the CWE type (according to the Common Weakness Enumeration) and provide a concise explanation for the vulnerability.\n \
+                - If “No”, briefly explain why no exploitable vulnerability is present.\n \
+            Your explanation should be formal, precise, and suitable for professional program analysis."
+    return end_prompt
+
+SYSTEM_LLM_PATH_OUTPUT = "Your answer must begin with either “Yes” or “No” to indicate whether an exploitable vulnerability exists."
+
+# 给完整的反编译代码加入行号
+def number_complete_blocks(complete_list):
+    numbered = []
+    for block in complete_list:
+        lines = block.splitlines()
+        width = max(2, len(str(len(lines))))
+        out = "\n".join(f"{i:>{width}} {line}" for i, line in enumerate(lines, start=1))
+        numbered.append(out)
+    return numbered
+
+# 加入超时时间
+def llm_worker(path, timeout=90):
+    code_snippet_list = path.get("decompile_list")
+    keywords = ("Fail to Decompile", "Invalid code snippet")
+    if not code_snippet_list or any(any(k in snippet for k in keywords) for snippet in code_snippet_list): # 处理不存在反编译代码的情况
+        path["LLM_judge"] = "unsupported"
+        path["LLM_response"] = "unsupported"
+        path["LLM_time"] = "unsupported"
+        return path
+    # 构造对应的提示词
+    taint_source = path.get("taint_source")
+    taint_sink = path.get("taint_sink")
+    vulnerability_type = path.get("vulnerability_type") # 提示词的构造与漏洞类型相关
+    number_complete_code = number_complete_blocks(path.get("complete_list")) # 完整且存在行号的代码片段集合
+    try:
+        start_time = time.time()
+        LLM_chat = LLM(SG_TEMPERATURE)
+        LLM_chat.system_role(SYSTEM_LLM_PATH_CHECK)
+        # 生成起始提示词
+        first_snippet = number_complete_code[0] if vulnerability_type == "buffer overflow" else code_snippet_list[0]
+        start_index, end_index = path.get("range_list")[0] if vulnerability_type == "buffer overflow" else (None, None)
+        resp = LLM_chat.chat(get_start_prompt(taint_source, first_snippet, start_index, end_index), timeout=timeout)
+        if resp.startswith("[ERROR]"):
+            path["LLM_judge"] = "unsupported"
+            path["LLM_response"] = resp
+            path["LLM_time"] = "unsupported"
+            return path
+        # 迭代处理中间代码片段
+        for index in range(1, len(code_snippet_list)):
+            middle_snippet = number_complete_code[index] if vulnerability_type == "buffer overflow" else code_snippet_list[index]
+            start_index, end_index = path.get("range_list")[index] if vulnerability_type == "buffer overflow" else (None, None)
+            resp = LLM_chat.chat(get_middle_prompt(middle_snippet, start_index, end_index), timeout=timeout)
+            if resp.startswith("[ERROR]"):
+                path["LLM_judge"] = "unsupported"
+                path["LLM_response"] = resp
+                path["LLM_time"] = "unsupported"
+                return path
+        # 明确最终任务
+        start_index, end_index = path.get("range_list")[-1] if vulnerability_type == "buffer overflow" else (None, None)
+        response = LLM_chat.chat(get_end_prompt(taint_sink, start_index, end_index), timeout=timeout)
+        if response.startswith("[ERROR]"):
+            path["LLM_judge"] = "unsupported"
+            path["LLM_response"] = response
+            path["LLM_time"] = "unsupported"
+            return path
+        # 规范大语言模型的输入
+        while not response.startswith("Yes") and not response.startswith("No"):
+            response = LLM_chat.chat(SYSTEM_LLM_PATH_OUTPUT, timeout=timeout)
+            if response.startswith("[ERROR]"):
+                path["LLM_judge"] = "unsupported"
+                path["LLM_response"] = response
+                path["LLM_time"] = "unsupported"
+                return path
+        llm_judge = True if response.startswith("Yes") else False
+        path["LLM_judge"] = llm_judge
+        path["LLM_response"] = response
+        end_time = time.time()
+        path["LLM_time"] = end_time - start_time
+        print_color(f" analyzed time: {path['LLM_time']} seconds.", "green")
+        return path
+    except Exception as e:
+        print(f"llm_worker failed: {e}")
+        path["LLM_judge"] = "unsupported"
+        path["LLM_response"] = f"[ERROR] llm_worker failed: {e}"
+        path["LLM_time"] = "unsupported"
+        return path
+
+
+# 并行进行LLM的检查
+def llm_assist_parallel(potential_path):
+    llm_process_potential_path = [None] * len(potential_path)
+    print_color(f"Starting LLM-assisted judgment on {len(potential_path)} paths.", "green")
+    start_time = time.time()
+    max_workers = min(16, max(1, len(potential_path)))
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future2idx = {
+            executor.submit(llm_worker, path): idx
+            for idx, path in enumerate(potential_path)
+        }
+        finished = 0
+        for future in as_completed(future2idx):
+            idx = future2idx[future]
+            try:
+                result = future.result()
+                llm_process_potential_path[idx] = result
+            except Exception as e:
+                print_color(f"LLM worker failed at idx={idx}: {e}", "red")
+            finished += 1
+            print_color(f"LLM-assisted judgment task completed [{finished}/{len(potential_path)}]", "green")
+    print_color("All LLM-assisted judgment tasks completed.", "green")
+    end_time = time.time()
+    print_color(f"Total LLM-assisted judgment time: {end_time - start_time} seconds.", "green")
+    return llm_process_potential_path
+
+
+# 进行敏感路径的过滤（两阶段的过滤）
+def get_start_prompt_function(function_name, code_complete):
+    start_prompt = f"As a program analyst, I give you snippets of C code generated by decompilation, using {function_name} as the taint source to extract the taint data flow. \
+        Pay attention to the data alias and tainted data operations. Output in the form of data flows. {code_complete}"
+    return start_prompt
+
+def get_middle_prompt_function(code_complete):
+    middle_prompt = f"Continue to analyze function according to the above taint analysis results. Pay attention to the data alias and tainted data operations. {code_complete}"
+    return middle_prompt
+
+END_PROMPT_FUNCTION = "Based on the above taint analysis results, analyze whether the code has vulnerabilities. If there is a vulnerability, please explain what kind of vulnerability according to CWE."
+
+# 加入超时时间
+def llm_worker_function(path, timeout=90):
+    code_snippet_list = path.get("complete_list")
+    keywords = ("Fail to Decompile", "Invalid code snippet")
+    if not code_snippet_list or any(any(k in snippet for k in keywords) for snippet in code_snippet_list): # 处理不存在反编译代码的情况
+        path["LLM_judge"] = "unsupported"
+        path["LLM_response"] = "unsupported"
+        path["LLM_time"] = "unsupported"
+        return path
+    # 构造对应的提示词
+    taint_source = path.get("taint_source")
+    try:
+        start_time = time.time()
+        LLM_chat = LLM(SG_TEMPERATURE)
+        LLM_chat.system_role(SYSTEM_LLM_PATH_CHECK)
+        # 生成起始提示词
+        first_snippet = code_snippet_list[0]
+        resp = LLM_chat.chat(get_start_prompt_function(taint_source, first_snippet), timeout=timeout)
+        if resp.startswith("[ERROR]"):
+            path["LLM_judge"] = "unsupported"
+            path["LLM_response"] = resp
+            path["LLM_time"] = "unsupported"
+            return path
+        # 迭代处理中间代码片段
+        for index in range(1, len(code_snippet_list)):
+            middle_snippet = code_snippet_list[index]
+            resp = LLM_chat.chat(get_middle_prompt_function(middle_snippet), timeout=timeout)
+            if resp.startswith("[ERROR]"):
+                path["LLM_judge"] = "unsupported"
+                path["LLM_response"] = resp
+                path["LLM_time"] = "unsupported"
+                return path
+        # 明确最终任务
+        response = LLM_chat.chat(END_PROMPT_FUNCTION, timeout=timeout)
+        if response.startswith("[ERROR]"):
+            path["LLM_judge"] = "unsupported"
+            path["LLM_response"] = response
+            path["LLM_time"] = "unsupported"
+            return path
+        # 规范大语言模型的输入
+        while not response.startswith("Yes") and not response.startswith("No"):
+            response = LLM_chat.chat(SYSTEM_LLM_PATH_OUTPUT, timeout=timeout)
+            if response.startswith("[ERROR]"):
+                path["LLM_judge"] = "unsupported"
+                path["LLM_response"] = response
+                path["LLM_time"] = "unsupported"
+                return path
+        llm_judge = True if response.startswith("Yes") else False
+        path["LLM_judge"] = llm_judge
+        path["LLM_response"] = response
+        end_time = time.time()
+        path["LLM_time"] = end_time - start_time
+        print_color(f" analyzed time: {path['LLM_time']} seconds.", "blue")
+        return path
+    except Exception as e:
+        print(f"llm_worker failed: {e}")
+        path["LLM_judge"] = "unsupported"
+        path["LLM_response"] = f"[ERROR] llm_worker failed: {e}"
+        path["LLM_time"] = "unsupported"
+        return path
+    
+# 并行进行LLM的检查
+def llm_assist_parallel_function(potential_path):
+    llm_process_potential_path = [None] * len(potential_path)
+    print_color(f"Starting LLM-assisted judgment on {len(potential_path)} paths.", "blue")
+    start_time = time.time()
+    max_workers = min(16, max(1, len(potential_path)))
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future2idx = {
+            executor.submit(llm_worker_function, path): idx
+            for idx, path in enumerate(potential_path)
+        }
+        finished = 0
+        for future in as_completed(future2idx):
+            idx = future2idx[future]
+            try:
+                result = future.result()
+                llm_process_potential_path[idx] = result
+            except Exception as e:
+                print_color(f"LLM worker failed at idx={idx}: {e}", "red")
+            finished += 1
+            print_color(f"LLM-assisted judgment task completed function [{finished}/{len(potential_path)}]", "blue")
+    print_color("All LLM-assisted judgment tasks completed.", "blue")
+    end_time = time.time()
+    print_color(f"Total LLM-assisted judgment time function: {end_time - start_time} seconds.", "blue")
+    return llm_process_potential_path
+
+# 分析平均耗时间
+def analyze_avarage_time():
+    block_file_path = "/home/Experiment/output/llm_check_block_deepseek.json"
+    function_file_path = "/home/Experiment/output/llm_check_function_deepseek.json"
+    with open(block_file_path, "r") as f:
+        block_results = json.load(f)
+    with open(function_file_path, "r") as f:
+        function_results = json.load(f)
+    block_times = [item["LLM_time"] for item in block_results if isinstance(item.get("LLM_time"), (int, float))]
+    function_times = [item["LLM_time"] for item in function_results if isinstance(item.get("LLM_time"), (int, float))]
+    avg_block_time = sum(block_times) / len(block_times) if block_times else 0
+    avg_function_time = sum(function_times) / len(function_times) if function_times else 0
+    print_color(f"Average LLM-assisted judgment time (block-level): {avg_block_time} seconds.", "green")
+    print_color(f"Average LLM-assisted judgment time (function-level): {avg_function_time} seconds.", "blue")
+    return avg_block_time, avg_function_time
+    
+# 增加正确标签
+def add_correct_label():
+    potential_path_file_list = "/home/Experiment/output/correct_llm.json"
+    with open(potential_path_file_list, "r") as f:
+        potential_path = json.load(f)
+    for path in potential_path:
+        path["correct_label"] = ""
+    with open(potential_path_file_list, "w") as f:
+        json.dump(potential_path, f, indent=4)
+    print(f"Added 'correct_label' field to each path in {potential_path_file_list}")
+    
+def evaluate_detection(gt, pred):
+    acc = accuracy_score(gt, pred)
+    precision = precision_score(gt, pred, zero_division=0)
+    recall = recall_score(gt, pred, zero_division=0)
+    f1 = f1_score(gt, pred, zero_division=0)
+    tn, fp, fn, tp = confusion_matrix(gt, pred).ravel()
+    return {
+        "accuracy": acc,
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+        "tp": tp,
+        "fp": fp,
+        "fn": fn,
+        "tn": tn
+    }
+    
+# 统计试验结果
+def statistic_results():
+    correct_file_path = "/home/Experiment/output/correct_llm.json"
+    block_file_path = "/home/Experiment/output/llm_check_block_deepseek.json"
+    function_file_path = "/home/Experiment/output/llm_check_function_deepseek.json"
+    with open(correct_file_path, "r") as f:
+        correct_results = json.load(f)
+    with open(block_file_path, "r") as f:
+        block_results = json.load(f)
+    with open(function_file_path, "r") as f:
+        function_results = json.load(f)
+    correct_lable = [item.get("correct_label") for item in correct_results]
+    block_lable = [item.get("LLM_judge") for item in block_results]
+    function_lable = [item.get("LLM_judge") for item in function_results]
+    block_result_statistic = evaluate_detection(correct_lable, block_lable)
+    function_result_statistic = evaluate_detection(correct_lable, function_lable)
+    block_result_statistic["TPR"] = block_result_statistic["tp"] / (block_result_statistic["tp"] + block_result_statistic["fn"]) if (block_result_statistic["tp"] + block_result_statistic["fn"]) > 0 else 0
+    block_result_statistic["FPR"] = block_result_statistic["fp"] / (block_result_statistic["fp"] + block_result_statistic["tn"]) if (block_result_statistic["fp"] + block_result_statistic["tn"]) > 0 else 0
+    function_result_statistic["TPR"] = function_result_statistic["tp"] / (function_result_statistic["tp"] + function_result_statistic["fn"]) if (function_result_statistic["tp"] + function_result_statistic["fn"]) > 0 else 0
+    function_result_statistic["FPR"] = function_result_statistic["fp"] / (function_result_statistic["fp"] + function_result_statistic["tn"]) if (function_result_statistic["fp"] + function_result_statistic["tn"]) > 0 else 0
+    print("=== Vulnerability Detection Evaluation ===")
+    print(f"{'Metric':<10} | {'Block-level':<10} | {'Function-level':<10}")
+    print("-" * 40)
+    for metric in ["accuracy", "precision", "recall", "f1"]:
+        print(f"{metric.capitalize():<10} | {block_result_statistic[metric]:<10.3f} | {function_result_statistic[metric]:<10.3f}")
+
+    print("\n=== Confusion Matrix ===")
+    print(f"{'Type':<10} | {'Block-level':<10} | {'Function-level':<10}")
+    print("-" * 40)
+    for metric in ["tp", "fp", "fn", "tn"]:
+        print(f"{metric.upper():<10} | {block_result_statistic[metric]:<10} | {function_result_statistic[metric]:<10}")
+    avg_block_time, avg_function_time = analyze_avarage_time()
+    # 将结果写入到文件中去
+    output_txt_path="/home/Experiment/output/llm_evaluation_summary.txt"
+    with open(output_txt_path, "w") as f:
+        f.write("=== Vulnerability Detection Evaluation ===\n")
+        f.write(f"{'Metric':<10} | {'Block-level':<12} | {'Function-level':<14}\n")
+        f.write("-" * 44 + "\n")
+        for metric in ["accuracy", "precision", "recall", "f1", "TPR", "FPR"]:
+            f.write(f"{metric.capitalize():<10} | {block_result_statistic[metric]:<12.3f} | {function_result_statistic[metric]:<14.3f}\n")
+        
+        f.write("\n=== Confusion Matrix ===\n")
+        f.write(f"{'Type':<10} | {'Block-level':<12} | {'Function-level':<14}\n")
+        f.write("-" * 44 + "\n")
+        for metric in ["tp", "fp", "fn", "tn"]:
+            f.write(f"{metric.upper():<10} | {block_result_statistic[metric]:<12} | {function_result_statistic[metric]:<14}\n")
+        
+        f.write("\n=== Average Time (s) ===\n")
+        f.write(f"Block-level: {avg_block_time:.3f} s\n")
+        f.write(f"Function-level: {avg_function_time:.3f} s\n")
+    
+    print(f"All evaluation results have been saved to {output_txt_path}")
+    
+
+# 比较两种方式
+def main():
+    potential_path_file_list = "/home/Experiment/tmp/compare_llm.json"
+    with open(potential_path_file_list, "r") as f:
+        potential_path = json.load(f)
+    # 用进程池并行跑两个整体任务
+    with ProcessPoolExecutor(max_workers=2) as executor:
+        futures = {
+            executor.submit(llm_assist_parallel, potential_path): "block",
+            executor.submit(llm_assist_parallel_function, potential_path): "function",
+        }
+        results = {}
+        for future in as_completed(futures):
+            task_name = futures[future]
+            try:
+                results[task_name] = future.result()
+            except Exception as e:
+                print(f"{task_name} failed: {e}")
+    # 保存结果
+    block_file_path = "/home/Experiment/output/llm_check_block.json"
+    function_file_path = "/home/Experiment/output/llm_check_function.json"
+    if "block" in results:
+        with open(block_file_path, "w") as f:
+            json.dump(results["block"], f, indent=4)
+    if "function" in results:
+        with open(function_file_path, "w") as f:
+            json.dump(results["function"], f, indent=4)
+    print(f"LLM-assisted judgment results saved to {block_file_path} and {function_file_path}")
+    
+if __name__ == "__main__":
+    statistic_results()

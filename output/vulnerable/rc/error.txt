@@ -1,9 +1,10 @@
-target_addr: 0x417804, target_name: start_wan, errorMessage: list index out of range 
-target_addr: 0x433244, target_name: sub_433244, errorMessage: list index out of range 
-target_addr: 0x4368dc, target_name: start_ipv6_tunnel, errorMessage: list index out of range 
-target_addr: 0x41f158, target_name: wan_down, errorMessage: 'IMark' object has no attribute 'data' 
-target_addr: 0x423988, target_name: sub_423988, errorMessage: list index out of range 
-target_addr: 0x438d94, target_name: sub_438d94, errorMessage: list index out of range 
-target_addr: 0x435bec, target_name: sub_435bec, errorMessage: list index out of range 
-target_addr: 0x42d8b4, target_name: sub_42d8b4, errorMessage: list index out of range 
-target_addr: 0x409050, target_name: sub_409050, errorMessage: 'IMark' object has no attribute 'data' 
+target_addr: 0x438608, target_name: sub_438608, errorMessage: list index out of range 
+target_addr: 0x43b010, target_name: sub_43b010, errorMessage: list index out of range 
+target_addr: 0x41a214, target_name: start_wan, errorMessage: list index out of range 
+target_addr: 0x43e41c, target_name: sub_43e41c, errorMessage: list index out of range 
+target_addr: 0x43be54, target_name: start_ipv6_tunnel, errorMessage: list index out of range 
+target_addr: 0x4272e8, target_name: sub_4272e8, errorMessage: list index out of range 
+target_addr: 0x42215c, target_name: wan_down, errorMessage: 'IMark' object has no attribute 'data' 
+target_addr: 0x44a370, target_name: handle_notifications, timed out
+target_addr: 0x432c78, target_name: sub_432c78, errorMessage: list index out of range 
+target_addr: 0x40b71c, target_name: sub_40b71c, errorMessage: 'IMark' object has no attribute 'data' 

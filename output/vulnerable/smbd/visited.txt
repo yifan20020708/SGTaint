@@ -1,0 +1,32 @@
+
+[1/28] winbind_env_set, 1s
+[2/28] findProgramPath
+[3/28] cli_connect, 16s
+[4/28] tmpdir, 1s
+[5/28] poptGetContext, 2s
+[6/28] sub_6ce7bc, 52s
+[7/28] cli_initialise, 4s
+[8/28] cli_negprot, 10s
+[9/28] alloc_sub_basic
+[10/28] sub_64a9f0, 11s
+[11/28] sub_6ce4bc, 11s
+[12/28] sub_606704, 60s
+[13/28] sub_63422c, 1s
+[14/28] sub_6d743c, 13s
+[15/28] sub_6049f8, 41s
+[16/28] getsmbpass, 4s
+[17/28] sys_recvfrom
+[18/28] poptDupArgv, 3s
+[19/28] sub_6d5ef0
+[20/28] poptGetNextOpt
+[21/28] sub_6d27f0
+[22/28] sub_6d2550, 6s
+[23/28] sock_exec, 5s
+[24/28] smb_panic, 3s
+[25/28] smbrun, 7s
+[26/28] chgpasswd, 33s
+[27/28] smbrunsecret, 6s
+[28/28] sys_send, 1s
+New_input_getters functions: 
+ Done 
+Total time: 1583s 

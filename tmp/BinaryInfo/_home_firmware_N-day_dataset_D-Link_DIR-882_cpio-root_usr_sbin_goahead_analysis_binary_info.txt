@@ -1,0 +1,187 @@
+Binary Path: /home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/usr/sbin/goahead
+
+========== Binary Function Keywords ==========
+[1] 0123456789abcdef
+[2] HEAD
+[3] POST
+[4] _edata
+[5] _end
+[6] _fdata
+[7] _ftext
+[8] bclose
+[9] bopen
+[10] content-type
+[11] dbSave
+[12] disable
+[13] done
+[14] enabled
+[15] fclose
+[16] ferror
+[17] fopen
+[18] fork
+[19] group
+[20] groups
+[21] language
+[22] listen
+[23] method
+[24] null
+[25] password
+[26] rename
+[27] select
+[28] send
+[29] signal
+[30] text/css
+[31] text/html
+[32] text/plain
+[33] text/xml
+[34] umRestore
+[35] unlink
+[36] user
+[37] users
+[38] webs
+
+========== Set-Get Call Sites ==========
+No set-get call sites found.
+
+========== Related File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+nvram_set:
+nvram_set_int:
+
+========== Diffusion File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+nvram_set:
+nvram_set_int:
+
+========== Set-Get Function Info ==========
+[1] Set: nvram_safe_set, Get: nvram_safe_get, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[2] Set: nvram_set, Get: nvram_get, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+[3] Set: nvram_set_int, Get: nvram_get_int, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[4] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+
+========== Source2Sink Paths ==========
+*** Path #1 ***
+error_messges_str   : 
+str_length_visited_function: 
+decompile_list      : ['  local_20 = (int *)websGetVar(param_1,"REQUEST_METHOD",(undefined1 *)0x0);\n  sVar2 = strlen((char *)local_20);\n  sVar3 = strlen(*(char **)(param_1 + 0xb8));\n  __s = balloc(sVar2 + sVar3 + 2);\n  sprintf((char *)__s,"%s:%s",local_20,*(undefined4 *)(param_1 + 0xb8));']
+target_name         : sub_419f3c
+taint_source_addr   : 4267676
+end_block           : 4300732
+start_block         : 4300832
+path                : 0x41a020#0x41a008#0x419ff0#0x419fd8#0x419fbc
+visited_functions   : sprintf#websGetVar
+fail2captureConditionsTime: 0
+source_insr_addr    : 0x419fd4
+sink_addr           : sub_419f3c
+sink_insr_addr      : 0x41a040
+checking_time       : 0
+source_name         : sub_419f3c
+source_keyword      : REQUEST_METHOD
+ghidra_path         : [[4300604, 4300732, 4300756, 4300832, 4300864]]
+complete_list       : ['\nint * FUN_00419f3c(int param_1)\n\n{\n  int *piVar1;\n  size_t sVar2;\n  size_t sVar3;\n  int *__s;\n  int *piVar4;\n  char *local_28;\n  char *local_24;\n  int *local_20;\n  \n  local_24 = (char *)0x0;\n  fmtAlloc((int *)&local_24,0xff,"%s:%s:%s",*(uint *)(param_1 + 0xd4));\n  piVar1 = FUN_00419bac(local_24);\n  bfreeSafe((int)local_24);\n  local_20 = (int *)websGetVar(param_1,"REQUEST_METHOD",(undefined1 *)0x0);\n  sVar2 = strlen((char *)local_20);\n  sVar3 = strlen(*(char **)(param_1 + 0xb8));\n  __s = balloc(sVar2 + sVar3 + 2);\n  sprintf((char *)__s,"%s:%s",local_20,*(undefined4 *)(param_1 + 0xb8));\n  piVar4 = FUN_00419bac((char *)__s);\n  bfreeSafe((int)__s);\n  local_28 = (char *)0x0;\n  if (*(int *)(param_1 + 0x144) == 0) {\n    fmtAlloc((int *)&local_28,0xff,"%s:%s:%s",(uint)piVar1);\n  }\n  else {\n    fmtAlloc((int *)&local_28,0xff,"%s:%s:%s:%s:%s:%s",(uint)piVar1);\n  }\n  local_20 = FUN_00419bac(local_28);\n  bfreeSafe((int)piVar1);\n  bfreeSafe((int)piVar4);\n  bfreeSafe((int)local_28);\n  return local_20;\n}\n']
+target_addr         : 0x419f3c
+range_list          : [[18, 22]]
+conditions_str      : 
+taint_source        : websGetVar
+taint_sink_addr     : 5242996
+taint_sink          : sprintf
+source_addr         : 0x411e9c
+path_flag           : 0x41a020#0x41a008#0x419ff0#0x419fd8#0x419fbc
+
+========== Get2Set Paths ==========
+No paths paths found.
+
+========== SOURCE ==========
+[1] sub_1d170
+[2] config_get
+[3] NK_query_entry_get
+[4] webGetVarString
+[5] bcm_nvram_get
+[6] GetValue
+[7] acosNvramConfig_read
+[8] sub_42af24
+[9] sub_42a978
+[10] get_cgi
+[11] websGetVar
+[12] nvram_get
+[13] nvram_safe_get
+[14] nvram_default_get
+[15] getenv
+[16] nvram_pf_get
+[17] acosNvramConfig_get
+[18] uciGet
+[19] entry
+[20] wpa_config_get
+[21] httpGenListDataGet
+[22] cJSON_GetArrayItem
+[23] vici_find_str
+[24] DoHardwareComponent
+[25] device_get_string_value
+[26] cJSON_Parse
+[27] websGetVarSafe
+[28] websGetVar_secure
+[29] OM_ValGet
+[30] acosUciConfig_get
+[31] CAL_abstract_get
+[32] json_object_object_get
+[33] json_object_object_get_ex
+[34] json_tokener_parse
+[35] OM_ValFind
+[36] get_parameter
+[37] get_wlan_setting
+[38] av_dict_get
+[39] cgi_value
+[40] stringOut
+[41] cJSON_GetObjectItem
+[42] sw_getValueByName
+[43] querystr
+[44] find_val
+[45] log_query
+[46] value_parser_by_index_D7000
+[47] getoption
+[48] WEB_GetVar
+[49] av_opt_get
+[50] paramValueFromObjGet
+[51] help_getObjPtr
+[52] NCONF_get_string
+[53] getString
+[54] web_getav_metadata_get
+[55] httpGetEnv
+[56] gets
+[57] fgets
+[58] recvfrom
+[59] recvmsg
+[60] nvram_get_ex2
+[61] nvram_bufget
+[62] apmib_get
+[63] apcli_nvram_get
+[64] nvram_get_int
+
+========== TRANSITIVE SET ==========
+[1] config_set
+[2] SetValue
+[3] setenv
+[4] nvram_set
+[5] nvram_safe_set
+[6] nvram_pf_set
+[7] artblock_set
+[8] acos_nvram_set
+[9] acosNvramConfig_set
+[10] acosNvramConfig_write
+[11] envz_add
+[12] uciSet
+[13] device_set_string_value
+[14] wpa_config_set
+[15] scfgmgr_set_by_index_D7000
+[16] acosUciConfig_set
+[17] OM_ValSet
+[18] CAL_abstract_set
+[19] nvram_bufset
+[20] apmib_set
+[21] apcli_nvram_set
+[22] nvram_set_value
+[23] acosNvramConfig_set_bak
+[24] nvram_set_int
+

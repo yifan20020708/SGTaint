@@ -1,21 +1,21 @@
 
-[1/17] sub_408504, 3s
-[2/17] sub_40a64c
-[3/17] getifstats, 16s
-[4/17] readoptionsfile, 22s
-[5/17] sub_419518, 1s
-[6/17] ProcessSSDPRequest, 13s
-[7/17] wscNLSockRecv, 9s
-[8/17] ProcessIncomingNATPMPPacket, 11s
-[9/17] sub_4118b4, 12s
-[10/17] ProcessInterfaceWatchNotify, 3s
-[11/17] sub_41ad20, 0s
-[12/17] iptc_commit, 137s
-[13/17] WPSInit, 56s
-[14/17] iptc_init, 60s
-[15/17] WSCGetValueFromNameValueList, 0s
-[16/17] sub_4101e0, 1s
+[1/17] getifstats, 43s
+[2/17] sub_408464, 28s
+[3/17] sub_419308, 1s
+[4/17] sub_40a5ac
+[5/17] readoptionsfile, 44s
+[6/17] ProcessIncomingNATPMPPacket, 33s
+[7/17] wscNLSockRecv, 32s
+[8/17] ProcessSSDPRequest, 36s
+[9/17] sub_4116a4, 38s
+[10/17] ProcessInterfaceWatchNotify, 29s
+[11/17] iptc_init, 42s
+[12/17] sub_41ab10, 0s
+[13/17] iptc_commit, 85s
+[14/17] WPSInit, 30s
+[15/17] WSCGetValueFromNameValueList, 1s
+[16/17] sub_40ffd0, 1s
 [17/17] SendRespAndClose_upnphttp, 1s
 New_input_getters functions: 
  Done 
-Total time: 363s 
+Total time: 527s 

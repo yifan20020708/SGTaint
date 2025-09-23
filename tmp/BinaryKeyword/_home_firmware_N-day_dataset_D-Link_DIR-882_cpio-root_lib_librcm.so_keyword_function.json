@@ -1,0 +1,527 @@
+[
+    {
+        "keyword_function": "name",
+        "string": "psname",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_Pro.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/onetouch/device.xml",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js"
+        ]
+    },
+    {
+        "keyword_function": "time",
+        "string": "mktime",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/fwupgrade.js"
+        ]
+    },
+    {
+        "keyword_function": "6to4",
+        "string": "6to4",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_IPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ipv6/ipv6_profile.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Home_iqos.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Home.html"
+        ]
+    },
+    {
+        "keyword_function": "pppoe",
+        "string": "pppoe",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_IPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Wizard_Manual.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Wizard.html"
+        ]
+    },
+    {
+        "keyword_function": "link",
+        "string": "unlink",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js"
+        ]
+    },
+    {
+        "keyword_function": "PIN",
+        "string": "PINSU",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/hnap/SetTriggerWPS.xml",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/WiFi_org.html"
+        ]
+    },
+    {
+        "keyword_function": "select",
+        "string": "select",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/DynamicDNS.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ClientList/ClientListViewController.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Home.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/PortForwarding.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/SharePort_CreateUser.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Firewall.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/System.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/StaticRoute.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/VirtualServer.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/QoS.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ConnectedClients.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/QuickVPN.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/WebsiteFilter.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/GuestZone.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Home_iqos.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Device.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Firewall_IPv4.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ipv6/Internet_IPv6_trigger.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Statistics.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Wizard_Manual.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Time.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Firewall_IPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ClientList/ClientListView.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/UserAndDevice.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/StaticRouteIPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/SystemLog.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Network.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.selectbox-0.2_new.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Mydlink.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_VLAN.html"
+        ]
+    },
+    {
+        "keyword_function": "READY",
+        "string": "READY",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_ProAdd.html"
+        ]
+    },
+    {
+        "keyword_function": "for",
+        "string": "fork",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.checkbox.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_IPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js"
+        ]
+    },
+    {
+        "keyword_function": "error",
+        "string": "perror",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/UserDevice_CreateRule.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/menu.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ClientList/ClientListView.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ConnectedClients.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/require-2.1.17.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Mydlink.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_VLAN.html"
+        ]
+    },
+    {
+        "keyword_function": "DENY",
+        "string": "DENY",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/WebsiteFilter.html"
+        ]
+    },
+    {
+        "keyword_function": "mode",
+        "string": "modem",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js"
+        ]
+    },
+    {
+        "keyword_function": "static",
+        "string": "static",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Wizard_Manual.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/isp.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Wizard.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.stylish-select.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/config.asp",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/bootstrap/js/bootstrap.min.js"
+        ]
+    },
+    {
+        "keyword_function": "open",
+        "string": "fopen",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-ui.custom.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/bootstrap/js/bootstrap.min.js"
+        ]
+    },
+    {
+        "keyword_function": "signal",
+        "string": "signal",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ClientList/ClientListView.js"
+        ]
+    },
+    {
+        "keyword_function": "get",
+        "string": "fgets",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/libajax.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js"
+        ]
+    },
+    {
+        "keyword_function": "close",
+        "string": "fclose",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-ui.custom.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.selectbox-0.2_new.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/excanvas.js"
+        ]
+    },
+    {
+        "keyword_function": "val",
+        "string": "_eval",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/bootstrap/js/bootstrap.min.js"
+        ]
+    },
+    {
+        "keyword_function": "data",
+        "string": "_edata",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js"
+        ]
+    },
+    {
+        "keyword_function": "pptp",
+        "string": "pptp",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Firewall.html"
+        ]
+    },
+    {
+        "keyword_function": "dhcp_start",
+        "string": "dhcp_start",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_IPv6.html"
+        ]
+    },
+    {
+        "keyword_function": "Other",
+        "string": "Other",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/VirtualServer.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/VirtualServer.js"
+        ]
+    },
+    {
+        "keyword_function": "text",
+        "string": "_ftext",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_ProAdd.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/WiFi_org.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_Pro.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/scan.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.selectbox-0.2_new.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js"
+        ]
+    },
+    {
+        "keyword_function": "close",
+        "string": "pclose",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-ui.custom.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.selectbox-0.2_new.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/excanvas.js"
+        ]
+    },
+    {
+        "keyword_function": "ppp",
+        "string": "pppou",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/config.asp",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/isp.js"
+        ]
+    },
+    {
+        "keyword_function": "ByApplication",
+        "string": "ByApplication",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/QoS.html"
+        ]
+    },
+    {
+        "keyword_function": "end",
+        "string": "_end",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/excanvas.js"
+        ]
+    },
+    {
+        "keyword_function": "6in4",
+        "string": "6in4",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_IPv6.html"
+        ]
+    },
+    {
+        "keyword_function": "NULL",
+        "string": "NULL",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/StaticRouteIPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/StaticRoute.js"
+        ]
+    },
+    {
+        "keyword_function": "filter",
+        "string": "filter",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js"
+        ]
+    },
+    {
+        "keyword_function": "dhcp",
+        "string": "dhcp",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Wizard_Manual.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/config.asp",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/isp.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Wizard.html"
+        ]
+    },
+    {
+        "keyword_function": "sec",
+        "string": "ipsec",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/comm.js"
+        ]
+    },
+    {
+        "keyword_function": "ByDevice",
+        "string": "ByDevice",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/QoS.html"
+        ]
+    },
+    {
+        "keyword_function": "dhcp_end",
+        "string": "dhcp_end",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_IPv6.html"
+        ]
+    },
+    {
+        "keyword_function": "name",
+        "string": "uname",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_Pro.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/onetouch/device.xml",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js"
+        ]
+    },
+    {
+        "keyword_function": "time",
+        "string": "timer",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/www/rssui/fwupgrade.js"
+        ]
+    },
+    {
+        "keyword_function": "error",
+        "string": "ferror",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/UserDevice_CreateRule.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/menu.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ClientList/ClientListView.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ConnectedClients.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/require-2.1.17.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Mydlink.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_VLAN.html"
+        ]
+    },
+    {
+        "keyword_function": "rtsp",
+        "string": "rtsp",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Firewall.html"
+        ]
+    },
+    {
+        "keyword_function": "name",
+        "string": "rename",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_Pro.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/onetouch/device.xml",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js"
+        ]
+    },
+    {
+        "keyword_function": "Both",
+        "string": "Both",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/VirtualServer.js"
+        ]
+    },
+    {
+        "keyword_function": "data",
+        "string": "_fdata",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js"
+        ]
+    },
+    {
+        "keyword_function": "FTP_Port",
+        "string": "FTP_Port",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/UsbSharing.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/SharePort.html"
+        ]
+    },
+    {
+        "keyword_function": "Win",
+        "string": "WeWin",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.client.js"
+        ]
+    },
+    {
+        "keyword_function": "ALLOW",
+        "string": "ALLOW",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/WebsiteFilter.html"
+        ]
+    },
+    {
+        "keyword_function": "remove",
+        "string": "remove",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-ui.custom.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery.validate1.js"
+        ]
+    },
+    {
+        "keyword_function": "UploadBandwidth",
+        "string": "UploadBandwidth",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/QoS.html"
+        ]
+    },
+    {
+        "keyword_function": "open",
+        "string": "popen",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-ui.custom.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/bootstrap/js/bootstrap.min.js"
+        ]
+    },
+    {
+        "keyword_function": "enabled",
+        "string": "enabled",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/comm.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/Public.js"
+        ]
+    },
+    {
+        "keyword_function": "DownloadBandwidth",
+        "string": "DownloadBandwidth",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/QoS.html"
+        ]
+    },
+    {
+        "keyword_function": "detach",
+        "string": "nodetach",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/DynamicDNS.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/UsbSharing.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/PortForwarding.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/SharePort_CreateUser.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Wizard.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_IPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/UserDevice_CreateRule.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/System.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/WiFi_org.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/StaticRoute.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/VirtualServer.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/QoS.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ConnectedClients.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/info/Login.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/SharePort_CreateUser.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/UserDevice_CreateUser.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Firewall_IPv4.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Device.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ipv6/Internet_IPv6_trigger.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/WiFi.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Time.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Firewall_IPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_ProAdd.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/ClientList/ClientListView.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/StaticRouteIPv6.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/SystemLog.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/UserAndDevice.html",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/Internet_VLAN.html"
+        ]
+    },
+    {
+        "keyword_function": "link",
+        "string": "Dlink",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.11.1.min.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/jquery-1.8.2.min.js"
+        ]
+    },
+    {
+        "keyword_function": "size",
+        "string": "f_size",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/UserDevice_CreateRule.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/DynamicDNS.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/SharePort_CreateUser.js",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/js/UserDevice_CreateUser.js"
+        ]
+    },
+    {
+        "keyword_function": "netmask",
+        "string": "netmask",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/onetouch/device.xml"
+        ]
+    },
+    {
+        "keyword_function": "ip",
+        "string": "pipe",
+        "path": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/onetouch/device.xml"
+        ]
+    }
+]

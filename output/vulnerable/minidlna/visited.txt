@@ -1,0 +1,8 @@
+
+[1/4] sub_7bc580, 1s
+[2/4] sub_7bc5a0, 1s
+[3/4] sub_7caad0, 1s
+[4/4] sub_7bc600, 1s
+New_input_getters functions: 
+ Done 
+Total time: 606s 

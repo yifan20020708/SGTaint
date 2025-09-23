@@ -1,0 +1,5360 @@
+{
+    "D-Link-DIR-878": {
+        "result_file_path": "/home/firmware/0-day_dataset/D-Link/DIR-878/SGResult-DIR-878/log/DIR-878_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_safe_set",
+                    "nvram_safe_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "nvram_set_int",
+                    "nvram_get_int",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_bufset",
+                    "nvram_bufget",
+                    1,
+                    1,
+                    2,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 1107.56,
+            "binary-file-list": [
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/etc_ro/lighttpd/www/web/wireless.cgi",
+                    30.0,
+                    4
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/ralink_init",
+                    66.0,
+                    5
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/ntpclient",
+                    66.0,
+                    4
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/usr/sbin/omcproxy",
+                    78.0,
+                    4
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/usr/sbin/timer",
+                    111.0,
+                    10
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/tc",
+                    72.0,
+                    21
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/miniupnpd",
+                    225.0,
+                    17
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/lighttpd",
+                    290.0,
+                    4
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/lib/librcm.so",
+                    1617.0,
+                    202
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/rc",
+                    1980.0,
+                    206
+                ],
+                [
+                    "/home/firmware/New_dataset/D-Link/DIR-878/cpio-root/bin/prog.cgi",
+                    2703.0,
+                    198
+                ]
+            ],
+            "binary-file-number": 11,
+            "total-function-number": 675,
+            "rda_average_function_time": 10.72,
+            "total-time": 3992.97,
+            "get2sink_path_sanitization-length": 227,
+            "potential_path_sanitization-length": 69,
+            "get2sink_path_complete-length": 445,
+            "potential_path_complete-length": 242,
+            "sorted_potential_verify_path-length": 33,
+            "sorted_potential_maybe_path-length": 36,
+            "path_complete": 687,
+            "path_sanitization": 296,
+            "average_time_binary": 363.0,
+            "path_sanitization_cross": 84,
+            "path_sanitization_cross_rate": 0.2838
+        }
+    },
+    "D-Link-DIR-816": {
+        "result_file_path": "/home/firmware/0-day_dataset/D-Link/DIR-816/SGResult-DIR-816/log/DIR-816_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "nvram_bufset",
+                    "nvram_bufget",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "dbWriteStr",
+                    "dbReadStr",
+                    2,
+                    2,
+                    4,
+                    4
+                ],
+                [
+                    "dbWriteInt",
+                    "dbReadInt",
+                    2,
+                    2,
+                    4,
+                    4
+                ]
+            ],
+            "Set-get-graph-time": 1061.73,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/qos_timer",
+                    21.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/qos_run",
+                    26.0,
+                    8
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/ated",
+                    32.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/qos_portbased_run",
+                    15.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/ip_qos",
+                    54.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/product",
+                    110.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/ralink_init",
+                    135.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/miniupnpd",
+                    219.0,
+                    19
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/tc",
+                    205.0,
+                    24
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/iptables",
+                    817.0,
+                    22
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/etc_ro/web/cgi-bin/upload_torrent.cgi",
+                    1015.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/etc_ro/web/cgi-bin/upload.cgi",
+                    1022.0,
+                    8
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-816/squashfs-root/bin/goahead",
+                    9716.0,
+                    376
+                ]
+            ],
+            "binary-file-number": 13,
+            "total-function-number": 484,
+            "rda_average_function_time": 27.66,
+            "total-time": 10903.88,
+            "get2sink_path_sanitization-length": 39,
+            "potential_path_sanitization-length": 43,
+            "get2sink_path_complete-length": 108,
+            "potential_path_complete-length": 101,
+            "sorted_potential_verify_path-length": 13,
+            "sorted_potential_maybe_path-length": 30,
+            "path_complete": 209,
+            "path_sanitization": 82,
+            "average_time_binary": 838.76,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "D-Link-COVR-2600R": {
+        "result_file_path": "/home/firmware/0-day_dataset/D-Link/COVR-2600R/SGResult-COVR-2600R/log/COVR-2600R_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 538.59,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/D-Link/COVR-2600R/squashfs-root/usr/sbin/ssdk_sh",
+                    31.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/COVR-2600R/squashfs-root/sbin/httpd",
+                    318.0,
+                    22
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/COVR-2600R/squashfs-root/usr/libexec/ipsec/pluto",
+                    676.0,
+                    65
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/COVR-2600R/squashfs-root/sbin/smbd",
+                    836.0,
+                    26
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/COVR-2600R/squashfs-root/htdocs/cgibin",
+                    1378.0,
+                    78
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/COVR-2600R/squashfs-root/usr/bin/minidlna",
+                    2206.0,
+                    36
+                ]
+            ],
+            "binary-file-number": 6,
+            "total-function-number": 227,
+            "rda_average_function_time": 23.99,
+            "total-time": 2784.86,
+            "get2sink_path_sanitization-length": 8,
+            "potential_path_sanitization-length": 1,
+            "get2sink_path_complete-length": 61,
+            "potential_path_complete-length": 45,
+            "sorted_potential_verify_path-length": 1,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 106,
+            "path_sanitization": 9,
+            "average_time_binary": 464.14,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "D-Link-DIR-846": {
+        "result_file_path": "/home/firmware/0-day_dataset/D-Link/DIR-846/SGResult-DIR-846/log/DIR-846_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 485.03,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-846/squashfs-root/usr/sbin/miniupnpd",
+                    33.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-846/squashfs-root/usr/sbin/tc",
+                    24.0,
+                    9
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-846/squashfs-root/sbin/fw3",
+                    35.0,
+                    8
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-846/squashfs-root/sbin/netifd",
+                    52.0,
+                    12
+                ],
+                [
+                    "/home/firmware/0-day_dataset/D-Link/DIR-846/squashfs-root/usr/sbin/wpad",
+                    70.0,
+                    8
+                ]
+            ],
+            "binary-file-number": 5,
+            "total-function-number": 42,
+            "rda_average_function_time": 5.1,
+            "total-time": 698.68,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 0,
+            "potential_path_complete-length": 4,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 4,
+            "path_sanitization": 0,
+            "average_time_binary": 139.74,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0
+        }
+    },
+    "ToToLink-A720R": {
+        "result_file_path": "/home/firmware/0-day_dataset/ToToLink/A720R/SGResult-A720R/log/A720R_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "apmib_set",
+                    "apmib_get",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "inifile_set_int",
+                    "inifile_get_int",
+                    2,
+                    2,
+                    3,
+                    null
+                ],
+                [
+                    "inifile_set",
+                    "inifile_get_string",
+                    2,
+                    2,
+                    3,
+                    3
+                ]
+            ],
+            "Set-get-graph-time": 518.99,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/forceupg",
+                    19.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/sysschectl",
+                    26.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/cs_statistics",
+                    31.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/cs_init",
+                    35.0,
+                    8
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/wps",
+                    45.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/cloudupdate_check",
+                    46.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/ppp_inet",
+                    48.0,
+                    12
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/csteSys",
+                    51.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/convertIniToCfg",
+                    60.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/lib/libapmib.so",
+                    78.0,
+                    10
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/udhcpd",
+                    101.0,
+                    14
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/web_cste/cgi-bin/infostat.cgi",
+                    105.0,
+                    50
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/tc",
+                    88.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/writeflash",
+                    254.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/web_cste/cgi-bin/cstecgi.cgi",
+                    1428.0,
+                    189
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A720R/squashfs-root/bin/sysconf",
+                    2267.0,
+                    110
+                ]
+            ],
+            "binary-file-number": 16,
+            "total-function-number": 465,
+            "rda_average_function_time": 10.07,
+            "total-time": 2835.08,
+            "get2sink_path_sanitization-length": 50,
+            "potential_path_sanitization-length": 20,
+            "get2sink_path_complete-length": 58,
+            "potential_path_complete-length": 37,
+            "sorted_potential_verify_path-length": 18,
+            "sorted_potential_maybe_path-length": 2,
+            "path_complete": 95,
+            "path_sanitization": 70,
+            "average_time_binary": 177.19,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "ToToLink-LR1200GB": {
+        "result_file_path": "/home/firmware/0-day_dataset/ToToLink/LR1200GB/SGResult-LR1200GB/log/LR1200GB_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_set_int",
+                    "nvram_get_int",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_safe_get",
+                    "nvram_safe_get_int",
+                    0,
+                    0,
+                    null,
+                    1
+                ],
+                [
+                    "nvram_wlan_set",
+                    "nvram_wlan_get",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "nvram_wlan_set_int",
+                    "nvram_wlan_get_int",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "set_wan_unit_value",
+                    "get_wan_unit_value",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "set_wan_unit_value_int",
+                    "get_wan_unit_value_int",
+                    1,
+                    1,
+                    2,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 1318.93,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/networkmap",
+                    62.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/custom_info_to_nvram",
+                    85.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/bin/ltecheck",
+                    98.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/lib/libshared.so",
+                    110.0,
+                    69
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/bin/tc",
+                    143.0,
+                    20
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/usr/sbin/lighttpd",
+                    223.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/bin/xtables-multi",
+                    814.0,
+                    37
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/www/cgi-bin/cstecgi.cgi",
+                    905.0,
+                    164
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/sbin/rc",
+                    2478.0,
+                    322
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/LR1200GB/squashfs-root/lib/libmcm.so",
+                    2548.0,
+                    218
+                ]
+            ],
+            "binary-file-number": 10,
+            "total-function-number": 850,
+            "rda_average_function_time": 8.78,
+            "total-time": 3985.04,
+            "get2sink_path_sanitization-length": 80,
+            "potential_path_sanitization-length": 43,
+            "get2sink_path_complete-length": 115,
+            "potential_path_complete-length": 63,
+            "sorted_potential_verify_path-length": 40,
+            "sorted_potential_maybe_path-length": 3,
+            "path_complete": 178,
+            "path_sanitization": 123,
+            "average_time_binary": 398.5,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "ToToLink-NR1800X": {
+        "result_file_path": "/home/firmware/0-day_dataset/ToToLink/NR1800X/SGResult-NR1800X/log/NR1800X_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_set_int",
+                    "nvram_get_int",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_wlan_set",
+                    "nvram_wlan_get",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "nvram_wlan_set_int",
+                    "nvram_wlan_get_int",
+                    1,
+                    1,
+                    2,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 1192.57,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/networkmap",
+                    62.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/custom_info_to_nvram",
+                    103.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/NR1800X/squashfs-root/bin/tc",
+                    107.0,
+                    20
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/NR1800X/squashfs-root/usr/sbin/lighttpd",
+                    214.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/NR1800X/squashfs-root/bin/xtables-multi",
+                    856.0,
+                    37
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/NR1800X/squashfs-root/www/cgi-bin/cstecgi.cgi",
+                    1042.0,
+                    182
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/NR1800X/squashfs-root/lib/libmcm.so",
+                    2623.0,
+                    226
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/NR1800X/squashfs-root/sbin/rc",
+                    2735.0,
+                    306
+                ]
+            ],
+            "binary-file-number": 8,
+            "total-function-number": 787,
+            "rda_average_function_time": 9.84,
+            "total-time": 4025.43,
+            "get2sink_path_sanitization-length": 84,
+            "potential_path_sanitization-length": 35,
+            "get2sink_path_complete-length": 117,
+            "potential_path_complete-length": 60,
+            "sorted_potential_verify_path-length": 31,
+            "sorted_potential_maybe_path-length": 4,
+            "path_complete": 177,
+            "path_sanitization": 119,
+            "average_time_binary": 503.18,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "ToToLink-A3300R": {
+        "result_file_path": "/home/firmware/0-day_dataset/ToToLink/A3300R/SGResult-A3300R/log/A3300R_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 352.7,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A3300R/squashfs-root/sbin/netifd",
+                    24.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A3300R/squashfs-root/usr/sbin/shttpd",
+                    27.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A3300R/squashfs-root/usr/sbin/miniupnpd",
+                    31.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A3300R/squashfs-root/usr/sbin/cwmpd",
+                    35.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/A3300R/squashfs-root/usr/sbin/wpad",
+                    109.0,
+                    2
+                ]
+            ],
+            "binary-file-number": 5,
+            "total-function-number": 9,
+            "rda_average_function_time": 25.11,
+            "total-time": 679.82,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 0,
+            "potential_path_complete-length": 0,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 0,
+            "path_sanitization": 0,
+            "average_time_binary": 135.96,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0
+        }
+    },
+    "ToToLink-X2000R": {
+        "result_file_path": "/home/firmware/0-day_dataset/ToToLink/X2000R/SGResult-X2000R/log/X2000R_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 681.18,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X2000R/squashfs-root/bin/boa",
+                    85.0,
+                    13
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X2000R/squashfs-root/bin/wpa_supplicant",
+                    197.0,
+                    20
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X2000R/squashfs-root/bin/hostapd",
+                    647.0,
+                    27
+                ]
+            ],
+            "binary-file-number": 3,
+            "total-function-number": 60,
+            "rda_average_function_time": 15.48,
+            "total-time": 1600.37,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 1,
+            "get2sink_path_complete-length": 0,
+            "potential_path_complete-length": 1,
+            "sorted_potential_verify_path-length": 1,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 1,
+            "path_sanitization": 1,
+            "average_time_binary": 533.46,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "ToToLink-X5000R": {
+        "result_file_path": "/home/firmware/0-day_dataset/ToToLink/X5000R/SGResult-X5000R/log/X5000R_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 177.39,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X5000R/squashfs-root/web/cgi-bin/meshinfo.cgi",
+                    16.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X5000R/squashfs-root/usr/bin/xupnpd",
+                    20.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X5000R/squashfs-root/usr/sbin/miniupnpd",
+                    29.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X5000R/squashfs-root/usr/sbin/tc",
+                    26.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X5000R/squashfs-root/web/cgi-bin/cstecgi.cgi",
+                    30.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X5000R/squashfs-root/usr/sbin/lighttpd",
+                    33.0,
+                    0
+                ]
+            ],
+            "binary-file-number": 6,
+            "total-function-number": 0,
+            "rda_average_function_time": 0,
+            "total-time": 233.1,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 0,
+            "potential_path_complete-length": 0,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 0,
+            "path_sanitization": 0,
+            "average_time_binary": 38.85,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0
+        }
+    },
+    "ToToLink-X6000R": {
+        "result_file_path": "/home/firmware/0-day_dataset/ToToLink/X6000R/SGResult-X6000R/log/X6000R_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 383.26,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X6000R/squashfs-root/usr/libexec/cgi-io",
+                    21.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X6000R/squashfs-root/sbin/netifd",
+                    32.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X6000R/squashfs-root/usr/sbin/shttpd",
+                    32.0,
+                    14
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X6000R/squashfs-root/usr/sbin/miniupnpd",
+                    29.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X6000R/squashfs-root/usr/sbin/cwmpd",
+                    39.0,
+                    12
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X6000R/squashfs-root/usr/libexec/ip-tiny",
+                    35.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ToToLink/X6000R/squashfs-root/usr/libexec/tc-full",
+                    273.0,
+                    33
+                ]
+            ],
+            "binary-file-number": 7,
+            "total-function-number": 76,
+            "rda_average_function_time": 6.07,
+            "total-time": 728.22,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 0,
+            "potential_path_complete-length": 0,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 0,
+            "path_sanitization": 0,
+            "average_time_binary": 104.03,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0
+        }
+    },
+    "Netgear-BE9300": {
+        "result_file_path": "/home/firmware/0-day_dataset/Netgear/BE9300/SGResult-BE9300/log/BE9300_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "config_set",
+                    "config_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 8185.24,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/sbin/led_all",
+                    17.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/fw-checking",
+                    40.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/install_agent",
+                    70.0,
+                    25
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/sbin/show_product_info",
+                    81.0,
+                    16
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/sbin/traffic_meter",
+                    181.0,
+                    21
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/lib/dbus-1/dbus-daemon-launch-helper",
+                    169.0,
+                    9
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/net-scan",
+                    269.0,
+                    50
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/sbin/net-util",
+                    294.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/bin/mcpd",
+                    294.0,
+                    14
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/miniupnpd",
+                    285.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/lighttpd",
+                    259.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/dal-scan",
+                    379.0,
+                    50
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/soapclient",
+                    701.0,
+                    152
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/net-wall",
+                    1000.0,
+                    29
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/wl",
+                    1868.0,
+                    85
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/sbin/wlan",
+                    2693.0,
+                    47
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/BE9300/squashfs-root/usr/sbin/net-cgi",
+                    9023.0,
+                    660
+                ]
+            ],
+            "binary-file-number": 17,
+            "total-function-number": 1206,
+            "rda_average_function_time": 14.61,
+            "total-time": 17401.04,
+            "get2sink_path_sanitization-length": 1,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 11,
+            "potential_path_complete-length": 21,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 32,
+            "path_sanitization": 1,
+            "average_time_binary": 1023.59,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Netgear-EX6100": {
+        "result_file_path": "/home/firmware/0-day_dataset/Netgear/EX6100/SGResult-EX6100/log/EX6100_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_read",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "acosNvramConfig_set_bak",
+                    "acosNvramConfig_get_bak",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 2614.51,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/swresetd",
+                    18.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/dnsRedirectReplyd",
+                    20.0,
+                    2
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/timesync",
+                    40.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/rc",
+                    51.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/lld2d",
+                    73.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/check_opmode",
+                    88.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/telnetenabled",
+                    92.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/ddnsd",
+                    95.0,
+                    2
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/wpsd",
+                    97.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/scheact",
+                    104.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/gproxy",
+                    99.0,
+                    11
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/check_fw",
+                    122.0,
+                    12
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/tfmeter",
+                    154.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/sbin/bd",
+                    179.0,
+                    2
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/wandetect",
+                    193.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/heartbeat",
+                    207.0,
+                    30
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/email",
+                    253.0,
+                    10
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/bin/miniupnpd",
+                    267.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/bin/iptables",
+                    774.0,
+                    24
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/lib/libacos_shared.so",
+                    859.0,
+                    173
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/upnpd",
+                    1646.0,
+                    232
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/sbin/acos_service",
+                    3296.0,
+                    68
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/bin/openssl",
+                    4106.0,
+                    14
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6100/squashfs-root/usr/sbin/httpd",
+                    7486.0,
+                    694
+                ]
+            ],
+            "binary-file-number": 24,
+            "total-function-number": 1336,
+            "rda_average_function_time": 15.21,
+            "total-time": 10369.91,
+            "get2sink_path_sanitization-length": 2372,
+            "potential_path_sanitization-length": 1072,
+            "get2sink_path_complete-length": 4347,
+            "potential_path_complete-length": 4383,
+            "sorted_potential_verify_path-length": 1043,
+            "sorted_potential_maybe_path-length": 29,
+            "path_complete": 8730,
+            "path_sanitization": 3444,
+            "average_time_binary": 432.08,
+            "path_sanitization_cross": 2146,
+            "path_sanitization_cross_rate": 0.6231
+        }
+    },
+    "Netgear-EX6120": {
+        "result_file_path": "/home/firmware/0-day_dataset/Netgear/EX6120/SGResult-EX6120/log/EX6120_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_read",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 2280.92,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/swresetd",
+                    18.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/dnsRedirectReplyd",
+                    22.0,
+                    2
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/timesync",
+                    30.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/rc",
+                    31.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/lld2d",
+                    45.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/telnetenabled",
+                    66.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/scheact",
+                    79.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/ddnsd",
+                    86.0,
+                    2
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/wpsd",
+                    93.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/check_fw",
+                    116.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/tfmeter",
+                    121.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/heartbeat",
+                    133.0,
+                    30
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/sbin/bd",
+                    162.0,
+                    2
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/wandetect",
+                    189.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/email",
+                    229.0,
+                    10
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/bin/miniupnpd",
+                    259.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/lib/libacos_shared.so",
+                    991.0,
+                    172
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/bin/wget",
+                    2272.0,
+                    43
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/sbin/acos_service",
+                    2994.0,
+                    68
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/bin/openssl",
+                    4101.0,
+                    14
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Netgear/EX6120/squashfs-root/usr/sbin/httpd",
+                    12436.0,
+                    579
+                ]
+            ],
+            "binary-file-number": 21,
+            "total-function-number": 996,
+            "rda_average_function_time": 24.57,
+            "total-time": 14972.56,
+            "get2sink_path_sanitization-length": 738,
+            "potential_path_sanitization-length": 361,
+            "get2sink_path_complete-length": 1127,
+            "potential_path_complete-length": 1968,
+            "sorted_potential_verify_path-length": 342,
+            "sorted_potential_maybe_path-length": 19,
+            "path_complete": 3095,
+            "path_sanitization": 1099,
+            "average_time_binary": 712.98,
+            "path_sanitization_cross": 813,
+            "path_sanitization_cross_rate": 0.7398
+        }
+    },
+    "Linksys-E1200": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/E1200/SGResult-E1200/log/E1200_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 2449.96,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/utils/generate_ula",
+                    16.0,
+                    2
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/rc/diag_tracertbutton",
+                    16.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/rc/diag_pingbutton",
+                    18.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/utils/generate_pin",
+                    19.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/ctf/linux/ctf.o",
+                    20.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/emf/igs.o",
+                    29.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/emf/emf.o",
+                    30.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/rc/6rd_nud",
+                    45.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/rc/wan_auto_detect",
+                    51.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/rc/qos_bw_detect",
+                    79.0,
+                    16
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/tftpd/tftpd",
+                    128.0,
+                    24
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/bcmupnp/bcmupnp",
+                    275.0,
+                    84
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/wps/wps_monitor",
+                    403.0,
+                    62
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/shared/libshared.so",
+                    1473.0,
+                    138
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/rc/rc",
+                    6765.0,
+                    300
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E1200/router/httpd/httpd",
+                    16643.0,
+                    466
+                ]
+            ],
+            "binary-file-number": 16,
+            "total-function-number": 1121,
+            "rda_average_function_time": 23.2,
+            "total-time": 19505.98,
+            "get2sink_path_sanitization-length": 356,
+            "potential_path_sanitization-length": 53,
+            "get2sink_path_complete-length": 613,
+            "potential_path_complete-length": 114,
+            "sorted_potential_verify_path-length": 45,
+            "sorted_potential_maybe_path-length": 8,
+            "path_complete": 727,
+            "path_sanitization": 409,
+            "average_time_binary": 1219.12,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Linksys-RE7000": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/RE7000/SGResult-RE7000/log/RE7000_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 461.76,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/usr/bin/ubus",
+                    18.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/etc_ro/lighttpd/www/cgi-bin/media.cgi",
+                    26.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/etc_ro/lighttpd/www/cgi-bin/adm.cgi",
+                    45.0,
+                    9
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/etc_ro/lighttpd/jsoncgi/cgi-bin/json.cgi",
+                    66.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/etc_ro/lighttpd/RE7000_www/cgi-bin/json.cgi",
+                    73.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/etc_ro/lighttpd/www/cgi-bin/internet.cgi",
+                    99.0,
+                    13
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/bin/lighttpd",
+                    148.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/bin/ralink_init",
+                    230.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/bin/miniupnpd",
+                    238.0,
+                    18
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/etc_ro/lighttpd/www/cgi-bin/firewall.cgi",
+                    570.0,
+                    20
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/etc_ro/lighttpd/www/cgi-bin/wireless.cgi",
+                    682.0,
+                    27
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/etc_ro/lighttpd/www/cgi-bin/makeRequest.cgi",
+                    1105.0,
+                    14
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/sbin/wget",
+                    2597.0,
+                    28
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/RE7000/cpio-root/bin/openssl",
+                    6532.0,
+                    17
+                ]
+            ],
+            "binary-file-number": 14,
+            "total-function-number": 171,
+            "rda_average_function_time": 72.68,
+            "total-time": 7185.12,
+            "get2sink_path_sanitization-length": 28,
+            "potential_path_sanitization-length": 8,
+            "get2sink_path_complete-length": 95,
+            "potential_path_complete-length": 18,
+            "sorted_potential_verify_path-length": 5,
+            "sorted_potential_maybe_path-length": 3,
+            "path_complete": 113,
+            "path_sanitization": 36,
+            "average_time_binary": 513.22,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Linksys-E5600": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/E5600/SGResult-E5600/log/E5600_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 620.87,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/www/cgi-bin/upload_fw.cgi",
+                    2.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/www/cgi-bin/upload_config.cgi",
+                    17.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/usr/bin/cgi-fcgi",
+                    18.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/usr/bin/mapd_iface",
+                    18.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/www/cgi-bin/al.cgi",
+                    27.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/www/cgi-bin/login.cgi",
+                    41.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/www/cgi-bin/mesh_login.cgi",
+                    43.0,
+                    13
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/usr/bin/miniupnpd",
+                    92.0,
+                    16
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/usr/sbin/lighttpd",
+                    177.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E5600/squashfs-root/usr/bin/openssl",
+                    67.0,
+                    0
+                ]
+            ],
+            "binary-file-number": 10,
+            "total-function-number": 43,
+            "rda_average_function_time": 11.67,
+            "total-time": 910.07,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 1,
+            "get2sink_path_complete-length": 2,
+            "potential_path_complete-length": 1,
+            "sorted_potential_verify_path-length": 1,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 3,
+            "path_sanitization": 1,
+            "average_time_binary": 91.01,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Linksys-EA7200": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/EA7200/SGResult-EA7200/log/EA7200_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "tdb_store",
+                    "tdb_fetch",
+                    1,
+                    0,
+                    3,
+                    2
+                ]
+            ],
+            "Set-get-graph-time": 2151.1,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7200/jffs2-root/usr/sbin/lighttpd",
+                    170.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7200/jffs2-root/sbin/dhclient",
+                    1138.0,
+                    72
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7200/jffs2-root/sbin/minidlnad",
+                    1803.0,
+                    20
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7200/jffs2-root/sbin/smbd",
+                    2341.0,
+                    125
+                ]
+            ],
+            "binary-file-number": 4,
+            "total-function-number": 220,
+            "rda_average_function_time": 24.78,
+            "total-time": 5739.66,
+            "get2sink_path_sanitization-length": 10,
+            "potential_path_sanitization-length": 3,
+            "get2sink_path_complete-length": 11,
+            "potential_path_complete-length": 6,
+            "sorted_potential_verify_path-length": 3,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 17,
+            "path_sanitization": 13,
+            "average_time_binary": 1434.91,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Linksys-E7350": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/E7350/SGResult-E7350/log/E7350_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 270.86,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E7350/squashfs-root/usr/sbin/uhttpd",
+                    18.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E7350/squashfs-root/usr/bin/ralink_init",
+                    18.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E7350/squashfs-root/bin/httpd",
+                    43.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E7350/squashfs-root/usr/bin/miniupnpd",
+                    157.0,
+                    24
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E7350/squashfs-root/sbin/mtk_dut",
+                    3585.0,
+                    98
+                ]
+            ],
+            "binary-file-number": 5,
+            "total-function-number": 122,
+            "rda_average_function_time": 31.32,
+            "total-time": 3909.59,
+            "get2sink_path_sanitization-length": 9,
+            "potential_path_sanitization-length": 13,
+            "get2sink_path_complete-length": 10,
+            "potential_path_complete-length": 35,
+            "sorted_potential_verify_path-length": 10,
+            "sorted_potential_maybe_path-length": 3,
+            "path_complete": 45,
+            "path_sanitization": 22,
+            "average_time_binary": 781.92,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Linksys-E8450": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/E8450/SGResult-E8450/log/E8450_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 1072.44,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/www/cgi-bin/backup.cgi",
+                    34.0,
+                    9
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/www/cgi-bin/upgrade.cgi",
+                    35.0,
+                    2
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/www/cgi-bin/wnc_maccheck.cgi",
+                    56.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/usr/sbin/miniupnpd",
+                    115.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/usr/sbin/lighttpd",
+                    152.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/usr/sbin/tc",
+                    163.0,
+                    24
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/www/cgi-bin/sysinfo.cgi",
+                    213.0,
+                    13
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/usr/sbin/tcpdump",
+                    501.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/www/cgi-bin/portal.cgi",
+                    1273.0,
+                    242
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/usr/bin/openssl",
+                    4649.0,
+                    16
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/E8450/squashfs-root/sbin/mtk_dut",
+                    4950.0,
+                    118
+                ]
+            ],
+            "binary-file-number": 11,
+            "total-function-number": 452,
+            "rda_average_function_time": 26.86,
+            "total-time": 6105.13,
+            "get2sink_path_sanitization-length": 11,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 12,
+            "potential_path_complete-length": 0,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 12,
+            "path_sanitization": 11,
+            "average_time_binary": 555.01,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Linksys-EA7450": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/EA7450/SGResult-EA7450/log/EA7450_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 1964.25,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7450/jffs2-root/usr/sbin/lighttpd",
+                    157.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7450/jffs2-root/bin/wfa_ca",
+                    230.0,
+                    13
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7450/jffs2-root/sbin/minidlnad",
+                    1752.0,
+                    20
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7450/jffs2-root/sbin/dhclient",
+                    1725.0,
+                    72
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/EA7450/jffs2-root/sbin/smbd",
+                    1653.0,
+                    29
+                ]
+            ],
+            "binary-file-number": 5,
+            "total-function-number": 137,
+            "rda_average_function_time": 40.27,
+            "total-time": 4887.91,
+            "get2sink_path_sanitization-length": 10,
+            "potential_path_sanitization-length": 3,
+            "get2sink_path_complete-length": 11,
+            "potential_path_complete-length": 6,
+            "sorted_potential_verify_path-length": 3,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 17,
+            "path_sanitization": 13,
+            "average_time_binary": 977.58,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Linksys-LN1400": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/LN1400/SGResult-LN1400/log/LN1400_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 1826.11,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/LN1400/squashfs-root/www/cgi-bin/override.cgi",
+                    10.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/LN1400/squashfs-root/usr/sbin/lighttpd",
+                    118.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/LN1400/squashfs-root/usr/sbin/ssdk_sh",
+                    53.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/LN1400/squashfs-root/usr/sbin/hostapd",
+                    608.0,
+                    37
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/LN1400/squashfs-root/usr/sbin/mini_httpd",
+                    1168.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/LN1400/squashfs-root/usr/sbin/jq",
+                    1080.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/LN1400/squashfs-root/usr/sbin/wpa_supplicant",
+                    1335.0,
+                    29
+                ]
+            ],
+            "binary-file-number": 7,
+            "total-function-number": 84,
+            "rda_average_function_time": 52.05,
+            "total-time": 3596.22,
+            "get2sink_path_sanitization-length": 1,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 4,
+            "potential_path_complete-length": 4,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 8,
+            "path_sanitization": 1,
+            "average_time_binary": 513.75,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Linksys-WRT1900": {
+        "result_file_path": "/home/firmware/0-day_dataset/Linksys/WRT1900/SGResult-WRT1900/log/WRT1900_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 744.23,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/Linksys/WRT1900/jffs2-root/usr/sbin/lighttpd",
+                    122.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/WRT1900/jffs2-root/sbin/tc",
+                    128.0,
+                    21
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/WRT1900/jffs2-root/sbin/smbd",
+                    78.0,
+                    0
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/WRT1900/jffs2-root/sbin/openvpn",
+                    272.0,
+                    24
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/WRT1900/jffs2-root/usr/local/MediaServer/twonkymediaserver",
+                    516.0,
+                    30
+                ],
+                [
+                    "/home/firmware/0-day_dataset/Linksys/WRT1900/jffs2-root/sbin/dhclient",
+                    3443.0,
+                    75
+                ]
+            ],
+            "binary-file-number": 6,
+            "total-function-number": 153,
+            "rda_average_function_time": 29.8,
+            "total-time": 4264.03,
+            "get2sink_path_sanitization-length": 1,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 2,
+            "potential_path_complete-length": 12,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 14,
+            "path_sanitization": 1,
+            "average_time_binary": 710.67,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "ASUS-4G-AC53U": {
+        "result_file_path": "/home/firmware/0-day_dataset/ASUS/4G-AC53U/SGResult-4G-AC53U/log/4G-AC53U_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_pf_set",
+                    "nvram_pf_get",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "nvram_set_int",
+                    "nvram_get_int",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "setenv",
+                    "getenv",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 3287.23,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/arpstorm",
+                    17.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/lib/libasc.so",
+                    25.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/dblogcmd",
+                    28.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/lib/libasuslog.so",
+                    34.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/lib/libnvram.so",
+                    36.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/wlc_nt",
+                    39.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/ntpclient",
+                    43.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/protect_srv",
+                    51.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/bin/nvram",
+                    60.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/lighttpd-monitor",
+                    59.0,
+                    66
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/dblog",
+                    63.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/hapdevent",
+                    67.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/lighttpd-arpping",
+                    79.0,
+                    70
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/sbin/write_smb_conf",
+                    82.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/infosvr",
+                    87.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/miniupnpd",
+                    74.0,
+                    10
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/bin/rstats",
+                    103.0,
+                    8
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/aaews",
+                    116.0,
+                    50
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/mastiff",
+                    137.0,
+                    45
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/cfg_reportstatus",
+                    169.0,
+                    21
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/ez-ipupdate",
+                    177.0,
+                    16
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/vsftpd",
+                    221.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/lib/libdisk.so",
+                    263.0,
+                    32
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/lib/libvpn.so",
+                    279.0,
+                    31
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/networkmap",
+                    294.0,
+                    18
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/lighttpd",
+                    299.0,
+                    93
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/ahs",
+                    535.0,
+                    13
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/samba_multicall",
+                    335.0,
+                    32
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/lib/libshared.so",
+                    1439.0,
+                    282
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/usr/sbin/httpd",
+                    5649.0,
+                    274
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AC53U/squashfs-root/sbin/rc",
+                    16625.0,
+                    637
+                ]
+            ],
+            "binary-file-number": 31,
+            "total-function-number": 1783,
+            "rda_average_function_time": 15.42,
+            "total-time": 20093.28,
+            "get2sink_path_sanitization-length": 202,
+            "potential_path_sanitization-length": 4,
+            "get2sink_path_complete-length": 827,
+            "potential_path_complete-length": 242,
+            "sorted_potential_verify_path-length": 4,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 1069,
+            "path_sanitization": 206,
+            "average_time_binary": 648.17,
+            "path_sanitization_cross": 18,
+            "path_sanitization_cross_rate": 0.0874
+        }
+    },
+    "ASUS-4G-AX56": {
+        "result_file_path": "/home/firmware/0-day_dataset/ASUS/4G-AX56/SGResult-4G-AX56/log/4G-AX56_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_set_int",
+                    "nvram_get_int",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_pf_set",
+                    "nvram_pf_get_int",
+                    1,
+                    1,
+                    2,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 3431.39,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/arpstorm",
+                    22.0,
+                    1
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/lighttpd-monitor",
+                    75.0,
+                    68
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/wlc_nt",
+                    84.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/asusdiscovery",
+                    95.0,
+                    3
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/ntpclient",
+                    98.0,
+                    5
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/infosvr",
+                    101.0,
+                    14
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/protect_srv",
+                    115.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/bin/nvram",
+                    126.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/sbin/write_smb_conf",
+                    142.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/bin/rstats",
+                    171.0,
+                    7
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/lighttpd-arpping",
+                    170.0,
+                    72
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/lighttpd",
+                    249.0,
+                    97
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/lib/libbwdpi.so",
+                    456.0,
+                    163
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/mastiff",
+                    597.0,
+                    73
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/ahs",
+                    746.0,
+                    50
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/miniupnpd",
+                    779.0,
+                    11
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/aaews",
+                    867.0,
+                    58
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/chilli_radconfig",
+                    1185.0,
+                    185
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/lib/libvpn.so",
+                    1225.0,
+                    53
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/chilli",
+                    1204.0,
+                    183
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/lib/libdisk.so",
+                    1280.0,
+                    52
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/chilli_opt",
+                    1386.0,
+                    188
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/lib/libshared.so",
+                    1454.0,
+                    412
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/networkmap",
+                    1551.0,
+                    38
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/usr/sbin/httpd",
+                    4300.0,
+                    366
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/sbin/tr069",
+                    7369.0,
+                    775
+                ],
+                [
+                    "/home/firmware/0-day_dataset/ASUS/4G-AX56/squashfs-root/sbin/rc",
+                    22357.0,
+                    735
+                ]
+            ],
+            "binary-file-number": 27,
+            "total-function-number": 3639,
+            "rda_average_function_time": 13.25,
+            "total-time": 26022.86,
+            "get2sink_path_sanitization-length": 422,
+            "potential_path_sanitization-length": 349,
+            "get2sink_path_complete-length": 942,
+            "potential_path_complete-length": 1259,
+            "sorted_potential_verify_path-length": 303,
+            "sorted_potential_maybe_path-length": 46,
+            "path_complete": 2201,
+            "path_sanitization": 771,
+            "average_time_binary": 963.81,
+            "path_sanitization_cross": 123,
+            "path_sanitization_cross_rate": 0.1595
+        }
+    },
+    "PepLink-24_PoE_Switch_2.0.1": {
+        "result_file_path": "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/SGResult-24_PoE_Switch_2.0.1/log/24_PoE_Switch_2.0.1_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 3413.66,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/cpio-root/bin/uhttpd",
+                    36.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/cpio-root/usr/bin/ssh",
+                    2035.0,
+                    23
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/cpio-root/usr/bin/sshd",
+                    2208.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/cpio-root/bin/wtp",
+                    4418.0,
+                    168
+                ]
+            ],
+            "binary-file-number": 4,
+            "total-function-number": 214,
+            "rda_average_function_time": 40.64,
+            "total-time": 8172.39,
+            "get2sink_path_sanitization-length": 2,
+            "potential_path_sanitization-length": 10,
+            "get2sink_path_complete-length": 5,
+            "potential_path_complete-length": 60,
+            "sorted_potential_verify_path-length": 10,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 65,
+            "path_sanitization": 12,
+            "average_time_binary": 2043.1,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "PepLink-8_PoE_Switch_2.0.2": {
+        "result_file_path": "/home/firmware/0-day_dataset/PepLink/8_PoE_Switch_2.0.2/SGResult-8_PoE_Switch_2.0.2/log/8_PoE_Switch_2.0.2_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 3377.45,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/PepLink/8_PoE_Switch_2.0.2/cpio-root/bin/uhttpd",
+                    35.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/8_PoE_Switch_2.0.2/cpio-root/usr/bin/ssh",
+                    2063.0,
+                    26
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/8_PoE_Switch_2.0.2/cpio-root/usr/bin/sshd",
+                    2198.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/8_PoE_Switch_2.0.2/cpio-root/bin/wtp",
+                    4511.0,
+                    175
+                ]
+            ],
+            "binary-file-number": 4,
+            "total-function-number": 224,
+            "rda_average_function_time": 39.32,
+            "total-time": 8222.16,
+            "get2sink_path_sanitization-length": 1,
+            "potential_path_sanitization-length": 9,
+            "get2sink_path_complete-length": 5,
+            "potential_path_complete-length": 65,
+            "sorted_potential_verify_path-length": 9,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 70,
+            "path_sanitization": 10,
+            "average_time_binary": 2055.54,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "PepLink-48_PoE_Switch_2.0.1": {
+        "result_file_path": "/home/firmware/0-day_dataset/PepLink/48_PoE_Switch_2.0.1/SGResult-48_PoE_Switch_2.0.1/log/24_PoE_Switch_2.0.1_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 3413.66,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/cpio-root/bin/uhttpd",
+                    36.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/cpio-root/usr/bin/ssh",
+                    2035.0,
+                    23
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/cpio-root/usr/bin/sshd",
+                    2208.0,
+                    17
+                ],
+                [
+                    "/home/firmware/0-day_dataset/PepLink/24_PoE_Switch_2.0.1/cpio-root/bin/wtp",
+                    4418.0,
+                    168
+                ]
+            ],
+            "binary-file-number": 4,
+            "total-function-number": 214,
+            "rda_average_function_time": 40.64,
+            "total-time": 8172.39,
+            "get2sink_path_sanitization-length": 2,
+            "potential_path_sanitization-length": 10,
+            "get2sink_path_complete-length": 5,
+            "potential_path_complete-length": 60,
+            "sorted_potential_verify_path-length": 10,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 65,
+            "path_sanitization": 12,
+            "average_time_binary": 2043.1,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "TP-Link-A54": {
+        "result_file_path": "/home/firmware/0-day_dataset/TP-Link/A54/SGResult-A54/log/A54_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 230.49,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/A54/squashfs-root/usr/bin/tdpd",
+                    120.0,
+                    24
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/A54/squashfs-root/usr/bin/tmpd",
+                    115.0,
+                    26
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/A54/squashfs-root/usr/bin/upnpd",
+                    281.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/A54/squashfs-root/usr/bin/httpd",
+                    352.0,
+                    34
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/A54/squashfs-root/usr/bin/cos",
+                    1274.0,
+                    20
+                ]
+            ],
+            "binary-file-number": 5,
+            "total-function-number": 119,
+            "rda_average_function_time": 18.0,
+            "total-time": 1529.58,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 5,
+            "get2sink_path_complete-length": 0,
+            "potential_path_complete-length": 29,
+            "sorted_potential_verify_path-length": 1,
+            "sorted_potential_maybe_path-length": 4,
+            "path_complete": 29,
+            "path_sanitization": 5,
+            "average_time_binary": 305.92,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "TP-Link-AX90": {
+        "result_file_path": "/home/firmware/0-day_dataset/TP-Link/AX90/SGResult-AX90/log/AX90_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "dhd_set",
+                    "dhd_get",
+                    1,
+                    1,
+                    2,
+                    2
+                ],
+                [
+                    "wlu_iovar_set",
+                    "wlu_iovar_get",
+                    1,
+                    1,
+                    2,
+                    2
+                ],
+                [
+                    "wlu_var_setbuf",
+                    "wlu_var_getbuf",
+                    1,
+                    1,
+                    2,
+                    3
+                ],
+                [
+                    "setenv",
+                    "getenv",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 1849.85,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/AX90/rootfs_ubifs/usr/sbin/uhttpd",
+                    90.0,
+                    4
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/AX90/rootfs_ubifs/usr/sbin/tc",
+                    101.0,
+                    20
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/AX90/rootfs_ubifs/usr/sbin/miniupnpd",
+                    144.0,
+                    11
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/AX90/rootfs_ubifs/usr/bin/tmpServer",
+                    175.0,
+                    49
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/AX90/rootfs_ubifs/usr/sbin/dhd",
+                    225.0,
+                    49
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/AX90/rootfs_ubifs/usr/sbin/samba_multicall",
+                    377.0,
+                    33
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/AX90/rootfs_ubifs/usr/sbin/wl",
+                    6437.0,
+                    429
+                ]
+            ],
+            "binary-file-number": 7,
+            "total-function-number": 595,
+            "rda_average_function_time": 12.69,
+            "total-time": 8451.27,
+            "get2sink_path_sanitization-length": 4,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 10,
+            "potential_path_complete-length": 22,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 32,
+            "path_sanitization": 4,
+            "average_time_binary": 1207.32,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "TP-Link-C20": {
+        "result_file_path": "/home/firmware/0-day_dataset/TP-Link/C20/SGResult-C20/log/C20_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "rdp_setObj",
+                    "rdp_getObj",
+                    1,
+                    1,
+                    2,
+                    2
+                ],
+                [
+                    "rdp_setObjStruct",
+                    "rdp_getObjStruct",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 873.29,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/tddp",
+                    69.0,
+                    26
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/cloud_https",
+                    76.0,
+                    6
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/tr143d",
+                    114.0,
+                    28
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/tdpd",
+                    219.0,
+                    67
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/upnpd",
+                    261.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/tmpd",
+                    283.0,
+                    69
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/httpd",
+                    449.0,
+                    53
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/cos",
+                    1434.0,
+                    63
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/C20/squashfs-root/usr/bin/cli",
+                    1647.0,
+                    32
+                ]
+            ],
+            "binary-file-number": 9,
+            "total-function-number": 359,
+            "rda_average_function_time": 12.68,
+            "total-time": 2548.64,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 5,
+            "get2sink_path_complete-length": 0,
+            "potential_path_complete-length": 29,
+            "sorted_potential_verify_path-length": 2,
+            "sorted_potential_maybe_path-length": 3,
+            "path_complete": 29,
+            "path_sanitization": 5,
+            "average_time_binary": 283.18,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "TP-Link-WR902AC": {
+        "result_file_path": "/home/firmware/0-day_dataset/TP-Link/WR902AC/SGResult-WR902AC/log/WR902AC_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "setTLVData",
+                    "getTLVData",
+                    1,
+                    1,
+                    3,
+                    2
+                ],
+                [
+                    "setenv",
+                    "getenv",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 1051.2,
+            "binary-file-list": [
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/WR902AC/squashfs-root/usr/bin/tdpd",
+                    147.0,
+                    24
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/WR902AC/squashfs-root/usr/bin/tmpd",
+                    180.0,
+                    42
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/WR902AC/squashfs-root/usr/bin/upnpd",
+                    321.0,
+                    15
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/WR902AC/squashfs-root/usr/bin/httpd",
+                    453.0,
+                    32
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/WR902AC/squashfs-root/usr/bin/cos",
+                    1462.0,
+                    21
+                ],
+                [
+                    "/home/firmware/0-day_dataset/TP-Link/WR902AC/squashfs-root/usr/bin/samba_multicall",
+                    1277.0,
+                    30
+                ]
+            ],
+            "binary-file-number": 6,
+            "total-function-number": 164,
+            "rda_average_function_time": 23.41,
+            "total-time": 2966.13,
+            "get2sink_path_sanitization-length": 1,
+            "potential_path_sanitization-length": 5,
+            "get2sink_path_complete-length": 3,
+            "potential_path_complete-length": 30,
+            "sorted_potential_verify_path-length": 2,
+            "sorted_potential_maybe_path-length": 3,
+            "path_complete": 33,
+            "path_sanitization": 6,
+            "average_time_binary": 494.36,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "D-Link-DIR-823G": {
+        "result_file_path": "/home/firmware/N-day_dataset/D-Link/DIR-823G/SGResult-DIR-823G/log/DIR-823G_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "apmib_set",
+                    "apmib_get",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 501.36,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/web_mtn/cgi-bin/upload_settings.cgi",
+                    8.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/web_mtn/cgi-bin/upload_firmware.cgi",
+                    11.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/cleanAutoFlag",
+                    48.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/startWifi",
+                    49.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/endWifi",
+                    49.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/autoReboot",
+                    49.0,
+                    18
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/autoUpgradeFirmware",
+                    50.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/ppp_inet",
+                    55.0,
+                    11
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/isAutoSettings",
+                    65.0,
+                    24
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/lib/libapmib.so",
+                    88.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/loop",
+                    95.0,
+                    19
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/miniigd",
+                    247.0,
+                    20
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/timelycheck",
+                    892.0,
+                    80
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/sysconf",
+                    968.0,
+                    83
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/flash",
+                    1043.0,
+                    16
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-823G/squashfs-root/bin/boa",
+                    7191.0,
+                    132
+                ]
+            ],
+            "binary-file-number": 16,
+            "total-function-number": 483,
+            "rda_average_function_time": 22.58,
+            "total-time": 7768.98,
+            "get2sink_path_sanitization-length": 63,
+            "potential_path_sanitization-length": 30,
+            "get2sink_path_complete-length": 81,
+            "potential_path_complete-length": 81,
+            "sorted_potential_verify_path-length": 30,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 162,
+            "path_sanitization": 93,
+            "average_time_binary": 485.56,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "D-Link-DIR-859": {
+        "result_file_path": "/home/firmware/N-day_dataset/D-Link/DIR-859/SGResult-DIR-859/log/DIR-859_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 402.2,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-859/squashfs-root/usr/sbin/ssdk_sh",
+                    33.0,
+                    0
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-859/squashfs-root/htdocs/fileaccess.cgi",
+                    518.0,
+                    127
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-859/squashfs-root/htdocs/cgibin",
+                    545.0,
+                    49
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-859/squashfs-root/sbin/httpd",
+                    617.0,
+                    20
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-859/squashfs-root/sbin/nart.out",
+                    1198.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-859/squashfs-root/usr/sbin/openssl",
+                    4279.0,
+                    16
+                ]
+            ],
+            "binary-file-number": 6,
+            "total-function-number": 225,
+            "rda_average_function_time": 31.96,
+            "total-time": 4845.17,
+            "get2sink_path_sanitization-length": 23,
+            "potential_path_sanitization-length": 1,
+            "get2sink_path_complete-length": 43,
+            "potential_path_complete-length": 6,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 1,
+            "path_complete": 49,
+            "path_sanitization": 24,
+            "average_time_binary": 807.53,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "D-Link-DIR-882": {
+        "result_file_path": "/home/firmware/N-day_dataset/D-Link/DIR-882/SGResult-DIR-882/log/DIR-882_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_safe_set",
+                    "nvram_safe_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    1,
+                    1,
+                    2,
+                    null
+                ],
+                [
+                    "nvram_set_int",
+                    "nvram_get_int",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "nvram_bufset",
+                    "nvram_bufget",
+                    1,
+                    1,
+                    2,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 2874.06,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/wireless.cgi",
+                    35.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/ntpclient",
+                    85.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/ralink_init",
+                    97.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/usr/sbin/timer",
+                    112.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/lighttpd",
+                    402.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/miniupnpd",
+                    527.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/usr/sbin/goahead",
+                    665.0,
+                    73
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/sbin/minidlna",
+                    606.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/sbin/smbpasswd",
+                    1468.0,
+                    25
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/lib/librcm.so",
+                    1794.0,
+                    231
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/sbin/smbd",
+                    1583.0,
+                    28
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/prog.cgi",
+                    2449.0,
+                    213
+                ],
+                [
+                    "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/rc",
+                    3211.0,
+                    287
+                ]
+            ],
+            "binary-file-number": 13,
+            "total-function-number": 905,
+            "rda_average_function_time": 14.4,
+            "total-time": 6284.91,
+            "get2sink_path_sanitization-length": 235,
+            "potential_path_sanitization-length": 73,
+            "get2sink_path_complete-length": 586,
+            "potential_path_complete-length": 702,
+            "sorted_potential_verify_path-length": 32,
+            "sorted_potential_maybe_path-length": 41,
+            "path_complete": 1288,
+            "path_sanitization": 308,
+            "average_time_binary": 483.45,
+            "path_sanitization_cross": 69,
+            "path_sanitization_cross_rate": 0.224
+        }
+    },
+    "Netgear-R6200": {
+        "result_file_path": "/home/firmware/N-day_dataset/Netgear/R6200/SGResult-R6200/log/R6200_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_read",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 3455.83,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/dlnad",
+                    16.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/autoipd",
+                    19.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/timesync",
+                    23.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/dnsRedirectReplyd",
+                    26.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/sbin/ubdcmd",
+                    25.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/rtsol",
+                    48.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/wpsd",
+                    59.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/gproxy",
+                    54.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/lld2d",
+                    55.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/ddnsd",
+                    80.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/heartbeat",
+                    87.0,
+                    11
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/telnetenabled",
+                    98.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/check_fw",
+                    96.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/scheact",
+                    123.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/bftpd",
+                    206.0,
+                    30
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/tfmeter",
+                    204.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/email",
+                    242.0,
+                    11
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/sbin/bd",
+                    331.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/wandetect",
+                    344.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/lib/libacos_shared.so",
+                    702.0,
+                    92
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/local/samba/smbd",
+                    393.0,
+                    29
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/wl",
+                    1604.0,
+                    41
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/sbin/acos_service",
+                    2443.0,
+                    88
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/upnpd",
+                    2675.0,
+                    229
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6200/squashfs-root/usr/sbin/httpd",
+                    9102.0,
+                    587
+                ]
+            ],
+            "binary-file-number": 25,
+            "total-function-number": 1192,
+            "rda_average_function_time": 15.99,
+            "total-time": 13044.2,
+            "get2sink_path_sanitization-length": 1366,
+            "potential_path_sanitization-length": 241,
+            "get2sink_path_complete-length": 1840,
+            "potential_path_complete-length": 447,
+            "sorted_potential_verify_path-length": 183,
+            "sorted_potential_maybe_path-length": 58,
+            "path_complete": 2287,
+            "path_sanitization": 1607,
+            "average_time_binary": 521.77,
+            "path_sanitization_cross": 607,
+            "path_sanitization_cross_rate": 0.3777
+        }
+    },
+    "Netgear-R6300": {
+        "result_file_path": "/home/firmware/N-day_dataset/Netgear/R6300/SGResult-R6300/log/R6300_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_read",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 3370.3,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/dlnad",
+                    17.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/autoipd",
+                    20.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/timesync",
+                    25.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/sbin/ubdcmd",
+                    26.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/dnsRedirectReplyd",
+                    28.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/gproxy",
+                    34.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/wpsd",
+                    44.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/rtsol",
+                    49.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/lld2d",
+                    39.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/ddnsd",
+                    64.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/telnetenabled",
+                    68.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/heartbeat",
+                    74.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/scheact",
+                    91.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/check_fw",
+                    97.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/tfmeter",
+                    139.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/sbin/bd",
+                    184.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/email",
+                    223.0,
+                    11
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/wandetect",
+                    325.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/lib/libacos_shared.so",
+                    1034.0,
+                    87
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/wl",
+                    1478.0,
+                    41
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/local/samba/smbd",
+                    1464.0,
+                    29
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/sbin/acos_service",
+                    3218.0,
+                    88
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/upnpd",
+                    3858.0,
+                    234
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6300/squashfs-root/usr/sbin/httpd",
+                    11781.0,
+                    636
+                ]
+            ],
+            "binary-file-number": 24,
+            "total-function-number": 1210,
+            "rda_average_function_time": 20.15,
+            "total-time": 15607.03,
+            "get2sink_path_sanitization-length": 887,
+            "potential_path_sanitization-length": 296,
+            "get2sink_path_complete-length": 1230,
+            "potential_path_complete-length": 665,
+            "sorted_potential_verify_path-length": 213,
+            "sorted_potential_maybe_path-length": 83,
+            "path_complete": 1895,
+            "path_sanitization": 1183,
+            "average_time_binary": 650.29,
+            "path_sanitization_cross": 398,
+            "path_sanitization_cross_rate": 0.3364
+        }
+    },
+    "Netgear-R6350": {
+        "result_file_path": "/home/firmware/N-day_dataset/Netgear/R6350/SGResult-R6350/log/R6350_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "nvram_set",
+                    "nvram_get",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "nvram_set_idx_n",
+                    "nvram_get_idx_n",
+                    0,
+                    0,
+                    3,
+                    2
+                ],
+                [
+                    "apcli_nvram_set",
+                    "apcli_nvram_get",
+                    1,
+                    1,
+                    2,
+                    2
+                ],
+                [
+                    "set_nvram_n",
+                    "get_nvram_n",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "nv_set",
+                    "nv_get",
+                    1,
+                    1,
+                    3,
+                    2
+                ],
+                [
+                    "nv_set_int",
+                    "nv_get_int",
+                    1,
+                    1,
+                    3,
+                    2
+                ],
+                [
+                    "sw_setValueByName",
+                    "sw_getValueByName",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "setenv",
+                    "getenv",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 4363.7,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/internet",
+                    24.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/system",
+                    24.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/wol",
+                    27.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/firewall",
+                    32.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/RAE_ping_monitor",
+                    35.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/ddns_deamon",
+                    37.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/apcli_link_monitor",
+                    39.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/xCloud_monitor",
+                    42.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/wps_det",
+                    45.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/access_logd",
+                    45.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/lld2",
+                    42.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/httpd_watchdog",
+                    52.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/access_devinfo",
+                    56.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/sc_private_cmd",
+                    52.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/cpm_cmd",
+                    54.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/amped_check_fw",
+                    55.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/led_app",
+                    54.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/RAE_decrypt",
+                    65.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/generate_cert_file",
+                    71.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/napt_init",
+                    72.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/wan_monitor",
+                    76.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/led_switch",
+                    76.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/multi_pb_app",
+                    83.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/smtpc",
+                    92.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/auto_force_upgrade_fw",
+                    93.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/wizard",
+                    97.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/restore_config.cgi",
+                    118.0,
+                    22
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/RAE_update_monitor",
+                    135.0,
+                    20
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/dnrd",
+                    133.0,
+                    16
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/opt/rcagent/cgi_processor",
+                    58.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/traffic_meter",
+                    161.0,
+                    27
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/lib/libscmisc.so",
+                    165.0,
+                    32
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/udhcpd",
+                    152.0,
+                    20
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/tcpdump",
+                    81.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/Netgear_ddns",
+                    279.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/miniupnpd_wsc",
+                    265.0,
+                    20
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/miniupnpd",
+                    367.0,
+                    37
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/opt/rcagent/scripts/readycloud_control.cgi",
+                    406.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/mini_httpd",
+                    543.0,
+                    30
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/radvd",
+                    595.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/scfgmgr",
+                    653.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/setupwizard.cgi",
+                    1730.0,
+                    351
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/ip6tables-multi",
+                    1744.0,
+                    26
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/rc_app/rc_apps",
+                    1770.0,
+                    375
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R6350/squashfs-root/usr/sbin/setup.cgi",
+                    4295.0,
+                    1645
+                ]
+            ],
+            "binary-file-number": 45,
+            "total-function-number": 2778,
+            "rda_average_function_time": 5.43,
+            "total-time": 8876.49,
+            "get2sink_path_sanitization-length": 527,
+            "potential_path_sanitization-length": 122,
+            "get2sink_path_complete-length": 885,
+            "potential_path_complete-length": 261,
+            "sorted_potential_verify_path-length": 79,
+            "sorted_potential_maybe_path-length": 43,
+            "path_complete": 1146,
+            "path_sanitization": 649,
+            "average_time_binary": 197.26,
+            "path_sanitization_cross": 3,
+            "path_sanitization_cross_rate": 0.0046
+        }
+    },
+    "Netgear-R7000P": {
+        "result_file_path": "/home/firmware/N-day_dataset/Netgear/R7000P/SGResult-R7000P/log/R7000P_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "setenv",
+                    "getenv",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "acosNvramConfig_set",
+                    "acosNvramConfig_read",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 4600.85,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/dslcheck",
+                    25.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/dnsRedirectReplyd",
+                    32.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/sbin/mstat",
+                    36.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/sbin/ubdcmd",
+                    36.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/queryusb",
+                    43.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/debug_logd",
+                    44.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/lld2test",
+                    44.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/gproxy",
+                    44.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/ftpc",
+                    50.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/lld2d",
+                    39.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/dlnad",
+                    56.0,
+                    11
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/telnetenabled",
+                    67.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/timesync",
+                    69.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/wpsd",
+                    74.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/bdbroker-client",
+                    87.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/check_db",
+                    90.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/rtsol",
+                    98.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/check_ra",
+                    107.0,
+                    18
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/chat",
+                    110.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/swresetd",
+                    116.0,
+                    18
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/usbheartbeat",
+                    123.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/arp_check",
+                    149.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/sbin/bd",
+                    154.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/opt/rcagent/cgi_processor",
+                    52.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/tfmeter",
+                    189.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/bftpd",
+                    189.0,
+                    32
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/wandetect",
+                    216.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/sbin/wwan",
+                    236.0,
+                    25
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/check_fw",
+                    238.0,
+                    26
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/device_detect",
+                    235.0,
+                    22
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/checkDullWan",
+                    240.0,
+                    30
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/ddnsd",
+                    293.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/scheact",
+                    327.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/heartbeat",
+                    324.0,
+                    46
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/check_kwilt",
+                    381.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/update_device_info",
+                    493.0,
+                    41
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/email",
+                    521.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/local/sbin/openvpn",
+                    448.0,
+                    30
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/wl",
+                    815.0,
+                    76
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/sbin/rc",
+                    2160.0,
+                    89
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/upnpd",
+                    2758.0,
+                    330
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/sbin/acos_service",
+                    3051.0,
+                    140
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/lib/libacos_shared.so",
+                    3907.0,
+                    233
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/local/sbin/openssl",
+                    4760.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Netgear/R7000P/squashfs-root/usr/sbin/httpd",
+                    24679.0,
+                    1118
+                ]
+            ],
+            "binary-file-number": 45,
+            "total-function-number": 2464,
+            "rda_average_function_time": 19.56,
+            "total-time": 29505.9,
+            "get2sink_path_sanitization-length": 4938,
+            "potential_path_sanitization-length": 30,
+            "get2sink_path_complete-length": 7780,
+            "potential_path_complete-length": 9488,
+            "sorted_potential_verify_path-length": 30,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 17268,
+            "path_sanitization": 4968,
+            "average_time_binary": 655.69,
+            "path_sanitization_cross": 3495,
+            "path_sanitization_cross_rate": 0.7035
+        }
+    },
+    "ToToLink-A950RG": {
+        "result_file_path": "/home/firmware/N-day_dataset/ToToLink/A950RG/SGResult-A950RG/log/A950RG_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "apmib_set",
+                    "apmib_get",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "apmib_setDef",
+                    "apmib_getDef",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 593.27,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/bin/initcste",
+                    28.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/web_cste/cgi-bin/upload.cgi",
+                    30.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/web_cste/cgi-bin/upload_settings.cgi",
+                    31.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/bin/cs_statistics",
+                    39.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/web_cste/cgi-bin/upload_bootloader.cgi",
+                    41.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/web_cste/cgi-bin/cstecgi.cgi",
+                    46.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/cste_modules/wps.so",
+                    59.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/web_cste/cgi-bin/downloadFlile.cgi",
+                    60.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/cste_modules/vlan.so",
+                    78.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/cste_modules/system.so",
+                    90.0,
+                    39
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/bin/csteSys",
+                    107.0,
+                    42
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/cste_modules/lan.so",
+                    108.0,
+                    15
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/libapmib.so",
+                    97.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/cste_modules/wan.so",
+                    113.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/cste_modules/app.so",
+                    139.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/bin/notice",
+                    142.0,
+                    24
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/bin/lighttpd",
+                    140.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/cste_modules/global.so",
+                    392.0,
+                    28
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/bin/ip6tables",
+                    415.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/lib/cste_modules/wireless.so",
+                    513.0,
+                    25
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/bin/flash",
+                    1265.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/A950RG/squashfs-root/bin/sysconf",
+                    2305.0,
+                    129
+                ]
+            ],
+            "binary-file-number": 22,
+            "total-function-number": 414,
+            "rda_average_function_time": 15.07,
+            "total-time": 2959.54,
+            "get2sink_path_sanitization-length": 73,
+            "potential_path_sanitization-length": 29,
+            "get2sink_path_complete-length": 118,
+            "potential_path_complete-length": 62,
+            "sorted_potential_verify_path-length": 25,
+            "sorted_potential_maybe_path-length": 4,
+            "path_complete": 180,
+            "path_sanitization": 102,
+            "average_time_binary": 134.52,
+            "path_sanitization_cross": 11,
+            "path_sanitization_cross_rate": 0.1078
+        }
+    },
+    "ToToLink-T10": {
+        "result_file_path": "/home/firmware/N-day_dataset/ToToLink/T10/SGResult-T10/log/T10_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "apmib_set",
+                    "apmib_get",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 624.69,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/web_cste/cgi-bin/upload_settings.cgi",
+                    30.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/initcste",
+                    31.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/web_cste/cgi-bin/upload.cgi",
+                    30.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/cs_statistics",
+                    35.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/web_cste/cgi-bin/cstecgi.cgi",
+                    43.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/cste_sub",
+                    51.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/web_cste/cgi-bin/upload_bootloader.cgi",
+                    53.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/cste_modules/cloudupdate.so",
+                    53.0,
+                    14
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/web_cste/cgi-bin/downloadFlile.cgi",
+                    64.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/cste_modules/system.so",
+                    64.0,
+                    22
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/cste_modules/wps.so",
+                    73.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/csteSys",
+                    97.0,
+                    33
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/cste_modules/lan.so",
+                    102.0,
+                    14
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/cste_modules/upgrade.so",
+                    134.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/cste_modules/wan.so",
+                    137.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/libapmib.so",
+                    125.0,
+                    6
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/fwupg",
+                    191.0,
+                    19
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/lighttpd",
+                    148.0,
+                    14
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/miniigd",
+                    262.0,
+                    24
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/WTP",
+                    246.0,
+                    48
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/AACWTP",
+                    248.0,
+                    48
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/cste_modules/global.so",
+                    327.0,
+                    14
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/iptables",
+                    296.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/lib/cste_modules/wireless.so",
+                    420.0,
+                    37
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/flash",
+                    1042.0,
+                    14
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/sysconf",
+                    2056.0,
+                    101
+                ],
+                [
+                    "/home/firmware/N-day_dataset/ToToLink/T10/squashfs-root/bin/dnsmasq",
+                    4421.0,
+                    43
+                ]
+            ],
+            "binary-file-number": 27,
+            "total-function-number": 542,
+            "rda_average_function_time": 19.89,
+            "total-time": 5127.61,
+            "get2sink_path_sanitization-length": 210,
+            "potential_path_sanitization-length": 25,
+            "get2sink_path_complete-length": 307,
+            "potential_path_complete-length": 64,
+            "sorted_potential_verify_path-length": 24,
+            "sorted_potential_maybe_path-length": 1,
+            "path_complete": 371,
+            "path_sanitization": 235,
+            "average_time_binary": 189.91,
+            "path_sanitization_cross": 55,
+            "path_sanitization_cross_rate": 0.234
+        }
+    },
+    "Motorola-C1": {
+        "result_file_path": "/home/firmware/N-day_dataset/Motorola/C1/SGResult-C1/log/C1_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 366.93,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/usr/bin/cgi-fcgi",
+                    17.0,
+                    0
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/sbin/upload_firmware.cgi",
+                    26.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/usr/sbin/hnap",
+                    29.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/usr/sbin/miniupnpd",
+                    29.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/usr/sbin/tc",
+                    19.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/usr/sbin/scopd",
+                    33.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/sbin/netifd",
+                    55.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/usr/sbin/prog.cgi",
+                    39.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/C1/squashfs-root/usr/sbin/lighttpd",
+                    149.0,
+                    4
+                ]
+            ],
+            "binary-file-number": 9,
+            "total-function-number": 65,
+            "rda_average_function_time": 6.09,
+            "total-time": 545.28,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 2,
+            "potential_path_complete-length": 4,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 6,
+            "path_sanitization": 0,
+            "average_time_binary": 60.59,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0
+        }
+    },
+    "Motorola-M2": {
+        "result_file_path": "/home/firmware/N-day_dataset/Motorola/M2/SGResult-M2/log/M2_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 374.92,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/usr/bin/cgi-fcgi",
+                    19.0,
+                    0
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/sbin/upload_firmware.cgi",
+                    27.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/usr/sbin/hnap",
+                    30.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/usr/sbin/miniupnpd",
+                    30.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/usr/sbin/tc",
+                    22.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/sbin/fw3",
+                    34.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/sbin/netifd",
+                    58.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/usr/sbin/prog.cgi",
+                    39.0,
+                    10
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Motorola/M2/squashfs-root/usr/sbin/lighttpd",
+                    158.0,
+                    4
+                ]
+            ],
+            "binary-file-number": 9,
+            "total-function-number": 63,
+            "rda_average_function_time": 6.62,
+            "total-time": 563.62,
+            "get2sink_path_sanitization-length": 0,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 2,
+            "potential_path_complete-length": 5,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 7,
+            "path_sanitization": 0,
+            "average_time_binary": 62.62,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0
+        }
+    },
+    "AXIS-P1367": {
+        "result_file_path": "/home/firmware/N-day_dataset/AXIS/P1367/SGResult-P1367/log/P1367_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 1260.24,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/sbin/pwdgrp.cgi",
+                    15.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/html/axis-cgi/createsession.cgi",
+                    23.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/html/axis-cgi/httptest.cgi",
+                    25.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/html/axis-cgi/getshuttergain.cgi",
+                    21.0,
+                    0
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/html/axis-cgi/smtptest.cgi",
+                    27.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/html/axis-cgi/shuttergain.cgi",
+                    21.0,
+                    0
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/bin/param.cgi-transfer",
+                    32.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/html/axis-cgi/network_management.cgi",
+                    62.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/bin/monolith",
+                    58.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/bin/editcgi.cgi",
+                    159.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/bin/image2d",
+                    52.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/sbin/httpd",
+                    164.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/html/axis-cgi/param.cgi",
+                    256.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/bin/udevadm",
+                    1123.0,
+                    24
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/lib/systemd/systemd-udevd",
+                    2329.0,
+                    23
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/P1367/ubifs-root/usr/bin/busybox.nosuid",
+                    2740.0,
+                    92
+                ]
+            ],
+            "binary-file-number": 16,
+            "total-function-number": 169,
+            "rda_average_function_time": 42.05,
+            "total-time": 4094.12,
+            "get2sink_path_sanitization-length": 1,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 16,
+            "potential_path_complete-length": 44,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 60,
+            "path_sanitization": 1,
+            "average_time_binary": 255.88,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "AXIS-Q1645": {
+        "result_file_path": "/home/firmware/N-day_dataset/AXIS/Q1645/SGResult-Q1645/log/Q1645_INFO.md",
+        "parsed_data": {
+            "transer-function-information": false,
+            "Set-get-graph-time": 1238.66,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/sbin/pwdgrp.cgi",
+                    14.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/html/axis-cgi/createsession.cgi",
+                    22.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/html/axis-cgi/httptest.cgi",
+                    25.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/html/axis-cgi/getshuttergain.cgi",
+                    20.0,
+                    0
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/html/axis-cgi/smtptest.cgi",
+                    26.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/html/axis-cgi/shuttergain.cgi",
+                    19.0,
+                    0
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/bin/param.cgi-transfer",
+                    50.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/html/axis-cgi/network_management.cgi",
+                    65.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/bin/monolith",
+                    52.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/bin/editcgi.cgi",
+                    173.0,
+                    2
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/bin/image2d",
+                    44.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/sbin/httpd",
+                    150.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/html/axis-cgi/param.cgi",
+                    280.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/bin/udevadm",
+                    1428.0,
+                    24
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/lib/systemd/systemd-udevd",
+                    2317.0,
+                    23
+                ],
+                [
+                    "/home/firmware/N-day_dataset/AXIS/Q1645/ubifs-root/usr/bin/busybox.nosuid",
+                    3717.0,
+                    92
+                ]
+            ],
+            "binary-file-number": 16,
+            "total-function-number": 169,
+            "rda_average_function_time": 49.72,
+            "total-time": 5051.81,
+            "get2sink_path_sanitization-length": 1,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 15,
+            "potential_path_complete-length": 43,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 58,
+            "path_sanitization": 1,
+            "average_time_binary": 315.74,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Tenda-AC12": {
+        "result_file_path": "/home/firmware/N-day_dataset/Tenda/AC12/SGResult-AC12/log/AC12_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "SetUrlValue",
+                    "GetUrlValue",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "SetValue",
+                    "GetValue",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 2086.17,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/upgrade",
+                    17.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/usr/sbin/udhcpc",
+                    54.0,
+                    8
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/auto_discover",
+                    74.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/usr/sbin/pppdv2",
+                    61.0,
+                    20
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/cfmd",
+                    91.0,
+                    23
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/lib/libpal_vendor.so",
+                    99.0,
+                    22
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/sntp",
+                    119.0,
+                    34
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/dhcpcd",
+                    142.0,
+                    20
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/miniupnpd",
+                    172.0,
+                    42
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/lib/libcommon.so",
+                    212.0,
+                    55
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/time_check",
+                    220.0,
+                    69
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/multiWAN",
+                    245.0,
+                    63
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/business_proc",
+                    565.0,
+                    155
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/netctrl",
+                    587.0,
+                    165
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/lib/libtpi.so",
+                    919.0,
+                    296
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/dnrd",
+                    1136.0,
+                    48
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/dhttpd",
+                    1167.0,
+                    35
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/sbin/udevd",
+                    1254.0,
+                    15
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/dhcps",
+                    2965.0,
+                    92
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC12/squashfs-root/bin/httpd",
+                    12533.0,
+                    1037
+                ]
+            ],
+            "binary-file-number": 20,
+            "total-function-number": 2215,
+            "rda_average_function_time": 10.22,
+            "total-time": 14988.36,
+            "get2sink_path_sanitization-length": 431,
+            "potential_path_sanitization-length": 266,
+            "get2sink_path_complete-length": 545,
+            "potential_path_complete-length": 639,
+            "sorted_potential_verify_path-length": 247,
+            "sorted_potential_maybe_path-length": 19,
+            "path_complete": 1184,
+            "path_sanitization": 697,
+            "average_time_binary": 749.42,
+            "path_sanitization_cross": 171,
+            "path_sanitization_cross_rate": 0.2453
+        }
+    },
+    "Tenda-AC15": {
+        "result_file_path": "/home/firmware/N-day_dataset/Tenda/AC15/SGResult-AC15/log/AC15_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "SetValue",
+                    "GetValue",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "setenv",
+                    "getenv",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 2434.47,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/upgrade",
+                    22.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/logserver",
+                    27.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/tendaupload",
+                    29.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/usr/sbin/udhcpc",
+                    57.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/wan_surf",
+                    60.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/cfmd",
+                    85.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/miniupnpd",
+                    75.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/lib/libpal_vendor.so",
+                    145.0,
+                    23
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/dnrd",
+                    153.0,
+                    15
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/auto_discover",
+                    158.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/time_check",
+                    218.0,
+                    65
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/lib/libcommon.so",
+                    238.0,
+                    45
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/multiWAN",
+                    289.0,
+                    72
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/dhttpd",
+                    366.0,
+                    26
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/usr/bin/app_data_center",
+                    412.0,
+                    22
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/business_proc",
+                    472.0,
+                    154
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/usr/sbin/xtables-multi",
+                    477.0,
+                    26
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/usr/sbin/smbd",
+                    441.0,
+                    28
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/sbin/udevd",
+                    784.0,
+                    23
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/lib/libtpi.so",
+                    967.0,
+                    286
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/usr/sbin/wl",
+                    1755.0,
+                    185
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/netctrl",
+                    3741.0,
+                    258
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/busybox",
+                    4393.0,
+                    165
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC15/squashfs-root/bin/httpd",
+                    6374.0,
+                    741
+                ]
+            ],
+            "binary-file-number": 24,
+            "total-function-number": 2206,
+            "rda_average_function_time": 9.85,
+            "total-time": 8988.93,
+            "get2sink_path_sanitization-length": 272,
+            "potential_path_sanitization-length": 154,
+            "get2sink_path_complete-length": 368,
+            "potential_path_complete-length": 435,
+            "sorted_potential_verify_path-length": 150,
+            "sorted_potential_maybe_path-length": 4,
+            "path_complete": 803,
+            "path_sanitization": 426,
+            "average_time_binary": 374.54,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Tenda-AC18": {
+        "result_file_path": "/home/firmware/N-day_dataset/Tenda/AC18/SGResult-AC18/log/AC18_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "SetValue",
+                    "GetValue",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "bcm_nvram_set",
+                    "bcm_nvram_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ],
+                [
+                    "SetUrlValue",
+                    "GetUrlValue",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 1882.62,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/upgrade",
+                    18.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/tendaupload",
+                    24.0,
+                    3
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/logserver",
+                    25.0,
+                    4
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/usr/sbin/udhcpc",
+                    51.0,
+                    7
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/wan_surf",
+                    56.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/miniupnpd",
+                    56.0,
+                    12
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/lib/libpal_vendor.so",
+                    113.0,
+                    23
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/dhcpcd",
+                    108.0,
+                    31
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/dnrd",
+                    127.0,
+                    15
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/lib/libcommon.so",
+                    172.0,
+                    45
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/time_check",
+                    189.0,
+                    71
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/multiWAN",
+                    221.0,
+                    72
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/dhttpd",
+                    246.0,
+                    26
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/usr/bin/app_data_center",
+                    333.0,
+                    22
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/business_proc",
+                    384.0,
+                    155
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/usr/sbin/smbd",
+                    429.0,
+                    28
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/netctrl",
+                    686.0,
+                    260
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/lib/libtpi.so",
+                    959.0,
+                    297
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/usr/sbin/wl",
+                    2313.0,
+                    185
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/AC18/squashfs-root/bin/httpd",
+                    7720.0,
+                    851
+                ]
+            ],
+            "binary-file-number": 20,
+            "total-function-number": 2123,
+            "rda_average_function_time": 6.7,
+            "total-time": 9757.23,
+            "get2sink_path_sanitization-length": 330,
+            "potential_path_sanitization-length": 81,
+            "get2sink_path_complete-length": 433,
+            "potential_path_complete-length": 353,
+            "sorted_potential_verify_path-length": 81,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 786,
+            "path_sanitization": 411,
+            "average_time_binary": 487.86,
+            "path_sanitization_cross": 6,
+            "path_sanitization_cross_rate": 0.0146
+        }
+    },
+    "Tenda-G0": {
+        "result_file_path": "/home/firmware/N-day_dataset/Tenda/G0/SGResult-G0/log/G0_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "SetValue",
+                    "GetValue",
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ],
+            "Set-get-graph-time": 1292.02,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G0/squashfs-root/bin/ate",
+                    84.0,
+                    34
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G0/squashfs-root/lib/libcommonprod.so",
+                    85.0,
+                    23
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G0/squashfs-root/bin/multiWAN",
+                    229.0,
+                    54
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G0/squashfs-root/lib/libcommon.so",
+                    202.0,
+                    64
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G0/squashfs-root/bin/netctrl",
+                    442.0,
+                    160
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G0/squashfs-root/bin/ac_manage",
+                    981.0,
+                    186
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G0/squashfs-root/bin/httpd",
+                    15126.0,
+                    895
+                ]
+            ],
+            "binary-file-number": 7,
+            "total-function-number": 1416,
+            "rda_average_function_time": 12.11,
+            "total-time": 16691.19,
+            "get2sink_path_sanitization-length": 155,
+            "potential_path_sanitization-length": 88,
+            "get2sink_path_complete-length": 177,
+            "potential_path_complete-length": 269,
+            "sorted_potential_verify_path-length": 86,
+            "sorted_potential_maybe_path-length": 2,
+            "path_complete": 446,
+            "path_sanitization": 243,
+            "average_time_binary": 2384.46,
+            "path_sanitization_cross": 16,
+            "path_sanitization_cross_rate": 0.0658
+        }
+    },
+    "Tenda-G3": {
+        "result_file_path": "/home/firmware/N-day_dataset/Tenda/G3/SGResult-G3/log/G3_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "SetValue",
+                    "GetValue",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "bcm_nvram_set",
+                    "bcm_nvram_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 1740.04,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/bin/miniupnpd",
+                    44.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/bin/network_check",
+                    85.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/bin/ate",
+                    98.0,
+                    40
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/lib/libcommonprod.so",
+                    150.0,
+                    56
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/bin/multiWAN",
+                    190.0,
+                    127
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/bin/ngrokc",
+                    192.0,
+                    17
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/lib/libcommon.so",
+                    443.0,
+                    84
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/usr/sbin/smbd",
+                    441.0,
+                    30
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/bin/ac_manage",
+                    720.0,
+                    324
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/bin/netctrl",
+                    3807.0,
+                    360
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/G3/squashfs-root/bin/httpd",
+                    4046.0,
+                    1159
+                ]
+            ],
+            "binary-file-number": 11,
+            "total-function-number": 2219,
+            "rda_average_function_time": 4.6,
+            "total-time": 5895.91,
+            "get2sink_path_sanitization-length": 161,
+            "potential_path_sanitization-length": 4,
+            "get2sink_path_complete-length": 197,
+            "potential_path_complete-length": 7,
+            "sorted_potential_verify_path-length": 4,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 204,
+            "path_sanitization": 165,
+            "average_time_binary": 535.99,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    },
+    "Tenda-W20E": {
+        "result_file_path": "/home/firmware/N-day_dataset/Tenda/W20E/SGResult-W20E/log/W20E_INFO.md",
+        "parsed_data": {
+            "transer-function-information": [
+                [
+                    "SetValue",
+                    "GetValue",
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    "bcm_nvram_set",
+                    "bcm_nvram_get",
+                    0,
+                    0,
+                    1,
+                    null
+                ]
+            ],
+            "Set-get-graph-time": 1602.71,
+            "binary-file-list": [
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/arpbrocast",
+                    11.0,
+                    1
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/lib/libcommonprod.so",
+                    26.0,
+                    5
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/miniupnpd",
+                    42.0,
+                    13
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/network_check",
+                    53.0,
+                    9
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/ate",
+                    87.0,
+                    28
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/portal",
+                    105.0,
+                    29
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/multiWAN",
+                    209.0,
+                    88
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/lib/libcommon.so",
+                    304.0,
+                    84
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/ac_manage",
+                    644.0,
+                    296
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/netctrl",
+                    1390.0,
+                    618
+                ],
+                [
+                    "/home/firmware/N-day_dataset/Tenda/W20E/squashfs-root/bin/httpd",
+                    8886.0,
+                    1381
+                ]
+            ],
+            "binary-file-number": 11,
+            "total-function-number": 2552,
+            "rda_average_function_time": 4.61,
+            "total-time": 10593.88,
+            "get2sink_path_sanitization-length": 155,
+            "potential_path_sanitization-length": 0,
+            "get2sink_path_complete-length": 218,
+            "potential_path_complete-length": 4,
+            "sorted_potential_verify_path-length": 0,
+            "sorted_potential_maybe_path-length": 0,
+            "path_complete": 222,
+            "path_sanitization": 155,
+            "average_time_binary": 963.08,
+            "path_sanitization_cross": 0,
+            "path_sanitization_cross_rate": 0.0
+        }
+    }
+}

@@ -1,0 +1,47 @@
+[
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "decompile_list": [
+            "  local_20 = (int *)websGetVar(param_1,\"REQUEST_METHOD\",(undefined1 *)0x0);\n  sVar2 = strlen((char *)local_20);\n  sVar3 = strlen(*(char **)(param_1 + 0xb8));\n  __s = balloc(sVar2 + sVar3 + 2);\n  sprintf((char *)__s,\"%s:%s\",local_20,*(undefined4 *)(param_1 + 0xb8));"
+        ],
+        "target_name": "sub_419f3c",
+        "taint_source_addr": 4267676,
+        "end_block": 4300732,
+        "start_block": 4300832,
+        "path": "0x41a020#0x41a008#0x419ff0#0x419fd8#0x419fbc",
+        "visited_functions": "sprintf#websGetVar",
+        "fail2captureConditionsTime": "0",
+        "source_insr_addr": "0x419fd4",
+        "sink_addr": "sub_419f3c",
+        "sink_insr_addr": "0x41a040",
+        "checking_time": "0",
+        "source_name": "sub_419f3c",
+        "source_keyword": "REQUEST_METHOD",
+        "ghidra_path": [
+            [
+                4300604,
+                4300732,
+                4300756,
+                4300832,
+                4300864
+            ]
+        ],
+        "complete_list": [
+            "\nint * FUN_00419f3c(int param_1)\n\n{\n  int *piVar1;\n  size_t sVar2;\n  size_t sVar3;\n  int *__s;\n  int *piVar4;\n  char *local_28;\n  char *local_24;\n  int *local_20;\n  \n  local_24 = (char *)0x0;\n  fmtAlloc((int *)&local_24,0xff,\"%s:%s:%s\",*(uint *)(param_1 + 0xd4));\n  piVar1 = FUN_00419bac(local_24);\n  bfreeSafe((int)local_24);\n  local_20 = (int *)websGetVar(param_1,\"REQUEST_METHOD\",(undefined1 *)0x0);\n  sVar2 = strlen((char *)local_20);\n  sVar3 = strlen(*(char **)(param_1 + 0xb8));\n  __s = balloc(sVar2 + sVar3 + 2);\n  sprintf((char *)__s,\"%s:%s\",local_20,*(undefined4 *)(param_1 + 0xb8));\n  piVar4 = FUN_00419bac((char *)__s);\n  bfreeSafe((int)__s);\n  local_28 = (char *)0x0;\n  if (*(int *)(param_1 + 0x144) == 0) {\n    fmtAlloc((int *)&local_28,0xff,\"%s:%s:%s\",(uint)piVar1);\n  }\n  else {\n    fmtAlloc((int *)&local_28,0xff,\"%s:%s:%s:%s:%s:%s\",(uint)piVar1);\n  }\n  local_20 = FUN_00419bac(local_28);\n  bfreeSafe((int)piVar1);\n  bfreeSafe((int)piVar4);\n  bfreeSafe((int)local_28);\n  return local_20;\n}\n"
+        ],
+        "target_addr": "0x419f3c",
+        "range_list": [
+            [
+                18,
+                22
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "websGetVar",
+        "taint_sink_addr": 5242996,
+        "taint_sink": "sprintf",
+        "source_addr": "0x411e9c",
+        "path_flag": "0x41a020#0x41a008#0x419ff0#0x419fd8#0x419fbc"
+    }
+]

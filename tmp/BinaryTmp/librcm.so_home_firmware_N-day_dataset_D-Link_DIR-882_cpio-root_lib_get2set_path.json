@@ -1,0 +1,107 @@
+[
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "snprintf*16",
+        "decompile_list": [
+            "  local_30 = (char *)nvram_safe_get(\"dhcp_start\");\n  __s_00 = (char *)nvram_safe_get(\"dhcp_end\");\n  dprintf(0x4b524,param_1,param_2,pcVar1,pcVar2);\n  iVar3 = inet_addr(param_1);\n  iVar4 = inet_addr(param_2);\n  iVar5 = inet_addr(pcVar1);\n  iVar6 = inet_addr(pcVar2);\n  if ((iVar4 & iVar3) != (iVar6 & iVar5)) {\n    return 0;\n  }\n  puVar8 = arrayLanIpPool;\n  if (pcVar1 != (char *)0x0) {\n    pcVar2 = strstr(pcVar1,arrayLanIpPool);\n    iVar7 = 0;\n    if (pcVar2 == (char *)0x0) {\n      pcVar2 = strstr(pcVar1,arrayLanIpPool + 0x10);\n      if (pcVar2 == (char *)0x0) {\n        pcVar1 = strstr(pcVar1,arrayLanIpPool + 0x20);\n        iVar7 = 2;\n        if (pcVar1 == (char *)0x0) goto LAB_00027180;\n      }\n      else {\n        iVar7 = 1;\n      }\n    }\n    puVar8 = arrayLanIpPool + ((iVar7 + 1U) % 3) * 0x10;\n  }\nLAB_00027180:\n  snprintf(local_40,0x10,\"%s%d\",puVar8,1);\n  pcVar1 = strrchr(local_30,0x2e);\n  snprintf((char *)&local_50,0x10,\"%s%s\",puVar8,pcVar1 + 1);\n  pcVar1 = strrchr(__s_00,0x2e);\n  snprintf(local_60,0x10,\"%s%s\",puVar8,pcVar1 + 1);\n  dprintf(0x4b568,local_40,&local_50,local_60);\n  nvram_safe_set(\"lan_ipaddr\",local_40);\n  nvram_safe_set(\"dhcp_start\",&local_50);\n  pcVar1 = local_60;\n  nvram_safe_set(\"dhcp_end\");\n  nvram_unset(\"authIp\");\n  nvram_unset(\"authTime\");\n  dprintf(0x4b5b8,pcVar1);\n  nvram_safe_set(\"conflictflag\",&DAT_0004f99c);\n  if (*__s != '\\0') {\n    sscanf(local_40,\"%d.%d.%d.%*d\",&local_70,&local_6c,&local_68);\n    sscanf(__s,\"%*d.%*d.%*d.%d\",&local_64);\n    sprintf(acStack_80,\"%d.%d.%d.%d\",local_70,local_6c,local_68,local_64);\n    nvram_safe_set(\"dmz_ipaddr\",acStack_80);\n  }\n  tw_lanip_reserve_check((char *)&local_50,local_60);",
+            "undefined4 tw_lanip_reserve_check(char *param_1,char *param_2)\n\n{\n  char *pcVar1;\n  undefined4 uVar2;\n  size_t sVar3;\n  char *__s;\n  int iVar4;\n  uint uVar5;\n  uint uVar6;\n  undefined4 local_60;\n  undefined4 local_5c;\n  char *local_58;\n  char *local_54;\n  undefined4 local_50;\n  undefined4 local_4c;\n  undefined4 local_48;\n  undefined4 local_44;\n  undefined4 local_40;\n  undefined4 local_3c;\n  undefined4 local_38;\n  undefined4 local_34;\n  char *local_30;\n  int local_2c;\n  \n  pcVar1 = (char *)nvram_safe_get(\"lan_reserve_config\");\n  uVar2 = 0;\n  if (*pcVar1 != '\\0') {\n    sVar3 = strlen(pcVar1);\n    __s = (char *)malloc(sVar3 + 10);\n    uVar2 = 0xffff;\n    if (__s != (char *)0x0) {\n      local_2c = 0;\n      local_54 = strdup(pcVar1);\n      local_30 = local_54;\n      while (local_54 != (char *)0x0) {\n        pcVar1 = strsep(&local_54,\">\");\n        if (pcVar1 == (char *)0x0) break;\n        uVar2 = 0;\n        iVar4 = _vstrsep(pcVar1,\"<\",&local_58,&local_5c);\n        local_50 = 0;\n        local_4c = 0;\n        local_48 = 0;\n        local_44 = 0;\n        sscanf(param_1,\"%d.%d.%d.%*d\",&local_40,&local_3c,&local_38,uVar2);\n        sscanf(local_58,\"%*d.%*d.%*d.%d\",&local_34);\n        sprintf((char *)&local_50,\"%d.%d.%d.%d\",local_40,local_3c,local_38,local_34);\n        if (iVar4 == 3) {\n          uVar5 = tw_CnvtIpFromStr((char *)&local_50);\n          uVar6 = tw_CnvtIpFromStr(param_1);\n          if (uVar6 <= uVar5) {\n            uVar5 = tw_CnvtIpFromStr((char *)&local_50);\n            uVar6 = tw_CnvtIpFromStr(param_2);\n            if (uVar5 <= uVar6) {\n              if (local_2c == 0) {\n                __s[0] = '\\0';\n                __s[1] = '\\0';\n                __s[2] = '\\0';\n                __s[3] = '\\0';\n                sprintf(__s,\"%s<%s<%s\",&local_50,local_5c,local_60);\n                local_2c = 1;\n              }\n              else {\n                local_2c = 1;\n                sprintf(__s,\">%s<%s<%s\",&local_50,local_5c,local_60);\n              }\n            }\n          }\n        }\n      }\n      nvram_safe_set(\"lan_reserve_config\",__s);"
+        ],
+        "target_name": "tw_lanip_reserve_check",
+        "taint_source_addr": 5243384,
+        "end_block": 4288052,
+        "start_block": 4288548,
+        "path": "0x416e34#0x416e24#0x416f58#0x416f34#0x416eec#0x416edc#0x416ec4#0x416eb4#0x416ea4#0x416e8c#0x416e7c#0x416e10#0x416de4#0x416dc8#0x416d90#0x416d80#0x416d64#0x416d5c#0x416d20#0x416d10#0x416d00#0x416ce8#0x416cd8#0x416c94#0x416c40#0x41730c#0x4173f4#0x4173dc#0x4173ac#0x41738c#0x41736c#0x4172fc#0x4172dc#0x4172c0#0x4172a4#0x417288#0x417270#0x417258#0x41723c#0x41721c#0x4171f8#0x4171e0#0x4171bc#0x4171a4#0x417180#0x417174#0x417164#0x417158#0x417148#0x41713c#0x41712c#0x417120#0x4170dc#0x4170c4#0x4170ac#0x417094#0x41707c#0x417054#0x41703c#0x417024",
+        "visited_functions": "sprintf#sprintf#tw_CnvtIpFromStr#tw_CnvtIpFromStr#sscanf#tw_lanip_reserve_check#tw_CnvtIpFromStr#snprintf#strrchr#nvram_safe_get",
+        "fail2captureConditionsTime": "-1",
+        "source_insr_addr": "0x417038",
+        "sink_addr": "tw_lanip_reserve_check",
+        "sink_insr_addr": "0x416e38",
+        "checking_time": "-1",
+        "source_name": "LAN_WANIPConflictHandler",
+        "source_keyword": "dhcp_start",
+        "ghidra_path": [
+            [
+                4288360,
+                4288548,
+                4288568,
+                4289292,
+                4289304
+            ],
+            [
+                4287552,
+                4287552,
+                4287632,
+                4288052,
+                4288064
+            ]
+        ],
+        "complete_list": [
+            "\nundefined4 LAN_WANIPConflictHandler(char *param_1,char *param_2)\n\n{\n  char *__s;\n  char *pcVar1;\n  char *pcVar2;\n  char *__s_00;\n  in_addr_t iVar3;\n  in_addr_t iVar4;\n  in_addr_t iVar5;\n  in_addr_t iVar6;\n  int iVar7;\n  undefined1 *puVar8;\n  char acStack_80 [16];\n  undefined4 local_70;\n  undefined4 local_6c;\n  undefined4 local_68;\n  undefined4 local_64;\n  char local_60 [16];\n  undefined4 local_50;\n  undefined4 local_4c;\n  undefined4 local_48;\n  undefined4 local_44;\n  char local_40 [16];\n  char *local_30;\n  \n  local_40[0] = '\\0';\n  local_40[1] = '\\0';\n  local_40[2] = '\\0';\n  local_40[3] = '\\0';\n  local_40[4] = '\\0';\n  local_40[5] = '\\0';\n  local_40[6] = '\\0';\n  local_40[7] = '\\0';\n  local_40[8] = '\\0';\n  local_40[9] = '\\0';\n  local_40[10] = '\\0';\n  local_40[0xb] = '\\0';\n  local_40[0xc] = '\\0';\n  local_40[0xd] = '\\0';\n  local_40[0xe] = '\\0';\n  local_40[0xf] = '\\0';\n  local_50 = 0;\n  local_4c = 0;\n  local_48 = 0;\n  local_44 = 0;\n  local_60[0] = '\\0';\n  local_60[1] = '\\0';\n  local_60[2] = '\\0';\n  local_60[3] = '\\0';\n  local_60[4] = '\\0';\n  local_60[5] = '\\0';\n  local_60[6] = '\\0';\n  local_60[7] = '\\0';\n  local_60[8] = '\\0';\n  local_60[9] = '\\0';\n  local_60[10] = '\\0';\n  local_60[0xb] = '\\0';\n  local_60[0xc] = '\\0';\n  local_60[0xd] = '\\0';\n  local_60[0xe] = '\\0';\n  local_60[0xf] = '\\0';\n  __s = (char *)nvram_safe_get(\"dmz_ipaddr\");\n  pcVar1 = (char *)nvram_safe_get(\"lan0_ipaddr\");\n  pcVar2 = (char *)nvram_safe_get(\"lan0_netmask\");\n  local_30 = (char *)nvram_safe_get(\"dhcp_start\");\n  __s_00 = (char *)nvram_safe_get(\"dhcp_end\");\n  dprintf(0x4b524,param_1,param_2,pcVar1,pcVar2);\n  iVar3 = inet_addr(param_1);\n  iVar4 = inet_addr(param_2);\n  iVar5 = inet_addr(pcVar1);\n  iVar6 = inet_addr(pcVar2);\n  if ((iVar4 & iVar3) != (iVar6 & iVar5)) {\n    return 0;\n  }\n  puVar8 = arrayLanIpPool;\n  if (pcVar1 != (char *)0x0) {\n    pcVar2 = strstr(pcVar1,arrayLanIpPool);\n    iVar7 = 0;\n    if (pcVar2 == (char *)0x0) {\n      pcVar2 = strstr(pcVar1,arrayLanIpPool + 0x10);\n      if (pcVar2 == (char *)0x0) {\n        pcVar1 = strstr(pcVar1,arrayLanIpPool + 0x20);\n        iVar7 = 2;\n        if (pcVar1 == (char *)0x0) goto LAB_00027180;\n      }\n      else {\n        iVar7 = 1;\n      }\n    }\n    puVar8 = arrayLanIpPool + ((iVar7 + 1U) % 3) * 0x10;\n  }\nLAB_00027180:\n  snprintf(local_40,0x10,\"%s%d\",puVar8,1);\n  pcVar1 = strrchr(local_30,0x2e);\n  snprintf((char *)&local_50,0x10,\"%s%s\",puVar8,pcVar1 + 1);\n  pcVar1 = strrchr(__s_00,0x2e);\n  snprintf(local_60,0x10,\"%s%s\",puVar8,pcVar1 + 1);\n  dprintf(0x4b568,local_40,&local_50,local_60);\n  nvram_safe_set(\"lan_ipaddr\",local_40);\n  nvram_safe_set(\"dhcp_start\",&local_50);\n  pcVar1 = local_60;\n  nvram_safe_set(\"dhcp_end\");\n  nvram_unset(\"authIp\");\n  nvram_unset(\"authTime\");\n  dprintf(0x4b5b8,pcVar1);\n  nvram_safe_set(\"conflictflag\",&DAT_0004f99c);\n  if (*__s != '\\0') {\n    sscanf(local_40,\"%d.%d.%d.%*d\",&local_70,&local_6c,&local_68);\n    sscanf(__s,\"%*d.%*d.%*d.%d\",&local_64);\n    sprintf(acStack_80,\"%d.%d.%d.%d\",local_70,local_6c,local_68,local_64);\n    nvram_safe_set(\"dmz_ipaddr\",acStack_80);\n  }\n  tw_lanip_reserve_check((char *)&local_50,local_60);\n  nvram_commit(0);\n  setAllRCModetype();\n  kill(1,1);\n  return 0;\n}\n",
+            "\nundefined4 tw_lanip_reserve_check(char *param_1,char *param_2)\n\n{\n  char *pcVar1;\n  undefined4 uVar2;\n  size_t sVar3;\n  char *__s;\n  int iVar4;\n  uint uVar5;\n  uint uVar6;\n  undefined4 local_60;\n  undefined4 local_5c;\n  char *local_58;\n  char *local_54;\n  undefined4 local_50;\n  undefined4 local_4c;\n  undefined4 local_48;\n  undefined4 local_44;\n  undefined4 local_40;\n  undefined4 local_3c;\n  undefined4 local_38;\n  undefined4 local_34;\n  char *local_30;\n  int local_2c;\n  \n  pcVar1 = (char *)nvram_safe_get(\"lan_reserve_config\");\n  uVar2 = 0;\n  if (*pcVar1 != '\\0') {\n    sVar3 = strlen(pcVar1);\n    __s = (char *)malloc(sVar3 + 10);\n    uVar2 = 0xffff;\n    if (__s != (char *)0x0) {\n      local_2c = 0;\n      local_54 = strdup(pcVar1);\n      local_30 = local_54;\n      while (local_54 != (char *)0x0) {\n        pcVar1 = strsep(&local_54,\">\");\n        if (pcVar1 == (char *)0x0) break;\n        uVar2 = 0;\n        iVar4 = _vstrsep(pcVar1,\"<\",&local_58,&local_5c);\n        local_50 = 0;\n        local_4c = 0;\n        local_48 = 0;\n        local_44 = 0;\n        sscanf(param_1,\"%d.%d.%d.%*d\",&local_40,&local_3c,&local_38,uVar2);\n        sscanf(local_58,\"%*d.%*d.%*d.%d\",&local_34);\n        sprintf((char *)&local_50,\"%d.%d.%d.%d\",local_40,local_3c,local_38,local_34);\n        if (iVar4 == 3) {\n          uVar5 = tw_CnvtIpFromStr((char *)&local_50);\n          uVar6 = tw_CnvtIpFromStr(param_1);\n          if (uVar6 <= uVar5) {\n            uVar5 = tw_CnvtIpFromStr((char *)&local_50);\n            uVar6 = tw_CnvtIpFromStr(param_2);\n            if (uVar5 <= uVar6) {\n              if (local_2c == 0) {\n                __s[0] = '\\0';\n                __s[1] = '\\0';\n                __s[2] = '\\0';\n                __s[3] = '\\0';\n                sprintf(__s,\"%s<%s<%s\",&local_50,local_5c,local_60);\n                local_2c = 1;\n              }\n              else {\n                local_2c = 1;\n                sprintf(__s,\">%s<%s<%s\",&local_50,local_5c,local_60);\n              }\n            }\n          }\n        }\n      }\n      nvram_safe_set(\"lan_reserve_config\",__s);\n      free(local_30);\n      free(__s);\n      uVar2 = 0;\n    }\n  }\n  return uVar2;\n}\n"
+        ],
+        "target_addr": "0x416c40",
+        "range_list": [
+            [
+                67,
+                115
+            ],
+            [
+                2,
+                72
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "nvram_safe_get",
+        "taint_sink_addr": 5243228,
+        "taint_sink": "nvram_safe_set",
+        "set_keyword": "lan_reserve_config",
+        "source_addr": "0x5001f8",
+        "path_flag": "0x416e34#0x416e24#0x416f58#0x416f34#0x416eec#0x416edc#0x416ec4#0x416eb4#0x416ea4#0x416e8c#0x416e7c#0x416e10#0x416de4#0x416dc8#0x416d90#0x416d80#0x416d64#0x416d5c#0x416d20#0x416d10#0x416d00#0x416ce8#0x416cd8#0x416c94#0x416c40#0x41730c#0x4173f4#0x4173dc#0x4173ac#0x41738c#0x41736c#0x4172fc#0x4172dc#0x4172c0#0x4172a4#0x417288#0x417270#0x417258#0x41723c#0x41721c#0x4171f8#0x4171e0#0x4171bc#0x4171a4#0x417180#0x417174#0x417164#0x417158#0x417148#0x41713c#0x41712c#0x417120#0x4170dc#0x4170c4#0x4170ac#0x417094#0x41707c#0x417054#0x41703c#0x417024"
+    },
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "decompile_list": [
+            "  pcVar1 = (char *)nvram_safe_get(\"lan_reserve_config\");\n  uVar2 = 0;\n  if (*pcVar1 != '\\0') {\n    sVar3 = strlen(pcVar1);\n    __s = (char *)malloc(sVar3 + 10);\n    uVar2 = 0xffff;\n    if (__s != (char *)0x0) {\n      local_2c = 0;\n      local_54 = strdup(pcVar1);\n      local_30 = local_54;\n      while (local_54 != (char *)0x0) {\n        pcVar1 = strsep(&local_54,\">\");\n        if (pcVar1 == (char *)0x0) break;\n        uVar2 = 0;\n        iVar4 = _vstrsep(pcVar1,\"<\",&local_58,&local_5c);\n        local_50 = 0;\n        local_4c = 0;\n        local_48 = 0;\n        local_44 = 0;\n        sscanf(param_1,\"%d.%d.%d.%*d\",&local_40,&local_3c,&local_38,uVar2);\n        sscanf(local_58,\"%*d.%*d.%*d.%d\",&local_34);\n        sprintf((char *)&local_50,\"%d.%d.%d.%d\",local_40,local_3c,local_38,local_34);\n        if (iVar4 == 3) {\n          uVar5 = tw_CnvtIpFromStr((char *)&local_50);\n          uVar6 = tw_CnvtIpFromStr(param_1);\n          if (uVar6 <= uVar5) {\n            uVar5 = tw_CnvtIpFromStr((char *)&local_50);\n            uVar6 = tw_CnvtIpFromStr(param_2);\n            if (uVar5 <= uVar6) {\n              if (local_2c == 0) {\n                __s[0] = '\\0';\n                __s[1] = '\\0';\n                __s[2] = '\\0';\n                __s[3] = '\\0';\n                sprintf(__s,\"%s<%s<%s\",&local_50,local_5c,local_60);\n                local_2c = 1;\n              }\n              else {\n                local_2c = 1;\n                sprintf(__s,\">%s<%s<%s\",&local_50,local_5c,local_60);\n              }\n            }\n          }\n        }\n      }\n      nvram_safe_set(\"lan_reserve_config\",__s);"
+        ],
+        "target_name": "tw_lanip_reserve_check",
+        "taint_source_addr": 5243384,
+        "end_block": 4288052,
+        "start_block": 4287552,
+        "path": "0x416e34#0x416e24#0x416f1c#0x416f08#0x416eec#0x416edc#0x416ec4#0x416eb4#0x416ea4#0x416e8c#0x416e7c#0x416e10#0x416de4#0x416dc8#0x416d90#0x416d80#0x416d64#0x416d5c#0x416d20#0x416d10#0x416d00#0x416ce8#0x416cd8#0x416c94#0x416c40",
+        "visited_functions": "malloc#strlen#nvram_safe_get",
+        "fail2captureConditionsTime": "-1",
+        "source_insr_addr": "0x416c90",
+        "sink_addr": "tw_lanip_reserve_check",
+        "sink_insr_addr": "0x416e38",
+        "checking_time": "-1",
+        "source_name": "tw_lanip_reserve_check",
+        "source_keyword": "lan_reserve_config",
+        "ghidra_path": [
+            [
+                4287552,
+                4287552,
+                4287632,
+                4288052,
+                4288064
+            ]
+        ],
+        "complete_list": [
+            "\nundefined4 tw_lanip_reserve_check(char *param_1,char *param_2)\n\n{\n  char *pcVar1;\n  undefined4 uVar2;\n  size_t sVar3;\n  char *__s;\n  int iVar4;\n  uint uVar5;\n  uint uVar6;\n  undefined4 local_60;\n  undefined4 local_5c;\n  char *local_58;\n  char *local_54;\n  undefined4 local_50;\n  undefined4 local_4c;\n  undefined4 local_48;\n  undefined4 local_44;\n  undefined4 local_40;\n  undefined4 local_3c;\n  undefined4 local_38;\n  undefined4 local_34;\n  char *local_30;\n  int local_2c;\n  \n  pcVar1 = (char *)nvram_safe_get(\"lan_reserve_config\");\n  uVar2 = 0;\n  if (*pcVar1 != '\\0') {\n    sVar3 = strlen(pcVar1);\n    __s = (char *)malloc(sVar3 + 10);\n    uVar2 = 0xffff;\n    if (__s != (char *)0x0) {\n      local_2c = 0;\n      local_54 = strdup(pcVar1);\n      local_30 = local_54;\n      while (local_54 != (char *)0x0) {\n        pcVar1 = strsep(&local_54,\">\");\n        if (pcVar1 == (char *)0x0) break;\n        uVar2 = 0;\n        iVar4 = _vstrsep(pcVar1,\"<\",&local_58,&local_5c);\n        local_50 = 0;\n        local_4c = 0;\n        local_48 = 0;\n        local_44 = 0;\n        sscanf(param_1,\"%d.%d.%d.%*d\",&local_40,&local_3c,&local_38,uVar2);\n        sscanf(local_58,\"%*d.%*d.%*d.%d\",&local_34);\n        sprintf((char *)&local_50,\"%d.%d.%d.%d\",local_40,local_3c,local_38,local_34);\n        if (iVar4 == 3) {\n          uVar5 = tw_CnvtIpFromStr((char *)&local_50);\n          uVar6 = tw_CnvtIpFromStr(param_1);\n          if (uVar6 <= uVar5) {\n            uVar5 = tw_CnvtIpFromStr((char *)&local_50);\n            uVar6 = tw_CnvtIpFromStr(param_2);\n            if (uVar5 <= uVar6) {\n              if (local_2c == 0) {\n                __s[0] = '\\0';\n                __s[1] = '\\0';\n                __s[2] = '\\0';\n                __s[3] = '\\0';\n                sprintf(__s,\"%s<%s<%s\",&local_50,local_5c,local_60);\n                local_2c = 1;\n              }\n              else {\n                local_2c = 1;\n                sprintf(__s,\">%s<%s<%s\",&local_50,local_5c,local_60);\n              }\n            }\n          }\n        }\n      }\n      nvram_safe_set(\"lan_reserve_config\",__s);\n      free(local_30);\n      free(__s);\n      uVar2 = 0;\n    }\n  }\n  return uVar2;\n}\n"
+        ],
+        "target_addr": "0x416c40",
+        "range_list": [
+            [
+                27,
+                72
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "nvram_safe_get",
+        "taint_sink_addr": 5243228,
+        "taint_sink": "nvram_safe_set",
+        "set_keyword": "lan_reserve_config",
+        "source_addr": "0x5001f8",
+        "path_flag": "0x416e34#0x416e24#0x416f1c#0x416f08#0x416eec#0x416edc#0x416ec4#0x416eb4#0x416ea4#0x416e8c#0x416e7c#0x416e10#0x416de4#0x416dc8#0x416d90#0x416d80#0x416d64#0x416d5c#0x416d20#0x416d10#0x416d00#0x416ce8#0x416cd8#0x416c94#0x416c40"
+    }
+]

@@ -1,0 +1,12 @@
+websGetVar
+websGetVar
+websGetVar
+websGetVar
+websGetVar
+websGetVar
+websGetVar
+websGetVar
+websGetVar
+websWrite
+websGetVar
+close

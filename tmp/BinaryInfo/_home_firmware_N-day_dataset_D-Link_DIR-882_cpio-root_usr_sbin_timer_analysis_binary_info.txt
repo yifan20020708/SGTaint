@@ -1,0 +1,183 @@
+Binary Path: /home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/usr/sbin/timer
+
+========== Binary Function Keywords ==========
+No keywords found.
+
+========== Set-Get Call Sites ==========
+nvram_safe_get:
+  [1] Call Site Address: 0x4014d0, Caller: 0x401080, Block Address: 0x4014c4, Key: SysLogMail_Schedule_Name
+  [2] Call Site Address: 0x401e04, Caller: 0x401c80, Block Address: 0x401df8, Key: wan_wan0_proto
+  [3] Call Site Address: 0x401e84, Caller: 0x401c80, Block Address: 0x401e78, Key: wan_wan0_pppoe_idletime
+  [4] Call Site Address: 0x401ec0, Caller: 0x401c80, Block Address: 0x401ec0, Key: -1
+  [5] Call Site Address: 0x401f14, Caller: 0x401c80, Block Address: 0x401f08, Key: wan_wan0_vpn_idletime
+  [6] Call Site Address: 0x402194, Caller: 0x402074, Block Address: 0x402188, Key: wan_phylink
+  [7] Call Site Address: 0x4021f4, Caller: 0x402074, Block Address: 0x4021e8, Key: wan_wan0_proto
+  [8] Call Site Address: 0x402210, Caller: 0x402074, Block Address: 0x4021fc, Key: wan_wan0_status
+  [9] Call Site Address: 0x4023bc, Caller: 0x402074, Block Address: 0x4023b0, Key: wan_wan0_vpn_demand
+  [10] Call Site Address: 0x4023d8, Caller: 0x402074, Block Address: 0x4023c4, Key: wan_wan0_vpn_manual_action
+  [11] Call Site Address: 0x40254c, Caller: 0x402074, Block Address: 0x4024f8, Key: -1
+  [12] Call Site Address: 0x40269c, Caller: 0x402074, Block Address: 0x402690, Key: wan_wan0_pppoe_demand
+  [13] Call Site Address: 0x4026b8, Caller: 0x402074, Block Address: 0x4026a4, Key: wan_wan0_pppoe_manual_action
+  [14] Call Site Address: 0x402850, Caller: 0x402804, Block Address: 0x402840, Key: RC_ModeType
+  [15] Call Site Address: 0x4029e0, Caller: 0x40295c, Block Address: 0x4029d4, Key: IsInConfiguring
+  [16] Call Site Address: 0x402a7c, Caller: 0x40295c, Block Address: 0x402a70, Key: wan_wan0_proto
+  [17] Call Site Address: 0x402ab4, Caller: 0x40295c, Block Address: 0x402aa8, Key: wan_wan0_pppoe_demand
+  [18] Call Site Address: 0x402aec, Caller: 0x40295c, Block Address: 0x402ae0, Key: wan_wan0_pppoe_autoreconn
+  [19] Call Site Address: 0x402be8, Caller: 0x40295c, Block Address: 0x402bdc, Key: wan_wan0_pppoe_DualAccessEn
+  [20] Call Site Address: 0x402c1c, Caller: 0x40295c, Block Address: 0x402c14, Key: wan_wan0_proto
+  [21] Call Site Address: 0x402c54, Caller: 0x40295c, Block Address: 0x402c4c, Key: wan_wan0_proto
+  [22] Call Site Address: 0x402c90, Caller: 0x40295c, Block Address: 0x402c88, Key: wan_wan0_vpn_demand
+  [23] Call Site Address: 0x402cc8, Caller: 0x40295c, Block Address: 0x402cbc, Key: wan_wan0_vpn_autoreconn
+  [24] Call Site Address: 0x402d3c, Caller: 0x40295c, Block Address: 0x402d34, Key: wan_wan0_proto
+  [25] Call Site Address: 0x402d74, Caller: 0x40295c, Block Address: 0x402d68, Key: wan_wan0_vpn_demand
+  [26] Call Site Address: 0x402dac, Caller: 0x40295c, Block Address: 0x402da0, Key: wan_wan0_vpn_autoreconn
+  [27] Call Site Address: 0x402e44, Caller: 0x40295c, Block Address: 0x402e38, Key: wan_wan0_pppoe_manual_action
+  [28] Call Site Address: 0x402e84, Caller: 0x40295c, Block Address: 0x402e78, Key: wan_wan0_vpn_manual_action
+  [29] Call Site Address: 0x402ec4, Caller: 0x40295c, Block Address: 0x402eb8, Key: wan_wan0_vpn_manual_action
+  [30] Call Site Address: 0x402f58, Caller: 0x402ef8, Block Address: 0x402ef8, Key: self_healing_enable
+  [31] Call Site Address: 0x403020, Caller: 0x402ef8, Block Address: 0x403014, Key: self_healing_time
+  [32] Call Site Address: 0x403074, Caller: 0x402ef8, Block Address: 0x403060, Key: self_healing_day
+  [33] Call Site Address: 0x403210, Caller: 0x4031a0, Block Address: 0x4031a0, Key: wlan_time_enable
+  [34] Call Site Address: 0x4032e0, Caller: 0x4031a0, Block Address: 0x4032d4, Key: wlan_start_time
+  [35] Call Site Address: 0x403334, Caller: 0x4031a0, Block Address: 0x403320, Key: wlan_end_time
+  [36] Call Site Address: 0x403388, Caller: 0x4031a0, Block Address: 0x403374, Key: wlan_day_time
+  [37] Call Site Address: 0x403408, Caller: 0x4031a0, Block Address: 0x4033fc, Key: wl0_radio
+  [38] Call Site Address: 0x403444, Caller: 0x4031a0, Block Address: 0x40343c, Key: wl1_radio
+  [39] Call Site Address: 0x4034f0, Caller: 0x4031a0, Block Address: 0x4034e4, Key: wl0_radio
+  [40] Call Site Address: 0x40352c, Caller: 0x4031a0, Block Address: 0x403524, Key: wl1_radio
+  [41] Call Site Address: 0x403678, Caller: 0x4035fc, Block Address: 0x4035fc, Key: parent_control_enable
+  [42] Call Site Address: 0x403820, Caller: 0x4035fc, Block Address: 0x403814, Key: schedule_enable
+  [43] Call Site Address: 0x4038ac, Caller: 0x4035fc, Block Address: 0x4038a0, Key: schedule_enable
+  [44] Call Site Address: 0x403cf4, Caller: 0x403c88, Block Address: 0x403c88, Key: parent_rules
+nvram_safe_set:
+  [1] Call Site Address: 0x402940, Caller: 0x402804, Block Address: 0x402930, Key: RC_ModeType
+  [2] Call Site Address: 0x403478, Caller: 0x4031a0, Block Address: 0x403470, Key: -1
+  [3] Call Site Address: 0x403490, Caller: 0x4031a0, Block Address: 0x403490, Key: -1
+  [4] Call Site Address: 0x403568, Caller: 0x4031a0, Block Address: 0x40355c, Key: -1
+  [5] Call Site Address: 0x403858, Caller: 0x4035fc, Block Address: 0x403858, Key: schedule_enable
+nvram_get_int:
+  [1] Call Site Address: 0x401420, Caller: 0x401080, Block Address: 0x401410, Key: SysLog_FILE_MAX_LEN
+  [2] Call Site Address: 0x401490, Caller: 0x401080, Block Address: 0x401488, Key: SysLogMail_Enable
+  [3] Call Site Address: 0x4014b0, Caller: 0x401080, Block Address: 0x4014a4, Key: SysLogMail_Schedule_Enable
+  [4] Call Site Address: 0x401904, Caller: 0x401080, Block Address: 0x4018fc, Key: SysLogMail_Enable
+  [5] Call Site Address: 0x401924, Caller: 0x401080, Block Address: 0x401918, Key: SysLogMail_LogFull_Enable
+
+========== Related File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+  [1] /home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/prog.cgi
+  [2] /home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/lib/librcm.so
+nvram_set:
+nvram_set_int:
+
+========== Diffusion File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+  [1] /home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/lib/librcm.so
+nvram_set:
+nvram_set_int:
+
+========== Set-Get Function Info ==========
+[1] Set: nvram_safe_set, Get: nvram_safe_get, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[2] Set: nvram_set, Get: nvram_get, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+[3] Set: nvram_set_int, Get: nvram_get_int, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[4] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+
+========== Source2Sink Paths ==========
+No paths paths found.
+
+========== Get2Set Paths ==========
+No paths paths found.
+
+========== SOURCE ==========
+[1] sub_1d170
+[2] config_get
+[3] NK_query_entry_get
+[4] webGetVarString
+[5] bcm_nvram_get
+[6] GetValue
+[7] acosNvramConfig_read
+[8] sub_42af24
+[9] sub_42a978
+[10] get_cgi
+[11] websGetVar
+[12] nvram_get
+[13] nvram_safe_get
+[14] nvram_default_get
+[15] getenv
+[16] nvram_pf_get
+[17] acosNvramConfig_get
+[18] uciGet
+[19] entry
+[20] wpa_config_get
+[21] httpGenListDataGet
+[22] cJSON_GetArrayItem
+[23] vici_find_str
+[24] DoHardwareComponent
+[25] device_get_string_value
+[26] cJSON_Parse
+[27] websGetVarSafe
+[28] websGetVar_secure
+[29] OM_ValGet
+[30] acosUciConfig_get
+[31] CAL_abstract_get
+[32] json_object_object_get
+[33] json_object_object_get_ex
+[34] json_tokener_parse
+[35] OM_ValFind
+[36] get_parameter
+[37] get_wlan_setting
+[38] av_dict_get
+[39] cgi_value
+[40] stringOut
+[41] cJSON_GetObjectItem
+[42] sw_getValueByName
+[43] querystr
+[44] find_val
+[45] log_query
+[46] value_parser_by_index_D7000
+[47] getoption
+[48] WEB_GetVar
+[49] av_opt_get
+[50] paramValueFromObjGet
+[51] help_getObjPtr
+[52] NCONF_get_string
+[53] getString
+[54] web_getav_metadata_get
+[55] httpGetEnv
+[56] gets
+[57] fgets
+[58] recvfrom
+[59] recvmsg
+[60] nvram_get_ex2
+[61] nvram_bufget
+[62] apmib_get
+[63] apcli_nvram_get
+[64] nvram_get_int
+
+========== TRANSITIVE SET ==========
+[1] config_set
+[2] SetValue
+[3] setenv
+[4] nvram_set
+[5] nvram_safe_set
+[6] nvram_pf_set
+[7] artblock_set
+[8] acos_nvram_set
+[9] acosNvramConfig_set
+[10] acosNvramConfig_write
+[11] envz_add
+[12] uciSet
+[13] device_set_string_value
+[14] wpa_config_set
+[15] scfgmgr_set_by_index_D7000
+[16] acosUciConfig_set
+[17] OM_ValSet
+[18] CAL_abstract_set
+[19] nvram_bufset
+[20] apmib_set
+[21] apcli_nvram_set
+[22] nvram_set_value
+[23] acosNvramConfig_set_bak
+[24] nvram_set_int
+

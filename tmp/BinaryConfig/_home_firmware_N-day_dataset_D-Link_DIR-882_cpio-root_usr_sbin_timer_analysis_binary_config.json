@@ -1,0 +1,468 @@
+{
+    "binary_path": "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/usr/sbin/timer",
+    "binary_function_keyword": [],
+    "set_get_call_sites_dict": {
+        "nvram_safe_get": [
+            [
+                4199632,
+                4198528,
+                4199620,
+                "SysLogMail_Schedule_Name"
+            ],
+            [
+                4201988,
+                4201600,
+                4201976,
+                "wan_wan0_proto"
+            ],
+            [
+                4202116,
+                4201600,
+                4202104,
+                "wan_wan0_pppoe_idletime"
+            ],
+            [
+                4202176,
+                4201600,
+                4202176,
+                -1
+            ],
+            [
+                4202260,
+                4201600,
+                4202248,
+                "wan_wan0_vpn_idletime"
+            ],
+            [
+                4202900,
+                4202612,
+                4202888,
+                "wan_phylink"
+            ],
+            [
+                4202996,
+                4202612,
+                4202984,
+                "wan_wan0_proto"
+            ],
+            [
+                4203024,
+                4202612,
+                4203004,
+                "wan_wan0_status"
+            ],
+            [
+                4203452,
+                4202612,
+                4203440,
+                "wan_wan0_vpn_demand"
+            ],
+            [
+                4203480,
+                4202612,
+                4203460,
+                "wan_wan0_vpn_manual_action"
+            ],
+            [
+                4203852,
+                4202612,
+                4203768,
+                -1
+            ],
+            [
+                4204188,
+                4202612,
+                4204176,
+                "wan_wan0_pppoe_demand"
+            ],
+            [
+                4204216,
+                4202612,
+                4204196,
+                "wan_wan0_pppoe_manual_action"
+            ],
+            [
+                4204624,
+                4204548,
+                4204608,
+                "RC_ModeType"
+            ],
+            [
+                4205024,
+                4204892,
+                4205012,
+                "IsInConfiguring"
+            ],
+            [
+                4205180,
+                4204892,
+                4205168,
+                "wan_wan0_proto"
+            ],
+            [
+                4205236,
+                4204892,
+                4205224,
+                "wan_wan0_pppoe_demand"
+            ],
+            [
+                4205292,
+                4204892,
+                4205280,
+                "wan_wan0_pppoe_autoreconn"
+            ],
+            [
+                4205544,
+                4204892,
+                4205532,
+                "wan_wan0_pppoe_DualAccessEn"
+            ],
+            [
+                4205596,
+                4204892,
+                4205588,
+                "wan_wan0_proto"
+            ],
+            [
+                4205652,
+                4204892,
+                4205644,
+                "wan_wan0_proto"
+            ],
+            [
+                4205712,
+                4204892,
+                4205704,
+                "wan_wan0_vpn_demand"
+            ],
+            [
+                4205768,
+                4204892,
+                4205756,
+                "wan_wan0_vpn_autoreconn"
+            ],
+            [
+                4205884,
+                4204892,
+                4205876,
+                "wan_wan0_proto"
+            ],
+            [
+                4205940,
+                4204892,
+                4205928,
+                "wan_wan0_vpn_demand"
+            ],
+            [
+                4205996,
+                4204892,
+                4205984,
+                "wan_wan0_vpn_autoreconn"
+            ],
+            [
+                4206148,
+                4204892,
+                4206136,
+                "wan_wan0_pppoe_manual_action"
+            ],
+            [
+                4206212,
+                4204892,
+                4206200,
+                "wan_wan0_vpn_manual_action"
+            ],
+            [
+                4206276,
+                4204892,
+                4206264,
+                "wan_wan0_vpn_manual_action"
+            ],
+            [
+                4206424,
+                4206328,
+                4206328,
+                "self_healing_enable"
+            ],
+            [
+                4206624,
+                4206328,
+                4206612,
+                "self_healing_time"
+            ],
+            [
+                4206708,
+                4206328,
+                4206688,
+                "self_healing_day"
+            ],
+            [
+                4207120,
+                4207008,
+                4207008,
+                "wlan_time_enable"
+            ],
+            [
+                4207328,
+                4207008,
+                4207316,
+                "wlan_start_time"
+            ],
+            [
+                4207412,
+                4207008,
+                4207392,
+                "wlan_end_time"
+            ],
+            [
+                4207496,
+                4207008,
+                4207476,
+                "wlan_day_time"
+            ],
+            [
+                4207624,
+                4207008,
+                4207612,
+                "wl0_radio"
+            ],
+            [
+                4207684,
+                4207008,
+                4207676,
+                "wl1_radio"
+            ],
+            [
+                4207856,
+                4207008,
+                4207844,
+                "wl0_radio"
+            ],
+            [
+                4207916,
+                4207008,
+                4207908,
+                "wl1_radio"
+            ],
+            [
+                4208248,
+                4208124,
+                4208124,
+                "parent_control_enable"
+            ],
+            [
+                4208672,
+                4208124,
+                4208660,
+                "schedule_enable"
+            ],
+            [
+                4208812,
+                4208124,
+                4208800,
+                "schedule_enable"
+            ],
+            [
+                4209908,
+                4209800,
+                4209800,
+                "parent_rules"
+            ]
+        ],
+        "nvram_safe_set": [
+            [
+                4204864,
+                4204548,
+                4204848,
+                "RC_ModeType"
+            ],
+            [
+                4207736,
+                4207008,
+                4207728,
+                -1
+            ],
+            [
+                4207760,
+                4207008,
+                4207760,
+                -1
+            ],
+            [
+                4207976,
+                4207008,
+                4207964,
+                -1
+            ],
+            [
+                4208728,
+                4208124,
+                4208728,
+                "schedule_enable"
+            ]
+        ],
+        "nvram_get_int": [
+            [
+                4199456,
+                4198528,
+                4199440,
+                "SysLog_FILE_MAX_LEN"
+            ],
+            [
+                4199568,
+                4198528,
+                4199560,
+                "SysLogMail_Enable"
+            ],
+            [
+                4199600,
+                4198528,
+                4199588,
+                "SysLogMail_Schedule_Enable"
+            ],
+            [
+                4200708,
+                4198528,
+                4200700,
+                "SysLogMail_Enable"
+            ],
+            [
+                4200740,
+                4198528,
+                4200728,
+                "SysLogMail_LogFull_Enable"
+            ]
+        ]
+    },
+    "relate_file_path": {
+        "nvram_safe_set": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/bin/prog.cgi",
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/lib/librcm.so"
+        ],
+        "nvram_set": [],
+        "nvram_set_int": [],
+        "nvram_bufset": []
+    },
+    "is_board_binary": false,
+    "is_set_role": true,
+    "construct_intra_graph_tag": true,
+    "diffusion_file": {
+        "nvram_safe_set": [
+            "/home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/lib/librcm.so"
+        ],
+        "nvram_set": [],
+        "nvram_set_int": [],
+        "nvram_bufset": []
+    },
+    "set_get_code_snippet": {
+        "nvram_safe_set": {
+            "0x401dbc": [
+                "iVar2 = nvram_safe_set(\"wan_phylink\",&DAT_00405798);",
+                "nvram_safe_set(\"wan_phylink\",&DAT_00405798)"
+            ],
+            "0x40200c": [
+                "nvram_safe_set(\"wan_phylink\",&DAT_00405808);",
+                "nvram_safe_set(\"wan_phylink\",&DAT_00405808)"
+            ],
+            "0x401f64": [
+                "iVar2 = nvram_safe_set(\"wan_wan0_status\",\"LIMITED_CONNECTION\");",
+                "nvram_safe_set(\"wan_wan0_status\",\"LIMITED_CONNECTION\")"
+            ],
+            "0x403858": [
+                "nvram_safe_set(\"schedule_enable\",puVar8);",
+                "nvram_safe_set(\"schedule_enable\",puVar8)"
+            ],
+            "0x402028": [
+                "nvram_safe_set(\"wan_wan0_pppoe_manual_action\",&DAT_00405808);",
+                "nvram_safe_set(\"wan_wan0_pppoe_manual_action\",&DAT_00405808)"
+            ],
+            "0x401fd0": [
+                "nvram_safe_set(\"wan_wan0_status\",\"DISCONNECTED\");",
+                "nvram_safe_set(\"wan_wan0_status\",\"DISCONNECTED\")"
+            ],
+            "0x402940": [
+                "nvram_safe_set(\"RC_ModeType\",local_50);",
+                "nvram_safe_set(\"RC_ModeType\",local_50)"
+            ],
+            "0x402044": [
+                "nvram_safe_set(\"wan_wan0_vpn_manual_action\",&DAT_00405808);",
+                "nvram_safe_set(\"wan_wan0_vpn_manual_action\",&DAT_00405808)"
+            ],
+            "0x403478": [
+                "            nvram_safe_set();\n",
+                "nvram_safe_set()"
+            ],
+            "0x403490": [
+                "            nvram_safe_set();\n",
+                "nvram_safe_set()"
+            ],
+            "0x403568": [
+                "                        nvram_safe_set();\n",
+                "nvram_safe_set()"
+            ]
+        },
+        "nvram_get_int": {
+            "0x401490": [
+                "(iVar2 = nvram_get_int(\"SysLogMail_Enable\"), iVar2 != 0)) &&",
+                "nvram_get_int(\"SysLogMail_Enable\")"
+            ],
+            "0x401904": [
+                "iVar2 = nvram_get_int(\"SysLogMail_Enable\");",
+                "nvram_get_int(\"SysLogMail_Enable\")"
+            ],
+            "0x4014b0": [
+                "((iVar2 = nvram_get_int(\"SysLogMail_Schedule_Enable\"), iVar2 != 0 &&",
+                "nvram_get_int(\"SysLogMail_Schedule_Enable\")"
+            ],
+            "0x401924": [
+                "(iVar2 = nvram_get_int(\"SysLogMail_LogFull_Enable\"), iVar2 != 0)) {",
+                "nvram_get_int(\"SysLogMail_LogFull_Enable\")"
+            ],
+            "0x401420": [
+                "uVar3 = nvram_get_int(\"SysLog_FILE_MAX_LEN\");",
+                "nvram_get_int(\"SysLog_FILE_MAX_LEN\")"
+            ]
+        }
+    },
+    "ghidra_func_identify_failed": {
+        "nvram_safe_set": [],
+        "nvram_get_int": []
+    },
+    "ghidra_project": false,
+    "get_set_function_info": [
+        [
+            "nvram_safe_set",
+            "nvram_safe_get",
+            0,
+            0,
+            1,
+            null
+        ],
+        [
+            "nvram_set",
+            "nvram_get",
+            1,
+            1,
+            2,
+            null
+        ],
+        [
+            "nvram_set_int",
+            "nvram_get_int",
+            0,
+            0,
+            1,
+            null
+        ],
+        [
+            "nvram_bufset",
+            "nvram_bufget",
+            1,
+            1,
+            2,
+            null
+        ]
+    ],
+    "source2sink_path": [],
+    "get2set_path": [],
+    "visited_function_list": []
+}

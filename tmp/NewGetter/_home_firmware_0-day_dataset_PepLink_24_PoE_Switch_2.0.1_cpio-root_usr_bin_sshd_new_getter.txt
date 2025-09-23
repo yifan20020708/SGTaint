@@ -1,9 +1,0 @@
-sshfatal
-stat64
-sshfatal
-puts
-strcasecmp
-recv_rexec_state.constprop.5
-getpwnam
-stat64
-sshfatal

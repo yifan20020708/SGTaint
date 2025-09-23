@@ -1,8 +1,8 @@
 
-[1/4] proc_open, 1s
+[1/4] proc_open, 34s
 [2/4] configparser
-[3/4] network_server_init, 66s
-[4/4] http_request_parse, 488s
+[3/4] network_server_init, 50s
+[4/4] http_request_parse, 155s
 New_input_getters functions: 
  Done 
-Total time: 664s 
+Total time: 402s 

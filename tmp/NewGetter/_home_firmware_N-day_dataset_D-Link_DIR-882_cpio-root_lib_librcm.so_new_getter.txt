@@ -1,0 +1,13 @@
+puts
+printf
+fopen
+fopen
+Get_The_Interface_By_Proto
+_eval
+_eval
+_eval
+_eval
+_eval
+_eval
+_eval
+perror

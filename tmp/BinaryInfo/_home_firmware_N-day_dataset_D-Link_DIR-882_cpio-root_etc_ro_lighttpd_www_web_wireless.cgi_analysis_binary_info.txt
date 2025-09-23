@@ -1,0 +1,124 @@
+Binary Path: /home/firmware/N-day_dataset/D-Link/DIR-882/cpio-root/etc_ro/lighttpd/www/web/wireless.cgi
+
+========== Binary Function Keywords ==========
+No keywords found.
+
+========== Set-Get Call Sites ==========
+No set-get call sites found.
+
+========== Related File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+nvram_set:
+nvram_set_int:
+
+========== Diffusion File Paths ==========
+nvram_bufset:
+nvram_safe_set:
+nvram_set:
+nvram_set_int:
+
+========== Set-Get Function Info ==========
+[1] Set: nvram_safe_set, Get: nvram_safe_get, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[2] Set: nvram_set, Get: nvram_get, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+[3] Set: nvram_set_int, Get: nvram_get_int, KeySet: 0, KeyGet: 0, ValSet: 1, ValGet: None
+[4] Set: nvram_bufset, Get: nvram_bufget, KeySet: 1, KeyGet: 1, ValSet: 2, ValGet: None
+
+========== Source2Sink Paths ==========
+No paths paths found.
+
+========== Get2Set Paths ==========
+No paths paths found.
+
+========== SOURCE ==========
+[1] sub_1d170
+[2] config_get
+[3] NK_query_entry_get
+[4] webGetVarString
+[5] bcm_nvram_get
+[6] GetValue
+[7] acosNvramConfig_read
+[8] sub_42af24
+[9] sub_42a978
+[10] get_cgi
+[11] websGetVar
+[12] nvram_get
+[13] nvram_safe_get
+[14] nvram_default_get
+[15] getenv
+[16] nvram_pf_get
+[17] acosNvramConfig_get
+[18] uciGet
+[19] entry
+[20] wpa_config_get
+[21] httpGenListDataGet
+[22] cJSON_GetArrayItem
+[23] vici_find_str
+[24] DoHardwareComponent
+[25] device_get_string_value
+[26] cJSON_Parse
+[27] websGetVarSafe
+[28] websGetVar_secure
+[29] OM_ValGet
+[30] acosUciConfig_get
+[31] CAL_abstract_get
+[32] json_object_object_get
+[33] json_object_object_get_ex
+[34] json_tokener_parse
+[35] OM_ValFind
+[36] get_parameter
+[37] get_wlan_setting
+[38] av_dict_get
+[39] cgi_value
+[40] stringOut
+[41] cJSON_GetObjectItem
+[42] sw_getValueByName
+[43] querystr
+[44] find_val
+[45] log_query
+[46] value_parser_by_index_D7000
+[47] getoption
+[48] WEB_GetVar
+[49] av_opt_get
+[50] paramValueFromObjGet
+[51] help_getObjPtr
+[52] NCONF_get_string
+[53] getString
+[54] web_getav_metadata_get
+[55] httpGetEnv
+[56] gets
+[57] fgets
+[58] recvfrom
+[59] recvmsg
+[60] nvram_get_ex2
+[61] nvram_bufget
+[62] apmib_get
+[63] apcli_nvram_get
+[64] nvram_get_int
+
+========== TRANSITIVE SET ==========
+[1] config_set
+[2] SetValue
+[3] setenv
+[4] nvram_set
+[5] nvram_safe_set
+[6] nvram_pf_set
+[7] artblock_set
+[8] acos_nvram_set
+[9] acosNvramConfig_set
+[10] acosNvramConfig_write
+[11] envz_add
+[12] uciSet
+[13] device_set_string_value
+[14] wpa_config_set
+[15] scfgmgr_set_by_index_D7000
+[16] acosUciConfig_set
+[17] OM_ValSet
+[18] CAL_abstract_set
+[19] nvram_bufset
+[20] apmib_set
+[21] apcli_nvram_set
+[22] nvram_set_value
+[23] acosNvramConfig_set_bak
+[24] nvram_set_int
+

@@ -1,0 +1,92 @@
+[
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "decompile_list": [
+            "    __s = (char *)nvram_safe_get(\"ntp_timezone\");\n    pcVar3 = (char *)nvram_safe_get(\"ntp_DaylightSavingsUsed\");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,\"+%d:%d\",&local_94,&local_98);"
+        ],
+        "target_name": "sub_4016dc",
+        "taint_source_addr": 5243080,
+        "end_block": 4201776,
+        "start_block": 4202540,
+        "path": "0x40202c#0x401ddc#0x401dc0#0x401da8#0x401d8c#0x401d30",
+        "visited_functions": "nvram_safe_get",
+        "fail2captureConditionsTime": "0",
+        "source_insr_addr": "0x401d88",
+        "sink_addr": "sub_4016dc",
+        "sink_insr_addr": "0x40203c",
+        "checking_time": "0",
+        "source_name": "sub_4016dc",
+        "source_keyword": "ntp_timezone",
+        "ghidra_path": [
+            [
+                4200156,
+                4201776,
+                4201864,
+                4202540,
+                4202556
+            ]
+        ],
+        "complete_list": [
+            "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_004016dc(uint *param_1,uint *param_2)\n\n{\n  uint uVar1;\n  int iVar2;\n  char *__s;\n  char *pcVar3;\n  int iVar4;\n  uint uVar5;\n  uint uVar6;\n  uint uVar7;\n  undefined4 uVar8;\n  uint uVar9;\n  uint uVar10;\n  uint uVar11;\n  uint uVar12;\n  uint uVar13;\n  uint uVar14;\n  undefined8 uVar15;\n  undefined8 uVar16;\n  undefined8 uVar17;\n  int local_98;\n  int local_94;\n  timeval local_90;\n  uint local_88;\n  uint local_84;\n  uint local_80;\n  uint local_7c;\n  uint local_78;\n  uint local_74;\n  undefined8 local_70;\n  undefined8 local_68;\n  undefined8 local_60;\n  undefined8 local_58;\n  uint local_50;\n  uint local_4c;\n  uint local_48;\n  undefined8 local_44;\n  uint local_3c;\n  uint local_38;\n  uint local_34;\n  uint local_2c;\n  \n  uVar1 = *param_1;\n  uVar14 = uVar1 << 0x18;\n  uVar6 = uVar1 >> 0x18;\n  local_70._0_4_ = param_1[1];\n  if ((uVar6 & 0x80) != 0) {\n    uVar6 = uVar6 | 0xffffff00;\n  }\n  uVar9 = param_1[10];\n  uVar7 = param_1[0xb];\n  uVar13 = param_1[6];\n  local_34 = uVar9 >> 0x18;\n  uVar12 = param_1[7];\n  uVar11 = param_1[8];\n  uVar10 = param_1[9];\n  uVar5 = param_1[2];\n  local_58._0_4_ = uVar9 & 0xff0000;\n  local_50 = uVar7 << 0x18;\n  local_4c = uVar7 >> 0x18;\n  local_38 = uVar13 << 0x18 | uVar13 >> 0x18;\n  local_48 = uVar7 & 0xff0000;\n  local_3c = uVar5 & 0xff0000;\n  local_68._0_4_ = uVar5 << 0x18;\n  local_60._0_4_ = uVar5 >> 0x18;\n  local_2c = uVar13 & 0xff00;\n  local_74 = uVar12 << 0x18 | uVar12 >> 0x18 | (uVar12 & 0xff0000) >> 8 | (uVar12 & 0xff00) << 8;\n  local_80 = uVar11 << 0x18 | uVar11 >> 0x18 | (uVar11 & 0xff0000) >> 8 | (uVar11 & 0xff00) << 8;\n  local_84 = local_50 | local_4c | local_48 >> 8 | (uVar7 & 0xff00) << 8;\n  local_78 = local_38 | (uVar13 & 0xff0000) >> 8 | local_2c << 8;\n  local_7c = uVar10 << 0x18 | uVar10 >> 0x18 | (uVar10 & 0xff0000) >> 8 | (uVar10 & 0xff00) << 8;\n  local_88 = uVar9 << 0x18 | local_34 | (uint)local_58 >> 8 | (uVar9 & 0xff00) << 8;\n  uVar10 = param_1[3];\n  uVar9 = param_1[4];\n  uVar7 = param_1[5];\n  uVar5 = (uint)local_68 | (uint)local_60 | local_3c >> 8 | (uVar5 & 0xff00) << 8;\n  if (DAT_004154fc != 0) {\n    local_90.tv_usec = (local_84 >> 0xc) + ((local_84 >> 10) + 0x8000 >> 0x10) * -0x2f7;\n    local_90.tv_sec = local_88 + 0x7c558180;\n    local_94 = 0;\n    local_98 = 0;\n    __s = (char *)nvram_safe_get(\"ntp_timezone\");\n    pcVar3 = (char *)nvram_safe_get(\"ntp_DaylightSavingsUsed\");\n    iVar2 = atoi(pcVar3);\n    pcVar3 = strchr(__s,0x2d);\n    if (pcVar3 == (char *)0x0) {\n      sscanf(__s,\"+%d:%d\",&local_94,&local_98);\n      local_90.tv_sec = local_90.tv_sec + (local_94 * 0x3c + local_98) * 0x3c;\n    }\n    else {\n      sscanf(__s,\"-%d:%d\",&local_94,&local_98);\n      local_90.tv_sec = local_90.tv_sec + (local_94 * -0x3c - local_98) * 0x3c;\n    }\n    if (iVar2 != 0) {\n      local_90.tv_sec = local_90.tv_sec + 0xe10;\n    }\n    iVar2 = settimeofday(&local_90,(timezone *)0x0);\n    if (iVar2 < 0) {\n      perror(\"settimeofday\");\n    }\n    if (debug == 0) goto LAB_00401914;\n    printf(\"set time to %lu.%.6lu\\n\",local_90.tv_sec,local_90.tv_usec);\n  }\n  if (debug != 0) {\n    uVar11 = uVar10 << 0x18 | uVar10 >> 0x18 | (uVar10 & 0xff0000) >> 8 | (uVar10 & 0xff00) << 8;\n    printf(\"LI=%d  VN=%d  Mode=%d  Stratum=%d  Poll=%d  Precision=%d\\n\",uVar14 >> 0x1e,\n           (uVar14 & 0x38000000) >> 0x1b,(uVar14 & 0x7000000) >> 0x18,\n           ((uVar1 & 0xff00) << 8) >> 0x10,(uVar1 >> 8 & 0xff00) >> 8,uVar6);\n    uVar16 = __floatsidf((uint)local_70 << 0x18 | (uint)local_70 >> 0x18 |\n                         ((uint)local_70 & 0xff0000) >> 8 | ((uint)local_70 & 0xff00) << 8);\n    local_44 = __muldf3((int)uVar16,(int)((ulonglong)uVar16 >> 0x20),0,0x402e8480);\n    uVar16 = __floatsidf(uVar5);\n    uVar16 = __muldf3((int)uVar16,(int)((ulonglong)uVar16 >> 0x20),0,0x402e8480);\n    uVar1 = (int)uVar11 >> 8 & 0xff;\n    printf(\"Delay=%.1f  Dispersion=%.1f  Refid=%u.%u.%u.%u\\n\",uVar1,(undefined4)local_44,\n           local_44._4_4_,(int)uVar16,(int)((ulonglong)uVar16 >> 0x20),uVar10 & 0xff,\n           (int)uVar11 >> 0x10 & 0xff,uVar1,uVar10 >> 0x18);\n    printf(\"Reference %u.%.10u\\n\",\n           uVar9 << 0x18 | uVar9 >> 0x18 | (uVar9 & 0xff0000) >> 8 | (uVar9 & 0xff00) << 8,\n           uVar7 << 0x18 | uVar7 >> 0x18 | (uVar7 & 0xff0000) >> 8 | (uVar7 & 0xff00) << 8);\n    printf(\"Originate %u.%.10u\\n\",local_78,local_74);\n    printf(\"Receive   %u.%.10u\\n\",local_80,local_7c);\n    printf(\"Transmit  %u.%.10u\\n\",local_88,local_84);\n    printf(\"Our recv  %u.%.10u\\n\",*param_2,param_2[1]);\n  }\nLAB_00401914:\n  local_70 = FUN_004015f4((int *)&local_78,(int *)param_2);\n  local_68 = FUN_004015f4((int *)&local_80,(int *)&local_88);\n  local_60 = FUN_004015f4((int *)&local_78,(int *)&local_80);\n  local_58 = FUN_004015f4((int *)&local_88,(int *)param_2);\n  iVar2 = FUN_004011c0();\n  uVar16 = local_60;\n  uVar17 = local_58;\n  if (debug != 0) {\n    uVar16 = local_68;\n    uVar17 = __subdf3((uint)local_70,local_70._4_4_,(uint)local_68,local_68._4_4_,local_68);\n    printf(\"Total elapsed: %9.2f\\nServer stall:  %9.2f\\nSlop:          %9.2f\\n\");\n    uVar16 = __subdf3((uint)local_60,local_60._4_4_,(uint)local_58,local_58._4_4_,uVar16,uVar17);\n    __muldf3((int)uVar16,(int)((ulonglong)uVar16 >> 0x20),0,0x3fe00000);\n    printf(\n          \"Skew:          %9.2f\\nFrequency:     %9d\\n day   second     elapsed    stall     skew  dispersion  freq\\n\"\n          );\n    uVar16 = local_60;\n    uVar17 = local_58;\n  }\n  local_58._4_4_ = (undefined4)((ulonglong)uVar17 >> 0x20);\n  local_58._0_4_ = (uint)uVar17;\n  local_60._4_4_ = (undefined4)((ulonglong)uVar16 >> 0x20);\n  local_60._0_4_ = (uint)uVar16;\n  if (DAT_00415500 != 0) {\n    uVar15 = __subdf3((uint)local_60,local_60._4_4_,(uint)local_58,local_58._4_4_);\n    local_58 = uVar17;\n    local_60 = uVar16;\n    uVar1 = *param_2;\n    uVar16 = __muldf3((int)uVar15,(int)((ulonglong)uVar15 >> 0x20),0,0x3fe00000);\n    local_44 = uVar16;\n    uVar16 = __floatsidf(uVar5);\n    uVar16 = __muldf3((int)uVar16,(int)((ulonglong)uVar16 >> 0x20),0,0x402e8480);\n    uVar8 = (undefined4)((ulonglong)uVar16 >> 0x20);\n    uVar16 = __adddf3((int)uVar16,uVar8,(uint)local_70,local_70._4_4_);\n    iVar4 = contemplate_data(uVar1,uVar8,(undefined4)local_44,local_44._4_4_,(int)uVar16,\n                             (int)((ulonglong)uVar16 >> 0x20),iVar2);\n    uVar16 = local_60;\n    uVar17 = local_58;\n    if ((debug == 0) && (iVar4 != iVar2)) {\n      FUN_00401228(iVar4);\n      uVar16 = local_60;\n      uVar17 = local_58;\n    }\n  }\n  local_58._4_4_ = (undefined4)((ulonglong)uVar17 >> 0x20);\n  local_58._0_4_ = (uint)uVar17;\n  local_60._4_4_ = (undefined4)((ulonglong)uVar16 >> 0x20);\n  local_60._0_4_ = (uint)uVar16;\n  uVar1 = *param_2;\n  uVar6 = param_2[1];\n  uVar15 = __subdf3((uint)local_60,local_60._4_4_,(uint)local_58,local_58._4_4_,local_70,local_68);\n  local_58 = uVar17;\n  local_60 = uVar16;\n  __muldf3((int)uVar15,(int)((ulonglong)uVar15 >> 0x20),0,0x3fe00000);\n  uVar16 = __floatsidf(uVar5);\n  __muldf3((int)uVar16,(int)((ulonglong)uVar16 >> 0x20),0,0x402e8480);\n  printf(\"%d %.5d.%.3d  %8.1f %8.1f  %8.1f %8.1f %9d\\n\",uVar1 / 0x15180,uVar1 % 0x15180,\n         uVar6 / 0x418937);\n  fflush(_stdout);\n  uVar16 = __subdf3((uint)local_70,local_70._4_4_,(uint)local_68,local_68._4_4_);\n  __fixdfsi((int)uVar16,(int)((ulonglong)uVar16 >> 0x20));\n  return;\n}\n"
+        ],
+        "target_addr": "0x4016dc",
+        "range_list": [
+            [
+                86,
+                91
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "nvram_safe_get",
+        "taint_sink_addr": 5242952,
+        "taint_sink": "sscanf",
+        "source_addr": "0x5000c8",
+        "path_flag": "0x401ddc#0x401dc0#0x401da8#0x401d8c#0x401d30"
+    },
+    {
+        "error_messges_str": "",
+        "str_length_visited_function": "",
+        "decompile_list": [
+            "    pcVar1 = fgets(acStack_98,100,_stdin);\n    if (pcVar1 == (char *)0x0) {\n      return;\n    }\n    iVar2 = sscanf(acStack_98,\"%d %f %f %f %lf %f %d\",&local_a4,&local_ac,&local_b0,auStack_b4,\n                   &local_a0,&local_b8,&local_a8);"
+        ],
+        "target_name": "sub_4025f4",
+        "taint_source_addr": 5243060,
+        "end_block": 4204096,
+        "start_block": 4204132,
+        "path": "0x402664#0x402640",
+        "visited_functions": "fgets",
+        "fail2captureConditionsTime": "0",
+        "source_insr_addr": "0x402648",
+        "sink_addr": "sub_4025f4",
+        "sink_insr_addr": "0x4026a0",
+        "checking_time": "0",
+        "source_name": "sub_4025f4",
+        "source_keyword": "not_static_string",
+        "ghidra_path": [
+            [
+                4204020,
+                4204096,
+                4204116,
+                4204132,
+                4204192
+            ]
+        ],
+        "complete_list": [
+            "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_004025f4(void)\n\n{\n  char *pcVar1;\n  int iVar2;\n  uint uVar3;\n  undefined4 uVar4;\n  undefined4 uVar5;\n  int iVar6;\n  int iVar7;\n  int iVar8;\n  undefined8 uVar9;\n  undefined8 uVar10;\n  undefined8 uVar11;\n  undefined8 uVar12;\n  undefined4 local_b8;\n  undefined1 auStack_b4 [4];\n  undefined4 local_b0;\n  undefined4 local_ac;\n  int local_a8;\n  int local_a4;\n  undefined8 local_a0;\n  char acStack_98 [104];\n  undefined8 local_30;\n  \n  uVar11 = 0;\n  iVar6 = 0;\n  iVar8 = 0;\n  do {\n    pcVar1 = fgets(acStack_98,100,_stdin);\n    if (pcVar1 == (char *)0x0) {\n      return;\n    }\n    iVar2 = sscanf(acStack_98,\"%d %f %f %f %lf %f %d\",&local_a4,&local_ac,&local_b0,auStack_b4,\n                   &local_a0,&local_b8,&local_a8);\n    if (iVar2 != 7) {\n      fwrite(\"Replay input error\\n\",1,0x13,_stderr);\n                    /* WARNING: Subroutine does not return */\n      exit(2);\n    }\n    fputs(acStack_98,_stdout);\n    iVar2 = local_a4 * 0x15180;\n    uVar3 = __fixsfsi(local_ac);\n    iVar2 = iVar2 + uVar3;\n    uVar4 = __addsf3(local_b0,local_b8);\n    uVar9 = __extendsfdf2(uVar4);\n    uVar4 = (undefined4)((ulonglong)uVar9 >> 0x20);\n    if (debug == 0) {\n      iVar7 = 0;\n      if (iVar8 != 0) goto LAB_0040274c;\nLAB_00402884:\n      uVar10 = 0;\n      iVar6 = local_a8;\n    }\n    else {\n      printf(\"contemplate %u %.1f %.1f %d\\n\",iVar2,(undefined4)local_a0,local_a0._4_4_,(int)uVar9,\n             uVar4,local_a8);\n      iVar7 = debug;\n      if (iVar8 == 0) goto LAB_00402884;\nLAB_0040274c:\n      uVar10 = __floatsidf(local_a8 - iVar6);\n    }\n    local_30 = uVar10;\n    uVar10 = __floatunsidf(iVar2 - iVar8);\n    uVar10 = __muldf3((int)uVar10,(int)((ulonglong)uVar10 >> 0x20),(undefined4)local_30,\n                      local_30._4_4_);\n    uVar10 = __muldf3((int)uVar10,(int)((ulonglong)uVar10 >> 0x20),0,0x3ef00000);\n    uVar11 = __adddf3((int)uVar11,(int)((ulonglong)uVar11 >> 0x20),(int)uVar10,\n                      (int)((ulonglong)uVar10 >> 0x20));\n    uVar5 = (undefined4)((ulonglong)uVar11 >> 0x20);\n    uVar10 = local_a0;\n    if (iVar7 != 0) {\n      local_30._0_4_ = uVar5;\n      printf(\"fake %f %d \\n\",0x400000,(int)uVar11,uVar5,iVar6);\n      uVar5 = (undefined4)local_30;\n      uVar10 = local_a0;\n    }\n    local_a0._4_4_ = (undefined4)((ulonglong)uVar10 >> 0x20);\n    local_a0._0_4_ = (undefined4)uVar10;\n    uVar12 = __adddf3((int)uVar11,uVar5,(undefined4)local_a0,local_a0._4_4_);\n    local_a0 = uVar10;\n    local_a8 = iVar6;\n    local_a0 = uVar12;\n    iVar6 = contemplate_data(iVar2,uVar5,(int)uVar12,(int)((ulonglong)uVar12 >> 0x20),(int)uVar9,\n                             uVar4,iVar6);\n    iVar8 = iVar2;\n  } while( true );\n}\n"
+        ],
+        "target_addr": "0x4025f4",
+        "range_list": [
+            [
+                33,
+                38
+            ]
+        ],
+        "conditions_str": "",
+        "taint_source": "fgets",
+        "taint_sink_addr": 5242952,
+        "taint_sink": "sscanf",
+        "source_addr": "0x5000b4",
+        "path_flag": "0x402640"
+    }
+]

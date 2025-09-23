@@ -1,0 +1,145 @@
+{
+    "D-Link-DIR-878": {
+        "complete_path_number": 314,
+        "sanitization_path_number": 169,
+        "cross_sanitization_number": 66,
+        "binary_number": 2,
+        "function_number": 404,
+        "rda_analysis_time": 4683.0,
+        "angr_analysis_time": 317.32732129096985,
+        "satc_analysis_time": 559.12,
+        "total_analysis_time": 5559.44732129097
+    },
+    "D-Link-DIR-816": {
+        "complete_path_number": 79,
+        "sanitization_path_number": 31,
+        "cross_sanitization_number": 0,
+        "binary_number": 3,
+        "function_number": 441,
+        "rda_analysis_time": 10840.0,
+        "angr_analysis_time": 247.1467297077179,
+        "satc_analysis_time": 159.71,
+        "total_analysis_time": 11246.856729707717
+    },
+    "ToToLink-A720R": {
+        "complete_path_number": 6,
+        "sanitization_path_number": 5,
+        "cross_sanitization_number": 0,
+        "binary_number": 1,
+        "function_number": 189,
+        "rda_analysis_time": 1428.0,
+        "angr_analysis_time": 41.75831317901611,
+        "satc_analysis_time": 6351.53,
+        "total_analysis_time": 7821.288313179016
+    },
+    "ToToLink-LR1200GB": {
+        "complete_path_number": 63,
+        "sanitization_path_number": 51,
+        "cross_sanitization_number": 0,
+        "binary_number": 3,
+        "function_number": 523,
+        "rda_analysis_time": 4197.0,
+        "angr_analysis_time": 226.83139610290527,
+        "satc_analysis_time": 170.74,
+        "total_analysis_time": 4594.571396102905
+    },
+    "ToToLink-NR1800X": {
+        "complete_path_number": 67,
+        "sanitization_path_number": 50,
+        "cross_sanitization_number": 0,
+        "binary_number": 3,
+        "function_number": 601,
+        "rda_analysis_time": 8112.0,
+        "angr_analysis_time": 251.20643091201782,
+        "satc_analysis_time": 213.29,
+        "total_analysis_time": 8576.496430912019
+    },
+    "Linksys-E1200": {
+        "complete_path_number": 515,
+        "sanitization_path_number": 290,
+        "cross_sanitization_number": 0,
+        "binary_number": 3,
+        "function_number": 766,
+        "rda_analysis_time": 23408.0,
+        "angr_analysis_time": 678.4166886806488,
+        "satc_analysis_time": 434.21,
+        "total_analysis_time": 24520.626688680648
+    },
+    "Linksys-RE7000": {
+        "complete_path_number": 0,
+        "sanitization_path_number": 0,
+        "cross_sanitization_number": 0,
+        "binary_number": 3,
+        "function_number": 596,
+        "rda_analysis_time": 12293.0,
+        "angr_analysis_time": 312.0722105503082,
+        "satc_analysis_time": 207.03,
+        "total_analysis_time": 12812.102210550309
+    },
+    "Linksys-E7350": {
+        "complete_path_number": 0,
+        "sanitization_path_number": 0,
+        "cross_sanitization_number": 0,
+        "binary_number": 2,
+        "function_number": 1,
+        "rda_analysis_time": 45.0,
+        "angr_analysis_time": 79.3367669582367,
+        "satc_analysis_time": 6718.27,
+        "total_analysis_time": 6842.606766958237
+    },
+    "D-Link-DIR-882": {
+        "complete_path_number": 73,
+        "sanitization_path_number": 20,
+        "cross_sanitization_number": 0,
+        "binary_number": 3,
+        "function_number": 245,
+        "rda_analysis_time": 4638.0,
+        "angr_analysis_time": 1940.5807735919952,
+        "satc_analysis_time": 1252.29,
+        "total_analysis_time": 7830.870773591995
+    },
+    "Netgear-R6200": {
+        "complete_path_number": 1840,
+        "sanitization_path_number": 1321,
+        "cross_sanitization_number": 526,
+        "binary_number": 3,
+        "function_number": 904,
+        "rda_analysis_time": 14220.0,
+        "angr_analysis_time": 630.9041171073914,
+        "satc_analysis_time": 333.55,
+        "total_analysis_time": 15184.45411710739
+    },
+    "Netgear-R6300": {
+        "complete_path_number": 1362,
+        "sanitization_path_number": 876,
+        "cross_sanitization_number": 321,
+        "binary_number": 3,
+        "function_number": 958,
+        "rda_analysis_time": 18857.0,
+        "angr_analysis_time": 608.0402915477753,
+        "satc_analysis_time": 328.65,
+        "total_analysis_time": 19793.690291547777
+    },
+    "Netgear-R7000P": {
+        "complete_path_number": 4860,
+        "sanitization_path_number": 3206,
+        "cross_sanitization_number": 2268,
+        "binary_number": 3,
+        "function_number": 1588,
+        "rda_analysis_time": 30488.0,
+        "angr_analysis_time": 272.7519428730011,
+        "satc_analysis_time": 1936.3,
+        "total_analysis_time": 32697.051942873
+    },
+    "ToToLink-A950RG": {
+        "complete_path_number": 13,
+        "sanitization_path_number": 8,
+        "cross_sanitization_number": 0,
+        "binary_number": 2,
+        "function_number": 153,
+        "rda_analysis_time": 2363.0,
+        "angr_analysis_time": 88.05299997329712,
+        "satc_analysis_time": 237.95,
+        "total_analysis_time": 2689.002999973297
+    }
+}
