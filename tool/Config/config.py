@@ -155,7 +155,7 @@ SOURCES = [
     "OM_ValGet", "acosUciConfig_get", "CAL_abstract_get", "json_object_object_get", "json_object_object_get_ex",
     "json_tokener_parse", "OM_ValFind", "get_parameter", "get_wlan_setting", "av_dict_get", "cgi_value", "stringOut",
     "cJSON_GetObjectItem", "sw_getValueByName", "querystr", "find_val", "log_query", "value_parser_by_index_D7000",
-    "getoption", "WEB_GetVar", "av_opt_get", "paramValueFromObjGet", "help_getObjPtr", "NCONF_get_string", "getString", "web_get"
+    "getoption", "WEB_GetVar", "av_opt_get", "paramValueFromObjGet", "help_getObjPtr", "NCONF_get_string", "getString", "web_get",
     "av_metadata_get", "httpGetEnv", "gets", "fgets", "recvfrom", "recvmsg", "nvram_get_ex2", "nvram_bufget", "apmib_get", "apcli_nvram_get"
 ]
 KEYWORD_SOURCES = [
