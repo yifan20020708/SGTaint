@@ -12,7 +12,7 @@ To facilitate ease of use and reproducibility, we offer a pre-configured Docker 
 
 ### Use the compiled docker environment directly
 
-The pre-built Docker image `sgtaint_image` for SGTaint can be obtained from [sgtaint_image.rar](https://pan.sjtu.edu.cn/web/share/0493fa95efc9aad891a1c3c1adbe5ec0)
+The pre-built Docker image `sgtaint_image` for SGTaint can be obtained from [sgtaint_image.rar](https://pan.sjtu.edu.cn/web/share/080bc039c6d7db4251f721f50e236371).
 
 ``````bash
 # Loading the Docker Image
@@ -136,7 +136,7 @@ The file `<firmware_mark>_path_sanitization_llm_check.json`, located in the `log
 
 ### Our dataset
 
-The dataset can be obtained from [SGTaint_dataset.zip](https://pan.sjtu.edu.cn/web/share/8852971219b92e4f56668cd393b74522)
+The dataset can be obtained from [SGTaint_dataset.zip](https://pan.sjtu.edu.cn/web/share/8852971219b92e4f56668cd393b74522).
 
 ### Case Study
 
@@ -160,4 +160,4 @@ python -m tool.sgtaint -f /home/firmware/Current_dataset/D-Link/DIR-878/cpio-roo
 
 ## 0-day Vulnerabilities
 
-All 0-day vulnerabilities identified by SGTaint are comprehensively documented in the repository [SGTaint-0-day](https://github.com/yifan20020708/SGTaint-0-day)
+All 0-day vulnerabilities identified by SGTaint are comprehensively documented in the repository [SGTaint-0-day](https://github.com/yifan20020708/SGTaint-0-day).
