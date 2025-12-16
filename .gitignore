@@ -1,3 +1,4 @@
 ghidra_tool/
 .env
 .git
+.SGTaint-arch.png

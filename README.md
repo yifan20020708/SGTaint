@@ -2,10 +2,6 @@
 
 **SGTaint** is a static taint analysis framework based on **Set-Get Graph** construction, utilizing Reaching Definition Analysis (RDA) to define the analysis scope. It is specifically designed for automated vulnerability detection in IoT firmware. Given the firmware’s file system, SGTaint enables a fully automated analysis process, achieving a balance between efficiency and effectiveness in vulnerability discovery.
 
-## Overview of SGTaint
-
-![SGTaint-arch](./SGTaint-arch.png)
-
 ## Running Environment
 
 To facilitate ease of use and reproducibility, we offer a pre-configured Docker environment that enables immediate execution of **SGTaint**. Additionally, the system can be built from source, allowing for flexible integration and extension in diverse research or practical scenarios.
