@@ -2,13 +2,17 @@
 
 **SGTaint** is a static taint analysis framework based on **Set-Get Graph** construction, utilizing Reaching Definition Analysis (RDA) to define the analysis scope. It is specifically designed for automated vulnerability detection in IoT firmware. Given the firmware’s file system, SGTaint enables a fully automated analysis process, achieving a balance between efficiency and effectiveness in vulnerability discovery.
 
+## Overview of SGTaint
+
+![SGTaint-arch](./SGTaint-framework.pdf)
+
 ## Running Environment
 
 To facilitate ease of use and reproducibility, we offer a pre-configured Docker environment that enables immediate execution of **SGTaint**. Additionally, the system can be built from source, allowing for flexible integration and extension in diverse research or practical scenarios.
 
 ### Use the compiled docker environment directly
 
-The pre-built Docker image `sgtaint_image` for SGTaint can be obtained from [sgtaint_image.rar](https://pan.sjtu.edu.cn/web/share/080bc039c6d7db4251f721f50e236371).
+The pre-built Docker image (`sgtaint_image`) will be made available upon paper acceptance to comply with the double-blind review policy.
 
 ``````bash
 # Loading the Docker Image
@@ -132,7 +136,7 @@ The file `<firmware_mark>_path_sanitization_llm_check.json`, located in the `log
 
 ### Our dataset
 
-The dataset can be obtained from [SGTaint_dataset.zip](https://pan.sjtu.edu.cn/web/share/8852971219b92e4f56668cd393b74522).
+The evaluation dataset will be made available upon paper acceptance to comply with the double-blind review policy.
 
 ### Case Study
 
@@ -150,10 +154,6 @@ python -m tool.sgtaint -f /home/firmware/Current_dataset/D-Link/DIR-878/cpio-roo
 
 3. **Execute parallel vulnerability analysis on the D-Link DIR-878 firmware with user-specified Set/Get function definitions**, allowing for customized taint graph construction based on domain-specific knowledge of data access semantics.
 
-``````
+``````bash
 python -m tool.sgtaint -f /home/firmware/Current_dataset/D-Link/DIR-878/cpio-root -n DIR-878 -o /home/output/DIR-878 -s "[(nvram_bufset, nvram_bufget, 1, 1, 2, None), (nvram_safe_set, nvram_safe_get, 0, 0, 1, None)]" -p -l
 ``````
-
-## 0-day Vulnerabilities
-
-All 0-day vulnerabilities identified by SGTaint are comprehensively documented in the repository [SGTaint-0-day](https://github.com/yifan20020708/SGTaint-0-day).
