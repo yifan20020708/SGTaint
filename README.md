@@ -4,7 +4,7 @@
 
 ## Overview of SGTaint
 
-![SGTaint-arch](./SGTaint-framework.pdf)
+![SGTaint-arch](./SGTaint-framework.png)
 
 ## Running Environment
 
